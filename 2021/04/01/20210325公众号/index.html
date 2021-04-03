@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Tsfresh——自动化特征工程工具 改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。  Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。 本文以天池-心跳信号分类预测为例，演示tsfresh工具的用法。 使用示例1. 合并train和test数据合并数据集，对整体数据做统一的特征工程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/04/01/20210325%E5%85%AC%E4%BC%97%E5%8F%B7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Tsfresh——自动化特征工程工具 改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。  Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。 本文以天池-心跳信号分类预测为例，演示tsfresh工具的用法。 使用示例1. 合并train和test数据合并数据集，对整体数据做统一的特征工程。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-01T13:15:10.122Z">
+<meta property="article:modified_time" content="2021-03-25T08:41:46.819Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/04/01/20210325公众号/"/>
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/01/20210325%E5%85%AC%E4%BC%97%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-01T21:15:10+08:00">
+                2021-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Tsfresh——自动化特征工程工具"><a href="#Tsfresh——自动化特征工程工具" class="headerlink" title="Tsfresh——自动化特征工程工具"></a>Tsfresh——自动化特征工程工具</h2><blockquote>
+<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
+</blockquote>
+<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
+<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-对原特征一列拆成多列，并为每条数据添加时间特征time"><a href="#2-对原特征一列拆成多列，并为每条数据添加时间特征time" class="headerlink" title="2. 对原特征一列拆成多列，并为每条数据添加时间特征time"></a>2. 对原特征一列拆成多列，并为每条数据添加时间特征time</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">all_heatbeat_df = all_data[<span class="string">&#x27;heartbeat_signals&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">&#x27;,&#x27;</span>, expand = <span class="literal">True</span>).stack()</span><br></pre></td></tr></table></figure>
+<h5 id="3-Index处理"><a href="#3-Index处理" class="headerlink" title="3. Index处理"></a>3. Index处理</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">all_heatbeat_df = all_heatbeat_df.reset_inex()</span><br><span class="line">all_heatbeat_df = all_heatbeat_df.set_inex(<span class="string">&#x27;level_0&#x27;</span>)</span><br><span class="line">all_heatbeat_df.index.name = <span class="literal">None</span></span><br><span class="line">all_heatbeat_df.rename(columns=&#123;<span class="string">&#x27;level_1&#x27;</span>:<span class="string">&#x27;time&#x27;</span>, <span class="number">0</span>:<span class="string">&#x27;heartbeat_signals&#x27;</span>, inpalce = <span class="literal">True</span>&#125;)</span><br><span class="line">all_heatbeat_df[<span class="string">&#x27;heartbeat_signals&#x27;</span>].astype(<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-label列单独存储，不进入tsfresh"><a href="#4-label列单独存储，不进入tsfresh" class="headerlink" title="4. label列单独存储，不进入tsfresh"></a>4. label列单独存储，不进入tsfresh</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_data_label = all_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">all_data = all_data.drop[<span class="string">&#x27;label&#x27;</span>, axis=<span class="number">1</span>].drop[<span class="string">&#x27;heartbeat_signals&#x27;</span>, axis=<span class="number">1</span>]</span><br><span class="line">all_data = all_data.join(all_heatbeat_df)</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-tsfresh特征抽取"><a href="#5-tsfresh特征抽取" class="headerlink" title="5. tsfresh特征抽取"></a>5. tsfresh特征抽取</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> extract_features</span><br><span class="line">all_features = extract_features(all_data, column_id=<span class="string">&#x27;id&#x27;</span>, column_sort=<span class="string">&#x27;time&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6.特征选择"></a>6.特征选择</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除nan值</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.utilities.dataframe_functions <span class="keyword">import</span> impute</span><br><span class="line">impute(all_features)</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-相关性特征提取"><a href="#7-相关性特征提取" class="headerlink" title="7.相关性特征提取"></a>7.相关性特征提取</h5><p>衍生众多特征之后，许多特征之间可能有很多相关性，需进一步筛选。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> select_features</span><br><span class="line">all_features_filtered = select_features(all_features, all_data_label)</span><br></pre></td></tr></table></figure>
+<h5 id="8-特征重命名，重新添加label"><a href="#8-特征重命名，重新添加label" class="headerlink" title="8.特征重命名，重新添加label"></a>8.特征重命名，重新添加label</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num = all_features_filtered.columns.size</span><br><span class="line">all_features_filtered.columns = [<span class="string">&#x27;f_&#x27;</span> + <span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>, num)]</span><br><span class="line">all_features_filtered[<span class="string">&#x27;label&#x27;</span>] = all_data_label</span><br></pre></td></tr></table></figure>
+
+<h4 id="tsfresh包深入探究"><a href="#tsfresh包深入探究" class="headerlink" title="tsfresh包深入探究"></a>tsfresh包深入探究</h4><h5 id="1-筛选特征的方法"><a href="#1-筛选特征的方法" class="headerlink" title="1. 筛选特征的方法"></a>1. 筛选特征的方法</h5><p>上文采用了手工打标签的方式划分训练集和测试集，略显麻烦，可以通过tsfresh的内置方法来提取训练数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind_to_fc_parameters = tsfresh.feature_extration.settings.from_columns(directed_features)</span><br></pre></td></tr></table></figure>
+<p>生成的params为训练集的特征字典，可以当作参数传入后续计算中。</p>
+<h5 id="2-自定义特征衍生规则"><a href="#2-自定义特征衍生规则" class="headerlink" title="2. 自定义特征衍生规则"></a>2. 自定义特征衍生规则</h5><p>tsfresh自带的衍生规则以字典的形式存放，可以直接调用，也可以自定义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#单个特征计算</span></span><br><span class="line">tsfresh.feature_extraction.feature_calculators.abs_energy(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定衍生规则</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.featureextraction <span class="keyword">import</span> extractfeatures</span><br><span class="line">params = &#123;<span class="string">&#x27;fft_coefficient:[&#123;&#x27;</span>coe<span class="string">f&#x27;:0, &#x27;</span>att<span class="string">r&#x27;:&#x27;</span><span class="built_in">abs</span><span class="string">&#x27;&#125;], &#x27;</span>kurtosis<span class="string">&#x27;: None, &#x27;</span>skewness<span class="string">&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>后续可以在extractfeatures中设置defaultparameters = params，具体用法见<a target="_blank" rel="noopener" href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+<h5 id="3-减小内存使用"><a href="#3-减小内存使用" class="headerlink" title="3. 减小内存使用"></a>3. 减小内存使用</h5><p>tsfresh默认参数太吃内存，且耗时长，笔者i7的16G笔记本最多只能跑到60%的进度就会卡住，天池notebook和谷歌colab都是没跑出结果就断线了，硬要跑的话只能租个高配服务器，或者调整衍生特征的数量，通过<strong>chunksize</strong>设置，具体用法见<a target="_blank" rel="noopener" href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/01/20210320%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/01/20210326%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tsfresh%E2%80%94%E2%80%94%E8%87%AA%E5%8A%A8%E5%8C%96%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">Tsfresh——自动化特征工程工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">使用示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%90%88%E5%B9%B6train%E5%92%8Ctest%E6%95%B0%E6%8D%AE"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1. 合并train和test数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%AF%B9%E5%8E%9F%E7%89%B9%E5%BE%81%E4%B8%80%E5%88%97%E6%8B%86%E6%88%90%E5%A4%9A%E5%88%97%EF%BC%8C%E5%B9%B6%E4%B8%BA%E6%AF%8F%E6%9D%A1%E6%95%B0%E6%8D%AE%E6%B7%BB%E5%8A%A0%E6%97%B6%E9%97%B4%E7%89%B9%E5%BE%81time"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2. 对原特征一列拆成多列，并为每条数据添加时间特征time</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Index%E5%A4%84%E7%90%86"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">3. Index处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-label%E5%88%97%E5%8D%95%E7%8B%AC%E5%AD%98%E5%82%A8%EF%BC%8C%E4%B8%8D%E8%BF%9B%E5%85%A5tsfresh"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">4. label列单独存储，不进入tsfresh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-tsfresh%E7%89%B9%E5%BE%81%E6%8A%BD%E5%8F%96"><span class="nav-number">2.0.0.5.</span> <span class="nav-text">5. tsfresh特征抽取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">2.0.0.6.</span> <span class="nav-text">6.特征选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-%E7%9B%B8%E5%85%B3%E6%80%A7%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.0.0.7.</span> <span class="nav-text">7.相关性特征提取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-%E7%89%B9%E5%BE%81%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%8C%E9%87%8D%E6%96%B0%E6%B7%BB%E5%8A%A0label"><span class="nav-number">2.0.0.8.</span> <span class="nav-text">8.特征重命名，重新添加label</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tsfresh%E5%8C%85%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%A9%B6"><span class="nav-number">2.0.1.</span> <span class="nav-text">tsfresh包深入探究</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%AD%9B%E9%80%89%E7%89%B9%E5%BE%81%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">1. 筛选特征的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%89%B9%E5%BE%81%E8%A1%8D%E7%94%9F%E8%A7%84%E5%88%99"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">2. 自定义特征衍生规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%87%8F%E5%B0%8F%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">3. 减小内存使用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
