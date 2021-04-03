@@ -1,3 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>Pandas的一些常用操作</title>
+    <url>/2021/02/21/pandas_1/</url>
+    <content><![CDATA[<blockquote>
+<p>今天介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame-to-markdown-latex"><a href="#1-DataFrame-to-markdown-latex" class="headerlink" title="1.DataFrame to markdown/latex"></a>1.DataFrame to markdown/latex</h4><p>dataframe可以转换为许多常用格式，如csv,excel,sql,json,html,latex等等，这里以markdown和latex为例。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.to_markdown())</span><br><span class="line"><span class="built_in">print</span>(df.to_latex())</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_markdown(<span class="string">&#x27;table.md&#x27;</span>)</span><br><span class="line">df.to_latex(<span class="string">&#x27;table.tex&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>也可以自定义输出latex格式，如表格宽度。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_latex(<span class="string">&#x27;tb.tex&#x27;</span>,column_format=<span class="string">&#x27;lp&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>除此以外，dataframe还可以保存为图片。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dataframe_image <span class="keyword">as</span> dfi</span><br><span class="line">dfi.export(obj = df, filename = <span class="string">&#x27;table.jpg&#x27;</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame常用属性查询"><a href="#2-DataFrame常用属性查询" class="headerlink" title="2.DataFrame常用属性查询"></a>2.DataFrame常用属性查询</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values	<span class="comment">#值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.index	<span class="comment">#索引号</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns	<span class="comment">#列标签</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dtypes	<span class="comment">#数据类型</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.shape	<span class="comment">#形状(几行几列)</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame常用基本函数"><a href="#3-DataFrame常用基本函数" class="headerlink" title="3.DataFrame常用基本函数"></a>3.DataFrame常用基本函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.head(<span class="number">5</span>)	<span class="comment">#前5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.tail(<span class="number">5</span>)	<span class="comment">#后5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()	<span class="comment">#信息概况</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()	<span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-DataFrame唯一值函数"><a href="#4-DataFrame唯一值函数" class="headerlink" title="4.DataFrame唯一值函数"></a>4.DataFrame唯一值函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].unique()	<span class="comment">#唯一值组成的数组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].nunique()    <span class="comment">#唯一值个数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].value_counts()    <span class="comment">#唯一值及其频数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()    <span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()    <span class="comment">#重复行的布尔值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()]    <span class="comment">#单列去重(删除重复行)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.drop_duplicates(subset=[<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>], keep=<span class="string">&#x27;first&#x27;</span>)    <span class="comment">#多列去重(保留first唯一值)</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame替换函数"><a href="#5-DataFrame替换函数" class="headerlink" title="5.DataFrame替换函数"></a>5.DataFrame替换函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(<span class="number">12.5</span>, <span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的单个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(&#123;<span class="number">12.5</span>:<span class="string">&#x27;A&#x27;</span>, <span class="number">11.7</span>:<span class="string">&#x27;B&#x27;</span>&#125;, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的多个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].replace(&#123;<span class="string">r&#x27;2\d+&#x27;</span>: <span class="string">&#x27;The 21st century&#x27;</span>&#125;, regex=<span class="literal">True</span>, inplace = <span class="literal">True</span>)    <span class="comment">#正则替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].mask(df[<span class="string">&#x27;psavert&#x27;</span>]&gt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].where(df[<span class="string">&#x27;psavert&#x27;</span>]&lt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件不符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame排序函数"><a href="#5-DataFrame排序函数" class="headerlink" title="5.DataFrame排序函数"></a>5.DataFrame排序函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>,ascending = <span class="literal">False</span>)    <span class="comment">#单列降序排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>pandas</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+        <tag>Data mining</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas的一些常用操作</title>
+    <url>/2021/02/21/pandas_2/</url>
+    <content><![CDATA[<blockquote>
+<p>今天继续介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([condition, df[<span class="string">&#x27;unemploy&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#True组和False两组分别细分</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([df[<span class="string">&#x27;unemploy&#x27;</span>], df[<span class="string">&#x27;uempmed&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#两级分组</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb = df.groupby([<span class="string">&#x27;unemploy&#x27;</span>])<span class="comment">#Groupby对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.size()<span class="comment">#每组的元素个数</span></span><br><span class="line"><span class="comment">#和DataFrame一样，Groupby对象也有max\idxmin\all\\nunique\quantile\prod等函数，这里不一一列举。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg([<span class="string">&#x27;skew&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;idxmax&#x27;</span>])<span class="comment">#agg聚合函数，查看每个分组的三个统计量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg(<span class="keyword">lambda</span> x: x.mean()-x.<span class="built_in">min</span>())<span class="comment">#在agg中自定义函数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x.shape[<span class="number">0</span>] &gt; <span class="number">100</span>)<span class="comment">#组过滤</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.apply(<span class="keyword">lambda</span> x: x**<span class="number">2</span>)<span class="comment">#组的apply方法</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame的连接"><a href="#3-DataFrame的连接" class="headerlink" title="3.DataFrame的连接"></a>3.DataFrame的连接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = df[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">df2 = df[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">df1.merge(df2, on=<span class="string">&#x27;date&#x27;</span>, how=<span class="string">&#x27;outer&#x27;</span>)<span class="comment">#merge表示关系型连接，包括左连接、右连接、内连接和外(全)连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df1, df2], axis=<span class="number">0</span>)<span class="comment">#concat是方向性连接，axis=0表示纵向连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_min</span>(<span class="params">x1, x2</span>):</span></span><br><span class="line">    <span class="built_in">min</span> = x1.where(x1&lt;x2, x1)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span></span><br><span class="line">df1.combine(df2, choose_min)<span class="comment">#使用combine函数自定义连接规则</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下一期是Pandas的常见数据处理，包括缺失数据、文本数据、分类数据和时序数据。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>pandas</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+        <tag>Data mining</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas的一些常用操作</title>
+    <url>/2021/02/21/pandas_3/</url>
+    <content><![CDATA[<blockquote>
+<p>今天介绍Pandas对一些常见数据的处理方法。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-缺失数据处理"><a href="#1-缺失数据处理" class="headerlink" title="1.缺失数据处理"></a>1.缺失数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna()<span class="comment">#是否有缺失值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna().mean()<span class="comment">#缺失的比例 </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df.psavert.isna()]<span class="comment">#查看某列是否有缺失值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].isna().<span class="built_in">any</span>(<span class="number">1</span>)]<span class="comment">#查看所有列至少有一个缺失值的行“any()至少有一个为空,all()都为空”</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的行</span></span><br><span class="line">df.loc[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的区域</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">0</span>, how = <span class="string">&#x27;any&#x27;</span>, subset = [<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>])<span class="comment">#axis=0(删除)行,how=&#x27;any&#x27;至少有一个缺失的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">1</span>, thresh = df.shape[<span class="number">0</span>]-<span class="number">5</span>)<span class="comment">#删除超过5个缺失值的列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(method = <span class="string">&#x27;ffill&#x27;</span>, limit = <span class="number">1</span>)<span class="comment">#method=&#x27;ffill&#x27;用前面的元素填充/method=&#x27;bfill&#x27;用后面的元素填充,limit=1连续缺失值的最大填充次数为1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(df.mean())<span class="comment">#用每列的均值填充</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(limit_direction=<span class="string">&#x27;both&#x27;</span>, limit=<span class="number">1</span>)<span class="comment">#用线性插值填充(both为双向限制插值)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(<span class="string">&#x27;nearest&#x27;</span>).values<span class="comment">#用最近邻插值填充</span></span><br></pre></td></tr></table></figure>
+<p>此外，也可以<a href="https://blog.csdn.net/wj1298250240/article/details/103600075">使用KNN来填充缺失值</a>。</p>
+<h4 id="2-文本数据处理"><a href="#2-文本数据处理" class="headerlink" title="2.文本数据处理"></a>2.文本数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts = pd.Series(df[<span class="string">&#x27;Area&#x27;</span>].values, index=df[<span class="string">&#x27;pct_2014&#x27;</span>])<span class="comment">#DataFrame转换为Series</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>[<span class="number">0</span>]<span class="comment">#查看第一个字符</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.<span class="built_in">len</span>()<span class="comment">#查看字符长度</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.split(<span class="string">&#x27;[aon]&#x27;</span>, n=<span class="number">3</span>, expand=<span class="literal">True</span>)<span class="comment">#从左到右拆分字符串，最大拆分次数3次，生成多列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.join(<span class="string">&#x27;-&#x27;</span>)<span class="comment">#每个字符用“-”连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.cat(ts2, sep=<span class="string">&#x27;-&#x27;</span>)<span class="comment">#合并两个字符Series，连接符为“-”</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.contains(<span class="string">&#x27;[a-z]u&#x27;</span>)<span class="comment">#查看包含正则模式的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.startswith(<span class="string">&#x27;A&#x27;</span>)<span class="comment">#查看以A为开始的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.endswith(<span class="string">&#x27;e&#x27;</span>)<span class="comment">#查看以e为结尾的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.match(<span class="string">&#x27;A|s&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.count(<span class="string">&#x27;[A|s]&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列数量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.find(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从左往右寻找&#x27;de&#x27;,匹配返回位置索引,未找到返回&#x27;-1&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.rfind(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从右往左寻找</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.replace(<span class="string">&#x27;\s?&#x27;</span>, <span class="string">&#x27;LA&#x27;</span>, regex=<span class="literal">True</span>)<span class="comment">#使用正则进行字符串替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pat = <span class="string">&#x27;(\w+o)(\w+s)(\w+u)(\w+n)&#x27;</span></span><br><span class="line">ts.<span class="built_in">str</span>.extract(pat)<span class="comment">#拆分&#x27;o&#x27;,&#x27;s&#x27;,&#x27;u&#x27;,&#x27;n&#x27;为4列</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.to_numeric(ts, errors=<span class="string">&#x27;ignore&#x27;</span>)<span class="comment">#将可以转为数值的字符转为数值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.pad(<span class="number">6</span>,<span class="string">&#x27;left&#x27;</span>,<span class="string">&#x27;*&#x27;</span>)<span class="comment">#选定字符串长度为6的填充为&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.lstrip()<span class="comment">#去掉字符串左侧空格</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.zfill(<span class="number">8</span>)<span class="comment">#用0补足8位</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-分类数据"><a href="#3-分类数据" class="headerlink" title="3.分类数据"></a>3.分类数据</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = df.psavert.astype(<span class="string">&#x27;category&#x27;</span>)<span class="comment">#Dataframe转为category对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.categories<span class="comment">#查看分类对象属性</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.add_categories(<span class="string">&#x27;C1&#x27;</span>)<span class="comment">#增加一个类别</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.remove_categories(<span class="number">11.7</span>)<span class="comment">#删除一个类别</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = s.cat.rename_categories(&#123;<span class="string">&#x27;S1&#x27;</span>:<span class="string">&#x27;xxx&#x27;</span>&#125;)<span class="comment">#重命名类别及其值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.reorder_categories([<span class="string">&#x27;S1&#x27;</span>, <span class="string">&#x27;S2&#x27;</span>, <span class="string">&#x27;S3&#x27;</span>, <span class="string">&#x27;S4&#x27;</span>], ordered=<span class="literal">True</span>)<span class="comment">#设置排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>)<span class="comment">#值排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.set_index(<span class="string">&#x27;psavert&#x27;</span>).sort_index()<span class="comment">#作为索引排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">res = df.psavert &lt;= <span class="string">&#x27;S4&#x27;</span><span class="comment">#比较顺序</span></span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+<h4 id="4-时序数据"><a href="#4-时序数据" class="headerlink" title="4.时序数据"></a>4.时序数据</h4><p>————-图——————–</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.to_datetime(df.date)<span class="comment">#生成时间序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.to_datetime([<span class="string">&#x27;2020\\1\\1&#x27;</span>,<span class="string">&#x27;2020\\1\\3&#x27;</span>],<span class="built_in">format</span>=<span class="string">&#x27;%Y\\%m\\%d&#x27;</span>)<span class="comment">#强制格式转换,生成时间序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;1967-07-01&#x27;</span>,<span class="string">&#x27;2015-04-01&#x27;</span>, freq=<span class="string">&#x27;D&#x27;</span>)<span class="comment">#查看两个时间之间的时间,间隔1天</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#dt对象</span></span><br><span class="line">s.dt.daysinmonth<span class="comment">#每个月几天</span></span><br><span class="line">s.dt.dayofweek<span class="comment">#每周几天</span></span><br><span class="line">s.dt.dayofweek.isin([<span class="number">5</span>,<span class="number">6</span>])<span class="comment">#是否包含双休日</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Timestamp(<span class="string">&#x27;20210223 22:00:00&#x27;</span>)-pd.Timestamp(<span class="string">&#x27;20210222 18:35:00&#x27;</span>)<span class="comment">#计算两个时间之差</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>pandas</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+        <tag>Data mining</tag>
+      </tags>
+  </entry>
 </search>
