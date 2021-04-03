@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="pandas,Data mining," />
+  <meta name="keywords" content="pandas," />
 
 
 
@@ -87,10 +87,9 @@
 <meta property="og:description" content="今天继续介绍几个常用的Pandas操作。  123import numpy as npimport pandas as pddf &#x3D; pd.read_csv(&amp;#x27;.&#x2F;economics.csv&amp;#x27;) 1.DataFrame的apply方法1df[[&amp;#x27;psavert&amp;#x27;,&amp;#x27;uempmed&amp;#x27;]].apply(lambda x:x.max()-x.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-21T12:30:38.000Z">
-<meta property="article:modified_time" content="2021-04-03T07:27:45.676Z">
+<meta property="article:modified_time" content="2021-04-03T08:57:10.870Z">
 <meta property="article:author" content="xhj">
 <meta property="article:tag" content="pandas">
-<meta property="article:tag" content="Data mining">
 <meta name="twitter:card" content="summary">
 
 
@@ -235,7 +234,7 @@
         <li class="menu-item menu-item-message">
           <a href="/message/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-message"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-comment-dots"></i> <br />
             
             message
           </a>
@@ -360,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pandas/" itemprop="url" rel="index">
-                    <span itemprop="name">pandas</span>
+                  <a href="/categories/Study/" itemprop="url" rel="index">
+                    <span itemprop="name">Study</span>
                   </a>
                 </span>
 
@@ -413,6 +412,7 @@
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
 <h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
@@ -450,8 +450,6 @@
           
             <a href="/tags/pandas/" rel="tag"># pandas</a>
           
-            <a href="/tags/Data-mining/" rel="tag"># Data mining</a>
-          
         </div>
       
 
@@ -463,17 +461,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/02/21/pandas_3/" rel="next" title="Pandas的一些常用操作">
-                <i class="fa fa-chevron-left"></i> Pandas的一些常用操作
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/02/21/pandas_1/" rel="prev" title="Pandas的一些常用操作">
+              <a href="/2021/02/21/pandas_3/" rel="prev" title="Pandas的一些常用操作">
                 Pandas的一些常用操作 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -584,7 +578,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
