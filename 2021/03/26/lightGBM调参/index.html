@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Grid search,Bayesian optimization,Cross validation," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="#1简单列举一下日常调参过程中常用的几种方法，具体的原理下次补上。 1. 经验法: 往两个方向调： 1.提高准确率：max_depth, num_leaves, learning_rate 2.降低过拟合：max_bin, min_data_in_leaf；L1, L2正则化；数据抽样, 列采样  1.使用较小的num_leaves，max_depth和max_bin，降低复杂度。 2.使用min">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LightGBM调参_1">
+<meta property="og:url" content="http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="#1简单列举一下日常调参过程中常用的几种方法，具体的原理下次补上。 1. 经验法: 往两个方向调： 1.提高准确率：max_depth, num_leaves, learning_rate 2.降低过拟合：max_bin, min_data_in_leaf；L1, L2正则化；数据抽样, 列采样  1.使用较小的num_leaves，max_depth和max_bin，降低复杂度。 2.使用min">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-26T14:30:38.000Z">
+<meta property="article:modified_time" content="2021-04-05T11:43:29.872Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="Grid search">
+<meta property="article:tag" content="Bayesian optimization">
+<meta property="article:tag" content="Cross validation">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/03/26/lightGBM调参/"/>
+
+
+
+
+
+  <title>LightGBM调参_1 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LightGBM调参_1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-26T22:30:38+08:00">
+                2021-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/03/26/lightGBM调参/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#1简单列举一下日常调参过程中常用的几种方法，具体的原理下次补上。</p>
+<h4 id="1-经验法"><a href="#1-经验法" class="headerlink" title="1. 经验法:"></a>1. 经验法:</h4><blockquote>
+<p>往两个方向调：</p>
+<p>1.提高准确率：max_depth, num_leaves, learning_rate</p>
+<p>2.降低过拟合：max_bin, min_data_in_leaf；L1, L2正则化；数据抽样, 列采样</p>
+</blockquote>
+<p>1.使用较小的num_leaves，max_depth和max_bin，降低复杂度。</p>
+<p>2.使用min_data_in_leaf和min_sum_hessian_in_leaf，该值越大，模型的学习越保守。</p>
+<span id="more"></span>
+
+<p>3.设置bagging_freq和bagging_fraction使用bagging。</p>
+<p>4.设置feature_fraction进行特征采样。</p>
+<p>5.使用lambda_l1,lambda_l2和min_gain_to_split正则化。</p>
+<h4 id="2-贪心调参"><a href="#2-贪心调参" class="headerlink" title="2. 贪心调参:"></a>2. 贪心调参:</h4><p>先调整对模型影响最大的参数，再调整对模型影响次大的参数，缺点是容易调成局部最优，需要多次调试。日常调参顺序如下:</p>
+<p>① num_leaves, max_depth</p>
+<p>② min_data_in_leaf, min_child_weight</p>
+<p>③ bagging_freq, bagging_fraction,  feature_fraction,</p>
+<p>④ reg_lambda, reg_alpha</p>
+<p>⑤ min_split_gain</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="comment"># 调objective</span></span><br><span class="line">best_obj = <span class="built_in">dict</span>()</span><br><span class="line"><span class="keyword">for</span> obj <span class="keyword">in</span> objective:</span><br><span class="line">    model = LGBMRegressor(objective=obj)</span><br><span class="line">    score = cross_val_score(model, X_train, y_train, cv=<span class="number">5</span>, scoring=<span class="string">&#x27;f1&#x27;</span>).mean()</span><br><span class="line">    best_obj[obj] = score</span><br><span class="line"></span><br><span class="line"><span class="comment"># num_leaves</span></span><br><span class="line">best_leaves = <span class="built_in">dict</span>()</span><br><span class="line"><span class="keyword">for</span> leaves <span class="keyword">in</span> num_leaves:</span><br><span class="line">    model = LGBMRegressor(objective=<span class="built_in">min</span>(best_obj.items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])[<span class="number">0</span>], num_leaves=leaves)</span><br><span class="line">    score = cross_val_score(model, X_train, y_train, cv=<span class="number">5</span>, scoring=<span class="string">&#x27;f1&#x27;</span>).mean()</span><br><span class="line">    best_leaves[leaves] = score</span><br><span class="line"></span><br><span class="line"><span class="comment"># max_depth</span></span><br><span class="line">best_depth = <span class="built_in">dict</span>()</span><br><span class="line"><span class="keyword">for</span> depth <span class="keyword">in</span> max_depth:</span><br><span class="line">    model = LGBMRegressor(objective=<span class="built_in">min</span>(best_obj.items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])[<span class="number">0</span>],</span><br><span class="line">                          num_leaves=<span class="built_in">min</span>(best_leaves.items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])[<span class="number">0</span>],</span><br><span class="line">                          max_depth=depth)</span><br><span class="line">    score = cross_val_score(model, X_train, y_train, cv=<span class="number">5</span>, scoring=<span class="string">&#x27;f1&#x27;</span>).mean()</span><br><span class="line">    best_depth[depth] = score</span><br></pre></td></tr></table></figure>
+
+<p>以此类推，按调参顺序依次调整优化，并且可以对每一个最优参数下模型的得分进行可视化。</p>
+<h4 id="3-网格搜索"><a href="#3-网格搜索" class="headerlink" title="3. 网格搜索"></a>3. 网格搜索</h4><p>即穷举搜索，在参数数组里循环遍历，一般大数据集不会用到，因为速度太慢。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_best_cv_params</span>(<span class="params">learning_rate=<span class="number">0.1</span>, n_estimators=<span class="number">581</span>, num_leaves=<span class="number">31</span>, max_depth=-<span class="number">1</span>, bagging_fraction=<span class="number">1.0</span>, feature_fraction=<span class="number">1.0</span>, bagging_freq=<span class="number">0</span>, min_data_in_leaf=<span class="number">20</span>, min_child_weight=<span class="number">0.001</span>, min_split_gain=<span class="number">0</span>, reg_lambda=<span class="number">0</span>, reg_alpha=<span class="number">0</span>, param_grid=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">    cv_fold = KFold(n_splits=<span class="number">5</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">2021</span>)</span><br><span class="line"></span><br><span class="line">    model_lgb = lgb.LGBMClassifier(learning_rate=learning_rate,</span><br><span class="line">                                   n_estimators=n_estimators,</span><br><span class="line">                                   num_leaves=num_leaves,</span><br><span class="line">                                   max_depth=max_depth,</span><br><span class="line">                                   bagging_fraction=bagging_fraction,</span><br><span class="line">                                   feature_fraction=feature_fraction,</span><br><span class="line">                                   bagging_freq=bagging_freq,</span><br><span class="line">                                   min_data_in_leaf=min_data_in_leaf,</span><br><span class="line">                                   min_child_weight=min_child_weight,</span><br><span class="line">                                   min_split_gain=min_split_gain,</span><br><span class="line">                                   reg_lambda=reg_lambda,</span><br><span class="line">                                   reg_alpha=reg_alpha,</span><br><span class="line">                                   n_jobs= <span class="number">8</span></span><br><span class="line">                                  )</span><br><span class="line"></span><br><span class="line">    f1 = make_scorer(f1_score, average=<span class="string">&#x27;micro&#x27;</span>)</span><br><span class="line">    grid_search = GridSearchCV(estimator=model_lgb, </span><br><span class="line">                               cv=cv_fold,</span><br><span class="line">                               param_grid=param_grid,</span><br><span class="line">                               scoring=f1</span><br><span class="line"></span><br><span class="line">                              )</span><br><span class="line">    grid_search.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;模型当前最优参数为:&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(grid_search.best_params_))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;模型当前最优得分为:&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(grid_search.best_score_))</span><br></pre></td></tr></table></figure>
+<p>总体思路是先粗调再细调。在一开始调整时，可设置较大的学习率如0.1，先确定树的个数，再依次调整参数，最后设置较小的学习率如0.05，确定最终参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">lgb_params = &#123;<span class="string">&#x27;num_leaves&#x27;</span>: <span class="built_in">range</span>(<span class="number">10</span>, <span class="number">80</span>, <span class="number">5</span>), <span class="string">&#x27;max_depth&#x27;</span>: <span class="built_in">range</span>(<span class="number">3</span>,<span class="number">10</span>,<span class="number">2</span>)&#125;</span><br><span class="line">get_best_cv_params()</span><br><span class="line"><span class="comment">#----------------------------------------</span></span><br><span class="line">lgb_params = &#123;<span class="string">&#x27;num_leaves&#x27;</span>: <span class="built_in">range</span>(<span class="number">25</span>, <span class="number">35</span>, <span class="number">1</span>), <span class="string">&#x27;max_depth&#x27;</span>: <span class="built_in">range</span>(<span class="number">5</span>,<span class="number">9</span>,<span class="number">1</span>)&#125;</span><br><span class="line">get_best_cv_params(n_estimators=<span class="number">85</span>)</span><br><span class="line"><span class="comment">#----------------------------------------</span></span><br><span class="line">lgb_params = &#123;<span class="string">&#x27;bagging_fraction&#x27;</span>: [i/<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>,<span class="number">10</span>,<span class="number">1</span>)], </span><br><span class="line">              <span class="string">&#x27;feature_fraction&#x27;</span>: [i/<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>,<span class="number">10</span>,<span class="number">1</span>)],</span><br><span class="line">              <span class="string">&#x27;bagging_freq&#x27;</span>: <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">81</span>,<span class="number">10</span>)&#125;</span><br><span class="line">get_best_cv_params(n_estimators=<span class="number">85</span>, num_leaves=<span class="number">29</span>, max_depth=<span class="number">7</span>, min_data_in_leaf=<span class="number">45</span>）</span><br><span class="line"><span class="comment">#----------------------------------------</span></span><br><span class="line">lgb_params = &#123;<span class="string">&#x27;reg_lambda&#x27;</span>: [<span class="number">0</span>,<span class="number">0.001</span>,<span class="number">0.01</span>,<span class="number">0.03</span>,<span class="number">0.08</span>,<span class="number">0.3</span>,<span class="number">0.5</span>], <span class="string">&#x27;reg_alpha&#x27;</span>: [<span class="number">0</span>,<span class="number">0.001</span>,<span class="number">0.01</span>,<span class="number">0.03</span>,<span class="number">0.08</span>,<span class="number">0.3</span>,<span class="number">0.5</span>]&#125;</span><br><span class="line">get_best_cv_params(n_estimators=<span class="number">85</span>, num_leaves=<span class="number">29</span>, max_depth=<span class="number">7</span>, min_data_in_leaf=<span class="number">45</span>, bagging_fraction=<span class="number">0.9</span>, feature_fraction=<span class="number">0.9</span>, bagging_freq=<span class="number">40</span>)</span><br><span class="line"><span class="comment">#----------------------------------------</span></span><br><span class="line">lgb_params = &#123;<span class="string">&#x27;min_split_gain&#x27;</span>: [i/<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">11</span>,<span class="number">1</span>)]&#125;</span><br><span class="line">get_best_cv_params(n_estimators=<span class="number">85</span>, num_leaves=<span class="number">29</span>, max_depth=<span class="number">7</span>, min_data_in_leaf=<span class="number">45</span>, bagging_fraction=<span class="number">0.9</span>, feature_fraction=<span class="number">0.9</span>, bagging_freq=<span class="number">40</span>, min_split_gain=<span class="literal">None</span>)</span><br><span class="line"><span class="comment">#----------------------------------------</span></span><br><span class="line">final_params = &#123;</span><br><span class="line">                <span class="string">&#x27;boosting_type&#x27;</span>: <span class="string">&#x27;gbdt&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;learning_rate&#x27;</span>: <span class="number">0.01</span>,</span><br><span class="line">                <span class="string">&#x27;num_leaves&#x27;</span>: <span class="number">29</span>,</span><br><span class="line">                <span class="string">&#x27;max_depth&#x27;</span>: <span class="number">7</span>,</span><br><span class="line">                <span class="string">&#x27;objective&#x27;</span>: <span class="string">&#x27;multiclass&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;num_class&#x27;</span>: <span class="number">4</span>,</span><br><span class="line">                <span class="string">&#x27;min_data_in_leaf&#x27;</span>:<span class="number">45</span>,</span><br><span class="line">                <span class="string">&#x27;min_child_weight&#x27;</span>:<span class="number">0.001</span>,</span><br><span class="line">                <span class="string">&#x27;bagging_fraction&#x27;</span>: <span class="number">0.9</span>,</span><br><span class="line">                <span class="string">&#x27;feature_fraction&#x27;</span>: <span class="number">0.9</span>,</span><br><span class="line">                <span class="string">&#x27;bagging_freq&#x27;</span>: <span class="number">40</span>,</span><br><span class="line">                <span class="string">&#x27;min_split_gain&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">&#x27;reg_lambda&#x27;</span>:<span class="number">0</span>,</span><br><span class="line">                <span class="string">&#x27;reg_alpha&#x27;</span>:<span class="number">0</span>,</span><br><span class="line">                <span class="string">&#x27;nthread&#x27;</span>: <span class="number">6</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">cv_result = lgb.cv(train_set=lgb_train,</span><br><span class="line">                   early_stopping_rounds=<span class="number">20</span>,</span><br><span class="line">                   num_boost_round=<span class="number">5000</span>,</span><br><span class="line">                   nfold=<span class="number">5</span>,</span><br><span class="line">                   stratified=<span class="literal">True</span>,</span><br><span class="line">                   shuffle=<span class="literal">True</span>,</span><br><span class="line">                   params=final_params,</span><br><span class="line">                   feval=f1_score_vali,</span><br><span class="line">                   seed=<span class="number">0</span>,</span><br><span class="line">                  )</span><br></pre></td></tr></table></figure>
+<h4 id="4-贝叶斯调参"><a href="#4-贝叶斯调参" class="headerlink" title="4. 贝叶斯调参"></a>4. 贝叶斯调参</h4><p>是一种用模型找到目标函数最小值的方法，比网格和随机搜索省时。步骤如下：</p>
+<p>① 定义优化函数(rf_cv）</p>
+<p>② 建立模型</p>
+<p>③ 定义待优化的参数</p>
+<p>④ 得到优化结果，并返回要优化的分数指标</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="comment">#定义优化函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rf_cv_lgb</span>(<span class="params">num_leaves, max_depth, bagging_fraction, feature_fraction, bagging_freq, min_data_in_leaf, </span></span></span><br><span class="line"><span class="function"><span class="params">              min_child_weight, min_split_gain, reg_lambda, reg_alpha</span>):</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立模型</span></span><br><span class="line">    model_lgb = lgb.LGBMClassifier(boosting_type=<span class="string">&#x27;gbdt&#x27;</span>, objective=<span class="string">&#x27;multiclass&#x27;</span>, num_class=<span class="number">4</span>,learning_rate=<span class="number">0.1</span>, n_estimators=<span class="number">5000</span>,num_leaves=<span class="built_in">int</span>(num_leaves), max_depth=<span class="built_in">int</span>(max_depth), bagging_fraction=<span class="built_in">round</span>(bagging_fraction, <span class="number">2</span>), feature_fraction=<span class="built_in">round</span>(feature_fraction, <span class="number">2</span>),bagging_freq=<span class="built_in">int</span>(bagging_freq), min_data_in_leaf=<span class="built_in">int</span>(min_data_in_leaf),min_child_weight=min_child_weight)</span><br><span class="line">    f1 = make_scorer(f1_score, average=<span class="string">&#x27;micro&#x27;</span>)</span><br><span class="line">    val = cross_val_score(model_lgb, X_train_split, y_train_split, cv=<span class="number">5</span>, scoring=f1).mean()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> val</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bayes_opt <span class="keyword">import</span> BayesianOptimization</span><br><span class="line"><span class="comment">#定义优化参数</span></span><br><span class="line">bayes_lgb = BayesianOptimization(</span><br><span class="line">    rf_cv_lgb, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&#x27;num_leaves&#x27;</span>:(<span class="number">10</span>, <span class="number">200</span>),</span><br><span class="line">        <span class="string">&#x27;max_depth&#x27;</span>:(<span class="number">3</span>, <span class="number">20</span>),</span><br><span class="line">        <span class="string">&#x27;bagging_fraction&#x27;</span>:(<span class="number">0.5</span>, <span class="number">1.0</span>),</span><br><span class="line">        <span class="string">&#x27;feature_fraction&#x27;</span>:(<span class="number">0.5</span>, <span class="number">1.0</span>),</span><br><span class="line">        <span class="string">&#x27;bagging_freq&#x27;</span>:(<span class="number">0</span>, <span class="number">100</span>),</span><br><span class="line">        <span class="string">&#x27;min_data_in_leaf&#x27;</span>:(<span class="number">10</span>,<span class="number">100</span>),</span><br><span class="line">        <span class="string">&#x27;min_child_weight&#x27;</span>:(<span class="number">0</span>, <span class="number">10</span>),</span><br><span class="line">        <span class="string">&#x27;min_split_gain&#x27;</span>:(<span class="number">0.0</span>, <span class="number">1.0</span>),</span><br><span class="line">        <span class="string">&#x27;reg_alpha&#x27;</span>:(<span class="number">0.0</span>, <span class="number">10</span>),</span><br><span class="line">        <span class="string">&#x27;reg_lambda&#x27;</span>:(<span class="number">0.0</span>, <span class="number">10</span>),</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#开始优化</span></span><br><span class="line">bayes_lgb.maximize(n_iter=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#显示优化结果</span></span><br><span class="line">bayes_lgb.<span class="built_in">max</span></span><br></pre></td></tr></table></figure>
+
+<p>参数优化完成后，可根据优化后的参数建立新的模型，降低学习率并寻找最优模型迭代次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置较小的学习率，并通过cv函数确定当前最优的迭代次数</span></span><br><span class="line">base_params_lgb = &#123;</span><br><span class="line">                    <span class="string">&#x27;boosting_type&#x27;</span>: <span class="string">&#x27;gbdt&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;objective&#x27;</span>: <span class="string">&#x27;multiclass&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;num_class&#x27;</span>: <span class="number">4</span>,</span><br><span class="line">                    <span class="string">&#x27;learning_rate&#x27;</span>: <span class="number">0.01</span>,</span><br><span class="line">                    <span class="string">&#x27;num_leaves&#x27;</span>: <span class="number">138</span>,</span><br><span class="line">                    <span class="string">&#x27;max_depth&#x27;</span>: <span class="number">11</span>,</span><br><span class="line">                    <span class="string">&#x27;min_data_in_leaf&#x27;</span>: <span class="number">43</span>,</span><br><span class="line">                    <span class="string">&#x27;min_child_weight&#x27;</span>: <span class="number">6.5</span>,</span><br><span class="line">                    <span class="string">&#x27;bagging_fraction&#x27;</span>: <span class="number">0.64</span>,</span><br><span class="line">                    <span class="string">&#x27;feature_fraction&#x27;</span>: <span class="number">0.93</span>,</span><br><span class="line">                    <span class="string">&#x27;bagging_freq&#x27;</span>: <span class="number">49</span>,</span><br><span class="line">                    <span class="string">&#x27;reg_lambda&#x27;</span>: <span class="number">7</span>,</span><br><span class="line">                    <span class="string">&#x27;reg_alpha&#x27;</span>: <span class="number">0.21</span>,</span><br><span class="line">                    <span class="string">&#x27;min_split_gain&#x27;</span>: <span class="number">0.288</span>,</span><br><span class="line">                    <span class="string">&#x27;nthread&#x27;</span>: <span class="number">10</span>,</span><br><span class="line">                    <span class="string">&#x27;verbose&#x27;</span>: -<span class="number">1</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cv_result_lgb = lgb.cv(</span><br><span class="line">    train_set=train_matrix,</span><br><span class="line">    early_stopping_rounds=<span class="number">1000</span>, </span><br><span class="line">    num_boost_round=<span class="number">20000</span>,</span><br><span class="line">    nfold=<span class="number">5</span>,</span><br><span class="line">    stratified=<span class="literal">True</span>,</span><br><span class="line">    shuffle=<span class="literal">True</span>,</span><br><span class="line">    params=base_params_lgb,</span><br><span class="line">    feval=f1_score_vali,</span><br><span class="line">    seed=<span class="number">0</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;迭代次数&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(cv_result_lgb[<span class="string">&#x27;f1_score-mean&#x27;</span>])))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;最终模型的f1为&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">max</span>(cv_result_lgb[<span class="string">&#x27;f1_score-mean&#x27;</span>])))</span><br></pre></td></tr></table></figure>
+
+<p>模型参数确定之后，建立最终模型并对验证集进行验证。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://z3.ax1x.com/2021/04/05/cQA21s.png">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/" title="LightGBM调参_1">http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grid-search/" rel="tag"># Grid search</a>
+          
+            <a href="/tags/Bayesian-optimization/" rel="tag"># Bayesian optimization</a>
+          
+            <a href="/tags/Cross-validation/" rel="tag"># Cross validation</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/25/tsfresh/" rel="next" title="Tsfresh——自动化特征工程工具">
+                <i class="fa fa-chevron-left"></i> Tsfresh——自动化特征工程工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=784594&auto=1&height=66">
+    </iframe>
+</div>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BB%8F%E9%AA%8C%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1. 经验法:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%B4%AA%E5%BF%83%E8%B0%83%E5%8F%82"><span class="nav-number">2.</span> <span class="nav-text">2. 贪心调参:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2"><span class="nav-number">3.</span> <span class="nav-text">3. 网格搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%B0%83%E5%8F%82"><span class="nav-number">4.</span> <span class="nav-text">4. 贝叶斯调参</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">5.7k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/';
+          this.page.identifier = '2021/03/26/lightGBM调参/';
+          this.page.title = 'LightGBM调参_1';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 29990,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

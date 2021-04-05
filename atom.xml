@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-03T08:57:10.870Z</updated>
+  <updated>2021-04-05T11:43:29.872Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,58 +17,124 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Pandas的一些常用操作</title>
-    <link href="http://example.com/2021/02/21/pandas_2/"/>
-    <id>http://example.com/2021/02/21/pandas_2/</id>
-    <published>2021-02-21T12:30:38.000Z</published>
-    <updated>2021-04-03T08:57:10.870Z</updated>
+    <title>LightGBM调参_1</title>
+    <link href="http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/"/>
+    <id>http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/</id>
+    <published>2021-03-26T14:30:38.000Z</published>
+    <updated>2021-04-05T11:43:29.872Z</updated>
     
     
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;#1简单列举一下日常调参过程中常用的几种方法，具体的原理下次补上。&lt;/p&gt;
+&lt;h4 id=&quot;1-经验法&quot;&gt;&lt;a href=&quot;#1-经验法&quot; class=&quot;headerlink&quot; title=&quot;1. 经验法:&quot;&gt;&lt;/a&gt;1. 经验法:&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;往两个方向调：&lt;/p&gt;
+&lt;p&gt;1.提高准确率：max_depth, num_leaves, learning_rate&lt;/p&gt;
+&lt;p&gt;2.降低过拟合：max_bin, min_data_in_leaf；L1, L2正则化；数据抽样, 列采样&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+&lt;p&gt;1.使用较小的num_leaves，max_depth和max_bin，降低复杂度。&lt;/p&gt;
+&lt;p&gt;2.使用min_data_in_leaf和min_sum_hessian_in_leaf，该值越大，模型的学习越保守。&lt;/p&gt;</summary>
     
     
     
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
+    <category term="Machine learning" scheme="http://example.com/categories/Machine-learning/"/>
     
     
-    <category term="pandas" scheme="http://example.com/tags/pandas/"/>
+    <category term="Grid search" scheme="http://example.com/tags/Grid-search/"/>
+    
+    <category term="Bayesian optimization" scheme="http://example.com/tags/Bayesian-optimization/"/>
+    
+    <category term="Cross validation" scheme="http://example.com/tags/Cross-validation/"/>
     
   </entry>
   
   <entry>
-    <title>Pandas的一些常用操作</title>
-    <link href="http://example.com/2021/02/21/pandas_3/"/>
-    <id>http://example.com/2021/02/21/pandas_3/</id>
-    <published>2021-02-21T12:30:38.000Z</published>
-    <updated>2021-04-03T08:57:25.023Z</updated>
+    <title>Tsfresh——自动化特征工程工具</title>
+    <link href="http://example.com/2021/03/25/tsfresh/"/>
+    <id>http://example.com/2021/03/25/tsfresh/</id>
+    <published>2021-03-25T15:30:38.000Z</published>
+    <updated>2021-04-05T11:43:12.939Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;今天介绍Pandas对一些常见数据的处理方法。&lt;/p&gt;
+&lt;p&gt;改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;1-缺失数据处理&quot;&gt;&lt;a href=&quot;#1-缺失数据处理&quot; class=&quot;headerlink&quot; title=&quot;1.缺失数据处理&quot;&gt;&lt;/a&gt;1.缺失数据处理&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.isna()&lt;span class=&quot;comment&quot;&gt;#是否有缺失值&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.isna().mean()&lt;span class=&quot;comment&quot;&gt;#缺失的比例 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+&lt;p&gt;Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。&lt;/p&gt;
+&lt;p&gt;本文以&lt;em&gt;天池-心跳信号分类预测&lt;/em&gt;为例，演示tsfresh工具的用法。&lt;/p&gt;
+&lt;h2 id=&quot;使用示例&quot;&gt;&lt;a href=&quot;#使用示例&quot; class=&quot;headerlink&quot; title=&quot;使用示例&quot;&gt;&lt;/a&gt;使用示例&lt;/h2&gt;&lt;h5 id=&quot;1-合并train和test数据&quot;&gt;&lt;a href=&quot;#1-合并train和test数据&quot; class=&quot;headerlink&quot; title=&quot;1. 合并train和test数据&quot;&gt;&lt;/a&gt;1. 合并train和test数据&lt;/h5&gt;&lt;p&gt;合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;data_test[&lt;span class=&quot;string&quot;&gt;&amp;#x27;label&amp;#x27;&lt;/span&gt;] = -&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;all_data = pd.concat((data_train, data_test)).reset_index(drop = &lt;span class=&quot;literal&quot;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
+    <category term="Feature engineering" scheme="http://example.com/categories/Feature-engineering/"/>
     
     
-    <category term="pandas" scheme="http://example.com/tags/pandas/"/>
+    <category term="tsfresh" scheme="http://example.com/tags/tsfresh/"/>
     
   </entry>
   
   <entry>
-    <title>Pandas的一些常用操作</title>
+    <title>特征选择_1</title>
+    <link href="http://example.com/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/"/>
+    <id>http://example.com/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/</id>
+    <published>2021-03-20T15:30:38.000Z</published>
+    <updated>2021-04-05T11:42:57.224Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在数据预处理过程中，特征选择是一个重要的过程，选择出重要的特征可以加快模型训练速度。通常可以从以下两方面来选择特征：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.特征是否发散（对于样本区分作用的大小）&lt;br&gt;2.特征与标签的相关性&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Feature engineering" scheme="http://example.com/categories/Feature-engineering/"/>
+    
+    
+    <category term="Embedding" scheme="http://example.com/tags/Embedding/"/>
+    
+    <category term="Wapper" scheme="http://example.com/tags/Wapper/"/>
+    
+    <category term="Filter" scheme="http://example.com/tags/Filter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>模型融合_1</title>
+    <link href="http://example.com/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/"/>
+    <id>http://example.com/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/</id>
+    <published>2021-03-15T14:30:38.000Z</published>
+    <updated>2021-04-05T11:42:43.251Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Kaggle和天池比赛中常用提高成绩的三种方法：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.特征工程&lt;br&gt;2.模型调参&lt;br&gt;3.模型融合&lt;br&gt;模型融合主要有以下几种方式：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;简单加权融合&quot;&gt;&lt;a href=&quot;#简单加权融合&quot; class=&quot;headerlink&quot; title=&quot;简单加权融合:&quot;&gt;&lt;/a&gt;简单加权融合:&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;①回归（分类概率）：算术平均融合（Arithmetic mean），几何平均融合（Geometric mean）；&lt;br&gt;②分类：投票（Voting)&lt;br&gt;③综合：排序融合(Rank averaging)，log融合&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;stacking-blending&quot;&gt;&lt;a href=&quot;#stacking-blending&quot; class=&quot;headerlink&quot; title=&quot;stacking/blending:&quot;&gt;&lt;/a&gt;stacking/blending:&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;构建多层模型，把初级学习器的输出当作下一层的输入。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Machine learning" scheme="http://example.com/categories/Machine-learning/"/>
+    
+    
+    <category term="voting" scheme="http://example.com/tags/voting/"/>
+    
+    <category term="Stacking" scheme="http://example.com/tags/Stacking/"/>
+    
+    <category term="Blending" scheme="http://example.com/tags/Blending/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pandas的一些常用操作_1</title>
     <link href="http://example.com/2021/02/21/pandas_1/"/>
     <id>http://example.com/2021/02/21/pandas_1/</id>
     <published>2021-02-21T12:30:38.000Z</published>
-    <updated>2021-04-03T08:57:00.901Z</updated>
+    <updated>2021-04-05T11:25:34.303Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -82,10 +148,57 @@
     
     
     
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
+    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
     
     
-    <category term="pandas" scheme="http://example.com/tags/pandas/"/>
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pandas的一些常用操作_2</title>
+    <link href="http://example.com/2021/02/21/pandas_2/"/>
+    <id>http://example.com/2021/02/21/pandas_2/</id>
+    <published>2021-02-21T12:30:38.000Z</published>
+    <updated>2021-04-05T11:25:58.660Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
+    
+    
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pandas的一些常用操作_3</title>
+    <link href="http://example.com/2021/02/21/pandas_3/"/>
+    <id>http://example.com/2021/02/21/pandas_3/</id>
+    <published>2021-02-21T12:30:38.000Z</published>
+    <updated>2021-04-05T11:26:39.689Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;今天介绍Pandas对一些常见数据的处理方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;1-缺失数据处理&quot;&gt;&lt;a href=&quot;#1-缺失数据处理&quot; class=&quot;headerlink&quot; title=&quot;1.缺失数据处理&quot;&gt;&lt;/a&gt;1.缺失数据处理&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.isna()&lt;span class=&quot;comment&quot;&gt;#是否有缺失值&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.isna().mean()&lt;span class=&quot;comment&quot;&gt;#缺失的比例 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
+    
+    
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
     
   </entry>
   
