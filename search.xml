@@ -2,41 +2,6 @@
 <search>
   <entry>
     <title>Pandas的一些常用操作</title>
-    <url>/2021/02/21/pandas_2/</url>
-    <content><![CDATA[<blockquote>
-<p>今天继续介绍几个常用的Pandas操作。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([condition, df[<span class="string">&#x27;unemploy&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#True组和False两组分别细分</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([df[<span class="string">&#x27;unemploy&#x27;</span>], df[<span class="string">&#x27;uempmed&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#两级分组</span></span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb = df.groupby([<span class="string">&#x27;unemploy&#x27;</span>])<span class="comment">#Groupby对象</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.size()<span class="comment">#每组的元素个数</span></span><br><span class="line"><span class="comment">#和DataFrame一样，Groupby对象也有max\idxmin\all\\nunique\quantile\prod等函数，这里不一一列举。</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg([<span class="string">&#x27;skew&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;idxmax&#x27;</span>])<span class="comment">#agg聚合函数，查看每个分组的三个统计量</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg(<span class="keyword">lambda</span> x: x.mean()-x.<span class="built_in">min</span>())<span class="comment">#在agg中自定义函数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x.shape[<span class="number">0</span>] &gt; <span class="number">100</span>)<span class="comment">#组过滤</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.apply(<span class="keyword">lambda</span> x: x**<span class="number">2</span>)<span class="comment">#组的apply方法</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-DataFrame的连接"><a href="#3-DataFrame的连接" class="headerlink" title="3.DataFrame的连接"></a>3.DataFrame的连接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = df[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">df2 = df[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">df1.merge(df2, on=<span class="string">&#x27;date&#x27;</span>, how=<span class="string">&#x27;outer&#x27;</span>)<span class="comment">#merge表示关系型连接，包括左连接、右连接、内连接和外(全)连接</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df1, df2], axis=<span class="number">0</span>)<span class="comment">#concat是方向性连接，axis=0表示纵向连接</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_min</span>(<span class="params">x1, x2</span>):</span></span><br><span class="line">    <span class="built_in">min</span> = x1.where(x1&lt;x2, x1)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span></span><br><span class="line">df1.combine(df2, choose_min)<span class="comment">#使用combine函数自定义连接规则</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>下一期是Pandas的常见数据处理，包括缺失数据、文本数据、分类数据和时序数据。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Study</category>
-      </categories>
-      <tags>
-        <tag>pandas</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pandas的一些常用操作</title>
     <url>/2021/02/21/pandas_1/</url>
     <content><![CDATA[<blockquote>
 <p>今天介绍几个常用的Pandas操作。</p>
@@ -76,6 +41,41 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Study</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas的一些常用操作</title>
+    <url>/2021/02/21/pandas_2/</url>
+    <content><![CDATA[<blockquote>
+<p>今天继续介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([condition, df[<span class="string">&#x27;unemploy&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#True组和False两组分别细分</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([df[<span class="string">&#x27;unemploy&#x27;</span>], df[<span class="string">&#x27;uempmed&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#两级分组</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb = df.groupby([<span class="string">&#x27;unemploy&#x27;</span>])<span class="comment">#Groupby对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.size()<span class="comment">#每组的元素个数</span></span><br><span class="line"><span class="comment">#和DataFrame一样，Groupby对象也有max\idxmin\all\\nunique\quantile\prod等函数，这里不一一列举。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg([<span class="string">&#x27;skew&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;idxmax&#x27;</span>])<span class="comment">#agg聚合函数，查看每个分组的三个统计量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg(<span class="keyword">lambda</span> x: x.mean()-x.<span class="built_in">min</span>())<span class="comment">#在agg中自定义函数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x.shape[<span class="number">0</span>] &gt; <span class="number">100</span>)<span class="comment">#组过滤</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.apply(<span class="keyword">lambda</span> x: x**<span class="number">2</span>)<span class="comment">#组的apply方法</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame的连接"><a href="#3-DataFrame的连接" class="headerlink" title="3.DataFrame的连接"></a>3.DataFrame的连接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = df[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">df2 = df[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">df1.merge(df2, on=<span class="string">&#x27;date&#x27;</span>, how=<span class="string">&#x27;outer&#x27;</span>)<span class="comment">#merge表示关系型连接，包括左连接、右连接、内连接和外(全)连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df1, df2], axis=<span class="number">0</span>)<span class="comment">#concat是方向性连接，axis=0表示纵向连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_min</span>(<span class="params">x1, x2</span>):</span></span><br><span class="line">    <span class="built_in">min</span> = x1.where(x1&lt;x2, x1)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span></span><br><span class="line">df1.combine(df2, choose_min)<span class="comment">#使用combine函数自定义连接规则</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下一期是Pandas的常见数据处理，包括缺失数据、文本数据、分类数据和时序数据。</p>
 </blockquote>
 ]]></content>
       <categories>
