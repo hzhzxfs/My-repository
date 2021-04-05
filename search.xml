@@ -2,56 +2,6 @@
 <search>
   <entry>
     <title>Pandas的一些常用操作</title>
-    <url>/2021/02/21/pandas_1/</url>
-    <content><![CDATA[<blockquote>
-<p>今天介绍几个常用的Pandas操作。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-DataFrame-to-markdown-latex"><a href="#1-DataFrame-to-markdown-latex" class="headerlink" title="1.DataFrame to markdown/latex"></a>1.DataFrame to markdown/latex</h4><p>dataframe可以转换为许多常用格式，如csv,excel,sql,json,html,latex等等，这里以markdown和latex为例。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.to_markdown())</span><br><span class="line"><span class="built_in">print</span>(df.to_latex())</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_markdown(<span class="string">&#x27;table.md&#x27;</span>)</span><br><span class="line">df.to_latex(<span class="string">&#x27;table.tex&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>也可以自定义输出latex格式，如表格宽度。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_latex(<span class="string">&#x27;tb.tex&#x27;</span>,column_format=<span class="string">&#x27;lp&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>除此以外，dataframe还可以保存为图片。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dataframe_image <span class="keyword">as</span> dfi</span><br><span class="line">dfi.export(obj = df, filename = <span class="string">&#x27;table.jpg&#x27;</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="2-DataFrame常用属性查询"><a href="#2-DataFrame常用属性查询" class="headerlink" title="2.DataFrame常用属性查询"></a>2.DataFrame常用属性查询</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values	<span class="comment">#值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.index	<span class="comment">#索引号</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns	<span class="comment">#列标签</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dtypes	<span class="comment">#数据类型</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.shape	<span class="comment">#形状(几行几列)</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-DataFrame常用基本函数"><a href="#3-DataFrame常用基本函数" class="headerlink" title="3.DataFrame常用基本函数"></a>3.DataFrame常用基本函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.head(<span class="number">5</span>)	<span class="comment">#前5行</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.tail(<span class="number">5</span>)	<span class="comment">#后5行</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()	<span class="comment">#信息概况</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()	<span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
-<h4 id="4-DataFrame唯一值函数"><a href="#4-DataFrame唯一值函数" class="headerlink" title="4.DataFrame唯一值函数"></a>4.DataFrame唯一值函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].unique()	<span class="comment">#唯一值组成的数组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].nunique()    <span class="comment">#唯一值个数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].value_counts()    <span class="comment">#唯一值及其频数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()    <span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()    <span class="comment">#重复行的布尔值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()]    <span class="comment">#单列去重(删除重复行)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.drop_duplicates(subset=[<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>], keep=<span class="string">&#x27;first&#x27;</span>)    <span class="comment">#多列去重(保留first唯一值)</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-DataFrame替换函数"><a href="#5-DataFrame替换函数" class="headerlink" title="5.DataFrame替换函数"></a>5.DataFrame替换函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(<span class="number">12.5</span>, <span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的单个值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(&#123;<span class="number">12.5</span>:<span class="string">&#x27;A&#x27;</span>, <span class="number">11.7</span>:<span class="string">&#x27;B&#x27;</span>&#125;, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的多个值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].replace(&#123;<span class="string">r&#x27;2\d+&#x27;</span>: <span class="string">&#x27;The 21st century&#x27;</span>&#125;, regex=<span class="literal">True</span>, inplace = <span class="literal">True</span>)    <span class="comment">#正则替换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].mask(df[<span class="string">&#x27;psavert&#x27;</span>]&gt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件符合，进行替换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].where(df[<span class="string">&#x27;psavert&#x27;</span>]&lt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件不符合，进行替换</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-DataFrame排序函数"><a href="#5-DataFrame排序函数" class="headerlink" title="5.DataFrame排序函数"></a>5.DataFrame排序函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>,ascending = <span class="literal">False</span>)    <span class="comment">#单列降序排序</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Study</category>
-      </categories>
-      <tags>
-        <tag>pandas</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pandas的一些常用操作</title>
     <url>/2021/02/21/pandas_2/</url>
     <content><![CDATA[<blockquote>
 <p>今天继续介绍几个常用的Pandas操作。</p>
@@ -142,6 +92,56 @@
 <hr>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#dt对象</span></span><br><span class="line">s.dt.daysinmonth<span class="comment">#每个月几天</span></span><br><span class="line">s.dt.dayofweek<span class="comment">#每周几天</span></span><br><span class="line">s.dt.dayofweek.isin([<span class="number">5</span>,<span class="number">6</span>])<span class="comment">#是否包含双休日</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Timestamp(<span class="string">&#x27;20210223 22:00:00&#x27;</span>)-pd.Timestamp(<span class="string">&#x27;20210222 18:35:00&#x27;</span>)<span class="comment">#计算两个时间之差</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Study</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas的一些常用操作</title>
+    <url>/2021/02/21/pandas_1/</url>
+    <content><![CDATA[<blockquote>
+<p>今天介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame-to-markdown-latex"><a href="#1-DataFrame-to-markdown-latex" class="headerlink" title="1.DataFrame to markdown/latex"></a>1.DataFrame to markdown/latex</h4><p>dataframe可以转换为许多常用格式，如csv,excel,sql,json,html,latex等等，这里以markdown和latex为例。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.to_markdown())</span><br><span class="line"><span class="built_in">print</span>(df.to_latex())</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_markdown(<span class="string">&#x27;table.md&#x27;</span>)</span><br><span class="line">df.to_latex(<span class="string">&#x27;table.tex&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>也可以自定义输出latex格式，如表格宽度。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_latex(<span class="string">&#x27;tb.tex&#x27;</span>,column_format=<span class="string">&#x27;lp&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>除此以外，dataframe还可以保存为图片。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dataframe_image <span class="keyword">as</span> dfi</span><br><span class="line">dfi.export(obj = df, filename = <span class="string">&#x27;table.jpg&#x27;</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame常用属性查询"><a href="#2-DataFrame常用属性查询" class="headerlink" title="2.DataFrame常用属性查询"></a>2.DataFrame常用属性查询</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values	<span class="comment">#值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.index	<span class="comment">#索引号</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns	<span class="comment">#列标签</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dtypes	<span class="comment">#数据类型</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.shape	<span class="comment">#形状(几行几列)</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame常用基本函数"><a href="#3-DataFrame常用基本函数" class="headerlink" title="3.DataFrame常用基本函数"></a>3.DataFrame常用基本函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.head(<span class="number">5</span>)	<span class="comment">#前5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.tail(<span class="number">5</span>)	<span class="comment">#后5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()	<span class="comment">#信息概况</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()	<span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-DataFrame唯一值函数"><a href="#4-DataFrame唯一值函数" class="headerlink" title="4.DataFrame唯一值函数"></a>4.DataFrame唯一值函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].unique()	<span class="comment">#唯一值组成的数组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].nunique()    <span class="comment">#唯一值个数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].value_counts()    <span class="comment">#唯一值及其频数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()    <span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()    <span class="comment">#重复行的布尔值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()]    <span class="comment">#单列去重(删除重复行)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.drop_duplicates(subset=[<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>], keep=<span class="string">&#x27;first&#x27;</span>)    <span class="comment">#多列去重(保留first唯一值)</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame替换函数"><a href="#5-DataFrame替换函数" class="headerlink" title="5.DataFrame替换函数"></a>5.DataFrame替换函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(<span class="number">12.5</span>, <span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的单个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(&#123;<span class="number">12.5</span>:<span class="string">&#x27;A&#x27;</span>, <span class="number">11.7</span>:<span class="string">&#x27;B&#x27;</span>&#125;, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的多个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].replace(&#123;<span class="string">r&#x27;2\d+&#x27;</span>: <span class="string">&#x27;The 21st century&#x27;</span>&#125;, regex=<span class="literal">True</span>, inplace = <span class="literal">True</span>)    <span class="comment">#正则替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].mask(df[<span class="string">&#x27;psavert&#x27;</span>]&gt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].where(df[<span class="string">&#x27;psavert&#x27;</span>]&lt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件不符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame排序函数"><a href="#5-DataFrame排序函数" class="headerlink" title="5.DataFrame排序函数"></a>5.DataFrame排序函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>,ascending = <span class="literal">False</span>)    <span class="comment">#单列降序排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
+</blockquote>
+]]></content>
       <categories>
         <category>Study</category>
       </categories>
