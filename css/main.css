@@ -1700,6 +1700,12 @@ pre {
   height: 30px;
   align-self: center;
 }
+.post-widgets {
+  padding-top: 0px;
+}
+.post-nav {
+  margin-top: 30px;
+}
 .rtl.post-body p,
 .rtl.post-body a,
 .rtl.post-body h1,
@@ -1901,7 +1907,7 @@ pre {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #582aff;
+  background: #ff2e59;
 }
 .links-of-blogroll {
   font-size: 13px;
