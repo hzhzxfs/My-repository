@@ -53,6 +53,171 @@
       </tags>
   </entry>
   <entry>
+    <title>Pandas的一些常用操作_1</title>
+    <url>/2021/02/21/pandas_1/</url>
+    <content><![CDATA[<blockquote>
+<p>今天介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame-to-markdown-latex"><a href="#1-DataFrame-to-markdown-latex" class="headerlink" title="1.DataFrame to markdown/latex"></a>1.DataFrame to markdown/latex</h4><p>dataframe可以转换为许多常用格式，如csv,excel,sql,json,html,latex等等，这里以markdown和latex为例。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.to_markdown())</span><br><span class="line"><span class="built_in">print</span>(df.to_latex())</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_markdown(<span class="string">&#x27;table.md&#x27;</span>)</span><br><span class="line">df.to_latex(<span class="string">&#x27;table.tex&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>也可以自定义输出latex格式，如表格宽度。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_latex(<span class="string">&#x27;tb.tex&#x27;</span>,column_format=<span class="string">&#x27;lp&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>除此以外，dataframe还可以保存为图片。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dataframe_image <span class="keyword">as</span> dfi</span><br><span class="line">dfi.export(obj = df, filename = <span class="string">&#x27;table.jpg&#x27;</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame常用属性查询"><a href="#2-DataFrame常用属性查询" class="headerlink" title="2.DataFrame常用属性查询"></a>2.DataFrame常用属性查询</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values	<span class="comment">#值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.index	<span class="comment">#索引号</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns	<span class="comment">#列标签</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dtypes	<span class="comment">#数据类型</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.shape	<span class="comment">#形状(几行几列)</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame常用基本函数"><a href="#3-DataFrame常用基本函数" class="headerlink" title="3.DataFrame常用基本函数"></a>3.DataFrame常用基本函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.head(<span class="number">5</span>)	<span class="comment">#前5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.tail(<span class="number">5</span>)	<span class="comment">#后5行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()	<span class="comment">#信息概况</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()	<span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-DataFrame唯一值函数"><a href="#4-DataFrame唯一值函数" class="headerlink" title="4.DataFrame唯一值函数"></a>4.DataFrame唯一值函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].unique()	<span class="comment">#唯一值组成的数组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].nunique()    <span class="comment">#唯一值个数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].value_counts()    <span class="comment">#唯一值及其频数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()    <span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()    <span class="comment">#重复行的布尔值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()]    <span class="comment">#单列去重(删除重复行)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.drop_duplicates(subset=[<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>], keep=<span class="string">&#x27;first&#x27;</span>)    <span class="comment">#多列去重(保留first唯一值)</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame替换函数"><a href="#5-DataFrame替换函数" class="headerlink" title="5.DataFrame替换函数"></a>5.DataFrame替换函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(<span class="number">12.5</span>, <span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的单个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(&#123;<span class="number">12.5</span>:<span class="string">&#x27;A&#x27;</span>, <span class="number">11.7</span>:<span class="string">&#x27;B&#x27;</span>&#125;, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的多个值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].replace(&#123;<span class="string">r&#x27;2\d+&#x27;</span>: <span class="string">&#x27;The 21st century&#x27;</span>&#125;, regex=<span class="literal">True</span>, inplace = <span class="literal">True</span>)    <span class="comment">#正则替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].mask(df[<span class="string">&#x27;psavert&#x27;</span>]&gt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].where(df[<span class="string">&#x27;psavert&#x27;</span>]&lt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件不符合，进行替换</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-DataFrame排序函数"><a href="#5-DataFrame排序函数" class="headerlink" title="5.DataFrame排序函数"></a>5.DataFrame排序函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>,ascending = <span class="literal">False</span>)    <span class="comment">#单列降序排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>DataFrame</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas的一些常用操作_2</title>
+    <url>/2021/02/21/pandas_2/</url>
+    <content><![CDATA[<blockquote>
+<p>今天继续介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([condition, df[<span class="string">&#x27;unemploy&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#True组和False两组分别细分</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([df[<span class="string">&#x27;unemploy&#x27;</span>], df[<span class="string">&#x27;uempmed&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#两级分组</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb = df.groupby([<span class="string">&#x27;unemploy&#x27;</span>])<span class="comment">#Groupby对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.size()<span class="comment">#每组的元素个数</span></span><br><span class="line"><span class="comment">#和DataFrame一样，Groupby对象也有max\idxmin\all\\nunique\quantile\prod等函数，这里不一一列举。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg([<span class="string">&#x27;skew&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;idxmax&#x27;</span>])<span class="comment">#agg聚合函数，查看每个分组的三个统计量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg(<span class="keyword">lambda</span> x: x.mean()-x.<span class="built_in">min</span>())<span class="comment">#在agg中自定义函数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x.shape[<span class="number">0</span>] &gt; <span class="number">100</span>)<span class="comment">#组过滤</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.apply(<span class="keyword">lambda</span> x: x**<span class="number">2</span>)<span class="comment">#组的apply方法</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-DataFrame的连接"><a href="#3-DataFrame的连接" class="headerlink" title="3.DataFrame的连接"></a>3.DataFrame的连接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = df[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">df2 = df[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">df1.merge(df2, on=<span class="string">&#x27;date&#x27;</span>, how=<span class="string">&#x27;outer&#x27;</span>)<span class="comment">#merge表示关系型连接，包括左连接、右连接、内连接和外(全)连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df1, df2], axis=<span class="number">0</span>)<span class="comment">#concat是方向性连接，axis=0表示纵向连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_min</span>(<span class="params">x1, x2</span>):</span></span><br><span class="line">    <span class="built_in">min</span> = x1.where(x1&lt;x2, x1)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span></span><br><span class="line">df1.combine(df2, choose_min)<span class="comment">#使用combine函数自定义连接规则</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下一期是Pandas的常见数据处理，包括缺失数据、文本数据、分类数据和时序数据。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>DataFrame</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tsfresh——自动化特征工程工具</title>
+    <url>/2021/03/25/tsfresh/</url>
+    <content><![CDATA[<blockquote>
+<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
+</blockquote>
+<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
+<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h5 id="2-对原特征一列拆成多列，并为每条数据添加时间特征time"><a href="#2-对原特征一列拆成多列，并为每条数据添加时间特征time" class="headerlink" title="2. 对原特征一列拆成多列，并为每条数据添加时间特征time"></a>2. 对原特征一列拆成多列，并为每条数据添加时间特征time</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_data[<span class="string">&#x27;heartbeat_signals&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">&#x27;,&#x27;</span>, expand = <span class="literal">True</span>).stack()</span><br></pre></td></tr></table></figure>
+<h5 id="3-Index处理"><a href="#3-Index处理" class="headerlink" title="3. Index处理"></a>3. Index处理</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_heatbeat_df.reset_inex()</span><br><span class="line">all_heatbeat_df = all_heatbeat_df.set_inex(<span class="string">&#x27;level_0&#x27;</span>)</span><br><span class="line">all_heatbeat_df.index.name = <span class="literal">None</span></span><br><span class="line">all_heatbeat_df.rename(columns=&#123;<span class="string">&#x27;level_1&#x27;</span>:<span class="string">&#x27;time&#x27;</span>, <span class="number">0</span>:<span class="string">&#x27;heartbeat_signals&#x27;</span>, inpalce = <span class="literal">True</span>&#125;)</span><br><span class="line">all_heatbeat_df[<span class="string">&#x27;heartbeat_signals&#x27;</span>].astype(<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-label列单独存储，不进入tsfresh"><a href="#4-label列单独存储，不进入tsfresh" class="headerlink" title="4. label列单独存储，不进入tsfresh"></a>4. label列单独存储，不进入tsfresh</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_data_label = all_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">all_data = all_data.drop[<span class="string">&#x27;label&#x27;</span>, axis=<span class="number">1</span>].drop[<span class="string">&#x27;heartbeat_signals&#x27;</span>, axis=<span class="number">1</span>]</span><br><span class="line">all_data = all_data.join(all_heatbeat_df)</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-tsfresh特征抽取"><a href="#5-tsfresh特征抽取" class="headerlink" title="5. tsfresh特征抽取"></a>5. tsfresh特征抽取</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> extract_features</span><br><span class="line">all_features = extract_features(all_data, column_id=<span class="string">&#x27;id&#x27;</span>, column_sort=<span class="string">&#x27;time&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6.特征选择"></a>6.特征选择</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#删除nan值</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.utilities.dataframe_functions <span class="keyword">import</span> impute</span><br><span class="line">impute(all_features)</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-相关性特征提取"><a href="#7-相关性特征提取" class="headerlink" title="7.相关性特征提取"></a>7.相关性特征提取</h5><p>衍生众多特征之后，许多特征之间可能有很多相关性，需进一步筛选。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> select_features</span><br><span class="line">all_features_filtered = select_features(all_features, all_data_label)</span><br></pre></td></tr></table></figure>
+<h5 id="8-特征重命名，重新添加label"><a href="#8-特征重命名，重新添加label" class="headerlink" title="8.特征重命名，重新添加label"></a>8.特征重命名，重新添加label</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = all_features_filtered.columns.size</span><br><span class="line">all_features_filtered.columns = [<span class="string">&#x27;f_&#x27;</span> + <span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>, num)]</span><br><span class="line">all_features_filtered[<span class="string">&#x27;label&#x27;</span>] = all_data_label</span><br></pre></td></tr></table></figure>
+
+<h4 id="tsfresh包深入探究"><a href="#tsfresh包深入探究" class="headerlink" title="tsfresh包深入探究"></a>tsfresh包深入探究</h4><h5 id="1-筛选特征的方法"><a href="#1-筛选特征的方法" class="headerlink" title="1. 筛选特征的方法"></a>1. 筛选特征的方法</h5><p>上文采用了手工打标签的方式划分训练集和测试集，略显麻烦，可以通过tsfresh的内置方法来提取训练数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kind_to_fc_parameters = tsfresh.feature_extration.settings.from_columns(directed_features)</span><br></pre></td></tr></table></figure>
+<p>生成的params为训练集的特征字典，可以当作参数传入后续计算中。</p>
+<h5 id="2-自定义特征衍生规则"><a href="#2-自定义特征衍生规则" class="headerlink" title="2. 自定义特征衍生规则"></a>2. 自定义特征衍生规则</h5><p>tsfresh自带的衍生规则以字典的形式存放，可以直接调用，也可以自定义。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单个特征计算</span></span><br><span class="line">tsfresh.feature_extraction.feature_calculators.abs_energy(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定衍生规则</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.featureextraction <span class="keyword">import</span> extractfeatures</span><br><span class="line">params = &#123;<span class="string">&#x27;fft_coefficient:[&#123;&#x27;</span>coe<span class="string">f&#x27;:0, &#x27;</span>att<span class="string">r&#x27;:&#x27;</span><span class="built_in">abs</span><span class="string">&#x27;&#125;], &#x27;</span>kurtosis<span class="string">&#x27;: None, &#x27;</span>skewness<span class="string">&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>后续可以在extractfeatures中设置defaultparameters = params，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+<h5 id="3-减小内存使用"><a href="#3-减小内存使用" class="headerlink" title="3. 减小内存使用"></a>3. 减小内存使用</h5><p>tsfresh默认参数太吃内存，且耗时长，笔者i7的16G笔记本最多只能跑到60%的进度就会卡住，天池notebook和谷歌colab都是没跑出结果就断线了，硬要跑的话只能租个高配服务器，或者调整衍生特征的数量，通过<strong>chunksize</strong>设置，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+]]></content>
+      <categories>
+        <category>Feature engineering</category>
+      </categories>
+      <tags>
+        <tag>tsfresh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模型融合_1</title>
+    <url>/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/</url>
+    <content><![CDATA[<p>Kaggle和天池比赛中常用提高成绩的三种方法：</p>
+<blockquote>
+<p>1.特征工程<br>2.模型调参<br>3.模型融合<br>模型融合主要有以下几种方式：</p>
+</blockquote>
+<h4 id="简单加权融合"><a href="#简单加权融合" class="headerlink" title="简单加权融合:"></a>简单加权融合:</h4><blockquote>
+<p>①回归（分类概率）：算术平均融合（Arithmetic mean），几何平均融合（Geometric mean）；<br>②分类：投票（Voting)<br>③综合：排序融合(Rank averaging)，log融合</p>
+</blockquote>
+<h4 id="stacking-blending"><a href="#stacking-blending" class="headerlink" title="stacking/blending:"></a>stacking/blending:</h4><blockquote>
+<p>构建多层模型，把初级学习器的输出当作下一层的输入。</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="boosting-bagging（在xgboost-Adaboost-GBDT中已经用到）"><a href="#boosting-bagging（在xgboost-Adaboost-GBDT中已经用到）" class="headerlink" title="boosting/bagging（在xgboost,Adaboost,GBDT中已经用到）:"></a>boosting/bagging（在xgboost,Adaboost,GBDT中已经用到）:</h4><blockquote>
+<p>多个分类器的整合</p>
+</blockquote>
+<h4 id="部分代码案例"><a href="#部分代码案例" class="headerlink" title="部分代码案例:"></a>部分代码案例:</h4><h5 id="1-简单加权平均"><a href="#1-简单加权平均" class="headerlink" title="1.简单加权平均"></a>1.简单加权平均</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Weighted_method</span>(<span class="params">test_pre1,test_pre2,test_pre3,w=[<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>]</span>):</span></span><br><span class="line">    Weighted_result = w[<span class="number">0</span>]*pd.Series(test_pre1)+w[<span class="number">1</span>]*pd.Series(test_pre2)+w[<span class="number">2</span>]*pd.Series(test_pre3)</span><br><span class="line">    <span class="keyword">return</span> Weighted_result</span><br><span class="line">    </span><br><span class="line">Weighted_pre = Weighted_method(test_pre1,test_pre2,test_pre3,w)</span><br></pre></td></tr></table></figure>
+<h5 id="2-Stacking融合-回归"><a href="#2-Stacking融合-回归" class="headerlink" title="2.Stacking融合(回归)"></a>2.Stacking融合(回归)</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Stacking_method</span>(<span class="params">train_reg1,train_reg2,train_reg3,y_train_true,test_pre1,test_pre2,test_pre3,model_L2= linear_model.LinearRegression(<span class="params"></span>)</span>):</span>    model_L2.fit(pd.concat([pd.Series(train_reg1),pd.Series(train_reg2),pd.Series(train_reg3)],axis=<span class="number">1</span>).values,y_train_true)</span><br><span class="line">    Stacking_result = model_L2.predict(pd.concat([pd.Series(test_pre1),pd.Series(test_pre2),pd.Series(test_pre3)],axis=<span class="number">1</span>).values)</span><br><span class="line">    <span class="keyword">return</span> Stacking_result</span><br><span class="line"></span><br><span class="line">Stacking_pre = Stacking_method(train_reg1,train_reg2,train_reg3,y_train_true,</span><br><span class="line">                               test_pre1,test_pre2,test_pre3,model_L2)</span><br></pre></td></tr></table></figure>
+<h5 id="3-Voting投票机制"><a href="#3-Voting投票机制" class="headerlink" title="3.Voting投票机制"></a>3.Voting投票机制</h5><blockquote>
+<p>硬投票：对多个模型直接进行投票，不区分模型结果的相对重要度，最终投票数最多的类为最终被预测的类。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">eclf = VotingClassifier(estimators=[(<span class="string">&#x27;lgb&#x27;</span>, clf1), (<span class="string">&#x27;rf&#x27;</span>, clf2), (<span class="string">&#x27;svc&#x27;</span>, clf3)], voting=<span class="string">&#x27;hard&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> clf, label <span class="keyword">in</span> <span class="built_in">zip</span>([clf1, clf2, clf3, eclf], [<span class="string">&#x27;LGB&#x27;</span>, <span class="string">&#x27;Random Forest&#x27;</span>, <span class="string">&#x27;SVM&#x27;</span>, <span class="string">&#x27;Ensemble&#x27;</span>]):</span><br><span class="line">    scores = cross_val_score(clf, x, y, cv=<span class="number">5</span>, scoring=<span class="string">&#x27;accuracy&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Accuracy: %0.2f (+/- %0.2f) [%s]&quot;</span> % (scores.mean(), scores.std(), label))</span><br></pre></td></tr></table></figure>
+<h5 id="4-分类模型的Stacking融合"><a href="#4-分类模型的Stacking融合" class="headerlink" title="4.分类模型的Stacking融合"></a>4.分类模型的Stacking融合</h5><blockquote>
+<p>Stacking与Blending相比存在一定优势:<br>1.充分使用数据<br>2.使用多次的交叉验证会比较稳健<br>3.不容易过拟合</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">clfs = [LogisticRegression(solver=<span class="string">&#x27;lbfgs&#x27;</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;entropy&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j, clf <span class="keyword">in</span> <span class="built_in">enumerate</span>(clfs):</span><br><span class="line">    <span class="comment">#依次训练各个单模型</span></span><br><span class="line">    clf.fit(X_d1, y_d1)</span><br><span class="line">    y_submission = clf.predict_proba(X_d2)[:, <span class="number">1</span>]</span><br><span class="line">    dataset_d1[:, j] = y_submission</span><br><span class="line">    <span class="comment">#对于测试集，直接用这k个模型的预测值作为新的特征。</span></span><br><span class="line">    dataset_d2[:, j] = clf.predict_proba(X_predict)[:, <span class="number">1</span>]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;val auc Score: %f&quot;</span> % roc_auc_score(y_predict, dataset_d2[:, j]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#融合使用的模型</span></span><br><span class="line">clf = GradientBoostingClassifier(learning_rate=<span class="number">0.02</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">30</span>)</span><br><span class="line">clf.fit(dataset_d1, y_d2)</span><br></pre></td></tr></table></figure>
+<h5 id="5-其他Stacking"><a href="#5-其他Stacking" class="headerlink" title="5.其他Stacking"></a>5.其他Stacking</h5><blockquote>
+<p>将特征放进模型中预测，并将预测结果变换并作为新的特征加入原有特征中再经过模型预测结果</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Ensemble_add_feature</span>(<span class="params">train,test,target,clfs</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j,clf <span class="keyword">in</span> <span class="built_in">enumerate</span>(clfs):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;依次训练各个单模型&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># print(j, clf)</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;使用第1个部分作为预测，第2部分来训练模型，获得其预测的输出作为第2部分的新特征。&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># X_train, y_train, X_test, y_test = X[train], y[train], X[test], y[test]</span></span><br><span class="line"></span><br><span class="line">        clf.fit(train,target)</span><br><span class="line">        y_train = clf.predict(train)</span><br><span class="line">        y_test = clf.predict(test)</span><br><span class="line"></span><br><span class="line">        <span class="comment">## 新特征生成</span></span><br><span class="line">        train_[:,j*<span class="number">2</span>] = y_train**<span class="number">2</span></span><br><span class="line">        test_[:,j*<span class="number">2</span>] = y_test**<span class="number">2</span></span><br><span class="line">        train_[:, j+<span class="number">1</span>] = np.exp(y_train)</span><br><span class="line">        test_[:, j+<span class="number">1</span>] = np.exp(y_test)</span><br><span class="line">        <span class="comment"># print(&quot;val auc Score: %f&quot; % r2_score(y_predict, dataset_d2[:, j]))</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Method &#x27;</span>,j)</span><br><span class="line"></span><br><span class="line">    train_ = pd.DataFrame(train_)</span><br><span class="line">    test_ = pd.DataFrame(test_)</span><br><span class="line">    <span class="keyword">return</span> train_,test_</span><br><span class="line"></span><br><span class="line"><span class="comment">#模型融合中使用到的各个单模型</span></span><br><span class="line">clfs = [LogisticRegression(),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;entropy&#x27;</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line">New_train,New_test = Ensemble_add_feature(x_train,x_test,y_train,clfs)</span><br><span class="line">clf = GradientBoostingClassifier(learning_rate=<span class="number">0.02</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">30</span>)</span><br><span class="line">clf.fit(New_train, y_train)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Machine learning</category>
+      </categories>
+      <tags>
+        <tag>voting</tag>
+        <tag>Stacking</tag>
+        <tag>Blending</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pandas的一些常用操作_3</title>
     <url>/2021/02/21/pandas_3/</url>
     <content><![CDATA[<blockquote>
@@ -117,96 +282,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Pandas的一些常用操作_1</title>
-    <url>/2021/02/21/pandas_1/</url>
-    <content><![CDATA[<blockquote>
-<p>今天介绍几个常用的Pandas操作。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-DataFrame-to-markdown-latex"><a href="#1-DataFrame-to-markdown-latex" class="headerlink" title="1.DataFrame to markdown/latex"></a>1.DataFrame to markdown/latex</h4><p>dataframe可以转换为许多常用格式，如csv,excel,sql,json,html,latex等等，这里以markdown和latex为例。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.to_markdown())</span><br><span class="line"><span class="built_in">print</span>(df.to_latex())</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_markdown(<span class="string">&#x27;table.md&#x27;</span>)</span><br><span class="line">df.to_latex(<span class="string">&#x27;table.tex&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>也可以自定义输出latex格式，如表格宽度。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_latex(<span class="string">&#x27;tb.tex&#x27;</span>,column_format=<span class="string">&#x27;lp&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;p&#123;1.8cm&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>除此以外，dataframe还可以保存为图片。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dataframe_image <span class="keyword">as</span> dfi</span><br><span class="line">dfi.export(obj = df, filename = <span class="string">&#x27;table.jpg&#x27;</span>, fontsize=<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="2-DataFrame常用属性查询"><a href="#2-DataFrame常用属性查询" class="headerlink" title="2.DataFrame常用属性查询"></a>2.DataFrame常用属性查询</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values	<span class="comment">#值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.index	<span class="comment">#索引号</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns	<span class="comment">#列标签</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dtypes	<span class="comment">#数据类型</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.shape	<span class="comment">#形状(几行几列)</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-DataFrame常用基本函数"><a href="#3-DataFrame常用基本函数" class="headerlink" title="3.DataFrame常用基本函数"></a>3.DataFrame常用基本函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.head(<span class="number">5</span>)	<span class="comment">#前5行</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.tail(<span class="number">5</span>)	<span class="comment">#后5行</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()	<span class="comment">#信息概况</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()	<span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
-<h4 id="4-DataFrame唯一值函数"><a href="#4-DataFrame唯一值函数" class="headerlink" title="4.DataFrame唯一值函数"></a>4.DataFrame唯一值函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].unique()	<span class="comment">#唯一值组成的数组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].nunique()    <span class="comment">#唯一值个数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].value_counts()    <span class="comment">#唯一值及其频数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()    <span class="comment">#主要统计量(count、mean、std、max、min、quartile)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()    <span class="comment">#重复行的布尔值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[<span class="string">&#x27;psavert&#x27;</span>].duplicated()]    <span class="comment">#单列去重(删除重复行)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.drop_duplicates(subset=[<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>], keep=<span class="string">&#x27;first&#x27;</span>)    <span class="comment">#多列去重(保留first唯一值)</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-DataFrame替换函数"><a href="#5-DataFrame替换函数" class="headerlink" title="5.DataFrame替换函数"></a>5.DataFrame替换函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(<span class="number">12.5</span>, <span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的单个值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].replace(&#123;<span class="number">12.5</span>:<span class="string">&#x27;A&#x27;</span>, <span class="number">11.7</span>:<span class="string">&#x27;B&#x27;</span>&#125;, inplace = <span class="literal">True</span>)    <span class="comment">#替换某列的多个值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].replace(&#123;<span class="string">r&#x27;2\d+&#x27;</span>: <span class="string">&#x27;The 21st century&#x27;</span>&#125;, regex=<span class="literal">True</span>, inplace = <span class="literal">True</span>)    <span class="comment">#正则替换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].mask(df[<span class="string">&#x27;psavert&#x27;</span>]&gt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件符合，进行替换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;psavert&#x27;</span>].where(df[<span class="string">&#x27;psavert&#x27;</span>]&lt;<span class="number">12.0</span> ,<span class="string">&#x27;A&#x27;</span>, inplace = <span class="literal">True</span>)    <span class="comment">#条件不符合，进行替换</span></span><br></pre></td></tr></table></figure>
-<h4 id="5-DataFrame排序函数"><a href="#5-DataFrame排序函数" class="headerlink" title="5.DataFrame排序函数"></a>5.DataFrame排序函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>,ascending = <span class="literal">False</span>)    <span class="comment">#单列降序排序</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values([<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])    <span class="comment">#前者升序情况下，后降序</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>今天先写到这，下一期接着写DataFrame的apply方法。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Pandas</category>
-      </categories>
-      <tags>
-        <tag>DataFrame</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tsfresh——自动化特征工程工具</title>
-    <url>/2021/03/25/tsfresh/</url>
-    <content><![CDATA[<blockquote>
-<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
-</blockquote>
-<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
-<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h5 id="2-对原特征一列拆成多列，并为每条数据添加时间特征time"><a href="#2-对原特征一列拆成多列，并为每条数据添加时间特征time" class="headerlink" title="2. 对原特征一列拆成多列，并为每条数据添加时间特征time"></a>2. 对原特征一列拆成多列，并为每条数据添加时间特征time</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_data[<span class="string">&#x27;heartbeat_signals&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">&#x27;,&#x27;</span>, expand = <span class="literal">True</span>).stack()</span><br></pre></td></tr></table></figure>
-<h5 id="3-Index处理"><a href="#3-Index处理" class="headerlink" title="3. Index处理"></a>3. Index处理</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_heatbeat_df.reset_inex()</span><br><span class="line">all_heatbeat_df = all_heatbeat_df.set_inex(<span class="string">&#x27;level_0&#x27;</span>)</span><br><span class="line">all_heatbeat_df.index.name = <span class="literal">None</span></span><br><span class="line">all_heatbeat_df.rename(columns=&#123;<span class="string">&#x27;level_1&#x27;</span>:<span class="string">&#x27;time&#x27;</span>, <span class="number">0</span>:<span class="string">&#x27;heartbeat_signals&#x27;</span>, inpalce = <span class="literal">True</span>&#125;)</span><br><span class="line">all_heatbeat_df[<span class="string">&#x27;heartbeat_signals&#x27;</span>].astype(<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="4-label列单独存储，不进入tsfresh"><a href="#4-label列单独存储，不进入tsfresh" class="headerlink" title="4. label列单独存储，不进入tsfresh"></a>4. label列单独存储，不进入tsfresh</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_data_label = all_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">all_data = all_data.drop[<span class="string">&#x27;label&#x27;</span>, axis=<span class="number">1</span>].drop[<span class="string">&#x27;heartbeat_signals&#x27;</span>, axis=<span class="number">1</span>]</span><br><span class="line">all_data = all_data.join(all_heatbeat_df)</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-tsfresh特征抽取"><a href="#5-tsfresh特征抽取" class="headerlink" title="5. tsfresh特征抽取"></a>5. tsfresh特征抽取</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> extract_features</span><br><span class="line">all_features = extract_features(all_data, column_id=<span class="string">&#x27;id&#x27;</span>, column_sort=<span class="string">&#x27;time&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6.特征选择"></a>6.特征选择</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#删除nan值</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.utilities.dataframe_functions <span class="keyword">import</span> impute</span><br><span class="line">impute(all_features)</span><br></pre></td></tr></table></figure>
-
-<h5 id="7-相关性特征提取"><a href="#7-相关性特征提取" class="headerlink" title="7.相关性特征提取"></a>7.相关性特征提取</h5><p>衍生众多特征之后，许多特征之间可能有很多相关性，需进一步筛选。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> select_features</span><br><span class="line">all_features_filtered = select_features(all_features, all_data_label)</span><br></pre></td></tr></table></figure>
-<h5 id="8-特征重命名，重新添加label"><a href="#8-特征重命名，重新添加label" class="headerlink" title="8.特征重命名，重新添加label"></a>8.特征重命名，重新添加label</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = all_features_filtered.columns.size</span><br><span class="line">all_features_filtered.columns = [<span class="string">&#x27;f_&#x27;</span> + <span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>, num)]</span><br><span class="line">all_features_filtered[<span class="string">&#x27;label&#x27;</span>] = all_data_label</span><br></pre></td></tr></table></figure>
-
-<h4 id="tsfresh包深入探究"><a href="#tsfresh包深入探究" class="headerlink" title="tsfresh包深入探究"></a>tsfresh包深入探究</h4><h5 id="1-筛选特征的方法"><a href="#1-筛选特征的方法" class="headerlink" title="1. 筛选特征的方法"></a>1. 筛选特征的方法</h5><p>上文采用了手工打标签的方式划分训练集和测试集，略显麻烦，可以通过tsfresh的内置方法来提取训练数据。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kind_to_fc_parameters = tsfresh.feature_extration.settings.from_columns(directed_features)</span><br></pre></td></tr></table></figure>
-<p>生成的params为训练集的特征字典，可以当作参数传入后续计算中。</p>
-<h5 id="2-自定义特征衍生规则"><a href="#2-自定义特征衍生规则" class="headerlink" title="2. 自定义特征衍生规则"></a>2. 自定义特征衍生规则</h5><p>tsfresh自带的衍生规则以字典的形式存放，可以直接调用，也可以自定义。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单个特征计算</span></span><br><span class="line">tsfresh.feature_extraction.feature_calculators.abs_energy(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定衍生规则</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.featureextraction <span class="keyword">import</span> extractfeatures</span><br><span class="line">params = &#123;<span class="string">&#x27;fft_coefficient:[&#123;&#x27;</span>coe<span class="string">f&#x27;:0, &#x27;</span>att<span class="string">r&#x27;:&#x27;</span><span class="built_in">abs</span><span class="string">&#x27;&#125;], &#x27;</span>kurtosis<span class="string">&#x27;: None, &#x27;</span>skewness<span class="string">&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>后续可以在extractfeatures中设置defaultparameters = params，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
-<h5 id="3-减小内存使用"><a href="#3-减小内存使用" class="headerlink" title="3. 减小内存使用"></a>3. 减小内存使用</h5><p>tsfresh默认参数太吃内存，且耗时长，笔者i7的16G笔记本最多只能跑到60%的进度就会卡住，天池notebook和谷歌colab都是没跑出结果就断线了，硬要跑的话只能租个高配服务器，或者调整衍生特征的数量，通过<strong>chunksize</strong>设置，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
-]]></content>
-      <categories>
-        <category>Feature engineering</category>
-      </categories>
-      <tags>
-        <tag>tsfresh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>特征选择_1</title>
     <url>/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/</url>
     <content><![CDATA[<p>在数据预处理过程中，特征选择是一个重要的过程，选择出重要的特征可以加快模型训练速度。通常可以从以下两方面来选择特征：</p>
@@ -257,81 +332,6 @@
         <tag>Embedding</tag>
         <tag>Wapper</tag>
         <tag>Filter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pandas的一些常用操作_2</title>
-    <url>/2021/02/21/pandas_2/</url>
-    <content><![CDATA[<blockquote>
-<p>今天继续介绍几个常用的Pandas操作。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.applymap(<span class="keyword">lambda</span> x:x*<span class="number">10</span>)<span class="comment">#applymap 将函数应用到每个元素</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-DataFrame的分组"><a href="#2-DataFrame的分组" class="headerlink" title="2.DataFrame的分组"></a>2.DataFrame的分组</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby(<span class="string">&#x27;unemploy&#x27;</span>)[<span class="string">&#x27;psavert&#x27;</span>].median()<span class="comment">#样例:df.groupby(分组依据)[数据来源].使用操作</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">condition = df.unemploy &gt; df.unemploy.mean()<span class="comment">#使用condition定义分组依据</span></span><br><span class="line">df.groupby(condition)[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#分为True和False两组</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([condition, df[<span class="string">&#x27;unemploy&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#True组和False两组分别细分</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.groupby([df[<span class="string">&#x27;unemploy&#x27;</span>], df[<span class="string">&#x27;uempmed&#x27;</span>]])[<span class="string">&#x27;psavert&#x27;</span>].mean()<span class="comment">#两级分组</span></span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb = df.groupby([<span class="string">&#x27;unemploy&#x27;</span>])<span class="comment">#Groupby对象</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.size()<span class="comment">#每组的元素个数</span></span><br><span class="line"><span class="comment">#和DataFrame一样，Groupby对象也有max\idxmin\all\\nunique\quantile\prod等函数，这里不一一列举。</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg([<span class="string">&#x27;skew&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>, <span class="string">&#x27;idxmax&#x27;</span>])<span class="comment">#agg聚合函数，查看每个分组的三个统计量</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.agg(<span class="keyword">lambda</span> x: x.mean()-x.<span class="built_in">min</span>())<span class="comment">#在agg中自定义函数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x.shape[<span class="number">0</span>] &gt; <span class="number">100</span>)<span class="comment">#组过滤</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gb.apply(<span class="keyword">lambda</span> x: x**<span class="number">2</span>)<span class="comment">#组的apply方法</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-DataFrame的连接"><a href="#3-DataFrame的连接" class="headerlink" title="3.DataFrame的连接"></a>3.DataFrame的连接</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = df[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">df2 = df[<span class="number">10</span>:<span class="number">20</span>]</span><br><span class="line">df1.merge(df2, on=<span class="string">&#x27;date&#x27;</span>, how=<span class="string">&#x27;outer&#x27;</span>)<span class="comment">#merge表示关系型连接，包括左连接、右连接、内连接和外(全)连接</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df1, df2], axis=<span class="number">0</span>)<span class="comment">#concat是方向性连接，axis=0表示纵向连接</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_min</span>(<span class="params">x1, x2</span>):</span></span><br><span class="line">    <span class="built_in">min</span> = x1.where(x1&lt;x2, x1)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span></span><br><span class="line">df1.combine(df2, choose_min)<span class="comment">#使用combine函数自定义连接规则</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>下一期是Pandas的常见数据处理，包括缺失数据、文本数据、分类数据和时序数据。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Pandas</category>
-      </categories>
-      <tags>
-        <tag>DataFrame</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>模型融合_1</title>
-    <url>/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/</url>
-    <content><![CDATA[<p>Kaggle和天池比赛中常用提高成绩的三种方法：</p>
-<blockquote>
-<p>1.特征工程<br>2.模型调参<br>3.模型融合<br>模型融合主要有以下几种方式：</p>
-</blockquote>
-<h4 id="简单加权融合"><a href="#简单加权融合" class="headerlink" title="简单加权融合:"></a>简单加权融合:</h4><blockquote>
-<p>①回归（分类概率）：算术平均融合（Arithmetic mean），几何平均融合（Geometric mean）；<br>②分类：投票（Voting)<br>③综合：排序融合(Rank averaging)，log融合</p>
-</blockquote>
-<h4 id="stacking-blending"><a href="#stacking-blending" class="headerlink" title="stacking/blending:"></a>stacking/blending:</h4><blockquote>
-<p>构建多层模型，把初级学习器的输出当作下一层的输入。</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="boosting-bagging（在xgboost-Adaboost-GBDT中已经用到）"><a href="#boosting-bagging（在xgboost-Adaboost-GBDT中已经用到）" class="headerlink" title="boosting/bagging（在xgboost,Adaboost,GBDT中已经用到）:"></a>boosting/bagging（在xgboost,Adaboost,GBDT中已经用到）:</h4><blockquote>
-<p>多个分类器的整合</p>
-</blockquote>
-<h4 id="部分代码案例"><a href="#部分代码案例" class="headerlink" title="部分代码案例:"></a>部分代码案例:</h4><h5 id="1-简单加权平均"><a href="#1-简单加权平均" class="headerlink" title="1.简单加权平均"></a>1.简单加权平均</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Weighted_method</span>(<span class="params">test_pre1,test_pre2,test_pre3,w=[<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>,<span class="number">1</span>/<span class="number">3</span>]</span>):</span></span><br><span class="line">    Weighted_result = w[<span class="number">0</span>]*pd.Series(test_pre1)+w[<span class="number">1</span>]*pd.Series(test_pre2)+w[<span class="number">2</span>]*pd.Series(test_pre3)</span><br><span class="line">    <span class="keyword">return</span> Weighted_result</span><br><span class="line">    </span><br><span class="line">Weighted_pre = Weighted_method(test_pre1,test_pre2,test_pre3,w)</span><br></pre></td></tr></table></figure>
-<h5 id="2-Stacking融合-回归"><a href="#2-Stacking融合-回归" class="headerlink" title="2.Stacking融合(回归)"></a>2.Stacking融合(回归)</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Stacking_method</span>(<span class="params">train_reg1,train_reg2,train_reg3,y_train_true,test_pre1,test_pre2,test_pre3,model_L2= linear_model.LinearRegression(<span class="params"></span>)</span>):</span>    model_L2.fit(pd.concat([pd.Series(train_reg1),pd.Series(train_reg2),pd.Series(train_reg3)],axis=<span class="number">1</span>).values,y_train_true)</span><br><span class="line">    Stacking_result = model_L2.predict(pd.concat([pd.Series(test_pre1),pd.Series(test_pre2),pd.Series(test_pre3)],axis=<span class="number">1</span>).values)</span><br><span class="line">    <span class="keyword">return</span> Stacking_result</span><br><span class="line"></span><br><span class="line">Stacking_pre = Stacking_method(train_reg1,train_reg2,train_reg3,y_train_true,</span><br><span class="line">                               test_pre1,test_pre2,test_pre3,model_L2)</span><br></pre></td></tr></table></figure>
-<h5 id="3-Voting投票机制"><a href="#3-Voting投票机制" class="headerlink" title="3.Voting投票机制"></a>3.Voting投票机制</h5><blockquote>
-<p>硬投票：对多个模型直接进行投票，不区分模型结果的相对重要度，最终投票数最多的类为最终被预测的类。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">eclf = VotingClassifier(estimators=[(<span class="string">&#x27;lgb&#x27;</span>, clf1), (<span class="string">&#x27;rf&#x27;</span>, clf2), (<span class="string">&#x27;svc&#x27;</span>, clf3)], voting=<span class="string">&#x27;hard&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> clf, label <span class="keyword">in</span> <span class="built_in">zip</span>([clf1, clf2, clf3, eclf], [<span class="string">&#x27;LGB&#x27;</span>, <span class="string">&#x27;Random Forest&#x27;</span>, <span class="string">&#x27;SVM&#x27;</span>, <span class="string">&#x27;Ensemble&#x27;</span>]):</span><br><span class="line">    scores = cross_val_score(clf, x, y, cv=<span class="number">5</span>, scoring=<span class="string">&#x27;accuracy&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Accuracy: %0.2f (+/- %0.2f) [%s]&quot;</span> % (scores.mean(), scores.std(), label))</span><br></pre></td></tr></table></figure>
-<h5 id="4-分类模型的Stacking融合"><a href="#4-分类模型的Stacking融合" class="headerlink" title="4.分类模型的Stacking融合"></a>4.分类模型的Stacking融合</h5><blockquote>
-<p>Stacking与Blending相比存在一定优势:<br>1.充分使用数据<br>2.使用多次的交叉验证会比较稳健<br>3.不容易过拟合</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">clfs = [LogisticRegression(solver=<span class="string">&#x27;lbfgs&#x27;</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;entropy&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j, clf <span class="keyword">in</span> <span class="built_in">enumerate</span>(clfs):</span><br><span class="line">    <span class="comment">#依次训练各个单模型</span></span><br><span class="line">    clf.fit(X_d1, y_d1)</span><br><span class="line">    y_submission = clf.predict_proba(X_d2)[:, <span class="number">1</span>]</span><br><span class="line">    dataset_d1[:, j] = y_submission</span><br><span class="line">    <span class="comment">#对于测试集，直接用这k个模型的预测值作为新的特征。</span></span><br><span class="line">    dataset_d2[:, j] = clf.predict_proba(X_predict)[:, <span class="number">1</span>]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;val auc Score: %f&quot;</span> % roc_auc_score(y_predict, dataset_d2[:, j]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#融合使用的模型</span></span><br><span class="line">clf = GradientBoostingClassifier(learning_rate=<span class="number">0.02</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">30</span>)</span><br><span class="line">clf.fit(dataset_d1, y_d2)</span><br></pre></td></tr></table></figure>
-<h5 id="5-其他Stacking"><a href="#5-其他Stacking" class="headerlink" title="5.其他Stacking"></a>5.其他Stacking</h5><blockquote>
-<p>将特征放进模型中预测，并将预测结果变换并作为新的特征加入原有特征中再经过模型预测结果</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Ensemble_add_feature</span>(<span class="params">train,test,target,clfs</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j,clf <span class="keyword">in</span> <span class="built_in">enumerate</span>(clfs):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;依次训练各个单模型&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># print(j, clf)</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;使用第1个部分作为预测，第2部分来训练模型，获得其预测的输出作为第2部分的新特征。&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># X_train, y_train, X_test, y_test = X[train], y[train], X[test], y[test]</span></span><br><span class="line"></span><br><span class="line">        clf.fit(train,target)</span><br><span class="line">        y_train = clf.predict(train)</span><br><span class="line">        y_test = clf.predict(test)</span><br><span class="line"></span><br><span class="line">        <span class="comment">## 新特征生成</span></span><br><span class="line">        train_[:,j*<span class="number">2</span>] = y_train**<span class="number">2</span></span><br><span class="line">        test_[:,j*<span class="number">2</span>] = y_test**<span class="number">2</span></span><br><span class="line">        train_[:, j+<span class="number">1</span>] = np.exp(y_train)</span><br><span class="line">        test_[:, j+<span class="number">1</span>] = np.exp(y_test)</span><br><span class="line">        <span class="comment"># print(&quot;val auc Score: %f&quot; % r2_score(y_predict, dataset_d2[:, j]))</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Method &#x27;</span>,j)</span><br><span class="line"></span><br><span class="line">    train_ = pd.DataFrame(train_)</span><br><span class="line">    test_ = pd.DataFrame(test_)</span><br><span class="line">    <span class="keyword">return</span> train_,test_</span><br><span class="line"></span><br><span class="line"><span class="comment">#模型融合中使用到的各个单模型</span></span><br><span class="line">clfs = [LogisticRegression(),</span><br><span class="line">        RandomForestClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;gini&#x27;</span>),</span><br><span class="line">        ExtraTreesClassifier(n_estimators=<span class="number">5</span>, n_jobs=-<span class="number">1</span>, criterion=<span class="string">&#x27;entropy&#x27;</span>),</span><br><span class="line">        GradientBoostingClassifier(learning_rate=<span class="number">0.05</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line">New_train,New_test = Ensemble_add_feature(x_train,x_test,y_train,clfs)</span><br><span class="line">clf = GradientBoostingClassifier(learning_rate=<span class="number">0.02</span>, subsample=<span class="number">0.5</span>, max_depth=<span class="number">6</span>, n_estimators=<span class="number">30</span>)</span><br><span class="line">clf.fit(New_train, y_train)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Machine learning</category>
-      </categories>
-      <tags>
-        <tag>voting</tag>
-        <tag>Stacking</tag>
-        <tag>Blending</tag>
       </tags>
   </entry>
 </search>
