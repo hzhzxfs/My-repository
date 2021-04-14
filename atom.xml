@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-05T11:43:29.872Z</updated>
+  <updated>2021-04-14T16:36:52.750Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>地理数据分析常用工具</title>
+    <link href="http://example.com/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>http://example.com/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</id>
+    <published>2021-04-15T15:30:38.000Z</published>
+    <updated>2021-04-14T16:36:52.750Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在地理空间数据分析中，常用一些模块进行地理数据分析、特征提取及可视化，包括shapely、geopandas、folium、kepler.gl、geohash等工具。&lt;/p&gt;
+&lt;h4 id=&quot;1-shapely&quot;&gt;&lt;a href=&quot;#1-shapely&quot; class=&quot;headerlink&quot; title=&quot;1. shapely&quot;&gt;&lt;/a&gt;1. shapely&lt;/h4&gt;&lt;p&gt;shapely是基于笛卡尔坐标的几何对象操作和分析Python库，底层基于GEOS和JTS拓扑运算库。&lt;/p&gt;
+&lt;h5 id=&quot;1-1-Point对象&quot;&gt;&lt;a href=&quot;#1-1-Point对象&quot; class=&quot;headerlink&quot; title=&quot;1.1 Point对象&quot;&gt;&lt;/a&gt;1.1 Point对象&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; shapely.geometry &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Point&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;point1 = Point(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;point2 = Point(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;point3 = Point(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#点的可视化&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;geo.GeometryCollection([point1,point2,point3])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#Point转为numpy数组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(np.array(point))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="geospatial data analysis" scheme="http://example.com/categories/geospatial-data-analysis/"/>
+    
+    <category term="data visualization" scheme="http://example.com/categories/geospatial-data-analysis/data-visualization/"/>
+    
+    <category term="GIS" scheme="http://example.com/categories/geospatial-data-analysis/data-visualization/GIS/"/>
+    
+    
+    <category term="geopandas" scheme="http://example.com/tags/geopandas/"/>
+    
+    <category term="shapely" scheme="http://example.com/tags/shapely/"/>
+    
+    <category term="Kepler.gl" scheme="http://example.com/tags/Kepler-gl/"/>
+    
+    <category term="folium" scheme="http://example.com/tags/folium/"/>
+    
+    <category term="geohash" scheme="http://example.com/tags/geohash/"/>
+    
+  </entry>
   
   <entry>
     <title>LightGBM调参_1</title>
