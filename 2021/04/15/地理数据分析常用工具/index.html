@@ -99,11 +99,9 @@
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U31c06924a773420bb62cc56d2ee9442ft.jpg">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/Uc6be8164498d4fda99801e6d30ac676eV.jpg">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U1fe179343a464ab1926cd10582207986X.jpg">
-<meta property="og:image" content="https://media.giphy.com/media/HNPVvZetEjTWBloujW/giphy.gif">
-<meta property="og:image" content="https://media.giphy.com/media/8nnxyDPm4nXPD1Ff2K/giphy.gif">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/Uf288553e6d2c43038976764613dd1cc1x.jpg">
 <meta property="article:published_time" content="2021-04-15T15:30:38.000Z">
-<meta property="article:modified_time" content="2021-04-14T16:36:52.750Z">
+<meta property="article:modified_time" content="2021-04-14T16:44:16.792Z">
 <meta property="article:author" content="xhj">
 <meta property="article:tag" content="geopandas">
 <meta property="article:tag" content="shapely">
@@ -501,16 +499,19 @@
 <p><img src="https://ae01.alicdn.com/kf/U1fe179343a464ab1926cd10582207986X.jpg" alt="f4"></p>
 <p>folium的MarkerCluster()聚类函数，可以用来反映一个区域的拥挤程度。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> folium.plugins <span class="keyword">import</span> MarkerCluster</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建对象</span></span><br><span class="line">marker_cluster = MarkerCluster().add_to(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将经纬度加入聚类</span></span><br><span class="line"><span class="keyword">for</span> element <span class="keyword">in</span> data:</span><br><span class="line">    folium.Marker(location=[element[<span class="number">0</span>], element[<span class="number">1</span>]],icon=<span class="literal">None</span>).add_to(marker_cluster)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加至地图</span></span><br><span class="line">m.add_child(marker_cluster)</span><br><span class="line">m</span><br></pre></td></tr></table></figure>
-<p><img src="https://media.giphy.com/media/HNPVvZetEjTWBloujW/giphy.gif" alt="f5"></p>
+
 <h4 id="4-Kepler-gl"><a href="#4-Kepler-gl" class="headerlink" title="4.Kepler.gl"></a>4.Kepler.gl</h4><p>Kepler.gl是Uber联合Mapbox推出的地理空间可视化工具，支持3种数据格式：CSV、JSON、GeoJSON。接下来将以杭州市OSM路网为例，制作路径流动动画。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keplergl <span class="keyword">import</span> KeplerGl</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取geojson</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./hzroad.json&#x27;</span>,encoding=<span class="string">&#x27;gb18030&#x27;</span>, errors=<span class="string">&#x27;ignore&#x27;</span>) <span class="keyword">as</span> g:</span><br><span class="line">    raw_roads = json.load(g)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成虚构时间戳信息和高度0</span></span><br><span class="line">start_time = time.mktime(time.strptime(<span class="string">&#x27;2020-05-29 20:00:00&#x27;</span>, <span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(raw_roads[<span class="string">&#x27;features&#x27;</span>].__len__()):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(raw_roads[<span class="string">&#x27;features&#x27;</span>][i][<span class="string">&#x27;geometry&#x27;</span>][<span class="string">&#x27;coordinates&#x27;</span>].__len__()):</span><br><span class="line">        <span class="comment"># 更新当前对应的时间戳</span></span><br><span class="line">        shift_time = <span class="built_in">int</span>((j / raw_roads[<span class="string">&#x27;features&#x27;</span>][i][<span class="string">&#x27;geometry&#x27;</span>][<span class="string">&#x27;coordinates&#x27;</span>].__len__())*<span class="number">3600</span>) </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 高度设置为0</span></span><br><span class="line">        raw_roads[<span class="string">&#x27;features&#x27;</span>][i][<span class="string">&#x27;geometry&#x27;</span>][<span class="string">&#x27;coordinates&#x27;</span>][j] \</span><br><span class="line">            .extend([<span class="number">0</span>, </span><br><span class="line">                     <span class="built_in">int</span>(start_time) + shift_time])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keplergl <span class="keyword">import</span> KeplerGl</span><br><span class="line"><span class="comment"># 生成KeplerGl对象</span></span><br><span class="line">m = KeplerGl(height=<span class="number">400</span>, </span><br><span class="line">                data=&#123;<span class="string">&#x27;flow&#x27;</span>: raw_roads&#125;) <span class="comment"># data以图层名为键，对应的矢量数据为值</span></span><br><span class="line">m</span><br><span class="line">m.save_to_html(file_name=<span class="string">&#x27;./hangzhou.html&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://media.giphy.com/media/8nnxyDPm4nXPD1Ff2K/giphy.gif" alt="f7"></p>
+
 <h4 id="5-Geohash"><a href="#5-Geohash" class="headerlink" title="5.Geohash"></a>5.Geohash</h4><p>GeoHash是一种地址编码方法，可以将地理经纬度坐标编码为由字母和数字所构成的字符串。其原理类似哈希表：由于遍历列表查找时间复杂度高，而创建散列函数能够更高效地定位数据。而GeoHash将二维的经纬度坐标编码到一维的字符串中，在做地理位置索引时只需匹配字符串，便于信息的缓存和压缩。</p>
 <p>GeoHash采用二分法不断缩小经度和纬度的区间来进行二进制编码，最后将经纬度分别产生的编码奇偶位交叉合并，再用字母数字表示。</p>
 <p><img src="https://ae01.alicdn.com/kf/Uf288553e6d2c43038976764613dd1cc1x.jpg" alt="f6"></p>
+<blockquote>
+<p>p.s. 酷炫动图见公众号</p>
+</blockquote>
 
       
     </div>
@@ -743,10 +744,7 @@
             </div>
           
 
-          <div id="music163player">
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=784594&auto=1&height=66">
-    </iframe>
-</div>
+          
         </div>
       </section>
 
