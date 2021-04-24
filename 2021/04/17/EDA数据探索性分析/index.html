@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DataFrame," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以智慧海洋建设竞赛为例进行演示。 1. 总体了解数据1.1 查看样本个数和原始特征维度1data_train.shape 1data_test.shape 1data_train.columns	#查看列名 123pd.set_option(&amp;#x27;displa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EDA数据探索性分析">
+<meta property="og:url" content="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以智慧海洋建设竞赛为例进行演示。 1. 总体了解数据1.1 查看样本个数和原始特征维度1data_train.shape 1data_test.shape 1data_train.columns	#查看列名 123pd.set_option(&amp;#x27;displa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-17T12:30:22.000Z">
+<meta property="article:modified_time" content="2021-04-24T00:28:05.472Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="DataFrame">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/04/17/EDA数据探索性分析/"/>
+
+
+
+
+
+  <title>EDA数据探索性分析 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">EDA数据探索性分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-17T20:30:22+08:00">
+                2021-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">Exploratory Data Analysis</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandas</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">geospatial data analysis</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/" itemprop="url" rel="index">
+                    <span itemprop="name">data visualization</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/GIS/" itemprop="url" rel="index">
+                    <span itemprop="name">GIS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/04/17/EDA数据探索性分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以<em>智慧海洋建设竞赛</em>为例进行演示。</p>
+<h4 id="1-总体了解数据"><a href="#1-总体了解数据" class="headerlink" title="1. 总体了解数据"></a>1. 总体了解数据</h4><h5 id="1-1-查看样本个数和原始特征维度"><a href="#1-1-查看样本个数和原始特征维度" class="headerlink" title="1.1 查看样本个数和原始特征维度"></a>1.1 查看样本个数和原始特征维度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.shape</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_test.shape</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.columns	<span class="comment">#查看列名</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.set_option(<span class="string">&#x27;display.max_info_rows&#x27;</span>,<span class="number">2699639</span>)	<span class="comment">#提高非缺失值检查的行数上线</span></span><br><span class="line"><span class="comment">#pd.options.display.max_info_rows = 2699639</span></span><br><span class="line">data_train.info()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看count 非空值数、std 标准差、（25%、50%、75%）分位数等基本情况</span></span><br><span class="line">data_train.describe([<span class="number">0.01</span>,<span class="number">0.025</span>,<span class="number">0.05</span>,<span class="number">0.5</span>,<span class="number">0.75</span>,<span class="number">0.9</span>,<span class="number">0.99</span>])	</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h5 id="1-2-查看缺失值和唯一值等"><a href="#1-2-查看缺失值和唯一值等" class="headerlink" title="1.2 查看缺失值和唯一值等"></a>1.2 查看缺失值和唯一值等</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.isnull().<span class="built_in">any</span>()	<span class="comment">#查看缺失值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看含有缺失值的列名</span></span><br><span class="line">data_train.columns[data_train.isnull().<span class="built_in">any</span>()].tolist()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看仅有唯一值的特征</span></span><br><span class="line">one_value_fea_train = [col <span class="keyword">for</span> col <span class="keyword">in</span> data_train.columns <span class="keyword">if</span> data_train[col].nunique() &lt;= <span class="number">1</span>]</span><br><span class="line">one_value_fea_test = [col <span class="keyword">for</span> col <span class="keyword">in</span> data_test.columns <span class="keyword">if</span> data_test[col].nunique() &lt;= <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="2-查看数据特性和特征分布"><a href="#2-查看数据特性和特征分布" class="headerlink" title="2. 查看数据特性和特征分布"></a>2. 查看数据特性和特征分布</h4><h5 id="2-1-渔船轨迹可视化"><a href="#2-1-渔船轨迹可视化" class="headerlink" title="2.1 渔船轨迹可视化"></a>2.1 渔船轨迹可视化</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从每个类别中随机抽取三个渔船的轨迹进行可视化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_three_traj</span>():</span></span><br><span class="line">    fig,axes = plt.subplots(nrows=<span class="number">3</span>,ncols=<span class="number">3</span>,figsize=(<span class="number">20</span>,<span class="number">15</span>))</span><br><span class="line">    plt.subplots_adjust(wspace=<span class="number">0.2</span>,hspace=<span class="number">0.2</span>)</span><br><span class="line">    <span class="comment"># 对于每一个类别，随机选出刺网的三条轨迹进行可视化</span></span><br><span class="line">    lables = [<span class="string">&quot;ciwang&quot;</span>,<span class="string">&quot;weiwang&quot;</span>,<span class="string">&quot;tuowang&quot;</span>]</span><br><span class="line">    <span class="keyword">for</span> i,file_type <span class="keyword">in</span> tqdm(<span class="built_in">enumerate</span>([<span class="string">&quot;ciwang_data&quot;</span>,<span class="string">&quot;weiwang_data&quot;</span>,<span class="string">&quot;tuowang_data&quot;</span>])):</span><br><span class="line">        data1, data2, data3 = get_random_three_traj(<span class="built_in">type</span>=file_type)</span><br><span class="line">        <span class="keyword">for</span> j, datax <span class="keyword">in</span> <span class="built_in">enumerate</span>([data1, data2, data3]):</span><br><span class="line">            x_data = datax[<span class="string">&quot;x&quot;</span>].loc[-<span class="number">1</span>:].values</span><br><span class="line">            y_data = datax[<span class="string">&quot;y&quot;</span>].loc[-<span class="number">1</span>:].values</span><br><span class="line">            axes[i][j - <span class="number">1</span>].scatter(x_data[<span class="number">0</span>], y_data[<span class="number">0</span>], label=<span class="string">&quot;start&quot;</span>, c=<span class="string">&quot;red&quot;</span>, s=<span class="number">20</span>, marker=<span class="string">&quot;o&quot;</span>)</span><br><span class="line">            axes[i][j - <span class="number">1</span>].plot(x_data, y_data, label=lables[i])</span><br><span class="line">            axes[i][j - <span class="number">1</span>].scatter(x_data[<span class="built_in">len</span>(x_data) - <span class="number">1</span>], y_data[<span class="built_in">len</span>(y_data) - <span class="number">1</span>], label=<span class="string">&quot;end&quot;</span>, c=<span class="string">&quot;green&quot;</span>, s=<span class="number">20</span>,</span><br><span class="line">                                   marker=<span class="string">&quot;D&quot;</span>)</span><br><span class="line">            axes[i][j - <span class="number">1</span>].grid(alpha=<span class="number">2</span>)</span><br><span class="line">            axes[i][j - <span class="number">1</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">visualize_three_traj()</span><br></pre></td></tr></table></figure>
+<p>—————-图1——————</p>
+<p>从图中可以发现,不同类别的轨迹有一定区分性.</p>
+<blockquote>
+<p>刺网为规则多边形.</p>
+<p>围网为包围的形状.</p>
+<p>拖网为点到点,转弯次数少.</p>
+</blockquote>
+<p>从轨迹数据可以猜测其特征可能为转弯的角度大小\转弯次数\起始点之间的距离和时间\经度和维度变化范围等.</p>
+<p>此外,存在一些异常轨迹需要剔除.</p>
+<h4 id="3-坐标序列可视化"><a href="#3-坐标序列可视化" class="headerlink" title="3. 坐标序列可视化"></a>3. 坐标序列可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机选取某条数据，观察x坐标序列和y坐标序列的变化情况</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_one_traj_x_y</span>():</span></span><br><span class="line">    fig,axes = plt.subplots(nrows=<span class="number">2</span>,ncols=<span class="number">1</span>,figsize=(<span class="number">10</span>,<span class="number">8</span>))</span><br><span class="line">    plt.subplots_adjust(wspace=<span class="number">0.2</span>,hspace=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line">    data1 = get_random_one_traj(<span class="built_in">type</span>=<span class="string">&quot;weiwang_data&quot;</span>)</span><br><span class="line">    x = data1[<span class="string">&quot;x&quot;</span>].loc[-<span class="number">1</span>:]</span><br><span class="line">    x = x / <span class="number">10000</span></span><br><span class="line">    </span><br><span class="line">    y = data1[<span class="string">&quot;y&quot;</span>].loc[-<span class="number">1</span>:]</span><br><span class="line">    y = y / <span class="number">10000</span></span><br><span class="line"></span><br><span class="line">    arr1 = np.arange(<span class="built_in">len</span>(x))</span><br><span class="line">    arr2 = np.arange(<span class="built_in">len</span>(y))</span><br><span class="line"></span><br><span class="line">    axes[<span class="number">0</span>].plot(arr1,x,label=<span class="string">&quot;x&quot;</span>)</span><br><span class="line">    axes[<span class="number">1</span>].plot(arr2,y,label=<span class="string">&quot;y&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].grid(alpha=<span class="number">3</span>)</span><br><span class="line">    axes[<span class="number">0</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line">    axes[<span class="number">1</span>].grid(alpha=<span class="number">3</span>)</span><br><span class="line">    axes[<span class="number">1</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">visualize_one_traj_x_y()</span><br></pre></td></tr></table></figure>
+<p>———-图2———–</p>
+<p>由上图可知,存在同一时间段内x\y坐标均未变化,说明可能该时段内渔船正停留在某处.</p>
+<h4 id="4-三类渔船速度和方向可视化"><a href="#4-三类渔船速度和方向可视化" class="headerlink" title="4.三类渔船速度和方向可视化"></a>4.三类渔船速度和方向可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每类轨迹，随机选取某个渔船，可视化速度序列和方向序列</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_three_traj_speed_direction</span>():</span></span><br><span class="line">    fig,axes = plt.subplots(nrows=<span class="number">3</span>,ncols=<span class="number">2</span>,figsize=(<span class="number">20</span>,<span class="number">15</span>))</span><br><span class="line">    plt.subplots_adjust(wspace=<span class="number">0.1</span>,hspace=<span class="number">0.1</span>)</span><br><span class="line">    <span class="comment"># 随机选出刺网的三条轨迹进行可视化</span></span><br><span class="line">    file_types = [<span class="string">&quot;ciwang_data&quot;</span>,<span class="string">&quot;weiwang_data&quot;</span>,<span class="string">&quot;tuowang_data&quot;</span>]</span><br><span class="line">    speed_types = [<span class="string">&quot;ciwang_speed&quot;</span>,<span class="string">&quot;weiwang_speed&quot;</span>,<span class="string">&quot;tuowang_speed&quot;</span>]</span><br><span class="line">    doirections = [<span class="string">&quot;ciwang_direction&quot;</span>,<span class="string">&quot;weiwang_direction&quot;</span>,<span class="string">&quot;tuowang_direction&quot;</span>]</span><br><span class="line">    colors = [<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;brown&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> i,file_name <span class="keyword">in</span> tqdm(<span class="built_in">enumerate</span>(file_types)):</span><br><span class="line">        datax = get_random_one_traj(<span class="built_in">type</span>=file_name)</span><br><span class="line">        x_data = datax[<span class="string">&quot;速度&quot;</span>].loc[-<span class="number">1</span>:].values</span><br><span class="line">        y_data = datax[<span class="string">&quot;方向&quot;</span>].loc[-<span class="number">1</span>:].values</span><br><span class="line">        axes[i][<span class="number">0</span>].plot(<span class="built_in">range</span>(<span class="built_in">len</span>(x_data)), x_data, label=speed_types[i], color=colors[i])</span><br><span class="line">        axes[i][<span class="number">0</span>].grid(alpha=<span class="number">2</span>)</span><br><span class="line">        axes[i][<span class="number">0</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line">        axes[i][<span class="number">1</span>].plot(<span class="built_in">range</span>(<span class="built_in">len</span>(y_data)), y_data, label=doirections[i], color=colors[i])</span><br><span class="line">        axes[i][<span class="number">1</span>].grid(alpha=<span class="number">2</span>)</span><br><span class="line">        axes[i][<span class="number">1</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">visualize_three_traj_speed_direction()</span><br></pre></td></tr></table></figure>
+<p>————图3—————-<br>由上图可知,不同分类渔船的轨迹速度某些时段均存在连续的低值情况,说明可能存在某些海上停留点;不同类别渔船的方向变化都很大,可能是海上漂泊导致,作为特征对于类别的区分度低,但也存在方向变化不大的时段,强化了对停留点存在的判断.</p>
+<h4 id="5-三类渔船速度和方向的数据分布"><a href="#5-三类渔船速度和方向的数据分布" class="headerlink" title="5.三类渔船速度和方向的数据分布"></a>5.三类渔船速度和方向的数据分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对某一特征进行数据统计</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data_cummulation</span>(<span class="params"><span class="built_in">type</span>,path,kind,columns</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    type:&quot;ciwang&quot;,&quot;weiwang&quot; or &quot;tuowang&quot;</span></span><br><span class="line"><span class="string">    path:数据路径</span></span><br><span class="line"><span class="string">    kind:&quot;速度&quot;or&quot;方向&quot;</span></span><br><span class="line"><span class="string">    columns:与kind对应，&quot;speed&quot;or&quot;direction&quot;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    data_dict = <span class="built_in">dict</span>()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path + <span class="built_in">type</span>+<span class="string">&quot;.pkl&quot;</span>,<span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        data_list = pickle.load(file)</span><br><span class="line">    <span class="keyword">for</span> datax <span class="keyword">in</span> tqdm(data_list):</span><br><span class="line">        data = datax[kind].values</span><br><span class="line">        <span class="keyword">for</span> speed <span class="keyword">in</span> data:</span><br><span class="line">            data_dict.setdefault(speed,<span class="number">0</span>)</span><br><span class="line">            data_dict[speed] += <span class="number">1</span></span><br><span class="line">    data_dict = <span class="built_in">dict</span>(<span class="built_in">sorted</span>(data_dict.items(),key=<span class="keyword">lambda</span> x:x[<span class="number">0</span>],reverse=<span class="literal">False</span>))</span><br><span class="line">    data_df = pd.DataFrame.from_dict(data_dict,columns=[columns],orient=<span class="string">&quot;index&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data_df</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分别得到速度和方向的分布数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_speed_and_direction_distribution_data</span>(<span class="params"><span class="built_in">type</span></span>):</span></span><br><span class="line">    path = <span class="string">&quot;./data/&quot;</span></span><br><span class="line">    data_speed_df = get_data_cummulation(<span class="built_in">type</span>=<span class="built_in">type</span>, path=path,kind=<span class="string">&quot;速度&quot;</span>,columns=<span class="string">&quot;speed&quot;</span>)</span><br><span class="line">    data_direction_df = get_data_cummulation(<span class="built_in">type</span>=<span class="built_in">type</span>,path=path,kind=<span class="string">&quot;方向&quot;</span>,columns=<span class="string">&quot;direction&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> data_speed_df,data_direction_df</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可视化速度和方向的数据分布</span></span><br><span class="line">df_speeds = []</span><br><span class="line">df_directions = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_speed_direction1_distribution</span>():</span></span><br><span class="line">    plt.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">2</span>, figsize=(<span class="number">15</span>, <span class="number">6</span>))</span><br><span class="line">    plt.subplots_adjust(wspace=<span class="number">0.2</span>, hspace=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line">    file_types = [<span class="string">&quot;ciwang_data&quot;</span>, <span class="string">&quot;weiwang_data&quot;</span>, <span class="string">&quot;tuowang_data&quot;</span>]</span><br><span class="line">    lables = [<span class="string">&quot;ciwang&quot;</span>, <span class="string">&quot;weiwang&quot;</span>, <span class="string">&quot;tuowang&quot;</span>]</span><br><span class="line">    colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;green&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, filenames <span class="keyword">in</span> <span class="built_in">enumerate</span>(file_types):</span><br><span class="line">        df11, df21 = get_speed_and_direction_distribution_data(file_types[i])</span><br><span class="line">        plt.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">        ax1 = sns.kdeplot(df11[<span class="string">&quot;speed&quot;</span>].values / <span class="number">1000000</span>, color=colors[i],shade=<span class="literal">True</span>)</span><br><span class="line">        plt.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">        ax3 = sns.kdeplot(df21[<span class="string">&quot;direction&quot;</span>].values / <span class="number">1000000</span>, color=colors[i],shade=<span class="literal">True</span>)</span><br><span class="line">        df_speeds.append(df11)</span><br><span class="line">        df_directions.append(df21)</span><br><span class="line">    ax1.legend(lables)</span><br><span class="line">    ax1.set_xlabel(<span class="string">&quot;Speed&quot;</span>)</span><br><span class="line">    ax3.set_xlabel(<span class="string">&quot;Direction&quot;</span>)</span><br><span class="line">    ax3.legend(lables)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">plot_speed_direction1_distribution()</span><br></pre></td></tr></table></figure>
+<p>———–图4———————</p>
+<p>由上图可知,三种类别渔船的速度分布差异较大,而刺网和围网方向分布差异不明显,拖网方向分布有差异.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/" title="EDA数据探索性分析">http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DataFrame/" rel="tag"># DataFrame</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="next" title="地理数据分析常用工具">
+                <i class="fa fa-chevron-left"></i> 地理数据分析常用工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/" rel="prev" title="特征工程_1">
+                特征工程_1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%80%BB%E4%BD%93%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">1. 总体了解数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E6%9F%A5%E7%9C%8B%E6%A0%B7%E6%9C%AC%E4%B8%AA%E6%95%B0%E5%92%8C%E5%8E%9F%E5%A7%8B%E7%89%B9%E5%BE%81%E7%BB%B4%E5%BA%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 查看样本个数和原始特征维度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E6%9F%A5%E7%9C%8B%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%92%8C%E5%94%AF%E4%B8%80%E5%80%BC%E7%AD%89"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 查看缺失值和唯一值等</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E7%89%B9%E6%80%A7%E5%92%8C%E7%89%B9%E5%BE%81%E5%88%86%E5%B8%83"><span class="nav-number">2.</span> <span class="nav-text">2. 查看数据特性和特征分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E6%B8%94%E8%88%B9%E8%BD%A8%E8%BF%B9%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 渔船轨迹可视化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9D%90%E6%A0%87%E5%BA%8F%E5%88%97%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">3. 坐标序列可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%B8%89%E7%B1%BB%E6%B8%94%E8%88%B9%E9%80%9F%E5%BA%A6%E5%92%8C%E6%96%B9%E5%90%91%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">4.三类渔船速度和方向可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E4%B8%89%E7%B1%BB%E6%B8%94%E8%88%B9%E9%80%9F%E5%BA%A6%E5%92%8C%E6%96%B9%E5%90%91%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83"><span class="nav-number">5.</span> <span class="nav-text">5.三类渔船速度和方向的数据分布</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">9.5k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/';
+          this.page.identifier = '2021/04/17/EDA数据探索性分析/';
+          this.page.title = 'EDA数据探索性分析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

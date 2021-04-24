@@ -304,6 +304,420 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/" itemprop="url">特征工程_1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-21T23:14:12+08:00">
+                2021-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Feature-engineering/" itemprop="url" rel="index">
+                    <span itemprop="name">Feature engineering</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Feature-engineering/Pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandas</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/04/21/特征工程_1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>特征工程就是将原始数据空间变换到新的特征空间，在新的特征空间中，模型能够更好地学习数据中的规律。特征的选择和构造，就是人为地帮助模型学习到原本很难学好的东西，从而使模型达到更好的效果。</p>
+<h4 id="1-根据现实情况构造特征"><a href="#1-根据现实情况构造特征" class="headerlink" title="1. 根据现实情况构造特征"></a>1. 根据现实情况构造特征</h4><h5 id="1-1-各点与特定点的距离"><a href="#1-1-各点与特定点的距离" class="headerlink" title="1.1 各点与特定点的距离"></a>1.1 各点与特定点的距离</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;x_dis&#x27;</span>] = (df[<span class="string">&#x27;x&#x27;</span>] - <span class="number">6165599</span>).<span class="built_in">abs</span>()</span><br><span class="line">df[<span class="string">&#x27;y_dis&#x27;</span>] = (df[<span class="string">&#x27;y&#x27;</span>] - <span class="number">5202660</span>).<span class="built_in">abs</span>()</span><br><span class="line">df[<span class="string">&#x27;base_dis] = (df[&#x27;</span>y_dis<span class="string">&#x27;]**2))**0.5 + ((df[&#x27;</span>x_dis<span class="string">&#x27;]**2)</span></span><br><span class="line"><span class="string">del df[&#x27;</span>x_dis<span class="string">&#x27;],df[&#x27;</span>y_dis<span class="string">&#x27;] </span></span><br><span class="line"><span class="string">df[&#x27;</span>base_dis_dif<span class="string">f&#x27;].head()</span></span><br></pre></td></tr></table></figure>
+<h5 id="1-2-将时间划分为白天与黑夜"><a href="#1-2-将时间划分为白天与黑夜" class="headerlink" title="1.2 将时间划分为白天与黑夜"></a>1.2 将时间划分为白天与黑夜</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;day_night&#x27;</span>] = <span class="number">0</span></span><br><span class="line">df.loc[(df[<span class="string">&#x27;hour&#x27;</span>] &gt; <span class="number">5</span>) &amp; (df[<span class="string">&#x27;hour&#x27;</span>] &lt; <span class="number">20</span>),<span class="string">&#x27;day_night&#x27;</span>] = <span class="number">1</span></span><br><span class="line">df[<span class="string">&#x27;day_night&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/" itemprop="url">EDA数据探索性分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-17T20:30:22+08:00">
+                2021-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">Exploratory Data Analysis</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandas</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/" itemprop="url" rel="index">
+                    <span itemprop="name">geospatial data analysis</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/" itemprop="url" rel="index">
+                    <span itemprop="name">data visualization</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/GIS/" itemprop="url" rel="index">
+                    <span itemprop="name">GIS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/04/17/EDA数据探索性分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以<em>智慧海洋建设竞赛</em>为例进行演示。</p>
+<h4 id="1-总体了解数据"><a href="#1-总体了解数据" class="headerlink" title="1. 总体了解数据"></a>1. 总体了解数据</h4><h5 id="1-1-查看样本个数和原始特征维度"><a href="#1-1-查看样本个数和原始特征维度" class="headerlink" title="1.1 查看样本个数和原始特征维度"></a>1.1 查看样本个数和原始特征维度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.shape</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_test.shape</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.columns	<span class="comment">#查看列名</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.set_option(<span class="string">&#x27;display.max_info_rows&#x27;</span>,<span class="number">2699639</span>)	<span class="comment">#提高非缺失值检查的行数上线</span></span><br><span class="line"><span class="comment">#pd.options.display.max_info_rows = 2699639</span></span><br><span class="line">data_train.info()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看count 非空值数、std 标准差、（25%、50%、75%）分位数等基本情况</span></span><br><span class="line">data_train.describe([<span class="number">0.01</span>,<span class="number">0.025</span>,<span class="number">0.05</span>,<span class="number">0.5</span>,<span class="number">0.75</span>,<span class="number">0.9</span>,<span class="number">0.99</span>])	</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1233,6 +1647,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/21/pandas_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/21/pandas_2/" itemprop="url">Pandas的一些常用操作_2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-21T20:30:38+08:00">
+                2021-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandas</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/02/21/pandas_2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/02/21/pandas_2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  404
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>今天继续介绍几个常用的Pandas操作。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/02/21/pandas_2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/21/pandas_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1366,186 +1960,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2021/02/21/pandas_1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/21/pandas_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XHJ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/02/21/pandas_2/" itemprop="url">Pandas的一些常用操作_2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-21T20:30:38+08:00">
-                2021-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Pandas/" itemprop="url" rel="index">
-                    <span itemprop="name">Pandas</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2021/02/21/pandas_2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/02/21/pandas_2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  404
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>今天继续介绍几个常用的Pandas操作。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-DataFrame的apply方法"><a href="#1-DataFrame的apply方法" class="headerlink" title="1.DataFrame的apply方法"></a>1.DataFrame的apply方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].apply(<span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()-x.<span class="built_in">min</span>(), axis=<span class="number">1</span>)<span class="comment">#axis=1 将函数应用到列</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/02/21/pandas_2/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1814,7 +2228,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1825,7 +2239,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1836,7 +2250,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1917,7 +2331,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7k</span>
+    <span title="Site words total count">9.5k</span>
   
 </div>
 

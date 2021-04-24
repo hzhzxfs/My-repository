@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-14T16:44:16.792Z</updated>
+  <updated>2021-04-24T00:25:06.016Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>特征工程_1</title>
+    <link href="http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/"/>
+    <id>http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/</id>
+    <published>2021-04-21T15:14:12.000Z</published>
+    <updated>2021-04-24T00:25:06.016Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;特征工程就是将原始数据空间变换到新的特征空间，在新的特征空间中，模型能够更好地学习数据中的规律。特征的选择和构造，就是人为地帮助模型学习到原本很难学好的东西，从而使模型达到更好的效果。&lt;/p&gt;
+&lt;h4 id=&quot;1-根据现实情况构造特征&quot;&gt;&lt;a href=&quot;#1-根据现实情况构造特征&quot; class=&quot;headerlink&quot; title=&quot;1. 根据现实情况构造特征&quot;&gt;&lt;/a&gt;1. 根据现实情况构造特征&lt;/h4&gt;&lt;h5 id=&quot;1-1-各点与特定点的距离&quot;&gt;&lt;a href=&quot;#1-1-各点与特定点的距离&quot; class=&quot;headerlink&quot; title=&quot;1.1 各点与特定点的距离&quot;&gt;&lt;/a&gt;1.1 各点与特定点的距离&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;x_dis&amp;#x27;&lt;/span&gt;] = (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;x&amp;#x27;&lt;/span&gt;] - &lt;span class=&quot;number&quot;&gt;6165599&lt;/span&gt;).&lt;span class=&quot;built_in&quot;&gt;abs&lt;/span&gt;()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;y_dis&amp;#x27;&lt;/span&gt;] = (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;y&amp;#x27;&lt;/span&gt;] - &lt;span class=&quot;number&quot;&gt;5202660&lt;/span&gt;).&lt;span class=&quot;built_in&quot;&gt;abs&lt;/span&gt;()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;base_dis] = (df[&amp;#x27;&lt;/span&gt;y_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;]**2))**0.5 + ((df[&amp;#x27;&lt;/span&gt;x_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;]**2)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;del df[&amp;#x27;&lt;/span&gt;x_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;],df[&amp;#x27;&lt;/span&gt;y_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;] &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;df[&amp;#x27;&lt;/span&gt;base_dis_dif&lt;span class=&quot;string&quot;&gt;f&amp;#x27;].head()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h5 id=&quot;1-2-将时间划分为白天与黑夜&quot;&gt;&lt;a href=&quot;#1-2-将时间划分为白天与黑夜&quot; class=&quot;headerlink&quot; title=&quot;1.2 将时间划分为白天与黑夜&quot;&gt;&lt;/a&gt;1.2 将时间划分为白天与黑夜&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df.loc[(df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;hour&amp;#x27;&lt;/span&gt;] &amp;gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;) &amp;amp; (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;hour&amp;#x27;&lt;/span&gt;] &amp;lt; &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;),&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;].head()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Feature engineering" scheme="http://example.com/categories/Feature-engineering/"/>
+    
+    <category term="Pandas" scheme="http://example.com/categories/Feature-engineering/Pandas/"/>
+    
+    
+    <category term="Embedding" scheme="http://example.com/tags/Embedding/"/>
+    
+    <category term="Word2vec" scheme="http://example.com/tags/Word2vec/"/>
+    
+    <category term="NMF" scheme="http://example.com/tags/NMF/"/>
+    
+    <category term="DataFramte" scheme="http://example.com/tags/DataFramte/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EDA数据探索性分析</title>
+    <link href="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/"/>
+    <id>http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/</id>
+    <published>2021-04-17T12:30:22.000Z</published>
+    <updated>2021-04-24T00:28:05.472Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以&lt;em&gt;智慧海洋建设竞赛&lt;/em&gt;为例进行演示。&lt;/p&gt;
+&lt;h4 id=&quot;1-总体了解数据&quot;&gt;&lt;a href=&quot;#1-总体了解数据&quot; class=&quot;headerlink&quot; title=&quot;1. 总体了解数据&quot;&gt;&lt;/a&gt;1. 总体了解数据&lt;/h4&gt;&lt;h5 id=&quot;1-1-查看样本个数和原始特征维度&quot;&gt;&lt;a href=&quot;#1-1-查看样本个数和原始特征维度&quot; class=&quot;headerlink&quot; title=&quot;1.1 查看样本个数和原始特征维度&quot;&gt;&lt;/a&gt;1.1 查看样本个数和原始特征维度&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;data_train.shape&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;data_test.shape&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;data_train.columns	&lt;span class=&quot;comment&quot;&gt;#查看列名&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;pd.set_option(&lt;span class=&quot;string&quot;&gt;&amp;#x27;display.max_info_rows&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2699639&lt;/span&gt;)	&lt;span class=&quot;comment&quot;&gt;#提高非缺失值检查的行数上线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#pd.options.display.max_info_rows = 2699639&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;data_train.info()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#查看count 非空值数、std 标准差、（25%、50%、75%）分位数等基本情况&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;data_train.describe([&lt;span class=&quot;number&quot;&gt;0.01&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.025&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.05&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.75&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.9&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0.99&lt;/span&gt;])	&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Exploratory Data Analysis" scheme="http://example.com/categories/Exploratory-Data-Analysis/"/>
+    
+    <category term="Pandas" scheme="http://example.com/categories/Exploratory-Data-Analysis/Pandas/"/>
+    
+    <category term="geospatial data analysis" scheme="http://example.com/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/"/>
+    
+    <category term="data visualization" scheme="http://example.com/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/"/>
+    
+    <category term="GIS" scheme="http://example.com/categories/Exploratory-Data-Analysis/Pandas/geospatial-data-analysis/data-visualization/GIS/"/>
+    
+    
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
+    
+  </entry>
   
   <entry>
     <title>地理数据分析常用工具</title>
@@ -163,6 +224,29 @@
   </entry>
   
   <entry>
+    <title>Pandas的一些常用操作_2</title>
+    <link href="http://example.com/2021/02/21/pandas_2/"/>
+    <id>http://example.com/2021/02/21/pandas_2/</id>
+    <published>2021-02-21T12:30:38.000Z</published>
+    <updated>2021-04-05T11:25:58.660Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
+    
+    
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Pandas的一些常用操作_1</title>
     <link href="http://example.com/2021/02/21/pandas_1/"/>
     <id>http://example.com/2021/02/21/pandas_1/</id>
@@ -178,29 +262,6 @@
 &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(df.to_markdown())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(df.to_latex())&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;or&lt;/p&gt;
 &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.to_markdown(&lt;span class=&quot;string&quot;&gt;&amp;#x27;table.md&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df.to_latex(&lt;span class=&quot;string&quot;&gt;&amp;#x27;table.tex&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
-    
-    
-    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pandas的一些常用操作_2</title>
-    <link href="http://example.com/2021/02/21/pandas_2/"/>
-    <id>http://example.com/2021/02/21/pandas_2/</id>
-    <published>2021-02-21T12:30:38.000Z</published>
-    <updated>2021-04-05T11:25:58.660Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
