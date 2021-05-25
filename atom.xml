@@ -61,11 +61,11 @@
   </entry>
   
   <entry>
-    <title>异常检测(Anomaly Detection)简介</title>
+    <title>异常检测——线性相关方法</title>
     <link href="http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-17T15:52:21.000Z</published>
-    <updated>2021-05-25T04:52:59.575Z</updated>
+    <updated>2021-05-25T05:53:09.093Z</updated>
     
     
     <summary type="html">&lt;p&gt;真实数据集中不同维度的特征可能具有高度相关性，这是因为不同的特征往往是由相同的基础过程以密切相关的方式产生的。这被称为——回归建模，是一种参数化的相关性分析。&lt;br&gt;一类相关性分析通过其他变量预测单独的属性值，另一类方法用一些潜在变量来代表整个数&lt;br&gt;据。前者的代表是&lt;strong&gt;线性回归&lt;/strong&gt;，后者一个典型的例子是&lt;strong&gt;主成分分析&lt;/strong&gt;。&lt;br&gt;线性相关分析基于的假设是：①近似线性相关假设；②子空间假设。为了确定线性模型是否适合数据集，需要进行探索性和可视化分析。&lt;/p&gt;</summary>
@@ -346,6 +346,29 @@
   </entry>
   
   <entry>
+    <title>Pandas的一些常用操作_2</title>
+    <link href="http://example.com/2021/02/21/pandas_2/"/>
+    <id>http://example.com/2021/02/21/pandas_2/</id>
+    <published>2021-02-21T12:30:38.000Z</published>
+    <updated>2021-04-05T11:25:58.660Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
+    
+    
+    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Pandas的一些常用操作_1</title>
     <link href="http://example.com/2021/02/21/pandas_1/"/>
     <id>http://example.com/2021/02/21/pandas_1/</id>
@@ -361,29 +384,6 @@
 &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(df.to_markdown())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt;(df.to_latex())&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;or&lt;/p&gt;
 &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df.to_markdown(&lt;span class=&quot;string&quot;&gt;&amp;#x27;table.md&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df.to_latex(&lt;span class=&quot;string&quot;&gt;&amp;#x27;table.tex&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="Pandas" scheme="http://example.com/categories/Pandas/"/>
-    
-    
-    <category term="DataFrame" scheme="http://example.com/tags/DataFrame/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pandas的一些常用操作_2</title>
-    <link href="http://example.com/2021/02/21/pandas_2/"/>
-    <id>http://example.com/2021/02/21/pandas_2/</id>
-    <published>2021-02-21T12:30:38.000Z</published>
-    <updated>2021-04-05T11:25:58.660Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;今天继续介绍几个常用的Pandas操作。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df = pd.read_csv(&lt;span class=&quot;string&quot;&gt;&amp;#x27;./economics.csv&amp;#x27;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h4 id=&quot;1-DataFrame的apply方法&quot;&gt;&lt;a href=&quot;#1-DataFrame的apply方法&quot; class=&quot;headerlink&quot; title=&quot;1.DataFrame的apply方法&quot;&gt;&lt;/a&gt;1.DataFrame的apply方法&lt;/h4&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[[&lt;span class=&quot;string&quot;&gt;&amp;#x27;psavert&amp;#x27;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&amp;#x27;uempmed&amp;#x27;&lt;/span&gt;]].apply(&lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x:x.&lt;span class=&quot;built_in&quot;&gt;max&lt;/span&gt;()-x.&lt;span class=&quot;built_in&quot;&gt;min&lt;/span&gt;(), axis=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;#axis=1 将函数应用到列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
