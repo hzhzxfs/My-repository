@@ -90,7 +90,7 @@
 
 <meta name="description" content="异常检测的统计方法包含两种主要类型：参数方法和非参数方法。参数方法：假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)非参数方法：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="异常检测(Anomaly Detection)简介">
+<meta property="og:title" content="异常检测——基于统计学的方法">
 <meta property="og:url" content="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="XHJ">
 <meta property="og:description" content="异常检测的统计方法包含两种主要类型：参数方法和非参数方法。参数方法：假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)非参数方法：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。">
@@ -99,9 +99,10 @@
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U22473047196a4af9b6ebca2d9ed966d3A.jpg">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg">
+<meta property="og:image" content="https://z3.ax1x.com/2021/05/25/gzJbtA.png">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/U3264e024f94c45a0bbe5110c82bca661k.jpg">
 <meta property="article:published_time" content="2021-05-14T15:18:11.000Z">
-<meta property="article:modified_time" content="2021-05-25T05:01:21.876Z">
+<meta property="article:modified_time" content="2021-05-25T05:48:50.298Z">
 <meta property="article:author" content="xhj">
 <meta property="article:tag" content="Normal distribution">
 <meta property="article:tag" content="HBOS">
@@ -142,7 +143,7 @@
 
 
 
-  <title>异常检测(Anomaly Detection)简介 | XHJ</title>
+  <title>异常检测——基于统计学的方法 | XHJ</title>
   
 
 
@@ -330,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">异常检测(Anomaly Detection)简介</h1>
+          <h1 class="post-title" itemprop="name headline">异常检测——基于统计学的方法</h1>
         
 
         <div class="post-meta">
@@ -435,9 +436,9 @@
         <p>异常检测的统计方法包含两种主要类型：参数方法和非参数方法。<br><strong>参数方法：</strong>假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)<br><strong>非参数方法</strong>：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。</p>
 <span id="more"></span>
 <h4 id="1-参数方法"><a href="#1-参数方法" class="headerlink" title="1. 参数方法"></a>1. 参数方法</h4><h5 id="1-1-基于正态分布的一元异常点检测"><a href="#1-1-基于正态分布的一元异常点检测" class="headerlink" title="1.1 基于正态分布的一元异常点检测"></a>1.1 基于正态分布的一元异常点检测</h5><p>仅涉及单变量的数据称为一元数据，假定数据由正态分布产生，由输入数据学习正态分布的参数，并把低概率的点识别为异常点。<br>输入数据集<img src="https://ae01.alicdn.com/kf/U0f09d41be5f54bc4892bab4863e0cc3b6.jpg" alt="公式1"> ，根据公式可以求出参数均值μ和方差σ，和概率密度函数p(x)。<br>$$<br>\mu =\frac{1}{n}\sum_{i=1}^n{x_i}<br>$$<br>$$<br>\sigma ^2=\frac{1}{n}\sum_{i=1}^n{\left( x_i-\mu \right)}^2<br>$$<br>$$<br>p\left( x \right) =\frac{1}{\sqrt{2\pi}\sigma}\exp \left( -\frac{\left( x-\mu \right) ^2}{2\sigma ^2} \right)<br>$$<br>在正太分布的假设中，可以为p(x)取值设置阈值来判断异常点。<br>或者简单地用3σ法则来判断，(μ-3σ，μ+3σ)包含99.7%的数据，某数据超出这个范围，可以简单的标记为异常点(Outlier)。</p>
-<h5 id="1-2-多元离群点的检测方法"><a href="#1-2-多元离群点的检测方法" class="headerlink" title="1.2 多元离群点的检测方法"></a>1.2 多元离群点的检测方法</h5><p>一元异常点检测的方法可以扩展为多元异常点检测。<br>对于一个n维数据集合<img src="https://ae01.alicdn.com/kf/U22473047196a4af9b6ebca2d9ed966d3A.jpg" alt="公式2">，当各个维度的特征之间相互独立，可以按上述公式计算每个维度的均值和方差。基于正态分布的假设，根据概率<img src="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg" alt="公式3">的大小判断x是否属于异常值。<br>$$<br>p\left( \vec{x} \right) =\prod_{j=1}^n{p\left( x_j;\mu _j;\sigma <em>{j}^{2} \right)}=\prod</em>{j=1}^n{\frac{1}{\sqrt{2\pi}\sigma _j}}\exp \left( -\frac{\left( x_j-\mu <em>j \right) ^2}{2\sigma <em>{j}^{2}} \right)<br>$$<br>当各个维度的特征相关时，需要用到基于多元正太分布来进行异常点检测，首先计算n维的均值向量<br>$$<br>\vec{\mu}=\left( E\left( x_1 \right) ,…,E\left( x_n \right) \right)<br>$$<br>和n×n的协方差矩阵：<br>$$<br>\sum{=\frac{1}{m}}\sum</em>{i=1}^m{\left( \vec{x}-\vec{\mu} \right) \left( \vec{x}-\vec{\mu} \right) ^T}<br>$$<br>如有新数据，可以计算<img src="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg" alt="公式3">,根据概率值大小判断是否属于异常值。<br>$$<br>p\left( \vec{x} \right) =\frac{1}{\left( 2\pi ^{\frac{n}{2}}\left| \sum{} \right|^{</em>{2}^{1}} \right)}\exp \left( -\frac{1}{2}\left( \vec{x}-\vec{\mu} \right) ^T\sum{^{-1}\left( \vec{x}-\vec{\mu} \right)} \right)<br>$$</p>
+<h5 id="1-2-多元离群点的检测方法"><a href="#1-2-多元离群点的检测方法" class="headerlink" title="1.2 多元离群点的检测方法"></a>1.2 多元离群点的检测方法</h5><p>一元异常点检测的方法可以扩展为多元异常点检测。<br>对于一个n维数据集合<img src="https://ae01.alicdn.com/kf/U22473047196a4af9b6ebca2d9ed966d3A.jpg" alt="公式2">，当各个维度的特征之间相互独立，可以按上述公式计算每个维度的均值和方差。基于正态分布的假设，根据概率<img src="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg" alt="公式3">的大小判断x是否属于异常值。<br>$$<br>p\left(\vec{x} \right) =\prod_{j=1}^n{p\left(x_j;\mu _j;\sigma <em>{j}^{2} \right)}=\prod</em>{j=1}^n{\frac{1}{\sqrt{2\pi}\sigma _j}}\exp \left(-\frac{\left(x_j-\mu <em>j \right) ^2}{2\sigma <em>{j}^{2}} \right)<br>$$<br>当各个维度的特征相关时，需要用到基于多元正太分布来进行异常点检测，首先计算n维的均值向量<br>$$<br>\vec{\mu}=\left( E\left( x_1 \right) ,…,E\left( x_n \right) \right)<br>$$<br>和n×n的协方差矩阵：<br>$$<br>\sum{=\frac{1}{m}}\sum</em>{i=1}^m{\left( \vec{x}-\vec{\mu} \right) \left( \vec{x}-\vec{\mu} \right) ^T}<br>$$<br>如有新数据，可以计算<img src="https://ae01.alicdn.com/kf/U98b94844e25b4646a6538fab43facfbc8.jpg" alt="公式3">,根据概率值大小判断是否属于异常值。<br>$$<br>p\left( \vec{x} \right) =\frac{1}{\left( 2\pi ^{\frac{n}{2}}\left| \sum{} \right|^{</em>{2}^{1}} \right)}\exp \left( -\frac{1}{2}\left( \vec{x}-\vec{\mu} \right) ^T\sum{^{-1}\left( \vec{x}-\vec{\mu} \right)} \right)<br>$$</p>
 <h4 id="2-非参数方法"><a href="#2-非参数方法" class="headerlink" title="2. 非参数方法"></a>2. 非参数方法</h4><p>非参数方法是对数据做较少的假定，因而适合多数情况。</p>
-<h5 id="2-1-基于角度的方法"><a href="#2-1-基于角度的方法" class="headerlink" title="2.1 基于角度的方法"></a>2.1 基于角度的方法</h5><p>基于角度的方法往往在高维空间里会很有效，其主要思想是：数据边界上的数据很可能将整个数据包围在一个较小的角度内，而内部的数据点则可能以不同的角度围绕着他们。如下图所示，其中点A是一个异常点，点B位于数据内部。<br>———-图1———–<br>如果数据点与其余点离得较远，则潜在角度可能越小。因此，具有较小角度谱的数据点较有可能异常值，而具有较大角度谱的数据点不太可能是异常值。</p>
+<h5 id="2-1-基于角度的方法"><a href="#2-1-基于角度的方法" class="headerlink" title="2.1 基于角度的方法"></a>2.1 基于角度的方法</h5><p>基于角度的方法往往在高维空间里会很有效，其主要思想是：数据边界上的数据很可能将整个数据包围在一个较小的角度内，而内部的数据点则可能以不同的角度围绕着他们。如下图所示，其中点A是一个异常点，点B位于数据内部。<br><img src="https://z3.ax1x.com/2021/05/25/gzJbtA.png" alt="a"><br>如果数据点与其余点离得较远，则潜在角度可能越小。因此，具有较小角度谱的数据点较有可能异常值，而具有较大角度谱的数据点不太可能是异常值。</p>
 <h5 id="2-2-基于频数直方图的无监督异常点检测算法-HBOS"><a href="#2-2-基于频数直方图的无监督异常点检测算法-HBOS" class="headerlink" title="2.2 基于频数直方图的无监督异常点检测算法(HBOS)"></a>2.2 基于频数直方图的无监督异常点检测算法(HBOS)</h5><p>HBOS(Histogram-based Outlier Score)是一种单变量方法组合，HBOS在全局异常检测问题上表现良好，但不能检测局部异常值。但是HBOS比标准算法快得多，尤其是在大数据集上。<br>HOBS不能对特征之间的依赖关系进行建模，其基本假设是数据集的每个维度相互独立。然后对每个维度进行区间(bin)划分，对每一个bin进行评分。区间的密度越低，异常评分越高，越可能是异常点。<br>①等宽分桶：标准直方图构建，在值范围内构造k个等宽箱，样本若如每个箱的概率作为密度的估计[时间复杂度O(n)]<br>②动态宽度分桶：对所有值进行排序，将固定数量的N/k个连续值装进一个箱。N是总实例数，k是箱个数，所有箱面积一样，跨度大的箱的高度低，即密度小(例外情况：超过k个数相等，此时允许在同一个箱里超过N/k值)<br>对每个维度都计算一个独立的直方图，其中每个箱子的高度表示密度的估计，对直方图进行归一化处理，最后计算每一个实例的HBOS值。<br>$$<br>HBOS\left( p \right) =\sum_{i=0}^d{\log \left( \frac{1}{hist_i\left( p \right)} \right)}<br>$$<br>详细推导过程：<br>假设样本o的第i个特征概率密度为<img src="https://ae01.alicdn.com/kf/U3264e024f94c45a0bbe5110c82bca661k.jpg" alt="x">，则o的概率密度为：<br>$$<br>P\left( p \right) =P_1\left( p \right) P_2\left( p \right) …P_d\left( p \right)<br>$$<br>两边取对数<br>$$<br>\log \left( P\left( p \right) \right) =\log \left( P_1\left( p \right) P_2\left( p \right) …P_d\left( p \right) \right) =\sum_{i=1}^d{\log \left( P_i\left( p \right) \right)}<br>$$<br>为了达到概率密度越大异常评分越小，两边同乘-1。<br>$$<br>-\log \left( P\left( p \right) \right) =-\sum_{i=1}^d{\log \left( P_i\left( p \right) \right)}=\sum_{i=1}^d{\frac{1}{\log \left( P_i\left( p \right) \right)}}<br>$$<br>最后：<br>$$<br>HOBS\left( p \right) =-\log \left( P\left( p \right) \right) =\sum_{i=1}^d{\frac{1}{\log \left( P_i\left( p \right) \right)}}<br>$$</p>
 
       
@@ -465,7 +466,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/" title="异常检测(Anomaly Detection)简介">http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/</a>
+    <a href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/" title="异常检测——基于统计学的方法">http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -862,7 +863,7 @@
         var disqus_config = function () {
           this.page.url = 'http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/';
           this.page.identifier = '2021/05/14/异常检测——基于统计学的方法/';
-          this.page.title = '异常检测(Anomaly Detection)简介';
+          this.page.title = '异常检测——基于统计学的方法';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
