@@ -181,67 +181,43 @@
       </tags>
   </entry>
   <entry>
-    <title>Pandas的一些常用操作_3</title>
-    <url>/2021/02/21/pandas_3/</url>
+    <title>Tsfresh——自动化特征工程工具</title>
+    <url>/2021/03/25/tsfresh/</url>
     <content><![CDATA[<blockquote>
-<p>今天介绍Pandas对一些常见数据的处理方法。</p>
+<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="1-缺失数据处理"><a href="#1-缺失数据处理" class="headerlink" title="1.缺失数据处理"></a>1.缺失数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna()<span class="comment">#是否有缺失值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna().mean()<span class="comment">#缺失的比例 </span></span><br></pre></td></tr></table></figure>
+<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
+<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df.psavert.isna()]<span class="comment">#查看某列是否有缺失值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].isna().<span class="built_in">any</span>(<span class="number">1</span>)]<span class="comment">#查看所有列至少有一个缺失值的行“any()至少有一个为空,all()都为空”</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的行</span></span><br><span class="line">df.loc[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的区域</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">0</span>, how = <span class="string">&#x27;any&#x27;</span>, subset = [<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>])<span class="comment">#axis=0(删除)行,how=&#x27;any&#x27;至少有一个缺失的行</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">1</span>, thresh = df.shape[<span class="number">0</span>]-<span class="number">5</span>)<span class="comment">#删除超过5个缺失值的列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(method = <span class="string">&#x27;ffill&#x27;</span>, limit = <span class="number">1</span>)<span class="comment">#method=&#x27;ffill&#x27;用前面的元素填充/method=&#x27;bfill&#x27;用后面的元素填充,limit=1连续缺失值的最大填充次数为1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(df.mean())<span class="comment">#用每列的均值填充</span></span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(limit_direction=<span class="string">&#x27;both&#x27;</span>, limit=<span class="number">1</span>)<span class="comment">#用线性插值填充(both为双向限制插值)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(<span class="string">&#x27;nearest&#x27;</span>).values<span class="comment">#用最近邻插值填充</span></span><br></pre></td></tr></table></figure>
-<p>此外，也可以<a href="https://blog.csdn.net/wj1298250240/article/details/103600075">使用KNN来填充缺失值</a>。</p>
-<h4 id="2-文本数据处理"><a href="#2-文本数据处理" class="headerlink" title="2.文本数据处理"></a>2.文本数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts = pd.Series(df[<span class="string">&#x27;Area&#x27;</span>].values, index=df[<span class="string">&#x27;pct_2014&#x27;</span>])<span class="comment">#DataFrame转换为Series</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>[<span class="number">0</span>]<span class="comment">#查看第一个字符</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.<span class="built_in">len</span>()<span class="comment">#查看字符长度</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.split(<span class="string">&#x27;[aon]&#x27;</span>, n=<span class="number">3</span>, expand=<span class="literal">True</span>)<span class="comment">#从左到右拆分字符串，最大拆分次数3次，生成多列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.join(<span class="string">&#x27;-&#x27;</span>)<span class="comment">#每个字符用“-”连接</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.cat(ts2, sep=<span class="string">&#x27;-&#x27;</span>)<span class="comment">#合并两个字符Series，连接符为“-”</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.contains(<span class="string">&#x27;[a-z]u&#x27;</span>)<span class="comment">#查看包含正则模式的序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.startswith(<span class="string">&#x27;A&#x27;</span>)<span class="comment">#查看以A为开始的序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.endswith(<span class="string">&#x27;e&#x27;</span>)<span class="comment">#查看以e为结尾的序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.match(<span class="string">&#x27;A|s&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.count(<span class="string">&#x27;[A|s]&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列数量</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.find(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从左往右寻找&#x27;de&#x27;,匹配返回位置索引,未找到返回&#x27;-1&#x27;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.rfind(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从右往左寻找</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.replace(<span class="string">&#x27;\s?&#x27;</span>, <span class="string">&#x27;LA&#x27;</span>, regex=<span class="literal">True</span>)<span class="comment">#使用正则进行字符串替换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pat = <span class="string">&#x27;(\w+o)(\w+s)(\w+u)(\w+n)&#x27;</span></span><br><span class="line">ts.<span class="built_in">str</span>.extract(pat)<span class="comment">#拆分&#x27;o&#x27;,&#x27;s&#x27;,&#x27;u&#x27;,&#x27;n&#x27;为4列</span></span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.to_numeric(ts, errors=<span class="string">&#x27;ignore&#x27;</span>)<span class="comment">#将可以转为数值的字符转为数值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.pad(<span class="number">6</span>,<span class="string">&#x27;left&#x27;</span>,<span class="string">&#x27;*&#x27;</span>)<span class="comment">#选定字符串长度为6的填充为&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.lstrip()<span class="comment">#去掉字符串左侧空格</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.zfill(<span class="number">8</span>)<span class="comment">#用0补足8位</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-分类数据"><a href="#3-分类数据" class="headerlink" title="3.分类数据"></a>3.分类数据</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = df.psavert.astype(<span class="string">&#x27;category&#x27;</span>)<span class="comment">#Dataframe转为category对象</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.categories<span class="comment">#查看分类对象属性</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.add_categories(<span class="string">&#x27;C1&#x27;</span>)<span class="comment">#增加一个类别</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.remove_categories(<span class="number">11.7</span>)<span class="comment">#删除一个类别</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = s.cat.rename_categories(&#123;<span class="string">&#x27;S1&#x27;</span>:<span class="string">&#x27;xxx&#x27;</span>&#125;)<span class="comment">#重命名类别及其值</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.reorder_categories([<span class="string">&#x27;S1&#x27;</span>, <span class="string">&#x27;S2&#x27;</span>, <span class="string">&#x27;S3&#x27;</span>, <span class="string">&#x27;S4&#x27;</span>], ordered=<span class="literal">True</span>)<span class="comment">#设置排序</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>)<span class="comment">#值排序</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.set_index(<span class="string">&#x27;psavert&#x27;</span>).sort_index()<span class="comment">#作为索引排序</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">res = df.psavert &lt;= <span class="string">&#x27;S4&#x27;</span><span class="comment">#比较顺序</span></span><br><span class="line">res</span><br></pre></td></tr></table></figure>
-<h4 id="4-时序数据"><a href="#4-时序数据" class="headerlink" title="4.时序数据"></a>4.时序数据</h4><p>————-图——————–</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.to_datetime(df.date)<span class="comment">#生成时间序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.to_datetime([<span class="string">&#x27;2020\\1\\1&#x27;</span>,<span class="string">&#x27;2020\\1\\3&#x27;</span>],<span class="built_in">format</span>=<span class="string">&#x27;%Y\\%m\\%d&#x27;</span>)<span class="comment">#强制格式转换,生成时间序列</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;1967-07-01&#x27;</span>,<span class="string">&#x27;2015-04-01&#x27;</span>, freq=<span class="string">&#x27;D&#x27;</span>)<span class="comment">#查看两个时间之间的时间,间隔1天</span></span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#dt对象</span></span><br><span class="line">s.dt.daysinmonth<span class="comment">#每个月几天</span></span><br><span class="line">s.dt.dayofweek<span class="comment">#每周几天</span></span><br><span class="line">s.dt.dayofweek.isin([<span class="number">5</span>,<span class="number">6</span>])<span class="comment">#是否包含双休日</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Timestamp(<span class="string">&#x27;20210223 22:00:00&#x27;</span>)-pd.Timestamp(<span class="string">&#x27;20210222 18:35:00&#x27;</span>)<span class="comment">#计算两个时间之差</span></span><br></pre></td></tr></table></figure>]]></content>
+<h5 id="2-对原特征一列拆成多列，并为每条数据添加时间特征time"><a href="#2-对原特征一列拆成多列，并为每条数据添加时间特征time" class="headerlink" title="2. 对原特征一列拆成多列，并为每条数据添加时间特征time"></a>2. 对原特征一列拆成多列，并为每条数据添加时间特征time</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_data[<span class="string">&#x27;heartbeat_signals&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">&#x27;,&#x27;</span>, expand = <span class="literal">True</span>).stack()</span><br></pre></td></tr></table></figure>
+<h5 id="3-Index处理"><a href="#3-Index处理" class="headerlink" title="3. Index处理"></a>3. Index处理</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_heatbeat_df.reset_inex()</span><br><span class="line">all_heatbeat_df = all_heatbeat_df.set_inex(<span class="string">&#x27;level_0&#x27;</span>)</span><br><span class="line">all_heatbeat_df.index.name = <span class="literal">None</span></span><br><span class="line">all_heatbeat_df.rename(columns=&#123;<span class="string">&#x27;level_1&#x27;</span>:<span class="string">&#x27;time&#x27;</span>, <span class="number">0</span>:<span class="string">&#x27;heartbeat_signals&#x27;</span>, inpalce = <span class="literal">True</span>&#125;)</span><br><span class="line">all_heatbeat_df[<span class="string">&#x27;heartbeat_signals&#x27;</span>].astype(<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-label列单独存储，不进入tsfresh"><a href="#4-label列单独存储，不进入tsfresh" class="headerlink" title="4. label列单独存储，不进入tsfresh"></a>4. label列单独存储，不进入tsfresh</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_data_label = all_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">all_data = all_data.drop[<span class="string">&#x27;label&#x27;</span>, axis=<span class="number">1</span>].drop[<span class="string">&#x27;heartbeat_signals&#x27;</span>, axis=<span class="number">1</span>]</span><br><span class="line">all_data = all_data.join(all_heatbeat_df)</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-tsfresh特征抽取"><a href="#5-tsfresh特征抽取" class="headerlink" title="5. tsfresh特征抽取"></a>5. tsfresh特征抽取</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> extract_features</span><br><span class="line">all_features = extract_features(all_data, column_id=<span class="string">&#x27;id&#x27;</span>, column_sort=<span class="string">&#x27;time&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6.特征选择"></a>6.特征选择</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#删除nan值</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.utilities.dataframe_functions <span class="keyword">import</span> impute</span><br><span class="line">impute(all_features)</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-相关性特征提取"><a href="#7-相关性特征提取" class="headerlink" title="7.相关性特征提取"></a>7.相关性特征提取</h5><p>衍生众多特征之后，许多特征之间可能有很多相关性，需进一步筛选。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> select_features</span><br><span class="line">all_features_filtered = select_features(all_features, all_data_label)</span><br></pre></td></tr></table></figure>
+<h5 id="8-特征重命名，重新添加label"><a href="#8-特征重命名，重新添加label" class="headerlink" title="8.特征重命名，重新添加label"></a>8.特征重命名，重新添加label</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = all_features_filtered.columns.size</span><br><span class="line">all_features_filtered.columns = [<span class="string">&#x27;f_&#x27;</span> + <span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>, num)]</span><br><span class="line">all_features_filtered[<span class="string">&#x27;label&#x27;</span>] = all_data_label</span><br></pre></td></tr></table></figure>
+
+<h4 id="tsfresh包深入探究"><a href="#tsfresh包深入探究" class="headerlink" title="tsfresh包深入探究"></a>tsfresh包深入探究</h4><h5 id="1-筛选特征的方法"><a href="#1-筛选特征的方法" class="headerlink" title="1. 筛选特征的方法"></a>1. 筛选特征的方法</h5><p>上文采用了手工打标签的方式划分训练集和测试集，略显麻烦，可以通过tsfresh的内置方法来提取训练数据。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kind_to_fc_parameters = tsfresh.feature_extration.settings.from_columns(directed_features)</span><br></pre></td></tr></table></figure>
+<p>生成的params为训练集的特征字典，可以当作参数传入后续计算中。</p>
+<h5 id="2-自定义特征衍生规则"><a href="#2-自定义特征衍生规则" class="headerlink" title="2. 自定义特征衍生规则"></a>2. 自定义特征衍生规则</h5><p>tsfresh自带的衍生规则以字典的形式存放，可以直接调用，也可以自定义。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单个特征计算</span></span><br><span class="line">tsfresh.feature_extraction.feature_calculators.abs_energy(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定衍生规则</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.featureextraction <span class="keyword">import</span> extractfeatures</span><br><span class="line">params = &#123;<span class="string">&#x27;fft_coefficient:[&#123;&#x27;</span>coe<span class="string">f&#x27;:0, &#x27;</span>att<span class="string">r&#x27;:&#x27;</span><span class="built_in">abs</span><span class="string">&#x27;&#125;], &#x27;</span>kurtosis<span class="string">&#x27;: None, &#x27;</span>skewness<span class="string">&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>后续可以在extractfeatures中设置defaultparameters = params，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+<h5 id="3-减小内存使用"><a href="#3-减小内存使用" class="headerlink" title="3. 减小内存使用"></a>3. 减小内存使用</h5><p>tsfresh默认参数太吃内存，且耗时长，笔者i7的16G笔记本最多只能跑到60%的进度就会卡住，天池notebook和谷歌colab都是没跑出结果就断线了，硬要跑的话只能租个高配服务器，或者调整衍生特征的数量，通过<strong>chunksize</strong>设置，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
+]]></content>
       <categories>
-        <category>Pandas</category>
+        <category>Feature engineering</category>
       </categories>
       <tags>
-        <tag>DataFrame</tag>
+        <tag>tsfresh</tag>
       </tags>
   </entry>
   <entry>
@@ -315,43 +291,67 @@
       </tags>
   </entry>
   <entry>
-    <title>Tsfresh——自动化特征工程工具</title>
-    <url>/2021/03/25/tsfresh/</url>
+    <title>Pandas的一些常用操作_3</title>
+    <url>/2021/02/21/pandas_3/</url>
     <content><![CDATA[<blockquote>
-<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
+<p>今天介绍Pandas对一些常见数据的处理方法。</p>
 </blockquote>
-<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
-<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./economics.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="1-缺失数据处理"><a href="#1-缺失数据处理" class="headerlink" title="1.缺失数据处理"></a>1.缺失数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna()<span class="comment">#是否有缺失值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.isna().mean()<span class="comment">#缺失的比例 </span></span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<h5 id="2-对原特征一列拆成多列，并为每条数据添加时间特征time"><a href="#2-对原特征一列拆成多列，并为每条数据添加时间特征time" class="headerlink" title="2. 对原特征一列拆成多列，并为每条数据添加时间特征time"></a>2. 对原特征一列拆成多列，并为每条数据添加时间特征time</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_data[<span class="string">&#x27;heartbeat_signals&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">&#x27;,&#x27;</span>, expand = <span class="literal">True</span>).stack()</span><br></pre></td></tr></table></figure>
-<h5 id="3-Index处理"><a href="#3-Index处理" class="headerlink" title="3. Index处理"></a>3. Index处理</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_heatbeat_df = all_heatbeat_df.reset_inex()</span><br><span class="line">all_heatbeat_df = all_heatbeat_df.set_inex(<span class="string">&#x27;level_0&#x27;</span>)</span><br><span class="line">all_heatbeat_df.index.name = <span class="literal">None</span></span><br><span class="line">all_heatbeat_df.rename(columns=&#123;<span class="string">&#x27;level_1&#x27;</span>:<span class="string">&#x27;time&#x27;</span>, <span class="number">0</span>:<span class="string">&#x27;heartbeat_signals&#x27;</span>, inpalce = <span class="literal">True</span>&#125;)</span><br><span class="line">all_heatbeat_df[<span class="string">&#x27;heartbeat_signals&#x27;</span>].astype(<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="4-label列单独存储，不进入tsfresh"><a href="#4-label列单独存储，不进入tsfresh" class="headerlink" title="4. label列单独存储，不进入tsfresh"></a>4. label列单独存储，不进入tsfresh</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">all_data_label = all_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">all_data = all_data.drop[<span class="string">&#x27;label&#x27;</span>, axis=<span class="number">1</span>].drop[<span class="string">&#x27;heartbeat_signals&#x27;</span>, axis=<span class="number">1</span>]</span><br><span class="line">all_data = all_data.join(all_heatbeat_df)</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-tsfresh特征抽取"><a href="#5-tsfresh特征抽取" class="headerlink" title="5. tsfresh特征抽取"></a>5. tsfresh特征抽取</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> extract_features</span><br><span class="line">all_features = extract_features(all_data, column_id=<span class="string">&#x27;id&#x27;</span>, column_sort=<span class="string">&#x27;time&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6.特征选择"></a>6.特征选择</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#删除nan值</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.utilities.dataframe_functions <span class="keyword">import</span> impute</span><br><span class="line">impute(all_features)</span><br></pre></td></tr></table></figure>
-
-<h5 id="7-相关性特征提取"><a href="#7-相关性特征提取" class="headerlink" title="7.相关性特征提取"></a>7.相关性特征提取</h5><p>衍生众多特征之后，许多特征之间可能有很多相关性，需进一步筛选。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tsfresh <span class="keyword">import</span> select_features</span><br><span class="line">all_features_filtered = select_features(all_features, all_data_label)</span><br></pre></td></tr></table></figure>
-<h5 id="8-特征重命名，重新添加label"><a href="#8-特征重命名，重新添加label" class="headerlink" title="8.特征重命名，重新添加label"></a>8.特征重命名，重新添加label</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = all_features_filtered.columns.size</span><br><span class="line">all_features_filtered.columns = [<span class="string">&#x27;f_&#x27;</span> + <span class="built_in">str</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>, num)]</span><br><span class="line">all_features_filtered[<span class="string">&#x27;label&#x27;</span>] = all_data_label</span><br></pre></td></tr></table></figure>
-
-<h4 id="tsfresh包深入探究"><a href="#tsfresh包深入探究" class="headerlink" title="tsfresh包深入探究"></a>tsfresh包深入探究</h4><h5 id="1-筛选特征的方法"><a href="#1-筛选特征的方法" class="headerlink" title="1. 筛选特征的方法"></a>1. 筛选特征的方法</h5><p>上文采用了手工打标签的方式划分训练集和测试集，略显麻烦，可以通过tsfresh的内置方法来提取训练数据。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kind_to_fc_parameters = tsfresh.feature_extration.settings.from_columns(directed_features)</span><br></pre></td></tr></table></figure>
-<p>生成的params为训练集的特征字典，可以当作参数传入后续计算中。</p>
-<h5 id="2-自定义特征衍生规则"><a href="#2-自定义特征衍生规则" class="headerlink" title="2. 自定义特征衍生规则"></a>2. 自定义特征衍生规则</h5><p>tsfresh自带的衍生规则以字典的形式存放，可以直接调用，也可以自定义。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#单个特征计算</span></span><br><span class="line">tsfresh.feature_extraction.feature_calculators.abs_energy(x)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定衍生规则</span></span><br><span class="line"><span class="keyword">from</span> tsfresh.featureextraction <span class="keyword">import</span> extractfeatures</span><br><span class="line">params = &#123;<span class="string">&#x27;fft_coefficient:[&#123;&#x27;</span>coe<span class="string">f&#x27;:0, &#x27;</span>att<span class="string">r&#x27;:&#x27;</span><span class="built_in">abs</span><span class="string">&#x27;&#125;], &#x27;</span>kurtosis<span class="string">&#x27;: None, &#x27;</span>skewness<span class="string">&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>后续可以在extractfeatures中设置defaultparameters = params，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
-<h5 id="3-减小内存使用"><a href="#3-减小内存使用" class="headerlink" title="3. 减小内存使用"></a>3. 减小内存使用</h5><p>tsfresh默认参数太吃内存，且耗时长，笔者i7的16G笔记本最多只能跑到60%的进度就会卡住，天池notebook和谷歌colab都是没跑出结果就断线了，硬要跑的话只能租个高配服务器，或者调整衍生特征的数量，通过<strong>chunksize</strong>设置，具体用法见<a href="https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html">操作文档</a>。</p>
-]]></content>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df.psavert.isna()]<span class="comment">#查看某列是否有缺失值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].isna().<span class="built_in">any</span>(<span class="number">1</span>)]<span class="comment">#查看所有列至少有一个缺失值的行“any()至少有一个为空,all()都为空”</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的行</span></span><br><span class="line">df.loc[df[[<span class="string">&#x27;psavert&#x27;</span>,<span class="string">&#x27;pop&#x27;</span>,<span class="string">&#x27;uempmed&#x27;</span>]].notna().<span class="built_in">all</span>(<span class="number">1</span>)]<span class="comment">#查看所有没有缺失值的区域</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">0</span>, how = <span class="string">&#x27;any&#x27;</span>, subset = [<span class="string">&#x27;psavert&#x27;</span>, <span class="string">&#x27;pop&#x27;</span>])<span class="comment">#axis=0(删除)行,how=&#x27;any&#x27;至少有一个缺失的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.dropna(axis = <span class="number">1</span>, thresh = df.shape[<span class="number">0</span>]-<span class="number">5</span>)<span class="comment">#删除超过5个缺失值的列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(method = <span class="string">&#x27;ffill&#x27;</span>, limit = <span class="number">1</span>)<span class="comment">#method=&#x27;ffill&#x27;用前面的元素填充/method=&#x27;bfill&#x27;用后面的元素填充,limit=1连续缺失值的最大填充次数为1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.fillna(df.mean())<span class="comment">#用每列的均值填充</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(limit_direction=<span class="string">&#x27;both&#x27;</span>, limit=<span class="number">1</span>)<span class="comment">#用线性插值填充(both为双向限制插值)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.interpolate(<span class="string">&#x27;nearest&#x27;</span>).values<span class="comment">#用最近邻插值填充</span></span><br></pre></td></tr></table></figure>
+<p>此外，也可以<a href="https://blog.csdn.net/wj1298250240/article/details/103600075">使用KNN来填充缺失值</a>。</p>
+<h4 id="2-文本数据处理"><a href="#2-文本数据处理" class="headerlink" title="2.文本数据处理"></a>2.文本数据处理</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts = pd.Series(df[<span class="string">&#x27;Area&#x27;</span>].values, index=df[<span class="string">&#x27;pct_2014&#x27;</span>])<span class="comment">#DataFrame转换为Series</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>[<span class="number">0</span>]<span class="comment">#查看第一个字符</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.<span class="built_in">len</span>()<span class="comment">#查看字符长度</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.split(<span class="string">&#x27;[aon]&#x27;</span>, n=<span class="number">3</span>, expand=<span class="literal">True</span>)<span class="comment">#从左到右拆分字符串，最大拆分次数3次，生成多列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.join(<span class="string">&#x27;-&#x27;</span>)<span class="comment">#每个字符用“-”连接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.cat(ts2, sep=<span class="string">&#x27;-&#x27;</span>)<span class="comment">#合并两个字符Series，连接符为“-”</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.contains(<span class="string">&#x27;[a-z]u&#x27;</span>)<span class="comment">#查看包含正则模式的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.startswith(<span class="string">&#x27;A&#x27;</span>)<span class="comment">#查看以A为开始的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.endswith(<span class="string">&#x27;e&#x27;</span>)<span class="comment">#查看以e为结尾的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.match(<span class="string">&#x27;A|s&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.count(<span class="string">&#x27;[A|s]&#x27;</span>)<span class="comment">#查看以A为开头,s为结尾的序列数量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.find(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从左往右寻找&#x27;de&#x27;,匹配返回位置索引,未找到返回&#x27;-1&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.rfind(<span class="string">&#x27;de&#x27;</span>)<span class="comment">#从右往左寻找</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.replace(<span class="string">&#x27;\s?&#x27;</span>, <span class="string">&#x27;LA&#x27;</span>, regex=<span class="literal">True</span>)<span class="comment">#使用正则进行字符串替换</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pat = <span class="string">&#x27;(\w+o)(\w+s)(\w+u)(\w+n)&#x27;</span></span><br><span class="line">ts.<span class="built_in">str</span>.extract(pat)<span class="comment">#拆分&#x27;o&#x27;,&#x27;s&#x27;,&#x27;u&#x27;,&#x27;n&#x27;为4列</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.to_numeric(ts, errors=<span class="string">&#x27;ignore&#x27;</span>)<span class="comment">#将可以转为数值的字符转为数值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.pad(<span class="number">6</span>,<span class="string">&#x27;left&#x27;</span>,<span class="string">&#x27;*&#x27;</span>)<span class="comment">#选定字符串长度为6的填充为&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.lstrip()<span class="comment">#去掉字符串左侧空格</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.<span class="built_in">str</span>.zfill(<span class="number">8</span>)<span class="comment">#用0补足8位</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-分类数据"><a href="#3-分类数据" class="headerlink" title="3.分类数据"></a>3.分类数据</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = df.psavert.astype(<span class="string">&#x27;category&#x27;</span>)<span class="comment">#Dataframe转为category对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.categories<span class="comment">#查看分类对象属性</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.add_categories(<span class="string">&#x27;C1&#x27;</span>)<span class="comment">#增加一个类别</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.remove_categories(<span class="number">11.7</span>)<span class="comment">#删除一个类别</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = s.cat.rename_categories(&#123;<span class="string">&#x27;S1&#x27;</span>:<span class="string">&#x27;xxx&#x27;</span>&#125;)<span class="comment">#重命名类别及其值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.cat.reorder_categories([<span class="string">&#x27;S1&#x27;</span>, <span class="string">&#x27;S2&#x27;</span>, <span class="string">&#x27;S3&#x27;</span>, <span class="string">&#x27;S4&#x27;</span>], ordered=<span class="literal">True</span>)<span class="comment">#设置排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.sort_values(<span class="string">&#x27;psavert&#x27;</span>)<span class="comment">#值排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.set_index(<span class="string">&#x27;psavert&#x27;</span>).sort_index()<span class="comment">#作为索引排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">res = df.psavert &lt;= <span class="string">&#x27;S4&#x27;</span><span class="comment">#比较顺序</span></span><br><span class="line">res</span><br></pre></td></tr></table></figure>
+<h4 id="4-时序数据"><a href="#4-时序数据" class="headerlink" title="4.时序数据"></a>4.时序数据</h4><p>————-图——————–</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.to_datetime(df.date)<span class="comment">#生成时间序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.to_datetime([<span class="string">&#x27;2020\\1\\1&#x27;</span>,<span class="string">&#x27;2020\\1\\3&#x27;</span>],<span class="built_in">format</span>=<span class="string">&#x27;%Y\\%m\\%d&#x27;</span>)<span class="comment">#强制格式转换,生成时间序列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;1967-07-01&#x27;</span>,<span class="string">&#x27;2015-04-01&#x27;</span>, freq=<span class="string">&#x27;D&#x27;</span>)<span class="comment">#查看两个时间之间的时间,间隔1天</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#dt对象</span></span><br><span class="line">s.dt.daysinmonth<span class="comment">#每个月几天</span></span><br><span class="line">s.dt.dayofweek<span class="comment">#每周几天</span></span><br><span class="line">s.dt.dayofweek.isin([<span class="number">5</span>,<span class="number">6</span>])<span class="comment">#是否包含双休日</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.Timestamp(<span class="string">&#x27;20210223 22:00:00&#x27;</span>)-pd.Timestamp(<span class="string">&#x27;20210222 18:35:00&#x27;</span>)<span class="comment">#计算两个时间之差</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Feature engineering</category>
+        <category>Pandas</category>
       </categories>
       <tags>
-        <tag>tsfresh</tag>
+        <tag>DataFrame</tag>
       </tags>
   </entry>
   <entry>
@@ -434,6 +434,30 @@
       </tags>
   </entry>
   <entry>
+    <title>异常检测(Anomaly Detection)简介</title>
+    <url>/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<p>异常检测顾名思义就是检测出与正常数据不同的数据，检测给定的新数据是否属于这组数据集。</p>
+<h4 id="1-异常检测的任务类型"><a href="#1-异常检测的任务类型" class="headerlink" title="1. 异常检测的任务类型"></a>1. 异常检测的任务类型</h4><p><strong>无监督</strong>：训练集无标签<br><strong>有监督</strong>：训练集的正例和反例均有标签<br><strong>半监督</strong>：在训练集中只有正例，异常实例不参与训练</p>
+<span id="more"></span>
+<h4 id="2-异常检测的难点"><a href="#2-异常检测的难点" class="headerlink" title="2. 异常检测的难点"></a>2. 异常检测的难点</h4><p><strong>数据量少</strong>：异常检测任务通常情况下负样本（abnormal）较少，0、1两类样本严重不均衡，有时候依赖于人工标签。<br><strong>噪音</strong>：异常和噪音有时容易混淆，如两幅图中的A点识别难度就不一样。<br><img src="https://z3.ax1x.com/2021/05/25/gzuSPO.png" alt="xx"></p>
+<h4 id="3-异常检测方法简介"><a href="#3-异常检测方法简介" class="headerlink" title="3. 异常检测方法简介"></a>3. 异常检测方法简介</h4><h5 id="3-1-基于统计学的方法"><a href="#3-1-基于统计学的方法" class="headerlink" title="3.1 基于统计学的方法"></a>3.1 基于统计学的方法</h5><p>通常做法是假设样本服从高斯分布，计算p(x)=ϵ作为判定正常和异常的阈值。<br><img src="https://z3.ax1x.com/2021/05/25/gzu9Re.png" alt="xx"></p>
+<h5 id="3-2-线性模型"><a href="#3-2-线性模型" class="headerlink" title="3.2 线性模型"></a>3.2 线性模型</h5><p>在线性模型中，有2个假设：<br>①不同维度的变量近似线性相关，可以通过一个相关系数矩阵进行衡量。<br>②数据是镶嵌在低维子空间中的，线性建模是为了找到某个低维子空间使异常点区别于正常点。<br>常用模型的包括：<br><strong>最小二乘法</strong>——最小化目标函数得到直线方程,计算每个变量与回归方程之间的残差,可通过3σ 法则判断异常值.<br><strong>PCA</strong>——将样本的协方差矩阵特征值分解后，特征值是样本投影到轴上对应的方差，特征值越小，投影后样本点分布越集中，异常点容易偏离，以此作为判定异常值的一个指标。</p>
+<h5 id="3-3-基于邻近度的方法"><a href="#3-3-基于邻近度的方法" class="headerlink" title="3.3 基于邻近度的方法"></a>3.3 基于邻近度的方法</h5><p>这类算法适用于数据点的聚集程度高、离群点较少的情况，不适用于数据量大、维度高的数据。<br>①基于集群（簇）的检测——DBSCAN，核心点距离ℇ内最小包含点数、距离ℇ与阈值比较。<br>②基于距离的度量——KNN，将K-近邻距离与阈值比较。<br>③基于密度的度量——LOF(局部离群因子)，邻域点密度与阈值比较。<br><img src="https://z3.ax1x.com/2021/05/25/gzupGD.png" alt="xx"></p>
+<h5 id="3-4-集成方法"><a href="#3-4-集成方法" class="headerlink" title="3.4 集成方法"></a>3.4 集成方法</h5><p>①<strong>孤立森林（Isolation Forest）</strong>——不停地使用随机超平面分隔每个子空间，直到每个子空间只有一个数据点为止，低密度的点被单独分配到一个子空间，孤立数低于阈值时，定义为异常值。<br><img src="https://z3.ax1x.com/2021/05/25/gznxIK.png" alt="xx"><br>②树模型——通过树不断划分子空间,数据点在多个树上的平均深度越浅,越可能为异常值。</p>
+]]></content>
+      <categories>
+        <category>Anomaly Detection</category>
+      </categories>
+      <tags>
+        <tag>LOF</tag>
+        <tag>OLSE</tag>
+        <tag>PCV</tag>
+        <tag>Isolation Forest</tag>
+        <tag>KNN</tag>
+        <tag>DBSCAN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异常检测——集成方法</title>
     <url>/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -459,32 +483,8 @@
         <category>Anomaly Detection</category>
       </categories>
       <tags>
+        <tag>Isolation Forest</tag>
         <tag>Feature Bagging</tag>
-        <tag>Isolation Forest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>异常检测(Anomaly Detection)简介</title>
-    <url>/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<p>异常检测顾名思义就是检测出与正常数据不同的数据，检测给定的新数据是否属于这组数据集。</p>
-<h4 id="1-异常检测的任务类型"><a href="#1-异常检测的任务类型" class="headerlink" title="1. 异常检测的任务类型"></a>1. 异常检测的任务类型</h4><p><strong>无监督</strong>：训练集无标签<br><strong>有监督</strong>：训练集的正例和反例均有标签<br><strong>半监督</strong>：在训练集中只有正例，异常实例不参与训练</p>
-<span id="more"></span>
-<h4 id="2-异常检测的难点"><a href="#2-异常检测的难点" class="headerlink" title="2. 异常检测的难点"></a>2. 异常检测的难点</h4><p><strong>数据量少</strong>：异常检测任务通常情况下负样本（abnormal）较少，0、1两类样本严重不均衡，有时候依赖于人工标签。<br><strong>噪音</strong>：异常和噪音有时容易混淆，如两幅图中的A点识别难度就不一样。<br><img src="https://z3.ax1x.com/2021/05/25/gzuSPO.png" alt="xx"></p>
-<h4 id="3-异常检测方法简介"><a href="#3-异常检测方法简介" class="headerlink" title="3. 异常检测方法简介"></a>3. 异常检测方法简介</h4><h5 id="3-1-基于统计学的方法"><a href="#3-1-基于统计学的方法" class="headerlink" title="3.1 基于统计学的方法"></a>3.1 基于统计学的方法</h5><p>通常做法是假设样本服从高斯分布，计算p(x)=ϵ作为判定正常和异常的阈值。<br><img src="https://z3.ax1x.com/2021/05/25/gzu9Re.png" alt="xx"></p>
-<h5 id="3-2-线性模型"><a href="#3-2-线性模型" class="headerlink" title="3.2 线性模型"></a>3.2 线性模型</h5><p>在线性模型中，有2个假设：<br>①不同维度的变量近似线性相关，可以通过一个相关系数矩阵进行衡量。<br>②数据是镶嵌在低维子空间中的，线性建模是为了找到某个低维子空间使异常点区别于正常点。<br>常用模型的包括：<br><strong>最小二乘法</strong>——最小化目标函数得到直线方程,计算每个变量与回归方程之间的残差,可通过3σ 法则判断异常值.<br><strong>PCA</strong>——将样本的协方差矩阵特征值分解后，特征值是样本投影到轴上对应的方差，特征值越小，投影后样本点分布越集中，异常点容易偏离，以此作为判定异常值的一个指标。</p>
-<h5 id="3-3-基于邻近度的方法"><a href="#3-3-基于邻近度的方法" class="headerlink" title="3.3 基于邻近度的方法"></a>3.3 基于邻近度的方法</h5><p>这类算法适用于数据点的聚集程度高、离群点较少的情况，不适用于数据量大、维度高的数据。<br>①基于集群（簇）的检测——DBSCAN，核心点距离ℇ内最小包含点数、距离ℇ与阈值比较。<br>②基于距离的度量——KNN，将K-近邻距离与阈值比较。<br>③基于密度的度量——LOF(局部离群因子)，邻域点密度与阈值比较。<br><img src="https://z3.ax1x.com/2021/05/25/gzupGD.png" alt="xx"></p>
-<h5 id="3-4-集成方法"><a href="#3-4-集成方法" class="headerlink" title="3.4 集成方法"></a>3.4 集成方法</h5><p>①<strong>孤立森林（Isolation Forest）</strong>——不停地使用随机超平面分隔每个子空间，直到每个子空间只有一个数据点为止，低密度的点被单独分配到一个子空间，孤立数低于阈值时，定义为异常值。<br><img src="https://z3.ax1x.com/2021/05/25/gznxIK.png" alt="xx"><br>②树模型——通过树不断划分子空间,数据点在多个树上的平均深度越浅,越可能为异常值。</p>
-]]></content>
-      <categories>
-        <category>Anomaly Detection</category>
-      </categories>
-      <tags>
-        <tag>LOF</tag>
-        <tag>OLSE</tag>
-        <tag>Isolation Forest</tag>
-        <tag>PCV</tag>
-        <tag>KNN</tag>
-        <tag>DBSCAN</tag>
       </tags>
   </entry>
   <entry>

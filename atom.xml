@@ -34,9 +34,9 @@
     <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
     
     
-    <category term="Feature Bagging" scheme="http://example.com/tags/Feature-Bagging/"/>
-    
     <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
+    
+    <category term="Feature Bagging" scheme="http://example.com/tags/Feature-Bagging/"/>
     
   </entry>
   
@@ -92,7 +92,7 @@
     <link href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-14T15:18:11.000Z</published>
-    <updated>2021-05-26T13:37:12.913Z</updated>
+    <updated>2021-05-26T13:41:55.836Z</updated>
     
     
     <summary type="html">&lt;p&gt;异常检测的统计方法包含两种主要类型：参数方法和非参数方法。&lt;br&gt;&lt;strong&gt;参数方法：&lt;/strong&gt;假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)&lt;br&gt;&lt;strong&gt;非参数方法&lt;/strong&gt;：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。&lt;/p&gt;</summary>
@@ -128,9 +128,9 @@
     
     <category term="OLSE" scheme="http://example.com/tags/OLSE/"/>
     
-    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
-    
     <category term="PCV" scheme="http://example.com/tags/PCV/"/>
+    
+    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
     
     <category term="KNN" scheme="http://example.com/tags/KNN/"/>
     
@@ -143,7 +143,7 @@
     <link href="http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/"/>
     <id>http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/</id>
     <published>2021-04-21T15:14:12.000Z</published>
-    <updated>2021-05-26T13:36:54.431Z</updated>
+    <updated>2021-05-26T13:41:45.296Z</updated>
     
     
     <summary type="html">&lt;p&gt;特征工程就是将原始数据空间变换到新的特征空间，在新的特征空间中，模型能够更好地学习数据中的规律。特征的选择和构造，就是人为地帮助模型学习到原本很难学好的东西，从而使模型达到更好的效果。&lt;/p&gt;
@@ -308,7 +308,7 @@
     <link href="http://example.com/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/"/>
     <id>http://example.com/2021/03/15/%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88_1/</id>
     <published>2021-03-15T14:30:38.000Z</published>
-    <updated>2021-05-26T13:36:44.224Z</updated>
+    <updated>2021-05-26T13:41:39.060Z</updated>
     
     
     <summary type="html">&lt;p&gt;Kaggle和天池比赛中常用提高成绩的三种方法：&lt;/p&gt;
