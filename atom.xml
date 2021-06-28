@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-05-25T05:00:37.385Z</updated>
+  <updated>2021-06-28T03:11:20.427Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,120 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>图神经网络——节点分类与边预测</title>
+    <link href="http://example.com/2021/06/27/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E4%B8%8E%E8%BE%B9%E9%A2%84%E6%B5%8B/"/>
+    <id>http://example.com/2021/06/27/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E4%B8%8E%E8%BE%B9%E9%A2%84%E6%B5%8B/</id>
+    <published>2021-06-27T13:12:21.000Z</published>
+    <updated>2021-06-28T03:11:20.427Z</updated>
+    
+    
+    <summary type="html">&lt;h4 id=&quot;1-InMemoryDataset基类&quot;&gt;&lt;a href=&quot;#1-InMemoryDataset基类&quot; class=&quot;headerlink&quot; title=&quot;1.InMemoryDataset基类&quot;&gt;&lt;/a&gt;1.InMemoryDataset基类&lt;/h4&gt;&lt;p&gt;在PyG中，可以通过继承InMemoryDataset类来自定义一个数据可全部存储到内存的数据集类。(继承Dataset是分次加载到内存，继承InMemoryDataset是一次性加载所有数据到内存)&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;InMemoryDataset&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;root: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;built_in&quot;&gt;str&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, transform: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, pre_transform: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, pre_filter: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;transform：数据转换函数，用于转换Data对象，每一次数据获取过程中都会被执行。&lt;br&gt;pre_transform：数据转换函数，用于转换Data对象，在Data对象被保存到文件前调用。&lt;br&gt;pre_filter：检查数据是否要保留的函数，接收一个Data对象，返回此Data对象是否应该被包含在最终的数据集中，在Data对象被保存到文件前调用。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
+    
+    
+    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
+    
+    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
+    
+    <category term="GAT" scheme="http://example.com/tags/GAT/"/>
+    
+    <category term="Sequential" scheme="http://example.com/tags/Sequential/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图神经网络——基于图神经网络的节点表征学习</title>
+    <link href="http://example.com/2021/06/23/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://example.com/2021/06/23/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-06-23T15:12:21.000Z</published>
+    <updated>2021-06-28T03:11:18.546Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Graph的特征表示非常复杂：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.复杂的拓扑结构，较难从图像中的感受野提取有效信息；&lt;br&gt;2.无特定的节点顺序；&lt;br&gt;3.通常graph会是动态变化的， 且使用多模态特征。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;高质量的节点表征能够用于衡量节点的相似性，同时高质量的节点表征也是准确分类节点的前提。&lt;/p&gt;
+&lt;p&gt;本文以Cora论文引用网络数据集为例，对MLP、GCN、GAT三种神经网络的分类性能进行对比。首先载入数据集并定义可视化函数：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#载入数据集&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; torch_geometric.datasets &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Planetoid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; torch_geometric.transforms &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; NormalizeFeatures&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dataset = Planetoid(root=&lt;span class=&quot;string&quot;&gt;&amp;#x27;dataset&amp;#x27;&lt;/span&gt;, name=&lt;span class=&quot;string&quot;&gt;&amp;#x27;Cora&amp;#x27;&lt;/span&gt;, transform=NormalizeFeatures())&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
+    
+    
+    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
+    
+    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
+    
+    <category term="MLP" scheme="http://example.com/tags/MLP/"/>
+    
+    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
+    
+    <category term="GAT" scheme="http://example.com/tags/GAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图神经网络——消息传递网络</title>
+    <link href="http://example.com/2021/06/19/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E7%BD%91%E7%BB%9C/"/>
+    <id>http://example.com/2021/06/19/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E7%BD%91%E7%BB%9C/</id>
+    <published>2021-06-19T15:11:21.000Z</published>
+    <updated>2021-06-28T03:08:30.503Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;消息传递(Message Passing) 指的是目标节点$S1$的邻居$\mathcal{N(S1)}$——B1、B2、B3，这些邻居节点根据一定的规则将信息(特征)，汇总到目标节点上。信息汇总中最简单的规则就是逐个元素相加。&lt;br&gt;在pytorch-geometric的官方文档中，消息传递图神经网络被描述为:&lt;br&gt;$$&lt;br&gt;\mathbf{x}_i^{(k)} = \gamma^{(k)} \left( \mathbf{x}&lt;em&gt;i^{(k-1)}, \square&lt;/em&gt;{j \in \mathcal{N}(i)} , \phi^{(k)}\left(\mathbf{x}&lt;em&gt;i^{(k-1)}, \mathbf{x}&lt;em&gt;j^{(k-1)},\mathbf{e}&lt;/em&gt;{j,i}\right) \right),&lt;br&gt;$$&lt;br&gt;其中，$\mathbf{e}&lt;/em&gt;{j,i} \in \mathbb{R}^D$ 表示从节点$j$到节点$i$的边的属性，$\mathbf{x}^{(k-1)}_i\in\mathbb{R}^F$表示$(k-1)$层中节点$i$的节点表征，$\square$表示聚合策略，$\gamma$和$\phi$表示一些神经网络方法，比如MLPs多层感知器、LSTM等。&lt;br&gt;从公式中可以看出，目标节点$x_i$在k层的特征可以通过$x_i$在上一层(k-1层)的特征与其相邻节点$x_j$在上一层(k-1层)的特征以及相邻节点到目标节点的边的特征，这三个特征在k层通过$\square$的聚合策略(aggregate)，通过一个$\gamma$在k层的分析方法来导出目标节点$x_i$的特征。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
+    
+    
+    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
+    
+    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图神经网络——基本图论与PyG库</title>
+    <link href="http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/"/>
+    <id>http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/</id>
+    <published>2021-06-15T14:52:21.000Z</published>
+    <updated>2021-06-28T03:07:19.207Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在以往的深度学习中，主要的数据形式包括矩阵、张量、序列(sequence)和时间序列(time series)，然而还有许多数据是图的结构，如社交网络、知识图谱等。图结构数据具有以下特点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;任意的大小和复杂的拓扑结构；&lt;br&gt;没有固定的节点排序或参考点；&lt;br&gt;通常是动态的，并具有多模态的特征；&lt;br&gt;图的信息包括节点信息、边信息和拓扑结构信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;1-图结构数据&quot;&gt;&lt;a href=&quot;#1-图结构数据&quot; class=&quot;headerlink&quot; title=&quot;1. 图结构数据&quot;&gt;&lt;/a&gt;1. 图结构数据&lt;/h4&gt;&lt;h5 id=&quot;1-1-图-Graphs&quot;&gt;&lt;a href=&quot;#1-1-图-Graphs&quot; class=&quot;headerlink&quot; title=&quot;1.1 图(Graphs)&quot;&gt;&lt;/a&gt;1.1 图(Graphs)&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;·&lt;/strong&gt; 一个图记作$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其中 $\mathcal{V}=\left{v_{1}, \ldots, v_{N}\right}$是数量为$N=|\mathcal{V}|$ 的节点的集合， $\mathcal{E}=\left{e_{1}, \ldots, e_{M}\right}$ 是数量为 $M$ 的边的集合。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 节点表示实体(entities)，边表示实体间的关系(relations)；节点和边的信息可以是类别型或数值型的。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 只有一种类型的节点和一种类型的边的图称为同质图(Homogeneous Graph)。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 存在多种类型的节点和多种类型的边的图称为异质图(Heterogeneous Graph)&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
+    
+    
+    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
+    
+    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
     <title>异常检测——集成方法</title>
     <link href="http://example.com/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-23T15:52:53.000Z</published>
-    <updated>2021-05-25T05:00:37.385Z</updated>
+    <updated>2021-06-28T03:05:20.497Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -34,9 +143,9 @@
     <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
     
     
-    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
-    
     <category term="Feature Bagging" scheme="http://example.com/tags/Feature-Bagging/"/>
+    
+    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
     
   </entry>
   
@@ -45,7 +154,7 @@
     <link href="http://example.com/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-20T15:52:43.000Z</published>
-    <updated>2021-05-26T13:37:22.366Z</updated>
+    <updated>2021-06-28T03:05:27.443Z</updated>
     
     
     <summary type="html">&lt;p&gt;异常值通常具有更高的离群程度分数值，同时也更具有可解释性。在基于相似度的异常检测方法中，主要思想是异常点的表示与正常点不同。&lt;/p&gt;
@@ -65,7 +174,7 @@
     <link href="http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-17T15:52:21.000Z</published>
-    <updated>2021-05-25T05:53:09.093Z</updated>
+    <updated>2021-06-28T03:05:04.734Z</updated>
     
     
     <summary type="html">&lt;p&gt;真实数据集中不同维度的特征可能具有高度相关性，这是因为不同的特征往往是由相同的基础过程以密切相关的方式产生的。这被称为——回归建模，是一种参数化的相关性分析。&lt;br&gt;一类相关性分析通过其他变量预测单独的属性值，另一类方法用一些潜在变量来代表整个数&lt;br&gt;据。前者的代表是&lt;strong&gt;线性回归&lt;/strong&gt;，后者一个典型的例子是&lt;strong&gt;主成分分析&lt;/strong&gt;。&lt;br&gt;线性相关分析基于的假设是：①近似线性相关假设；②子空间假设。为了确定线性模型是否适合数据集，需要进行探索性和可视化分析。&lt;/p&gt;</summary>
@@ -92,7 +201,7 @@
     <link href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
     <published>2021-05-14T15:18:11.000Z</published>
-    <updated>2021-05-26T13:41:55.836Z</updated>
+    <updated>2021-06-28T03:05:35.162Z</updated>
     
     
     <summary type="html">&lt;p&gt;异常检测的统计方法包含两种主要类型：参数方法和非参数方法。&lt;br&gt;&lt;strong&gt;参数方法：&lt;/strong&gt;假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)&lt;br&gt;&lt;strong&gt;非参数方法&lt;/strong&gt;：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。&lt;/p&gt;</summary>
@@ -113,7 +222,7 @@
     <link href="http://example.com/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/"/>
     <id>http://example.com/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/</id>
     <published>2021-05-12T15:12:13.000Z</published>
-    <updated>2021-05-25T04:48:49.039Z</updated>
+    <updated>2021-06-28T03:05:13.895Z</updated>
     
     
     <summary type="html">&lt;p&gt;异常检测顾名思义就是检测出与正常数据不同的数据，检测给定的新数据是否属于这组数据集。&lt;/p&gt;
@@ -128,9 +237,9 @@
     
     <category term="OLSE" scheme="http://example.com/tags/OLSE/"/>
     
-    <category term="PCV" scheme="http://example.com/tags/PCV/"/>
-    
     <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
+    
+    <category term="PCV" scheme="http://example.com/tags/PCV/"/>
     
     <category term="KNN" scheme="http://example.com/tags/KNN/"/>
     

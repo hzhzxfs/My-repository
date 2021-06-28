@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PyG,Graph," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在以往的深度学习中，主要的数据形式包括矩阵、张量、序列(sequence)和时间序列(time series)，然而还有许多数据是图的结构，如社交网络、知识图谱等。图结构数据具有以下特点：  任意的大小和复杂的拓扑结构；没有固定的节点排序或参考点；通常是动态的，并具有多模态的特征；图的信息包括节点信息、边信息和拓扑结构信息。  1. 图结构数据1.1 图(Graphs)· 一个图记作$\mathc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图神经网络——基本图论与PyG库">
+<meta property="og:url" content="http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="在以往的深度学习中，主要的数据形式包括矩阵、张量、序列(sequence)和时间序列(time series)，然而还有许多数据是图的结构，如社交网络、知识图谱等。图结构数据具有以下特点：  任意的大小和复杂的拓扑结构；没有固定的节点排序或参考点；通常是动态的，并具有多模态的特征；图的信息包括节点信息、边信息和拓扑结构信息。  1. 图结构数据1.1 图(Graphs)· 一个图记作$\mathc">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/28/RtabM8.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/28/RtaoGt.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/28/Rta7xf.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/28/RtaTRP.png">
+<meta property="article:published_time" content="2021-06-15T14:52:21.000Z">
+<meta property="article:modified_time" content="2021-06-28T03:07:19.207Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="PyG">
+<meta property="article:tag" content="Graph">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/06/28/RtabM8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/06/15/图神经网络——基本图论与PyG库/"/>
+
+
+
+
+
+  <title>图神经网络——基本图论与PyG库 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图神经网络——基本图论与PyG库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-15T22:52:21+08:00">
+                2021-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GNN/" itemprop="url" rel="index">
+                    <span itemprop="name">GNN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/06/15/图神经网络——基本图论与PyG库/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在以往的深度学习中，主要的数据形式包括矩阵、张量、序列(sequence)和时间序列(time series)，然而还有许多数据是图的结构，如社交网络、知识图谱等。图结构数据具有以下特点：</p>
+<blockquote>
+<p>任意的大小和复杂的拓扑结构；<br>没有固定的节点排序或参考点；<br>通常是动态的，并具有多模态的特征；<br>图的信息包括节点信息、边信息和拓扑结构信息。</p>
+</blockquote>
+<h4 id="1-图结构数据"><a href="#1-图结构数据" class="headerlink" title="1. 图结构数据"></a>1. 图结构数据</h4><h5 id="1-1-图-Graphs"><a href="#1-1-图-Graphs" class="headerlink" title="1.1 图(Graphs)"></a>1.1 图(Graphs)</h5><p><strong>·</strong> 一个图记作$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其中 $\mathcal{V}=\left{v_{1}, \ldots, v_{N}\right}$是数量为$N=|\mathcal{V}|$ 的节点的集合， $\mathcal{E}=\left{e_{1}, \ldots, e_{M}\right}$ 是数量为 $M$ 的边的集合。<br><strong>·</strong> 节点表示实体(entities)，边表示实体间的关系(relations)；节点和边的信息可以是类别型或数值型的。<br><strong>·</strong> 只有一种类型的节点和一种类型的边的图称为同质图(Homogeneous Graph)。<br><strong>·</strong> 存在多种类型的节点和多种类型的边的图称为异质图(Heterogeneous Graph)</p>
+<span id="more"></span>
+
+<h5 id="1-2-图的邻接矩阵-Adjacency-Matrix"><a href="#1-2-图的邻接矩阵-Adjacency-Matrix" class="headerlink" title="1.2 图的邻接矩阵(Adjacency Matrix)"></a>1.2 图的邻接矩阵(Adjacency Matrix)</h5><p><strong>·</strong> 图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其对应的邻接矩阵记为$\mathbf{A} \in{0,1}^{N \times N}$。$\mathbf{A}<em>{i, j}=1$表示存在从节点$v_i$到$v_j$的边，反之表示不存在从节点$v_i$到$v_j$的边。<br><strong>·</strong> 在无向图中，节点$v_i$到$v_j$的边存在，则节点$v_j$到$v_i$的边也存在，所以无向图的邻接矩阵的对称的。<br><img src="https://z3.ax1x.com/2021/06/28/RtabM8.png" alt="图1"><br>其邻接矩阵为：<br><img src="https://z3.ax1x.com/2021/06/28/RtaoGt.png" alt="图2"><br><strong>·</strong> 在无权图中，各条边的权重是等价的，都为1。<br><strong>·</strong> 在有权图中，其对应的邻接矩阵通常被记为$\mathbf{W} \in{0,1}^{N \times N}$，其中$\mathbf{W}</em>{i, j}=w_{ij}$表示从节点$v_i$到$v_j$的边的权重。若边不存在时，边的权重为$0$。</p>
+<h5 id="1-3-节点的度-degree"><a href="#1-3-节点的度-degree" class="headerlink" title="1.3 节点的度(degree)"></a>1.3 节点的度(degree)</h5><p><strong>·</strong> 在有向有权图中，节点$v_i$的出度(out degree)等于从$v_i$出发的边的权重之和，节点$v_i$的入度(in degree)等于从连向$v_i$的边的权重之和；节点$v_i$的度记为$d(v_i)$，入度记为$d_{in}(v_i)$，出度记为$d_{out}(v_i)$。<br><strong>·</strong> 在无向图中，出度=入度。<br><strong>·</strong> 在无权图中，入读等于连向$v_i$的边的数量，出度等于从$v_i$出发的边的数量。</p>
+<h5 id="1-4-邻接节点-neighbors"><a href="#1-4-邻接节点-neighbors" class="headerlink" title="1.4 邻接节点(neighbors)"></a>1.4 邻接节点(neighbors)</h5><p><strong>·</strong> 与节点$v_i$直接相连的节点称为邻接节点，记为**$\mathcal{N(v_i)}$**。<br><strong>·</strong> 与节点$v_i$距离$k$步的称为$k$跳远的邻接节点(neighbors with $k$-hop) [一个节点的$2$跳远的邻接节点包含自身]</p>
+<h5 id="1-5-行走-walk"><a href="#1-5-行走-walk" class="headerlink" title="1.5 行走(walk)"></a>1.5 行走(walk)</h5><p><strong>·</strong> $walk(v_1, v_2) = (v_1, e_6,e_5,e_4,e_1,v_2)$，这是一次“行走”，从节点$v_1$出发，依次经过边$e_6,e_5,e_4,e_1$，最终到达节点$v_2$的“行走”。<br><strong>·</strong> “行走”中，节点允许重复。<br><img src="https://z3.ax1x.com/2021/06/28/Rta7xf.png" alt="图3"></p>
+<h5 id="1-6-路径-path"><a href="#1-6-路径-path" class="headerlink" title="1.6 路径(path)"></a>1.6 路径(path)</h5><p>“路径”是节点不可重复的“行走”。</p>
+<h5 id="1-7-子图-subgraph"><a href="#1-7-子图-subgraph" class="headerlink" title="1.7 子图(subgraph)"></a>1.7 子图(subgraph)</h5><p>指节点集和边集分别是整图的节点集的子集和边集的子集的图。</p>
+<h5 id="1-8-连通分量-connected-component"><a href="#1-8-连通分量-connected-component" class="headerlink" title="1.8 连通分量(connected component)"></a>1.8 连通分量(connected component)</h5><p>图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$的子图为$\mathcal{G}^{\prime}$，记属于图$\mathcal{G}$但不属于$\mathcal{G}^{\prime}$图的节点集合记为$\mathcal{V}/\mathcal{V}^{\prime}$，属于$\mathcal{V}^{\prime}$的任意节点对之间存在至少一条路径，但不存在一条边连接属于$\mathcal{V}^{\prime}$的节点与属于$\mathcal{V}/\mathcal{V}^{\prime}$的节点，则图$\mathcal{G}^{\prime}$是图$\mathcal{G}$的连通分量。<br><img src="https://z3.ax1x.com/2021/06/28/RtaTRP.png" alt="图4"><br>左右两个子图都是整图的连通分量。</p>
+<h5 id="1-8-连通图-connected-graph"><a href="#1-8-连通图-connected-graph" class="headerlink" title="1.8 连通图(connected graph)"></a>1.8 连通图(connected graph)</h5><p>只包含一个连通分量(即其自身)的图是一个连通图。</p>
+<h5 id="1-9-最短路径-shortest-path"><a href="#1-9-最短路径-shortest-path" class="headerlink" title="1.9 最短路径(shortest path)"></a>1.9 最短路径(shortest path)</h5><p>$v_{s}, v_{t} \in \mathcal{V}$ 是图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$上的一对节点，节点对$v_{s}, v_{t} \in \mathcal{V}$之间所有路径集合$\mathcal{P}<em>{\mathrm{st}}$。节点对$v</em>{s}, v_{t}$之间的最短路径$p_{\mathrm{s} t}^{\mathrm{sp}}$为$\mathcal{P}<em>{\mathrm{st}}$中长度最短的一条路径，即$p</em>{\mathrm{s} t}^{\mathrm{sp}}=\arg \min <em>{p \in \mathcal{P}</em>{\mathrm{st}}}|p|$，$p$表示$\mathcal{P}_{\mathrm{st}}$中的一条路径，$|p|$是路径$p$的长度(边数量×权重)。</p>
+<h5 id="1-10-直径-diameter"><a href="#1-10-直径-diameter" class="headerlink" title="1.10 直径(diameter)"></a>1.10 直径(diameter)</h5><p>一个连通图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$中，其直径为其所有节点对之间的最短路径的最大值，即$\operatorname{diameter}(\mathcal{G})=\max <em>{v</em>{s}, v_{t} \in \mathcal{V}} \min <em>{p \in \mathcal{P}</em>{s t}}|p|$</p>
+<h5 id="1-11-拉普拉斯矩阵-Laplacian-Matrix"><a href="#1-11-拉普拉斯矩阵-Laplacian-Matrix" class="headerlink" title="1.11 拉普拉斯矩阵(Laplacian Matrix)"></a>1.11 拉普拉斯矩阵(Laplacian Matrix)</h5><p>图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其邻接矩阵为$A$，其拉普拉斯矩阵定义为$\mathbf{L=D-A}$，其中$\mathbf{D=diag(d(v_1), \cdots, d(v_N))}$。</p>
+<h5 id="1-12-对称归一化的拉普拉斯矩阵-Symmetric-normalized-Laplacian"><a href="#1-12-对称归一化的拉普拉斯矩阵-Symmetric-normalized-Laplacian" class="headerlink" title="1.12 对称归一化的拉普拉斯矩阵(Symmetric normalized Laplacian)"></a>1.12 对称归一化的拉普拉斯矩阵(Symmetric normalized Laplacian)</h5><p>图$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其邻接矩阵为$A$，其规范化的拉普拉斯矩阵定义为$\mathbf{L=D^{-\frac{1}{2}}(D-A)D^{-\frac{1}{2}}=I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}}$。</p>
+<h4 id="2-图结构数据上的机器学习"><a href="#2-图结构数据上的机器学习" class="headerlink" title="2. 图结构数据上的机器学习"></a>2. 图结构数据上的机器学习</h4><blockquote>
+<p><strong>节点预测</strong>：预测节点的类别或某类属性的取值。<br><strong>边预测</strong>：预测两个节点间是否存在链接。<br><strong>图预测</strong>：对不同的图进行分类或预测图的属性。<br><strong>节点聚类</strong>：检测节点是否形成一个类。</p>
+</blockquote>
+<h4 id="3-环境配置"><a href="#3-环境配置" class="headerlink" title="3. 环境配置"></a>3. 环境配置</h4><p><a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/">PyTorch Geometric</a> (PyG)是面向几何深度学习的PyTorch的扩展库，基于PyG库，我们可以轻松地根据数据生成一个图对象。</p>
+<h5 id="3-1-安装的pytorch和cudatoolkit"><a href="#3-1-安装的pytorch和cudatoolkit" class="headerlink" title="3.1 安装的pytorch和cudatoolkit"></a>3.1 安装的pytorch和cudatoolkit</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio cudatoolkit&#x3D;11.1 -c pytorch -c nvidia</span><br></pre></td></tr></table></figure>
+<p>安装成功后可以验证一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__)</span><br><span class="line"><span class="built_in">print</span>(torch.version.cuda)</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-安装PyG"><a href="#3-2-安装PyG" class="headerlink" title="3.2 安装PyG"></a>3.2 安装PyG</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-<span class="number">1.8</span><span class="number">.0</span>+cu111.html</span><br><span class="line">pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-<span class="number">1.8</span><span class="number">.0</span>+cu111.html</span><br><span class="line">pip install torch-cluster -f https://pytorch-geometric.com/whl/torch-<span class="number">1.8</span><span class="number">.0</span>+cu111.html</span><br><span class="line">pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-<span class="number">1.8</span><span class="number">.0</span>+cu111.html</span><br><span class="line">pip install torch-geometric</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Data类——PyG中图的表示"><a href="#4-Data类——PyG中图的表示" class="headerlink" title="4. Data类——PyG中图的表示"></a>4. Data类——PyG中图的表示</h4><h5 id="4-1-构造函数"><a href="#4-1-构造函数" class="headerlink" title="4.1 构造函数"></a>4.1 构造函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x=<span class="literal">None</span>, edge_index=<span class="literal">None</span>, edge_attr=<span class="literal">None</span>, y=<span class="literal">None</span>, **kwargs</span>):</span></span><br><span class="line">    self.x = x</span><br><span class="line">    self.edge_index = edge_index</span><br><span class="line">    self.edge_attr = edge_attr</span><br><span class="line">    self.y = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> key, item <span class="keyword">in</span> kwargs.items():</span><br><span class="line">        <span class="keyword">if</span> key == <span class="string">&#x27;num_nodes&#x27;</span>:</span><br><span class="line">            self.__num_nodes__ = item</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self[key] = item</span><br></pre></td></tr></table></figure>
+<p>Args:<br><strong>·</strong> x (Tensor, optional): 节点属性矩阵，大小为<code>[num_nodes, num_node_features]</code><br><strong>·</strong> edge_index (LongTensor, optional): 边索引矩阵，大小为<code>[2, num_edges]</code>，第0行为尾节点，第1行为头节点，头指向尾。<br><strong>·</strong> edge_attr (Tensor, optional): 边属性矩阵，大小为<code>[num_edges, num_edge_features]</code><br><strong>·</strong> y (Tensor, optional): 节点或图的标签，任意大小(其实也可以是边的标签)</p>
+<h5 id="4-2-参数"><a href="#4-2-参数" class="headerlink" title="4.2 参数"></a>4.2 参数</h5><p>一个图至少包含<code>x, edge_index, edge_attr, y, num_nodes</code>5个属性，也可以指定额外参数使<code>Data</code>对象包含其他的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph = Data(x=x, edge_index=edge_index, edge_attr=edge_attr, y=y, num_nodes=num_nodes, other_attr=other_attr)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-3-Data对象与其他数据互转"><a href="#4-3-Data对象与其他数据互转" class="headerlink" title="4.3 Data对象与其他数据互转"></a>4.3 Data对象与其他数据互转</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#dict to Data</span></span><br><span class="line">graph_dict = &#123;</span><br><span class="line">    <span class="string">&#x27;x&#x27;</span>: x,</span><br><span class="line">    <span class="string">&#x27;edge_index&#x27;</span>: edge_index,</span><br><span class="line">    <span class="string">&#x27;edge_attr&#x27;</span>: edge_attr,</span><br><span class="line">    <span class="string">&#x27;y&#x27;</span>: y,</span><br><span class="line">    <span class="string">&#x27;num_nodes&#x27;</span>: num_nodes,</span><br><span class="line">    <span class="string">&#x27;other_attr&#x27;</span>: other_attr</span><br><span class="line">&#125;</span><br><span class="line">graph_data = Data.from_dict(graph_dict)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Data to dict</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_to_dict</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;key: item <span class="keyword">for</span> key, item <span class="keyword">in</span> self&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Data to namedtuple</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_to_namedtuple</span>(<span class="params">self</span>):</span></span><br><span class="line">    keys = self.keys</span><br><span class="line">    DataTuple = collections.namedtuple(<span class="string">&#x27;DataTuple&#x27;</span>, keys)</span><br><span class="line">    <span class="keyword">return</span> DataTuple(*[self[key] <span class="keyword">for</span> key <span class="keyword">in</span> keys])</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-4-Data对象属性"><a href="#4-4-Data对象属性" class="headerlink" title="4.4 Data对象属性"></a>4.4 Data对象属性</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取Data对象属性</span></span><br><span class="line">x = graph_data[<span class="string">&#x27;x&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取Data对象属性关键字</span></span><br><span class="line">graph_data.keys()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#对边排序并移除重复的边</span></span><br><span class="line">graph_data.coalesce()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.datasets <span class="keyword">import</span> KarateClub</span><br><span class="line">dataset = KarateClub()</span><br><span class="line">data = dataset[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data.num_nodes) <span class="comment">#节点数量</span></span><br><span class="line"><span class="built_in">print</span>(data.num_edges) <span class="comment">#边数量</span></span><br><span class="line"><span class="built_in">print</span>(data.num_node_features) <span class="comment">#节点属性维度</span></span><br><span class="line"><span class="built_in">print</span>(data.num_edge_features) <span class="comment">#边属性维度</span></span><br><span class="line"><span class="built_in">print</span>(data.num_edges/data.num_nodes) <span class="comment">#平均节点度</span></span><br><span class="line"><span class="built_in">print</span>(data.is_coalesced()) <span class="comment">#是否边是有序的同时不含有重复的边</span></span><br><span class="line"><span class="built_in">print</span>(data.train_mask.<span class="built_in">sum</span>()) <span class="comment">#用作训练集的节点</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(data.train_mask.<span class="built_in">sum</span>())/data.num_nodes) <span class="comment">#用作训练集的节点数占比</span></span><br><span class="line"><span class="built_in">print</span>(data.contains_isolated_nodes()) <span class="comment">#此图是否包含孤立的节点</span></span><br><span class="line"><span class="built_in">print</span>(data.contains_self_loops()) <span class="comment">#此图是否包含自环的边</span></span><br><span class="line"><span class="built_in">print</span>(data.is_undirected()) <span class="comment">#此图是否是无向图</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-Dataset类——PyG中图数据集的表示"><a href="#5-Dataset类——PyG中图数据集的表示" class="headerlink" title="5.Dataset类——PyG中图数据集的表示"></a>5.Dataset类——PyG中图数据集的表示</h4><h5 id="5-1-数据集的下载"><a href="#5-1-数据集的下载" class="headerlink" title="5.1 数据集的下载"></a>5.1 数据集的下载</h5><p>首先下载PyG内置的Planetoid数据集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.datasets <span class="keyword">import</span> Planetoid</span><br><span class="line">dataset = Planetoid(root=<span class="string">&#x27;/dataset/Cora&#x27;</span>, name=<span class="string">&#x27;Cora&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(dataset))    <span class="comment">#数据集中图的数量</span></span><br><span class="line"><span class="built_in">print</span>(dataset.num_classes)   <span class="comment">#分类任务的数量</span></span><br><span class="line"><span class="built_in">print</span>(dataset.num_node_features)   <span class="comment">##节点属性维度</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-1-数据集的使用"><a href="#5-1-数据集的使用" class="headerlink" title="5.1 数据集的使用"></a>5.1 数据集的使用</h5><p>定义一个名为<code>Net</code>的图神经网络模型，将节点分类图数据集加入训练。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">model = Net().to(device)</span><br><span class="line">data = dataset[<span class="number">0</span>].to(device)</span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">0.01</span>, weight_decay=<span class="number">5e-4</span>)</span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    out = model(data)</span><br><span class="line">    loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
+
+<p>1.<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/team-learning-nlp/tree/master/GNN">datawhale-GNN开源学习资料</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/" title="图神经网络——基本图论与PyG库">http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PyG/" rel="tag"># PyG</a>
+          
+            <a href="/tags/Graph/" rel="tag"># Graph</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/" rel="next" title="异常检测——集成方法">
+                <i class="fa fa-chevron-left"></i> 异常检测——集成方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/06/19/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E7%BD%91%E7%BB%9C/" rel="prev" title="图神经网络——消息传递网络">
+                图神经网络——消息传递网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9B%BE%E7%BB%93%E6%9E%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">1. 图结构数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E5%9B%BE-Graphs"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 图(Graphs)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E5%9B%BE%E7%9A%84%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5-Adjacency-Matrix"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 图的邻接矩阵(Adjacency Matrix)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-%E8%8A%82%E7%82%B9%E7%9A%84%E5%BA%A6-degree"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 节点的度(degree)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-%E9%82%BB%E6%8E%A5%E8%8A%82%E7%82%B9-neighbors"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 邻接节点(neighbors)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-%E8%A1%8C%E8%B5%B0-walk"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 行走(walk)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-%E8%B7%AF%E5%BE%84-path"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 路径(path)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-%E5%AD%90%E5%9B%BE-subgraph"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 子图(subgraph)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F-connected-component"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 连通分量(connected component)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-%E8%BF%9E%E9%80%9A%E5%9B%BE-connected-graph"><span class="nav-number">1.9.</span> <span class="nav-text">1.8 连通图(connected graph)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-9-%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-shortest-path"><span class="nav-number">1.10.</span> <span class="nav-text">1.9 最短路径(shortest path)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-10-%E7%9B%B4%E5%BE%84-diameter"><span class="nav-number">1.11.</span> <span class="nav-text">1.10 直径(diameter)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-11-%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5-Laplacian-Matrix"><span class="nav-number">1.12.</span> <span class="nav-text">1.11 拉普拉斯矩阵(Laplacian Matrix)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-12-%E5%AF%B9%E7%A7%B0%E5%BD%92%E4%B8%80%E5%8C%96%E7%9A%84%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5-Symmetric-normalized-Laplacian"><span class="nav-number">1.13.</span> <span class="nav-text">1.12 对称归一化的拉普拉斯矩阵(Symmetric normalized Laplacian)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9B%BE%E7%BB%93%E6%9E%84%E6%95%B0%E6%8D%AE%E4%B8%8A%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">2. 图结构数据上的机器学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3. 环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85%E7%9A%84pytorch%E5%92%8Ccudatoolkit"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 安装的pytorch和cudatoolkit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E5%AE%89%E8%A3%85PyG"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 安装PyG</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Data%E7%B1%BB%E2%80%94%E2%80%94PyG%E4%B8%AD%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">4. Data类——PyG中图的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E5%8F%82%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-Data%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E4%BA%92%E8%BD%AC"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Data对象与其他数据互转</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-Data%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 Data对象属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Dataset%E7%B1%BB%E2%80%94%E2%80%94PyG%E4%B8%AD%E5%9B%BE%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">5.Dataset类——PyG中图数据集的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 数据集的下载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.2.</span> <span class="nav-text">5.1 数据集的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">24.7k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/';
+          this.page.identifier = '2021/06/15/图神经网络——基本图论与PyG库/';
+          this.page.title = '图神经网络——基本图论与PyG库';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
