@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="GCN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="图卷积网络(GCN)已经成功地应用于许多基于图形的应用，然而大规模的GCN的训练仍然具有挑战性。目前基于SGD的算法要么面临着随GCN层数呈指数增长的高计算成本，要么面临着保存整个图形和每个节点的embedding到内存的巨大空间(显存)需求。于是论文Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Conv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图神经网络——超大图上的节点表征学习">
+<meta property="og:url" content="http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="图卷积网络(GCN)已经成功地应用于许多基于图形的应用，然而大规模的GCN的训练仍然具有挑战性。目前基于SGD的算法要么面临着随GCN层数呈指数增长的高计算成本，要么面临着保存整个图形和每个节点的embedding到内存的巨大空间(显存)需求。于是论文Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Conv">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W2fREV.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W2fX4O.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/h2CLbu9VMEzyNTa.jpg">
+<meta property="article:published_time" content="2021-07-01T14:52:21.000Z">
+<meta property="article:modified_time" content="2021-07-25T12:38:12.290Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="GCN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/07/25/W2fREV.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/07/01/图神经网络——超大图上的节点表征学习/"/>
+
+
+
+
+
+  <title>图神经网络——超大图上的节点表征学习 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图神经网络——超大图上的节点表征学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-01T22:52:21+08:00">
+                2021-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GNN/" itemprop="url" rel="index">
+                    <span itemprop="name">GNN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/07/01/图神经网络——超大图上的节点表征学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>图卷积网络(GCN)已经成功地应用于许多基于图形的应用，然而大规模的GCN的训练仍然具有挑战性。目前基于SGD的算法要么面临着随GCN层数呈指数增长的高计算成本，要么面临着保存整个图形和每个节点的embedding到内存的巨大空间(显存)需求。于是论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.07953">Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Network</a>提出了Cluster-GCN方法来解决超大图的训练问题。</p>
+<h4 id="1-Cluster-GCN方法简单概括"><a href="#1-Cluster-GCN方法简单概括" class="headerlink" title="1.Cluster-GCN方法简单概括"></a>1.Cluster-GCN方法简单概括</h4><ul>
+<li>利用图节点聚类算法将一个图的节点划分为$c$个簇，每一次选择几个簇的节点和这些节点对应的边构成一个子图，然后对子图做训练。</li>
+<li>由于是利用图节点聚类算法将节点划分为多个簇，所以簇内边的数量要比簇间边的数量多得多，所以可以提高表征利用率，并提高图神经网络的训练效率。</li>
+<li>每一次随机选择多个簇来组成一个batch，这样不会丢失簇间的边，同时也不会有batch内类别分布偏差过大的问题。</li>
+<li>基于小图进行训练，不会消耗很多内存空间，于是我们可以训练更深的神经网络，进而可以达到更高的精度。</li>
+</ul>
+<span id="more"></span>
+<h4 id="2-GCN回顾"><a href="#2-GCN回顾" class="headerlink" title="2.GCN回顾"></a>2.GCN回顾</h4><p>论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1609.02907">2017. Semi-supervised classification with graph convolutional networks</a>中提出了GCN。作者定义了一种类似卷积的运算，称为谱图卷积。这使得CNN可以直接在图形上操作。GCN中的每一层通过考虑相邻节点的embedding，来更新Graph中的每个节点的特征向量表示。GCN的逐层正向传播可以总结为：<br>$$<br>X^{\left( l+1 \right)}=f\left( X^l,A \right) =\sigma \left( \tilde{D}^{-\frac{1}{2}}\tilde{A}D^{-\frac{1}{2}}X^{\left( l \right)}W^{\left( l \right)} \right)<br>$$</p>
+<ul>
+<li>$X$是所有节点的特征向量构成的特征矩阵。</li>
+<li>$X^l$和$X^{l+1}$分别是$l$层的输入和输出矩阵，$X^l$也是第$l$层对于所有节点的embedding。</li>
+<li>A是图的邻接矩阵。</li>
+<li>${A}=A+I_N$是带有自环的无向图的邻接矩阵。</li>
+<li>$I_N$是单位矩阵。</li>
+<li>$\tilde{D}<em>{ii}=\sum{\tilde{A}</em>{ij}}$是带有自环的无向图的度矩阵，是一个对角矩阵。</li>
+<li>$W^{(l)}$是一个可训练权重矩阵或参数矩阵。</li>
+<li>$\sigma(\cdot)$是激活函数，通常被设为<code>ReLU</code>。</li>
+</ul>
+<p>为了简化计算，假设所有层的表征维度都是F，上式写为：<br>$$<br>Z^{(l+1)}=A^{\prime} X^{(l)} W^{(l)}, X^{(l+1)}=\sigma\left(Z^{(l+1)}\right)<br>$$</p>
+<ul>
+<li>$A^{\prime}$是归一化和规范化后的邻接矩阵</li>
+</ul>
+<p>将GCN用于半监督节点分类时，目标是通过最小化损失函数来学习上式中的权重矩阵：<br>$$<br>\mathcal{L}=\frac{1}{\left|\mathcal{Y}<em>{L}\right|} \sum</em>{i \in \mathcal{Y}<em>{L}} \operatorname{loss}\left(y</em>{i}, z_{i}^{L}\right)<br>$$</p>
+<ul>
+<li>$\mathcal{Y}_{\mathcal{L}}$是节点类别。</li>
+<li>$z_{i}^{(L)}$是$Z^{(L)}$的第$i$行，表示节点$i$的最终层预测。</li>
+<li>$y_{i}$为节点$i$的真实类别。<h4 id="3-Cluster-GCN的速度"><a href="#3-Cluster-GCN的速度" class="headerlink" title="3.Cluster-GCN的速度"></a>3.Cluster-GCN的速度</h4>原始的GCN的训练使用的是全批量梯度下降(Full Gradient Descent)，它的计算和内存成本很高:</li>
+<li>在内存方面，通过反向传播来计算full gradient需要存储所有的embedding矩阵，这需要O(NFL)的内存空间（F是特征数量，N是结点数量，L是网络层数）。</li>
+<li>在收敛速度方面，由于在每个epoch模型才更新一次，所以需要很多个epoch才会使模型达到收敛。</li>
+</ul>
+<p>mini-batch SGD可以提高GCN的训练速度，其不需要计算整个梯度，只需要计算每次更新的mini-batch的梯度。使用大小为$b=|\mathcal{B}|$的$\mathcal{B} \subseteq[N]$来表示一个batch的节点索引。SGD的每一步都将计算梯度估计值$\frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla \operatorname{loss}\left(y_{i}, z_{i}^{(L)}\right)$来进行参数更新。</p>
+<p>尽管在每个epoch收敛得更快，但SGD在GCN训练上引入了另一个计算开销（邻域扩展），这使得SGD的每个epoch时间内比全梯度下降（full gradient descent）要慢得多——计算一个节点$i$的梯度，需要节点$i$的embedding，而节点$i$的embedding的依赖于前面的层里的它的邻居的embeddings，为了提取前面的层中它的邻居节点embeddings，还需要进一步聚合每个邻居节点的邻居节点的embeddings。假设一个图神经网络有$L+1$层，节点的平均的度为$d$。为了得到节点$i$的梯度，需要聚合图上$O\left(d^{L}\right)$的节点的表征，与权重矩阵$W^{(l)}$相乘，所以计算任意节点表征的时间开销是$O\left(F^{2}\right)$。所以SGD一个节点的梯度的计算需要$O\left(d^{L} F^{2}\right)$的时间。</p>
+<h4 id="4-Cluster-GCN详解"><a href="#4-Cluster-GCN详解" class="headerlink" title="4.Cluster-GCN详解"></a>4.Cluster-GCN详解</h4><p>在mini-batch SGD更新中，设计一个batch和相应的计算sub graph来最大限度地提高embedding utilization。Cluster-GCN通过将embedding utilization连接到一个聚类目标上来实现。</p>
+<p>对于一个Graph$G$，我们将其节点划分为$c$个簇：$\mathcal{V}=\left[\mathcal{V}<em>{1}, \cdots \mathcal{V}</em>{c}\right]$，其中$\mathcal{V}<em>{t}$由第$t$个簇中的节点组成，得到$c$个子图:<br>$$<br>\bar{G}=\left[G</em>{1}, \cdots, G_{c}\right]=\left[\left{\mathcal{V}<em>{1}, \mathcal{E}</em>{1}\right}, \cdots,\left{\mathcal{V}<em>{c}, \mathcal{E}</em>{c}\right}\right]<br>\notag<br>$$<br>其中$\mathcal{E}<em>{t}$只由$\mathcal{V}</em>{t}$中的节点之间的边组成。经过节点重组，邻接矩阵被划分为大小为$c^{2}$的块矩阵，如下所示<br>$$<br>A=\bar{A}+\Delta=\left[\begin{array}{ccc}<br>A_{11} &amp; \cdots &amp; A_{1 c} \<br>\vdots &amp; \ddots &amp; \vdots \<br>A_{c 1} &amp; \cdots &amp; A_{c c}<br>\end{array}\right]<br>$$<br>其中<br>$$<br>\bar{A}=\left[\begin{array}{ccc}<br>A_{11} &amp; \cdots &amp; 0 \<br>\vdots &amp; \ddots &amp; \vdots \<br>0 &amp; \cdots &amp; A_{c c}<br>\end{array}\right], \Delta=\left[\begin{array}{ccc}<br>0 &amp; \cdots &amp; A_{1 c} \<br>\vdots &amp; \ddots &amp; \vdots \<br>A_{c 1} &amp; \cdots &amp; 0<br>\end{array}\right]<br>$$</p>
+<ul>
+<li>对角线上的块$A_{t t}$是大小为$\left|\mathcal{V}<em>{t}\right| \times\left|\mathcal{V}</em>{t}\right|$的邻接矩阵，它由$G_{t}$内部的边构成。</li>
+<li>$\bar{A}$是图$\bar{G}$的邻接矩阵。</li>
+<li>$A_{s t}$由两个簇$\mathcal{V}<em>{s}$和$\mathcal{V}</em>{t}$之间的边构成。</li>
+<li>$\Delta$是由$A$的所有非对角线块组成的矩阵。</li>
+</ul>
+<p>用块对角线邻接矩阵$\bar{A}$去近似邻接矩阵$A$之后，完整的损失函数可以根据batch分解成多个部分之和：</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W2fREV"><img src="https://z3.ax1x.com/2021/07/25/W2fREV.png" alt="W2fREV.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W2fX4O"><img src="https://z3.ax1x.com/2021/07/25/W2fX4O.png" alt="W2fX4O.png"></a></p>
+<p>Cluster-GCN使用了Graph聚类算法来划分Graph。Graph聚类的方法，如metis和graclus等，旨在在Graph中的顶点上构建分区，使得簇内连接远大于簇间连接，从而更好的捕捉聚类和区分结构。</p>
+<p><img src="https://i.loli.net/2021/07/12/h2CLbu9VMEzyNTa.jpg" alt="LAYER.jpg"></p>
+<h4 id="5-Cluster-GCN实践"><a href="#5-Cluster-GCN实践" class="headerlink" title="5.Cluster-GCN实践"></a>5.Cluster-GCN实践</h4><p>PyG库中提供了Cluster-GCN的接口，可以像训练普通神经网络一样在超大图上训练图神经网络。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入库和数据集</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> ModuleList</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> SAGEConv</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> torch_geometric.datasets <span class="keyword">import</span> Reddit, Reddit2</span><br><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> ClusterData, ClusterLoader, NeighborSampler</span><br><span class="line"></span><br><span class="line">dataset = Reddit(<span class="string">&#x27;../dataset/Reddit&#x27;</span>)</span><br><span class="line">data = dataset[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(dataset.num_classes)</span><br><span class="line"><span class="built_in">print</span>(data.num_nodes)</span><br><span class="line"><span class="built_in">print</span>(data.num_edges)</span><br><span class="line"><span class="built_in">print</span>(data.num_features)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：<br>41, 232965, 114615892, 602</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#图节点聚类并生成数据加载器</span></span><br><span class="line">cluster_data = ClusterData(data, num_parts=<span class="number">1500</span>, recursive=<span class="literal">False</span>, save_dir=dataset.processed_dir)</span><br><span class="line"></span><br><span class="line">train_loader = ClusterLoader(cluster_data, batch_size=<span class="number">20</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">subgraph_loader = NeighborSampler(data.edge_index, sizes=[-<span class="number">1</span>], batch_size=<span class="number">1024</span>, shuffle=<span class="literal">False</span>,num_workers=<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#构建网络</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, in_channels, out_channels</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line">        self.convs = ModuleList(</span><br><span class="line">            [SAGEConv(in_channels, <span class="number">128</span>),</span><br><span class="line">             SAGEConv(<span class="number">128</span>, out_channels)])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, edge_index</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i, conv <span class="keyword">in</span> <span class="built_in">enumerate</span>(self.convs):</span><br><span class="line">            x = conv(x, edge_index)</span><br><span class="line">            <span class="keyword">if</span> i != <span class="built_in">len</span>(self.convs) - <span class="number">1</span>:</span><br><span class="line">                x = F.relu(x)</span><br><span class="line">                x = F.dropout(x, p=<span class="number">0.5</span>, training=self.training)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inference</span>(<span class="params">self, x_all</span>):</span></span><br><span class="line">        pbar = tqdm(total=x_all.size(<span class="number">0</span>) * <span class="built_in">len</span>(self.convs))</span><br><span class="line">        pbar.set_description(<span class="string">&#x27;Evaluating&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i, conv <span class="keyword">in</span> <span class="built_in">enumerate</span>(self.convs):</span><br><span class="line">            xs = []</span><br><span class="line">            <span class="keyword">for</span> batch_size, n_id, adj <span class="keyword">in</span> subgraph_loader:</span><br><span class="line">                edge_index, _, size = adj.to(device)</span><br><span class="line">                x = x_all[n_id].to(device)</span><br><span class="line">                x_target = x[:size[<span class="number">1</span>]]</span><br><span class="line">                x = conv((x, x_target), edge_index)</span><br><span class="line">                <span class="keyword">if</span> i != <span class="built_in">len</span>(self.convs) - <span class="number">1</span>:</span><br><span class="line">                    x = F.relu(x)</span><br><span class="line">                xs.append(x.cpu())</span><br><span class="line"></span><br><span class="line">                pbar.update(batch_size)</span><br><span class="line"></span><br><span class="line">            x_all = torch.cat(xs, dim=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        pbar.close()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x_all</span><br></pre></td></tr></table></figure>
+<p>此神经网络的forward函数的定义与普通的图神经网络并无区别，而inference方法应用于推理阶段，为了获取更高的预测精度，所以使用subgraph_loader。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#训练、验证、测试</span></span><br><span class="line">device = torch.device(<span class="string">&#x27;cuda&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">model = Net(dataset.num_features, dataset.num_classes).to(device)</span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">0.005</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>():</span></span><br><span class="line">    model.train()</span><br><span class="line"></span><br><span class="line">    total_loss = total_nodes = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader:</span><br><span class="line">        batch = batch.to(device)</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        out = model(batch.x, batch.edge_index)</span><br><span class="line">        loss = F.nll_loss(out[batch.train_mask], batch.y[batch.train_mask])</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        nodes = batch.train_mask.<span class="built_in">sum</span>().item()</span><br><span class="line">        total_loss += loss.item() * nodes</span><br><span class="line">        total_nodes += nodes</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> total_loss / total_nodes</span><br><span class="line"></span><br><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span>  <span class="comment"># Inference should be performed on the full graph.</span></span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">    out = model.inference(data.x)</span><br><span class="line">    y_pred = out.argmax(dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    accs = []</span><br><span class="line">    <span class="keyword">for</span> mask <span class="keyword">in</span> [data.train_mask, data.val_mask, data.test_mask]:</span><br><span class="line">        correct = y_pred[mask].eq(data.y[mask]).<span class="built_in">sum</span>().item()</span><br><span class="line">        accs.append(correct / mask.<span class="built_in">sum</span>().item())</span><br><span class="line">    <span class="keyword">return</span> accs</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">31</span>):</span><br><span class="line">    loss = train()</span><br><span class="line">    <span class="keyword">if</span> epoch % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        train_acc, val_acc, test_acc = test()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Epoch: <span class="subst">&#123;epoch:02d&#125;</span>, Loss: <span class="subst">&#123;loss:<span class="number">.4</span>f&#125;</span>, Train: <span class="subst">&#123;train_acc:<span class="number">.4</span>f&#125;</span>, &#x27;</span></span><br><span class="line">              <span class="string">f&#x27;Val: <span class="subst">&#123;val_acc:<span class="number">.4</span>f&#125;</span>, test: <span class="subst">&#123;test_acc:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Epoch: <span class="subst">&#123;epoch:02d&#125;</span>, Loss: <span class="subst">&#123;loss:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：<br>Epoch: 10, Loss: 0.2893, Train: 0.9620, Val: 0.9516, test: 0.9496<br>Epoch: 20, Loss: 0.2478, Train: 0.9664, Val: 0.9546, test: 0.9560<br>Epoch: 30, Loss: 0.2397, Train: 0.9689, Val: 0.9515, test: 0.9502</p>
+</blockquote>
+<p>在训练过程中，使用train_loader获取batch，每次根据多个簇组成的batch进行训练；在验证阶段，使用subgraph_loader，在计算一个节点的表征时会计算该节点的距离从$0$到$L$的邻接节点，可以更好地测试神经网络的性能。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>1.<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/team-learning-nlp/tree/master/GNN">datawhale-GNN开源学习资料</a><br>2.<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.07953">Cluster-GCN论文</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/" title="图神经网络——超大图上的节点表征学习">http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GCN/" rel="tag"># GCN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/27/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E4%B8%8E%E8%BE%B9%E9%A2%84%E6%B5%8B/" rel="next" title="图神经网络——节点分类与边预测">
+                <i class="fa fa-chevron-left"></i> 图神经网络——节点分类与边预测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="prev" title="图神经网络——基本图论与PyG库">
+                图神经网络——基本图论与PyG库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Cluster-GCN%E6%96%B9%E6%B3%95%E7%AE%80%E5%8D%95%E6%A6%82%E6%8B%AC"><span class="nav-number">1.</span> <span class="nav-text">1.Cluster-GCN方法简单概括</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-GCN%E5%9B%9E%E9%A1%BE"><span class="nav-number">2.</span> <span class="nav-text">2.GCN回顾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Cluster-GCN%E7%9A%84%E9%80%9F%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">3.Cluster-GCN的速度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Cluster-GCN%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.Cluster-GCN详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Cluster-GCN%E5%AE%9E%E8%B7%B5"><span class="nav-number">5.</span> <span class="nav-text">5.Cluster-GCN实践</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">39k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/';
+          this.page.identifier = '2021/07/01/图神经网络——超大图上的节点表征学习/';
+          this.page.title = '图神经网络——超大图上的节点表征学习';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

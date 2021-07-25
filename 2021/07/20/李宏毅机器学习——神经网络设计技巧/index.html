@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Momentum,Adam," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="李宏毅机器学习——神经网络设计技巧1 鞍点(Saddle Point)神经网络中，Gradient为0(或不存在)的点称为临界点(critical point)，其有两种可能性：局部极小(local minima)和鞍点(saddle point)。 长期以来，人们普遍认为，神经网络优化问题困难是因为较大的神经网络中包含很多局部极小值，使得算法容易陷入到其中某些点。2014年的一篇论文中提出高维非">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李宏毅机器学习——神经网络设计技巧">
+<meta property="og:url" content="http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="李宏毅机器学习——神经网络设计技巧1 鞍点(Saddle Point)神经网络中，Gradient为0(或不存在)的点称为临界点(critical point)，其有两种可能性：局部极小(local minima)和鞍点(saddle point)。 长期以来，人们普遍认为，神经网络优化问题困难是因为较大的神经网络中包含很多局部极小值，使得算法容易陷入到其中某些点。2014年的一篇论文中提出高维非">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W24pJU.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W2TLVA.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W27CrQ.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W27FVs.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W27Kr4.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W27DII.jpg">
+<meta property="og:image" content="https://z3.ax1x.com/2021/07/25/W27cz8.png">
+<meta property="article:published_time" content="2021-07-20T14:52:21.000Z">
+<meta property="article:modified_time" content="2021-07-25T13:24:32.944Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="Momentum">
+<meta property="article:tag" content="Adam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/07/25/W24pJU.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/07/20/李宏毅机器学习——神经网络设计技巧/"/>
+
+
+
+
+
+  <title>李宏毅机器学习——神经网络设计技巧 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李宏毅机器学习——神经网络设计技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-20T22:52:21+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Neural-Networks/" itemprop="url" rel="index">
+                    <span itemprop="name">Neural Networks</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/07/20/李宏毅机器学习——神经网络设计技巧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="李宏毅机器学习——神经网络设计技巧"><a href="#李宏毅机器学习——神经网络设计技巧" class="headerlink" title="李宏毅机器学习——神经网络设计技巧"></a>李宏毅机器学习——神经网络设计技巧</h3><h4 id="1-鞍点-Saddle-Point"><a href="#1-鞍点-Saddle-Point" class="headerlink" title="1 鞍点(Saddle Point)"></a>1 鞍点(<em>Saddle</em> <em>Point</em>)</h4><p>神经网络中，Gradient为0(或不存在)的点称为临界点(critical point)，其有两种可能性：局部极小(local minima)和鞍点(saddle point)。</p>
+<p>长期以来，人们普遍认为，神经网络优化问题困难是因为较大的神经网络中包含很多局部极小值，使得算法容易陷入到其中某些点。2014年的一篇论文中提出高维非凸优化问题之所以困难，是因为存在大量的鞍点而不是局部极值。</p>
+<blockquote>
+<p>鞍点：</p>
+<ul>
+<li>一个维度向上倾斜且另一维度向下倾斜的点。这些鞍点通常被相同误差值的平面所包围，这使得算法陷入其中很难脱离出来，因为梯度在所有维度上接近于零</li>
+<li>梯度等于零，在其附近Hessian矩阵有正的和负的特征值，行列式小于0，即是不定的。</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W24pJU"><img src="https://z3.ax1x.com/2021/07/25/W24pJU.png" alt="W24pJU.png"></a></p>
+<span id="more"></span>
+
+<p>在鞍点附近，基于梯度的优化算法会遇到较为严重的问题：鞍点处的梯度为零，鞍点通常被相同误差值的平面所包围（这个平面称为Plateaus，Plateaus是梯度接近于零的平缓区域，会降低神经网络学习速度），在高维的情形，这个鞍点附近的平坦区域范围可能非常大，这使得SGD算法很难脱离区域，即可能会长时间卡在该点附近（因为梯度在所有维度上接近于零）。</p>
+<p>在鞍点数目极大的时候，这个问题会变得非常严重。高维非凸优化问题之所以困难，是因为高维参数空间存在大量的鞍点。</p>
+<p>鞍点和局部极小值相同的是，在该点处的梯度都等于零，不同在于在鞍点附近Hessian矩阵是不定的(行列式小于0)，而在局部极值附近的Hessian矩阵是正定的。</p>
+<blockquote>
+<p>Hessian矩阵是一个多元函数的二阶偏导数构成的方阵，描述了函数的局部曲率。可用于判定多元函数的极值。</p>
+</blockquote>
+<blockquote>
+<p>$$<br>H(f)=\left[\begin{array}{cccc}<br>\frac{\partial^{2} f}{\partial x_{1}^{2}} &amp; \frac{\partial^{2} f}{\partial x_{1} \partial x_{2}} &amp; \cdots &amp; \frac{\partial^{2} f}{\partial x_{1} \partial x_{n}} \<br>\frac{\partial^{2} f}{\partial x_{2} \partial x_{1}} &amp; \frac{\partial^{2} f}{\partial x_{2}^{2}} &amp; \cdots &amp; \frac{\partial^{2} f}{\partial x_{2} \partial x_{n}} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}} &amp; \frac{\partial^{2} f}{\partial x_{n} \partial x_{2}} &amp; \cdots &amp; \frac{\partial^{2} f}{\partial x_{n}^{2}}<br>\end{array}\right]<br>$$</p>
+</blockquote>
+<ul>
+<li>当函数的Hessian矩阵在梯度为零的位置上的特征值全为正(正定矩阵)时，该函数得到局部最小值。</li>
+<li>当函数的Hessian矩阵在梯度为零的位置上的特征值全为负(负定矩阵)时，该函数得到局部最⼤值。</li>
+<li>当函数的Hessian矩阵在梯度为零的位置上的特征值有正有负(不定矩阵)时，该函数得到鞍点。</li>
+</ul>
+<h4 id="2-批次和动量-Batch-and-Momentum"><a href="#2-批次和动量-Batch-and-Momentum" class="headerlink" title="2 批次和动量(Batch and Momentum)"></a>2 批次和动量(Batch and Momentum)</h4><h5 id="2-1-Batch"><a href="#2-1-Batch" class="headerlink" title="2.1 Batch"></a>2.1 Batch</h5><p>批梯度下降（Batch gradient descent，BGD）遍历全部数据集算一次损失函数，然后算函数对各个参数的梯度，然后更新梯度。BGD的优点在于由全数据集确定的方向能够更好地代表样本总体，如果函数为凸函数，BGD一定能得到全局最优。其缺点在于每更新一次参数都要把数据集里的所有样本都看一遍，计算量开销大，计算速度慢。</p>
+<p>随机梯度下降（stochastic gradient descent，SGD）每看一个数据就算一下损失函数，然后求梯度更新参数，这个称为随机梯度下降。SGD方法速度比较快，但是由于单个样本并不能代表全体样本的趋势，所以其收敛性能不太好，遇上噪声则容易陷入局部最优解，也可能在最优点附近晃来晃去，收敛不到最优点。两次参数的更新也有可能互相抵消掉，造成目标函数震荡的比较剧烈。</p>
+<p>小批量梯度下降（mini-batch gradient descent，mini-batch GD）每次选取一定数目(mini-batch)的样本组成一个小批量样本，然后用这个小批量来更新梯度。每次使用一个batch可以大大减小收敛所需要的迭代次数，同时可以使收敛到的结果更加接近梯度下降的效果，可以提高算法稳定性。</p>
+<h5 id="2-2-Momentum"><a href="#2-2-Momentum" class="headerlink" title="2.2 Momentum"></a>2.2 Momentum</h5><p>动量梯度下降法（Gradient descent with Momentum）或者叫做Momentum，通过计算梯度的指数加权平均数，并利用该梯度更新权重。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/W2TLVA"><img src="https://z3.ax1x.com/2021/07/25/W2TLVA.png" alt="W2TLVA.png"></a></p>
+<p>其每一次梯度下降都会有一个之前的速度的作用，如果这次的方向与之前相同，则会因为之前的速度继续加速；如果这次的方向与之前相反，则会由于之前存在速度的作用不会产生一个急转弯。简而言之，Momentum对原始梯度做了修正和平滑，具有更快的收敛速度。</p>
+<h4 id="3-自动调整学习速率-Adaptive-Learning-rate"><a href="#3-自动调整学习速率-Adaptive-Learning-rate" class="headerlink" title="3 自动调整学习速率(Adaptive Learning rate)"></a>3 自动调整学习速率(Adaptive Learning rate)</h4><h5 id="2-1-AdaGrad"><a href="#2-1-AdaGrad" class="headerlink" title="2.1 AdaGrad"></a>2.1 AdaGrad</h5><p>设置全局学习率之后，每次通过全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同，可以使参数空间更为平缓的方向，会取得更大的进步（因为平缓，所以历史梯度平方和较小，对应学习下降的幅度较小），并且能够使得陡峭的方向变得平缓，从而加快训练速度。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/W27CrQ"><img src="https://z3.ax1x.com/2021/07/25/W27CrQ.png" alt="W27CrQ.png"></a></p>
+<h5 id="2-2-RMSprop"><a href="#2-2-RMSprop" class="headerlink" title="2.2 RMSprop"></a>2.2 RMSprop</h5><p>Adagrad会记录过去所有梯度的平方和。因此，学习越深入，更新的幅度就越小。实际上，如果无止境地学习，更新量就会变为0，完全不再更新。为了改善这个问题，可以使用 RMSProp方法。RMSProp方法并不是将过去所有的梯度一视同仁地相加，而是逐渐地遗忘过去的梯度，在做加法运算时将新梯度的信息更多地反映出来。这种方法也被称为“指数移动平均”，呈指数函数式地减小过去的梯度的尺度。</p>
+<p>RMSProp算法不是像AdaGrad算法那样暴力直接的累加平方梯度，而是加了一个衰减系数来控制历史信息的获取多少。相比于AdaGrad的历史梯度$r \leftarrow r+g \odot g$，RMSProp增加了一个衰减系数来控制历史信息的获取多少：$r \leftarrow \rho r+(1-\rho) \boldsymbol{g} \odot \boldsymbol{g}$。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W27FVs"><img src="https://z3.ax1x.com/2021/07/25/W27FVs.png" alt="W27FVs.png"></a></p>
+<p>第一个等式类似Momentum，计算了梯度平方的指数平均；第二个等式根据指数平均决定步幅大小，初始化学习率η，接着除以平均数；第三个等式是权重更新步骤。其中超参数ρ一般取0.9，ε一般取1e-10。</p>
+<p>RMSProp隐式地应用了模拟退火。在向最小值移动的过程中，RMSProp会自动降低学习步幅，以免跳过最小值。</p>
+<h5 id="2-3-Adam"><a href="#2-3-Adam" class="headerlink" title="2.3 Adam"></a>2.3 Adam</h5><p>Adam（Adaptive Moment Estimation）相当于RMSprop+Momentum，</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W27Kr4"><img src="https://z3.ax1x.com/2021/07/25/W27Kr4.png" alt="W27Kr4.png"></a></p>
+<p>等式1和等式2计算了梯度的指数平均和梯度平方的指数平均；等式3在学习率上乘以梯度的平均（类似动量），除以梯度平方平均的均方根（类似RMSProp），得出学习步幅；等式4是权重更新步骤。其中超参数β1一般取0.9，β2一般取0.99，ε一般取1e-10。</p>
+<h5 id="2-4-Learning-Rate-Scheduling"><a href="#2-4-Learning-Rate-Scheduling" class="headerlink" title="2.4 Learning Rate Scheduling"></a>2.4 Learning Rate Scheduling</h5><ul>
+<li>学习率衰减（Learning Rate Decay）——为了防止学习率过大，在收敛到全局最优点的时候会来回摆荡，所以要让学习率随着训练轮数不断下降，收敛梯度下降的学习步长。其中包括线性衰减（例如：每过5个epochs学习率减半）、指数衰减（随着迭代轮数的增加学习率自动发生衰减）、分段常数衰减等方法。</li>
+<li>热启动（Warm up）——warmup是初始阶段使用较小学习率启动，后期恢复正常；而decay是初始时使用较大的学习率，之后进行衰减。其有助于减缓模型在初始阶段对mini-batch的提前过拟合现象，保持分布的平稳。</li>
+</ul>
+<h4 id="4-损失函数-Loss-的影响"><a href="#4-损失函数-Loss-的影响" class="headerlink" title="4 损失函数(Loss)的影响"></a>4 损失函数(Loss)的影响</h4><p>均方误差（Mean Square Error，MSE）适用于回归问题，而交叉熵（Cross Entropy）适用于分类问题。<br>在分类问题中，MSE损失函数为$\text { loss }=\frac{1}{2 m} \sum_{i}^{m}\left(y_{i}-y^{\prime}\right)^{2}$，加上softmax之后为$\operatorname{los} s_{i}=\left(c_{1}-\frac{e^{y i^{\prime}}}{c_{2}}\right)^{2}$，是一个非凸函数，梯度下降算法难以达到全局最优解。所以MSE在分类问题中，并不是一个好的loss函数；而交叉熵损失函数为$\operatorname{loss}=-\sum_{i=1}^{n} y_{i} * \log \left(y_{i}\right)$，加入softmax得到$\operatorname{loss}<em>{i}=-\log \left(c</em>{1}-\frac{e^{x}}{c_{2}}\right)$。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W27DII"><img src="https://z3.ax1x.com/2021/07/25/W27DII.jpg" alt="W27DII.jpg"></a></p>
+<p>相对MSE而言，交叉熵曲线整体呈单调性，loss越大，梯度越大。便于梯度下降反向传播，利于优化。所以一般针对分类问题采用交叉熵作为loss函数。（P.S.在广义伯努利分布下，最小化交叉熵损失等同于极大似然估计）</p>
+<h4 id="5-批量标准化-归一化-Batch-Normalization，BN"><a href="#5-批量标准化-归一化-Batch-Normalization，BN" class="headerlink" title="5 批量标准化/归一化(Batch Normalization，BN)"></a>5 批量标准化/归一化(Batch Normalization，BN)</h4><p>Batch Normalization，简称BatchNorm或BN，翻译为“批归一化”，是神经网络中一种特殊的层，如今已是各种流行网络的标配。在原始论文中，BN被建议插入在（每个）ReLU激活层前面。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/W27cz8"><img src="https://z3.ax1x.com/2021/07/25/W27cz8.png" alt="W27cz8.png"></a></p>
+<p>BN操作分为两步：</p>
+<ol>
+<li>Standardization：首先对$m$个$x$进行Standardization，得到zero mean unit variance的分布$\hat{x}$。</li>
+<li>scale and shift：然后再对$\hat{x}$进行scale and shift，缩放并变换回原始的分布$y$。（这样的目的是为了补偿网络的非线性表达能力，因为经过标准化之后，偏移量丢失。均值$\beta$方差$\gamma$相当于输入数据分布的方差和偏移。）</li>
+</ol>
+<p>Batch Normalization有以下几点优势：</p>
+<ul>
+<li>BN使得网络中每层输入数据的分布相对稳定，加速模型学习速度</li>
+<li>BN使得模型对网络中的参数不那么敏感，简化调参过程，使得网络学习更加稳定</li>
+<li>BN允许网络使用饱和性激活函数（例如sigmoid，tanh等），缓解梯度消失问题</li>
+<li>BN具有一定的正则化效果</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>1.<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av59538266">b站李宏毅《机器学习》</a><br>2.<a target="_blank" rel="noopener" href="https://datawhalechina.github.io/leeml-notes/#/">datawhale李宏毅机器学习笔记(LeeML-Notes)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/" title="李宏毅机器学习——神经网络设计技巧">http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Momentum/" rel="tag"># Momentum</a>
+          
+            <a href="/tags/Adam/" rel="tag"># Adam</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/18/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" rel="next" title="李宏毅机器学习——反向传播">
+                <i class="fa fa-chevron-left"></i> 李宏毅机器学习——反向传播
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">李宏毅机器学习——神经网络设计技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%9E%8D%E7%82%B9-Saddle-Point"><span class="nav-number">1.1.</span> <span class="nav-text">1 鞍点(Saddle Point)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%89%B9%E6%AC%A1%E5%92%8C%E5%8A%A8%E9%87%8F-Batch-and-Momentum"><span class="nav-number">1.2.</span> <span class="nav-text">2 批次和动量(Batch and Momentum)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-Batch"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 Batch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-Momentum"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Momentum</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%87%AA%E5%8A%A8%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E9%80%9F%E7%8E%87-Adaptive-Learning-rate"><span class="nav-number">1.3.</span> <span class="nav-text">3 自动调整学习速率(Adaptive Learning rate)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-AdaGrad"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 AdaGrad</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-RMSprop"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 RMSprop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-Adam"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 Adam</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-Learning-Rate-Scheduling"><span class="nav-number">1.3.4.</span> <span class="nav-text">2.4 Learning Rate Scheduling</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-Loss-%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">1.4.</span> <span class="nav-text">4 损失函数(Loss)的影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%89%B9%E9%87%8F%E6%A0%87%E5%87%86%E5%8C%96-%E5%BD%92%E4%B8%80%E5%8C%96-Batch-Normalization%EF%BC%8CBN"><span class="nav-number">1.5.</span> <span class="nav-text">5 批量标准化&#x2F;归一化(Batch Normalization，BN)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">39k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/';
+          this.page.identifier = '2021/07/20/李宏毅机器学习——神经网络设计技巧/';
+          this.page.title = '李宏毅机器学习——神经网络设计技巧';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="WL Test,GIN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="图神经网络——基于图神经网络的图表征学习方法图表征学习要求在输入节点属性、边和边的属性（如果有的话）得到一个向量作为图的表征，基于图表征进一步的我们可以做图的预测，而图同构网络（Graph Isomorphism Network, GIN）的图表征网络是当前最经典的图表征学习网络。 1.GNN的邻域聚合(消息传递)GNN的目标是以图结构数据和节点特征作为输入，以学习到节点（或图）的embeddin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图神经网络——基本图论与PyG库">
+<meta property="og:url" content="http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="图神经网络——基于图神经网络的图表征学习方法图表征学习要求在输入节点属性、边和边的属性（如果有的话）得到一个向量作为图的表征，基于图表征进一步的我们可以做图的预测，而图同构网络（Graph Isomorphism Network, GIN）的图表征网络是当前最经典的图表征学习网络。 1.GNN的邻域聚合(消息传递)GNN的目标是以图结构数据和节点特征作为输入，以学习到节点（或图）的embeddin">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/XQxKfkPsL14g2O5.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/yr3axiC4PFOdqkJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/wREO2ejIZMWicHv.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/pgdboxL6BKAr9Rz.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/TOFRUV2INngGCxo.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/KVkxiSlCvDf63F8.png">
+<meta property="og:image" content="https://i.loli.net/2021/07/12/IbyZ7h8JEXYRk3t.jpg">
+<meta property="article:published_time" content="2021-07-05T14:52:21.000Z">
+<meta property="article:modified_time" content="2021-07-25T12:26:08.403Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="WL Test">
+<meta property="article:tag" content="GIN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/07/12/XQxKfkPsL14g2O5.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/07/05/图神经网络——基于图神经网络的图表征学习方法/"/>
+
+
+
+
+
+  <title>图神经网络——基本图论与PyG库 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图神经网络——基本图论与PyG库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-05T22:52:21+08:00">
+                2021-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GNN/" itemprop="url" rel="index">
+                    <span itemprop="name">GNN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/07/05/图神经网络——基于图神经网络的图表征学习方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.6k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="图神经网络——基于图神经网络的图表征学习方法"><a href="#图神经网络——基于图神经网络的图表征学习方法" class="headerlink" title="图神经网络——基于图神经网络的图表征学习方法"></a>图神经网络——基于图神经网络的图表征学习方法</h3><p>图表征学习要求在输入节点属性、边和边的属性（如果有的话）得到一个向量作为图的表征，基于图表征进一步的我们可以做图的预测，而图同构网络（Graph Isomorphism Network, GIN）的图表征网络是当前最经典的图表征学习网络。</p>
+<h4 id="1-GNN的邻域聚合-消息传递"><a href="#1-GNN的邻域聚合-消息传递" class="headerlink" title="1.GNN的邻域聚合(消息传递)"></a>1.GNN的邻域聚合(消息传递)</h4><p>GNN的目标是以图结构数据和节点特征作为输入，以学习到节点（或图）的embedding，用于分类任务。<br>基于邻域聚合的GNN可以拆分为以下三个模块：</p>
+<ul>
+<li>Aggregate：聚合一阶邻域特征。</li>
+<li>Combine：将邻居聚合的特征 与 当前节点特征合并， 以更新当前节点特征。</li>
+<li>Readout（可选）：如果是对graph分类，需要将graph中所有节点特征转变成graph特征。</li>
+</ul>
+<p>但是Aggregate的三种方式sum、mean、max的表征能力不够强大。</p>
+<span id="more"></span>
+
+<p><img src="https://i.loli.net/2021/07/12/XQxKfkPsL14g2O5.jpg" alt="FFFF.jpg"><br>如上图，节点v和v’为中心节点，通过聚合邻居特征生成embedding来分析不同aggregate设置下是否能区分不同的结构。设红绿蓝色节点特征值分别为r,g,b，不考虑combine。</p>
+<blockquote>
+<p>图a中：<br>mean：左$\frac{1}{2}(b+b)=b$，右$\frac{1}{3}(b+b+b)=b$，无法区分；<br>max：左$b$，右$b$，无法区分；<br>sum：左$2b$，右$3b$，可以区分。</p>
+</blockquote>
+<blockquote>
+<p>图b中：<br>mean：左$\frac{1}{2}(r+g)$，右$\frac{1}{3}(g+2r)=b$，可以区分；<br>max：左$max(r,g)$，右$max(r,r,g)$，无法区分；<br>sum：左$r+g$，右$2r+g$，可以区分。</p>
+</blockquote>
+<blockquote>
+<p>图c中：<br>mean：左$\frac{1}{2}(r+g)$，右$\frac{1}{4}(2g+2r)=b$，无法区分；<br>max：左$max(r,g)$，右$max(r,r,g,g)$，无法区分；<br>sum：左$r+g$，右$2r+2g$，可以区分。</p>
+</blockquote>
+<p>这说明，sum基本可以学习精确的结构信息、mean偏向学习分布信息，max偏向学习有代表性的元素信息，无法区分某些结构的图，故性能会比sum差一点。</p>
+<h4 id="2-Weisfeiler-Lehman-Test-WL-Test"><a href="#2-Weisfeiler-Lehman-Test-WL-Test" class="headerlink" title="2.Weisfeiler-Lehman Test (WL Test)"></a>2.Weisfeiler-Lehman Test (WL Test)</h4><p>图的同构性测试算法（Weisfeiler-Lehman），简称WL Test，是一种用于测试两个图是否同构的算法。<br>WL Test 的一维形式，类似GNN中的邻接节点聚合。WL Test先迭代地聚合节点及其邻接节点的标签，然后将聚合的标签散列（hash）成新标签，该过程形式化为下方的公示，<br>$$<br>L^{h}<em>{u} \leftarrow \operatorname{hash}\left(L^{h-1}</em>{u} + \sum_{v \in \mathcal{N}(U)} L^{h-1}<em>{v}\right)<br>$$<br>上式中，$L^{h}</em>{u}$表示节点$u$的第$h$次迭代的标签，第$0$次迭代的标签为节点原始标签。</p>
+<p>在迭代过程中，发现两个图之间的节点的标签不同时，就可以确定这两个图是非同构的。需要注意的是节点标签可能的取值只能是有限个数。</p>
+<p>WL测试不能保证对所有图都有效，特别是对于具有高度对称性的图，如链式图、完全图、环图和星图，它会判断错误。</p>
+<p>给定两个图$G$和$G^{\prime}$，每个节点拥有标签（实际中，一些图没有节点标签，我们可以以节点的度作为标签）。</p>
+<p><img src="https://i.loli.net/2021/07/12/yr3axiC4PFOdqkJ.png" alt="C1.png"></p>
+<p><strong>Weisfeiler-Leman Test 算法通过重复执行以下给节点打标签的过程来实现图是否同构的判断</strong>：</p>
+<ol>
+<li>聚合自身与邻接节点的标签得到一串字符串，自身标签与邻接节点的标签中间用<code>,</code>分隔，邻接节点的标签按升序排序。<strong>排序的原因在于要保证单射性，即保证输出的结果不因邻接节点的顺序改变而改变。</strong></li>
+</ol>
+<p><img src="https://i.loli.net/2021/07/12/wREO2ejIZMWicHv.png" alt="C2.png"></p>
+<ol start="2">
+<li><strong>标签散列，即标签压缩，将较长的字符串映射到一个简短的标签。</strong></li>
+</ol>
+<p><img src="https://i.loli.net/2021/07/12/pgdboxL6BKAr9Rz.png" alt="C3.png"></p>
+<ol start="3">
+<li><strong>给节点重新打上标签。</strong><br><img src="https://i.loli.net/2021/07/12/TOFRUV2INngGCxo.png" alt="C4.png"></li>
+</ol>
+<p>每重复一次以上的过程，就完成一次节点自身标签与邻接节点标签的聚合。</p>
+<p><strong>当出现两个图相同节点标签的出现次数不一致时，即可判断两个图不相似</strong>。如果上述的步骤重复一定的次数后，没有发现有相同节点标签的出现次数不一致的情况，那么我们无法判断两个图是否同构。</p>
+<p>当两个节点的$h$层的标签一样时，表示分别以这两个节点为根节点的WL子树是一致的。<strong>WL子树与普通子树不同</strong>，WL子树包含重复的节点。下图展示了一棵以1节点为根节点高为2的WL子树。</p>
+<p><img src="https://i.loli.net/2021/07/12/KVkxiSlCvDf63F8.png" alt="C5.png"></p>
+<h4 id="3-图相似性评估"><a href="#3-图相似性评估" class="headerlink" title="3.图相似性评估"></a>3.图相似性评估</h4><p>WL Test只能判断两个图的相似性，无法衡量图之间的相似性。要衡量两个图的相似性，需要用WL Subtree Kernel方法。该方法的思想是用WL Test算法得到节点的多层的标签，分别统计图中各类标签出现的次数，存于一个向量，这个向量可以作为图的表征<strong>。</strong>两个图的表征向量的内积，即可作为这两个图的相似性估计，内积越大表示相似性越高。</p>
+<p><img src="https://i.loli.net/2021/07/12/IbyZ7h8JEXYRk3t.jpg" alt="gggg.jpg"></p>
+<h4 id="4-图同构网络模型的构建"><a href="#4-图同构网络模型的构建" class="headerlink" title="4.图同构网络模型的构建"></a>4.图同构网络模型的构建</h4><p>通过GIN学习的节点表征向量可以用于类似于节点分类、边预测这样的任务。而对于图分类任务。READOUT函数：给定独立的节点的表征向量集，生成整个图的表征向量。</p>
+<p>GIN的READOUT模块使用concat+sum，对每次迭代得到的所有节点特征求和得到图的特征，然后拼接起来，公式如下：<br>$$<br>h_{G} = \text{CONCAT}(\text{READOUT}\left({h_{v}^{(k)}|v\in G}\right)|k=0,1,\cdots, K)<br>$$</p>
+<h4 id="5-基于图同构网络（GIN）的图表征网络的实现"><a href="#5-基于图同构网络（GIN）的图表征网络的实现" class="headerlink" title="5.基于图同构网络（GIN）的图表征网络的实现"></a>5.基于图同构网络（GIN）的图表征网络的实现</h4><p>基于图同构网络的图表征学习主要包含以下两个过程：</p>
+<ol>
+<li>计算得到节点表征；</li>
+<li>对图上各个节点的表征做图池化（Graph Pooling），或称为图读出（Graph Readout），得到图的表征（Graph Representation）。</li>
+</ol>
+<p>基于图同构网络的图表征模块（GINGraphRepr Module），首先采用<code>GINNodeEmbedding</code>模块对图上每一个节点做节点嵌入（Node Embedding），得到节点表征；然后对节点表征做图池化得到图的表征；最后用一层线性变换对图表征转换为对图的预测。代码实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> global_add_pool, global_mean_pool, global_max_pool, GlobalAttention, Set2Set</span><br><span class="line"><span class="keyword">from</span> gin_node <span class="keyword">import</span> GINNodeEmbedding</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GINGraphRepr</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, num_tasks=<span class="number">1</span>, num_layers=<span class="number">5</span>, emb_dim=<span class="number">300</span>, residual=<span class="literal">False</span>, drop_ratio=<span class="number">0</span>, JK=<span class="string">&quot;last&quot;</span>, graph_pooling=<span class="string">&quot;sum&quot;</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        num_tasks(int, optional)：图表征的维度；</span></span><br><span class="line"><span class="string">    	num_layers(int, optional)：卷积层数；</span></span><br><span class="line"><span class="string">        emb_dim(int, optional)：node embedding的维度；</span></span><br><span class="line"><span class="string">        residual(bool, optional)：是否添加剩余的连接；</span></span><br><span class="line"><span class="string">        drop_ratio (float, optional)：dropout rate；</span></span><br><span class="line"><span class="string">        JK (str, optional)：可选的值为&quot;last&quot;和&quot;sum&quot;。选&quot;last&quot;，只取最后一层的结点的嵌入，选&quot;sum&quot;对各层的结点的嵌入求和。</span></span><br><span class="line"><span class="string">        raph_pooling (str, optional)：node embedding的池化方法，可选的值为&quot;sum&quot;，&quot;mean&quot;，&quot;max&quot;，&quot;attention&quot;和&quot;set2set&quot;。</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">super</span>(GINGraphPooling, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.num_layers = num_layers</span><br><span class="line">        self.drop_ratio = drop_ratio</span><br><span class="line">        self.JK = JK</span><br><span class="line">        self.emb_dim = emb_dim</span><br><span class="line">        self.num_tasks = num_tasks</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.num_layers &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Number of GNN layers must be greater than 1.&quot;</span>)</span><br><span class="line"></span><br><span class="line">        self.gnn_node = GINNodeEmbedding(num_layers, emb_dim, JK=JK, drop_ratio=drop_ratio, residual=residual)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Pooling function to generate whole-graph embeddings</span></span><br><span class="line">        <span class="keyword">if</span> graph_pooling == <span class="string">&quot;sum&quot;</span>:</span><br><span class="line">            self.pool = global_add_pool</span><br><span class="line">        <span class="keyword">elif</span> graph_pooling == <span class="string">&quot;mean&quot;</span>:</span><br><span class="line">            self.pool = global_mean_pool</span><br><span class="line">        <span class="keyword">elif</span> graph_pooling == <span class="string">&quot;max&quot;</span>:</span><br><span class="line">            self.pool = global_max_pool</span><br><span class="line">        <span class="keyword">elif</span> graph_pooling == <span class="string">&quot;attention&quot;</span>:</span><br><span class="line">            self.pool = GlobalAttention(gate_nn=nn.Sequential(</span><br><span class="line">                nn.Linear(emb_dim, emb_dim), nn.BatchNorm1d(emb_dim), nn.ReLU(), nn.Linear(emb_dim, <span class="number">1</span>)))</span><br><span class="line">        <span class="keyword">elif</span> graph_pooling == <span class="string">&quot;set2set&quot;</span>:</span><br><span class="line">            self.pool = Set2Set(emb_dim, processing_steps=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Invalid graph pooling type.&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> graph_pooling == <span class="string">&quot;set2set&quot;</span>:</span><br><span class="line">            self.graph_pred_linear = nn.Linear(<span class="number">2</span>*self.emb_dim, self.num_tasks)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.graph_pred_linear = nn.Linear(self.emb_dim, self.num_tasks)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, batched_data</span>):</span></span><br><span class="line">        h_node = self.gnn_node(batched_data)</span><br><span class="line"></span><br><span class="line">        h_graph = self.pool(h_node, batched_data.batch)</span><br><span class="line">        output = self.graph_pred_linear(h_graph)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.training:</span><br><span class="line">            <span class="keyword">return</span> output</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># At inference time, relu is applied to output to ensure positivity</span></span><br><span class="line">            <span class="comment"># 因为预测目标的取值范围就在 (0, 50] 内</span></span><br><span class="line">            <span class="keyword">return</span> torch.clamp(output, <span class="built_in">min</span>=<span class="number">0</span>, <span class="built_in">max</span>=<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>attention：基于Attention对节点表征加权求和，使用模块 <a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.glob.GlobalAttention">torch_geometric.nn.glob.GlobalAttention</a>。<br>set2set：另一种基于Attention对节点表征加权求和的方法，使用模块 <a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#torch_geometric.nn.glob.Set2Set">torch_geometric.nn.glob.Set2Set</a>。</p>
+</blockquote>
+<h4 id="6-基于图同构网络的节点嵌入模块（GINNodeEmbedding-Module）"><a href="#6-基于图同构网络的节点嵌入模块（GINNodeEmbedding-Module）" class="headerlink" title="6.基于图同构网络的节点嵌入模块（GINNodeEmbedding Module）"></a>6.基于图同构网络的节点嵌入模块（GINNodeEmbedding Module）</h4><p>此节点嵌入模块基于多层<code>GINConv</code>实现结点嵌入的计算。首先用<code>AtomEncoder</code>对其做嵌入得到第0层节点表征然后我们逐层计算节点表征，从第1层开始到第num_layers层，每一层节点表征的计算都以上一层的节点表征<code>h_list[layer]</code>、边<code>edge_index</code>和边的属性<code>edge_attr</code>为输入。<br>需要注意的是，<code>GINConv</code>的层数越多，此节点嵌入模块的感受野（receptive field）越大，结点<code>i</code>的表征最远能捕获到结点<code>i</code>的距离为<code>num_layers</code>的邻接节点的信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> mol_encoder <span class="keyword">import</span> AtomEncoder</span><br><span class="line"><span class="keyword">from</span> gin_conv <span class="keyword">import</span> GINConv</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="comment"># GNN to generate node embedding</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GINNodeEmbedding</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Output:</span></span><br><span class="line"><span class="string">        node representations</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, num_layers, emb_dim, drop_ratio=<span class="number">0.5</span>, JK=<span class="string">&quot;last&quot;</span>, residual=<span class="literal">False</span></span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>(GINNodeEmbedding, self).__init__()</span><br><span class="line">        self.num_layers = num_layers</span><br><span class="line">        self.drop_ratio = drop_ratio</span><br><span class="line">        self.JK = JK</span><br><span class="line">        self.residual = residual</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.num_layers &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Number of GNN layers must be greater than 1.&quot;</span>)</span><br><span class="line"></span><br><span class="line">        self.atom_encoder = AtomEncoder(emb_dim)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># List of GNNs</span></span><br><span class="line">        self.convs = torch.nn.ModuleList()</span><br><span class="line">        self.batch_norms = torch.nn.ModuleList()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="built_in">range</span>(num_layers):</span><br><span class="line">            self.convs.append(GINConv(emb_dim))</span><br><span class="line">            self.batch_norms.append(torch.nn.BatchNorm1d(emb_dim))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, batched_data</span>):</span></span><br><span class="line">        x, edge_index, edge_attr = batched_data.x, batched_data.edge_index, batched_data.edge_attr</span><br><span class="line"></span><br><span class="line">        <span class="comment"># computing input node embedding</span></span><br><span class="line">        h_list = [self.atom_encoder(x)]  <span class="comment"># 先将类别型原子属性转化为原子表征</span></span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="built_in">range</span>(self.num_layers):</span><br><span class="line">            h = self.convs[layer](h_list[layer], edge_index, edge_attr)</span><br><span class="line">            h = self.batch_norms[layer](h)</span><br><span class="line">            <span class="keyword">if</span> layer == self.num_layers - <span class="number">1</span>:</span><br><span class="line">                <span class="comment"># remove relu for the last layer</span></span><br><span class="line">                h = F.dropout(h, self.drop_ratio, training=self.training)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h = F.dropout(F.relu(h), self.drop_ratio, training=self.training)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self.residual:</span><br><span class="line">                h += h_list[layer]</span><br><span class="line"></span><br><span class="line">            h_list.append(h)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Different implementations of Jk-concat</span></span><br><span class="line">        <span class="keyword">if</span> self.JK == <span class="string">&quot;last&quot;</span>:</span><br><span class="line">            node_representation = h_list[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">elif</span> self.JK == <span class="string">&quot;sum&quot;</span>:</span><br><span class="line">            node_representation = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="built_in">range</span>(self.num_layers + <span class="number">1</span>):</span><br><span class="line">                node_representation += h_list[layer]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node_representation</span><br></pre></td></tr></table></figure>
+<h4 id="7-图同构卷积层（GINConv）"><a href="#7-图同构卷积层（GINConv）" class="headerlink" title="7.图同构卷积层（GINConv）"></a>7.图同构卷积层（GINConv）</h4><p>图同构卷积层<code>GINConv</code>的数学定义如下：<br>$$<br>\mathbf{x}^{\prime}<em>i = h</em>{\mathbf{\Theta}} \left( (1 + \epsilon) \cdot\mathbf{x}<em>i + \sum</em>{j \in \mathcal{N}(i)} \mathbf{x}_j \right)<br>$$<br>构建代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> MessagePassing</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> ogb.graphproppred.mol_encoder <span class="keyword">import</span> BondEncoder</span><br><span class="line"></span><br><span class="line"><span class="comment"># GIN convolution along the graph structure</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GINConv</span>(<span class="params">MessagePassing</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, emb_dim</span>):</span></span><br><span class="line">        <span class="comment">#emb_dim (int): node embedding dimensionality</span></span><br><span class="line">        <span class="built_in">super</span>(GINConv, self).__init__(aggr = <span class="string">&quot;add&quot;</span>)</span><br><span class="line"></span><br><span class="line">        self.mlp = nn.Sequential(nn.Linear(emb_dim, emb_dim), nn.BatchNorm1d(emb_dim), nn.ReLU(), nn.Linear(emb_dim, emb_dim))</span><br><span class="line">        self.eps = nn.Parameter(torch.Tensor([<span class="number">0</span>]))</span><br><span class="line">        self.bond_encoder = BondEncoder(emb_dim = emb_dim)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, edge_index, edge_attr</span>):</span></span><br><span class="line">        edge_embedding = self.bond_encoder(edge_attr) <span class="comment"># 先将类别型边属性转换为边表征</span></span><br><span class="line">        out = self.mlp((<span class="number">1</span> + self.eps) *x + self.propagate(edge_index, x=x, edge_attr=edge_embedding))</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">message</span>(<span class="params">self, x_j, edge_attr</span>):</span></span><br><span class="line">        <span class="keyword">return</span> F.relu(x_j + edge_attr)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">self, aggr_out</span>):</span></span><br><span class="line">        <span class="keyword">return</span> aggr_out</span><br></pre></td></tr></table></figure>
+
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>1.<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/team-learning-nlp/tree/master/GNN">datawhale-GNN开源学习资料</a><br>2.<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html#global-pooling-layers">Global Pooling Layers</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" title="图神经网络——基本图论与PyG库">http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WL-Test/" rel="tag"># WL Test</a>
+          
+            <a href="/tags/GIN/" rel="tag"># GIN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/" rel="next" title="图神经网络——超大图上的节点表征学习">
+                <i class="fa fa-chevron-left"></i> 图神经网络——超大图上的节点表征学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/09/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E9%9B%86%E7%B1%BB%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%9B%BE%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/" rel="prev" title="图神经网络——基本图论与PyG库">
+                图神经网络——基本图论与PyG库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">图神经网络——基于图神经网络的图表征学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-GNN%E7%9A%84%E9%82%BB%E5%9F%9F%E8%81%9A%E5%90%88-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92"><span class="nav-number">1.1.</span> <span class="nav-text">1.GNN的邻域聚合(消息传递)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Weisfeiler-Lehman-Test-WL-Test"><span class="nav-number">1.2.</span> <span class="nav-text">2.Weisfeiler-Lehman Test (WL Test)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9B%BE%E7%9B%B8%E4%BC%BC%E6%80%A7%E8%AF%84%E4%BC%B0"><span class="nav-number">1.3.</span> <span class="nav-text">3.图相似性评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%9B%BE%E5%90%8C%E6%9E%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.4.</span> <span class="nav-text">4.图同构网络模型的构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%9F%BA%E4%BA%8E%E5%9B%BE%E5%90%8C%E6%9E%84%E7%BD%91%E7%BB%9C%EF%BC%88GIN%EF%BC%89%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">5.基于图同构网络（GIN）的图表征网络的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%9F%BA%E4%BA%8E%E5%9B%BE%E5%90%8C%E6%9E%84%E7%BD%91%E7%BB%9C%E7%9A%84%E8%8A%82%E7%82%B9%E5%B5%8C%E5%85%A5%E6%A8%A1%E5%9D%97%EF%BC%88GINNodeEmbedding-Module%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6.基于图同构网络的节点嵌入模块（GINNodeEmbedding Module）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%9B%BE%E5%90%8C%E6%9E%84%E5%8D%B7%E7%A7%AF%E5%B1%82%EF%BC%88GINConv%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">7.图同构卷积层（GINConv）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.8.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">39k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/';
+          this.page.identifier = '2021/07/05/图神经网络——基于图神经网络的图表征学习方法/';
+          this.page.title = '图神经网络——基本图论与PyG库';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
