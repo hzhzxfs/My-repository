@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Graph,BFS,DFS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Instrction Arrangement以及关键路径详解 关键路径详解 Hdu4109-Instrction Arrangement题解   关键路径详解AOE网概念:   在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，边上的权值表示活动的持续时间，称这样的有向图叫做边表示活动的网，简称AOE(Activity On Edge)网。AOE网中没有入边的顶点称为始点（或源点），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instrction Arrangement以及关键路径详解">
+<meta property="og:url" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="Instrction Arrangement以及关键路径详解 关键路径详解 Hdu4109-Instrction Arrangement题解   关键路径详解AOE网概念:   在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，边上的权值表示活动的持续时间，称这样的有向图叫做边表示活动的网，简称AOE(Activity On Edge)网。AOE网中没有入边的顶点称为始点（或源点），">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g1.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g2.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g3.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g4.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g5.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g6.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g7.png">
+<meta property="og:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g8.png">
+<meta property="article:published_time" content="2022-02-17T13:30:38.000Z">
+<meta property="article:modified_time" content="2024-06-01T02:00:23.846Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="DFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/images/g1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/02/17/Instrction Arrangement以及关键路径详解/"/>
+
+
+
+
+
+  <title>Instrction Arrangement以及关键路径详解 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Instrction Arrangement以及关键路径详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-17T21:30:38+08:00">
+                2022-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2022/02/17/Instrction Arrangement以及关键路径详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.6k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Instrction-Arrangement以及关键路径详解"><a href="#Instrction-Arrangement以及关键路径详解" class="headerlink" title="Instrction Arrangement以及关键路径详解"></a>Instrction Arrangement以及关键路径详解</h2><ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3">关键路径详解</a></li>
+<li><a href="#hdu4109-instrction-arrangement%E9%A2%98%E8%A7%A3">Hdu4109-Instrction Arrangement题解</a></li>
+</ul>
+<hr>
+<h3 id="关键路径详解"><a href="#关键路径详解" class="headerlink" title="关键路径详解"></a><font color  = red id = "1">关键路径详解</h3><h5 id="AOE网"><a href="#AOE网" class="headerlink" title="AOE网"></a><code>AOE</code>网</h5><p><font color = purple>概念: </p>
+<ul>
+<li>在一个表示工程的带权有向图中，<font color = red>用顶点表示事件，用有向边表示活动</fonT>，边上的权值表示活动的持续时间，称这样的有向图叫做边表示活动的网，简称<code>AOE</code>(<code>Activity On Edge</code>)网。AOE网中没有入边的顶点称为始点（或源点），没有出边的顶点称为终点（或汇点）。</li>
+</ul>
+<p>如下图的 <code>V...</code>表示事件，<code>a...</code>表示活动。<br><img src="images/g1.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>对比<code>AOV</code> (<code>Activity On Vertex Network</code>)网: 用顶点表示活动，用弧表示活动间的优先关系的有向图。</p>
+</blockquote>
+<ul>
+<li><code>AOE</code>网可用来估算工程的完成时间，对于<code>AOE</code>网，有两个关键的问题:<ul>
+<li>① 完成整个工程至少需要多少时间？</li>
+<li>② 哪些活动是影响工程进度的关键？（或者说，为缩短完成工程所需要的时间，应该加快哪些活动 ?）</li>
+</ul>
+</li>
+</ul>
+<p><font color = purple>性质:</p>
+<ul>
+<li><p>只有在某顶点所代表的事件发生后，从该顶点出发的各活动才能开始；</p>
+</li>
+<li><p>只有在进入某顶点的各活动都结束，该顶点所代表的事件才能发生。</p>
+</li>
+</ul>
+<h5 id="关键路径"><a href="#关键路径" class="headerlink" title="关键路径"></a>关键路径</h5><ul>
+<li><p>在<code>AOE</code>网中，从始点到终点具有<font color = red>最大路径长度（该路径上的各个活动所持续的时间之和）的路径称为关键路径</font> (<code>ee[ai]=le[ai]</code>(<font color = blue>活动最早开始时间和最晚开始时间相等（没有一点商量的余地）</font>))，在关键路径上的活动叫关键活动。</p>
+</li>
+<li><p>由于<code>AOE</code>网中的某些活动能够同时进行，故完成整个工程所必须花费的时间应该为<font color = red>始点到终点的最大路径长度。关键路径长度是整个工程所需的最短工期。</font></p>
+</li>
+</ul>
+<h5 id="关键路径相关的四个量"><a href="#关键路径相关的四个量" class="headerlink" title="关键路径相关的四个量"></a>关键路径相关的四个量</h5><ul>
+<li>事件的最早发生时间<code>ev</code>(<code>earliest time of vertex</code>): 即顶点<code>Vk</code>的最早发生时间。</li>
+<li>事件的最晚发生时间<code>lv</code>(<code>latest time of vertex</code>)  : 即顶点<code>Vk</code>的最晚发生时间。(<font color = green>也就是每个顶点对应的事件最晚需要开始的时间，超出此时间将会延误整个工期。</font>)</li>
+<li>活动的最早开工时间<code>ee</code>(<code>earliest time of edge</code>): 即边<code>ak</code>的最早发生时间。</li>
+<li>活动的最晚开工时间<code>le</code>(<code>latest time of edge</code>): 即弧<code>ak</code>的最晚发生时间。(<font color = green>也就是不推迟工期的最晚开工时间。</font>)</li>
+</ul>
+<p><font color = blue>只要求出了这四个量。然后根据活动最早开工时间<code>ee[ak]</code>和活动最晚开工时间<code>le[ak]</code>相等判断<code>ak</code>是否是关键活动(确定关键路径)。</font></p>
+<h5 id="四个量的求解"><a href="#四个量的求解" class="headerlink" title="四个量的求解"></a>四个量的求解</h5><p><font color = purple><strong>①事件的最早发生时间<code>ev</code></strong></p>
+<ul>
+<li><code>ev[k]</code>是指从始点开始到顶点<code>vk</code>的<font color = blue>最大路径长度</font>。这个长度决定了所有从顶点<code>vk</code>发出的活动能够开工的最早时间。</li>
+<li>要想求得当前的<code>ev[k]</code>，必须保证之前经过的顶点也是最大的路径，所以这是一个动态规划问题，转移方程<code>ev[k] = max&#123;ev[j] + lev&lt;Vj, Vk&gt; &#125;</code>（其中<code>Vj</code>就是<code>Vk</code>的所有前一个事件(顶点)）。</li>
+<li>要想求出上面的<code>ev</code>数组，由于<code>Vk</code>发生之前要发生<code>Vj</code>，所以我们可以使用拓扑排序来辅助这一过程，也就是说， 求事件的最早发生时间<code>ev</code>的过程，就是从头至尾找拓扑序列，然后顺便维护<code>ev</code>数组的过程。</li>
+</ul>
+<p><img src="images/g2.png" alt="在这里插入图片描述"></p>
+<p>看一个求解的例子:<br><img src="images/g3.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><code>V0</code>最早发生时间是<code>0</code>时刻，即<code>ev[0] = 0</code>；</li>
+<li><code>V1</code>最早发生时间是当<code>a0</code>完成后，也就是<code>ev[1] = 0 + a0 = 6</code>；</li>
+<li>同<code>V1</code>，<code>V2 = 4、V3 = 5</code>；</li>
+<li><code>V4</code>和前四个不同，前面有两条路径<code>V0 ~ V1 ~ V4</code>、<code>V0 ~ V2 ~ V4</code>到达<code>V4</code>，但是更长的一条是第一条<code>V0 ~ V1 ~ V4</code>，所以取更大<code>max</code>的，即<code>ev[4] = 7</code>；</li>
+<li>后面的<code>V7</code>、<code>V8</code>和<code>V4</code>同理。</li>
+</ul>
+<p> <font color = purple><strong>②事件的最晚发生时间<code>lv</code></strong></p>
+<ul>
+<li><code>lv[k]</code>是指在不推迟整个工期的前提下,事件<code>vk</code>允许的最晚发生时间。</li>
+<li>和<code>ev</code>相反，求<code>lv</code>数组是从<font color = blue>终点</font>开始求，<code>lv[n-1] = ev[n-1]</code>，然后对于前面的顶点，也是采用动态规划的方式，<code>lv[k] = min&#123; lv[j] - len&lt;Vk, Vj&gt;&#125;</code>；</li>
+</ul>
+<p><img src="images/g4.png" alt="在这里插入图片描述"><br><img src="images/g5.png" alt="在这里插入图片描述"><br><font color = purple><strong>③活动的最早发生时间<code>ee</code></strong></p>
+<p>这个最简单：　</p>
+<ul>
+<li>因为活动<code>ai</code>是由弧<code>&lt;vk , vj&gt;</code>表示，则活动<code>ai</code>的最早开始时间应等于事件<code>vk</code>的最早发生时间。因此，有：<code>ee[i]=ev[k]</code></li>
+</ul>
+<p><font color = purple><strong>④活动的最早发生时间<code>le</code></strong></p>
+<ul>
+<li>活动<code>ai</code>的最晚开始时间是指，在不推迟整个工期的前提下， <code>ai</code>必须开始的最晚时间。</li>
+<li>若<code>ai</code>由弧<code>&lt;vk，vj&gt;</code>表示，则<code>ai</code>的最晚开始时间要保证事件<code>vj</code>的最迟发生时间不拖后。因此，有：<code>le[ai]=lv[j]-len&lt;vk,vj&gt;</code>；</li>
+</ul>
+<p><img src="images/g6.png" alt="在这里插入图片描述"></p>
+<h5 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h5><p>这里是按照上面的图(索引从<code>0</code>开始)，也可以按照索引从<code>1</code>开始: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CriticalPathMethod2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Graph</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> n;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span>[] in;     <span class="comment">// 入度</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span>[] ev, lv; <span class="comment">// 事件(顶点)的最早，最晚时间</span></span><br><span class="line">        <span class="keyword">public</span> ArrayList&lt;Edge&gt; g[];</span><br><span class="line">        <span class="keyword">public</span> Stack&lt;Integer&gt;vStack; <span class="comment">//存拓扑排序的顶点</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Graph</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.n = n;</span><br><span class="line">            in = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            g = <span class="keyword">new</span> ArrayList[n];</span><br><span class="line">            ev = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            lv = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            vStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">                g[i] = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                ev[i] = <span class="number">0</span>;</span><br><span class="line">                lv[i] = <span class="number">0</span>;</span><br><span class="line">                in[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Edge</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> to;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> w;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Edge</span><span class="params">(<span class="keyword">int</span> to, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.to = to;</span><br><span class="line">            <span class="keyword">this</span>.w = w;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**求事件的最早发生时间ev的过程，就是从头至尾找拓扑序列的过程。**/</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortedTopology</span><span class="params">(Graph G)</span> </span>&#123;</span><br><span class="line">        Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(G.in[i] == <span class="number">0</span>)</span><br><span class="line">                queue.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> curNode = queue.poll();</span><br><span class="line">            G.vStack.push(curNode);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.g[curNode].size(); i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> to = G.g[curNode].get(i).to;</span><br><span class="line">                <span class="keyword">int</span> w = G.g[curNode].get(i).w;</span><br><span class="line">                <span class="keyword">if</span>(--G.in[to] == <span class="number">0</span>)</span><br><span class="line">                    queue.add(to);</span><br><span class="line">                <span class="comment">//ev事件最早发生: ve[to] = max&#123;ev[curNode] + len&lt;V[curNode],V[to]&gt;)&#125;</span></span><br><span class="line">                <span class="keyword">if</span>(G.ev[curNode] + w &gt; G.ev[to])  <span class="comment">// 更新的不是curNode，而是to</span></span><br><span class="line">                    G.ev[to] = G.ev[curNode] + w;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">&quot;ev(事件最早)数组: &quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)</span><br><span class="line">            System.out.print(G.ev[i] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">criticalPath</span><span class="params">(Graph G)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)</span><br><span class="line">            G.lv[i] = G.ev[G.n-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span>(!G.vStack.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> curNode = G.vStack.pop();</span><br><span class="line">            <span class="comment">//lv[curNode] = min&#123;lv[to] - len&lt;V[curNode],V[to]&gt;&#125;</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.g[curNode].size(); i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> to = G.g[curNode].get(i).to;</span><br><span class="line">                <span class="keyword">int</span> w = G.g[curNode].get(i).w;</span><br><span class="line">                <span class="keyword">if</span>(G.lv[to] - w &lt; G.lv[curNode]) <span class="comment">//注意更新的不是 to 而是 curNode</span></span><br><span class="line">                    G.lv[curNode] = G.lv[to] - w;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">&quot;lv(事件最迟)数组: &quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)</span><br><span class="line">            System.out.print(G.lv[i] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//求解活动最早、最晚发生时间</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ee, le; <span class="comment">//活动(边)最早、晚发生时间</span></span><br><span class="line">        System.out.println(<span class="string">&quot;关键活动(边): &lt;左端点,右端点&gt;: 权值&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; G.n; v++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.g[v].size(); i++)&#123;</span><br><span class="line">                ee = G.ev[v];       <span class="comment">// 活动ai 由&lt;Vk, Vj&gt;组成，则ai(ee) = ev[k] --&gt; 活动最早发生就是前面的事件最早发生</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> to = G.g[v].get(i).to;</span><br><span class="line">                <span class="keyword">int</span> w = G.g[v].get(i).w;</span><br><span class="line"></span><br><span class="line">                le = G.lv[to] - w;  <span class="comment">// 活动ai 由&lt;Vk, Vj&gt;组成，则ai(le) = lv[j] - len&lt;Vk, Vj&gt;</span></span><br><span class="line">                <span class="keyword">if</span>(ee == le)   <span class="comment">//关键活动</span></span><br><span class="line">                    System.out.format(<span class="string">&quot;&lt;V%d,V%d&gt;: %d\n&quot;</span>, v, to, w);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner cin = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> BufferedInputStream(System.in));</span><br><span class="line">        <span class="keyword">int</span> n = cin.nextInt();</span><br><span class="line">        <span class="keyword">int</span> m = cin.nextInt();</span><br><span class="line"></span><br><span class="line">        Graph G = <span class="keyword">new</span> Graph(n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> from = cin.nextInt();</span><br><span class="line">            <span class="keyword">int</span> to = cin.nextInt();</span><br><span class="line">            <span class="keyword">int</span> w = cin.nextInt();</span><br><span class="line">            G.g[from].add(<span class="keyword">new</span> Edge(to, w));</span><br><span class="line">            G.in[to]++;</span><br><span class="line">        &#125;</span><br><span class="line">        sortedTopology(G); <span class="comment">//拓扑排序求 G.ev : 每个顶点(事件)的最早发生时间</span></span><br><span class="line">        criticalPath(G); <span class="comment">// 求解关键路径</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上图的测试结果:<br><img src="images/g7.png" alt="在这里插入图片描述"></p>
+<hr>
+<h3 id="Hdu4109-Instrction-Arrangement题解"><a href="#Hdu4109-Instrction-Arrangement题解" class="headerlink" title="Hdu4109-Instrction Arrangement题解"></a><font color  = red id = "2">Hdu4109-Instrction Arrangement题解</h3><h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=4109">题目链接</a></h4><h4 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h4><p>给你<code>n</code>和<code>m</code>代表编号<code>0 ~ n-1</code>个任务(顶点)，和<code>m</code>条关系(边)，每条关系由<code>X、Y、Z</code>，代表想要完成<code>Y</code>必须先完成<code>X</code>并花费<code>Z</code>个时间、<code>CPU</code>可以同时完成多个任务处理，一次花费一个单位时间。问完成<code>0 ~ n-1</code>个任务需要多少时间。</p>
+<p><img src="images/g8.png" alt="在这里插入图片描述"></p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
+<li>这个比关键路径更加简单，其实就是求一个<code>ev</code>数组的最大值；</li>
+<li>也就是求这个图(<font color = red>可能不连通，但是我们求一个最大值即可</font>)这些连通分量的最长路径长度的最大值.</li>
+<li>所以我们只需要通过拓扑排序求出<code>ev</code>数组即可。</li>
+<li>值得注意的是，因为这里不是<font color = red>“时刻”</font>，所以起点不是<code>0</code>，而是<code>1</code>；<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Graph</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> n;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span>[] in;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span>[] ev;</span><br><span class="line">        <span class="keyword">public</span> ArrayList&lt;Edge&gt; g[];</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Graph</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.n = n;</span><br><span class="line">            in = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            g = <span class="keyword">new</span> ArrayList[n];</span><br><span class="line">            ev = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">                in[i] = <span class="number">0</span>;</span><br><span class="line">                g[i] = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                ev[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Edge</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> to;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> w;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Edge</span><span class="params">(<span class="keyword">int</span> to, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.to = to;</span><br><span class="line">            <span class="keyword">this</span>.w = w;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**求事件的最早发生时间ev的过程，就是从头至尾找拓扑序列的过程。**/</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortedTopology</span><span class="params">(Graph G)</span> </span>&#123;</span><br><span class="line">        Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(G.in[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                queue.add(i);</span><br><span class="line">                G.ev[i] = <span class="number">1</span>; <span class="comment">// this is important   不是时间，而是CPU的花费，所以初始化不是0而是1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span> curNode = queue.poll();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.g[curNode].size(); i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> to = G.g[curNode].get(i).to;</span><br><span class="line">                <span class="keyword">int</span> w = G.g[curNode].get(i).w;</span><br><span class="line">                <span class="keyword">if</span>(--G.in[to] == <span class="number">0</span>)</span><br><span class="line">                    queue.add(to);</span><br><span class="line">                <span class="comment">//ev事件最早发生: ve[to] = max&#123;ev[curNode] + len&lt;V[curNode],V[to]&gt;)&#125;</span></span><br><span class="line">                <span class="keyword">if</span>(G.ev[curNode] + w &gt; G.ev[to])  <span class="comment">// 更新的不是curNode，而是to</span></span><br><span class="line">                    G.ev[to] = G.ev[curNode] + w;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner cin = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> BufferedInputStream(System.in));</span><br><span class="line">        <span class="keyword">while</span>(cin.hasNext()) &#123;</span><br><span class="line">            <span class="keyword">int</span> n = cin.nextInt();</span><br><span class="line">            <span class="keyword">int</span> m = cin.nextInt();</span><br><span class="line">            Graph G = <span class="keyword">new</span> Graph(n);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">                <span class="keyword">int</span> from = cin.nextInt();</span><br><span class="line">                <span class="keyword">int</span> to = cin.nextInt();</span><br><span class="line">                <span class="keyword">int</span> w = cin.nextInt();</span><br><span class="line">                G.g[from].add(<span class="keyword">new</span> Edge(to, w));</span><br><span class="line">                G.in[to]++;</span><br><span class="line">            &#125;</span><br><span class="line">            sortedTopology(G);</span><br><span class="line">            <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G.n; i++)</span><br><span class="line">                res = Math.max(res, G.ev[i]);</span><br><span class="line">            System.out.println(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/" title="Instrction Arrangement以及关键路径详解">http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Graph/" rel="tag"># Graph</a>
+          
+            <a href="/tags/BFS/" rel="tag"># BFS</a>
+          
+            <a href="/tags/DFS/" rel="tag"># DFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/29/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%BB%A5%E5%8F%8ABFS%E5%92%8CDFS(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92)/" rel="next" title="图的基本结构以及BFS和DFS(递归和非递归)">
+                <i class="fa fa-chevron-left"></i> 图的基本结构以及BFS和DFS(递归和非递归)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/" rel="prev" title="Instrction Arrangement以及关键路径详解">
+                Instrction Arrangement以及关键路径详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Instrction-Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Instrction Arrangement以及关键路径详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">关键路径详解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AOE%E7%BD%91"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">AOE网</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">关键路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9B%9B%E4%B8%AA%E9%87%8F"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">关键路径相关的四个量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AA%E9%87%8F%E7%9A%84%E6%B1%82%E8%A7%A3"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">四个量的求解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">实现代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hdu4109-Instrction-Arrangement%E9%A2%98%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">Hdu4109-Instrction Arrangement题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">118.5k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/';
+          this.page.identifier = '2022/02/17/Instrction Arrangement以及关键路径详解/';
+          this.page.title = 'Instrction Arrangement以及关键路径详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

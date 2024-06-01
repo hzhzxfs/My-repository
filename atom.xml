@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-06-01T00:37:42.253Z</updated>
+  <updated>2024-06-01T02:06:21.844Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,40 +17,18 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>复盘｜「天池 X LeetCode」在线编程专场选拔赛</title>
-    <link href="http://example.com/2021/07/22/%E5%A4%8D%E7%9B%98%EF%BD%9C%E3%80%8C%E5%A4%A9%E6%B1%A0%20X%20LeetCode%E3%80%8D%E5%9C%A8%E7%BA%BF%E7%BC%96%E7%A8%8B%E4%B8%93%E5%9C%BA%E9%80%89%E6%8B%94%E8%B5%9B/"/>
-    <id>http://example.com/2021/07/22/%E5%A4%8D%E7%9B%98%EF%BD%9C%E3%80%8C%E5%A4%A9%E6%B1%A0%20X%20LeetCode%E3%80%8D%E5%9C%A8%E7%BA%BF%E7%BC%96%E7%A8%8B%E4%B8%93%E5%9C%BA%E9%80%89%E6%8B%94%E8%B5%9B/</id>
-    <published>2021-07-22T12:31:31.000Z</published>
-    <updated>2024-06-01T00:37:42.253Z</updated>
+    <title>矩阵相关操作和矩阵快速幂</title>
+    <link href="http://example.com/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
+    <id>http://example.com/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/</id>
+    <published>2022-05-06T13:30:38.000Z</published>
+    <updated>2024-06-01T02:06:21.844Z</updated>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;复盘｜「天池-X-LeetCode」在线编程专场选拔赛&quot;&gt;&lt;a href=&quot;#复盘｜「天池-X-LeetCode」在线编程专场选拔赛&quot; class=&quot;headerlink&quot; title=&quot;复盘｜「天池 X LeetCode」在线编程专场选拔赛&quot;&gt;&lt;/a&gt;复盘｜「天</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Algorithm" scheme="http://example.com/tags/Algorithm/"/>
-    
-    <category term="Python" scheme="http://example.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>复盘｜天堂硅谷·数字经济算法编程大赛</title>
-    <link href="http://example.com/2021/07/21/%E5%A4%8D%E7%9B%98%EF%BD%9C%E5%A4%A9%E5%A0%82%E7%A1%85%E8%B0%B7%C2%B7%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B%E5%A4%A7%E8%B5%9B/"/>
-    <id>http://example.com/2021/07/21/%E5%A4%8D%E7%9B%98%EF%BD%9C%E5%A4%A9%E5%A0%82%E7%A1%85%E8%B0%B7%C2%B7%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B%E5%A4%A7%E8%B5%9B/</id>
-    <published>2021-07-21T13:30:38.000Z</published>
-    <updated>2024-06-01T00:29:02.719Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;复盘｜天堂硅谷·数字经济算法编程大赛&quot;&gt;&lt;a href=&quot;#复盘｜天堂硅谷·数字经济算法编程大赛&quot; class=&quot;headerlink&quot; title=&quot;复盘｜天堂硅谷·数字经济算法编程大赛&quot;&gt;&lt;/a&gt;复盘｜天堂硅谷·数字经济算法编程大赛&lt;/h1&gt;&lt;h3 id=&quot;题</summary>
+    <summary type="html">&lt;h2 id=&quot;矩阵相关操作和矩阵快速幂&quot;&gt;&lt;a href=&quot;#矩阵相关操作和矩阵快速幂&quot; class=&quot;headerlink&quot; title=&quot;矩阵相关操作和矩阵快速幂&quot;&gt;&lt;/a&gt;矩阵相关操作和矩阵快速幂&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;矩阵基本运算以及快速幂模板&lt;/li&gt;
+&lt;li&gt;P</summary>
       
     
     
@@ -58,459 +36,493 @@
     <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="Algorithm" scheme="http://example.com/tags/Algorithm/"/>
-    
-    <category term="Python" scheme="http://example.com/tags/Python/"/>
+    <category term="Math" scheme="http://example.com/tags/Math/"/>
     
   </entry>
   
   <entry>
-    <title>李宏毅机器学习——神经网络设计技巧</title>
-    <link href="http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/"/>
-    <id>http://example.com/2021/07/20/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</id>
-    <published>2021-07-20T14:52:21.000Z</published>
-    <updated>2021-07-25T13:24:32.944Z</updated>
+    <title>乘法快速幂相关总结  &amp; LeetCode - 50. Pow(x, n)</title>
+    <link href="http://example.com/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&amp;%20LeetCode%20-%2050.%20Pow(x,%20n)/"/>
+    <id>http://example.com/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&amp;%20LeetCode%20-%2050.%20Pow(x,%20n)/</id>
+    <published>2022-04-26T13:30:38.000Z</published>
+    <updated>2024-06-01T02:05:36.792Z</updated>
     
     
-    <summary type="html">&lt;h3 id=&quot;李宏毅机器学习——神经网络设计技巧&quot;&gt;&lt;a href=&quot;#李宏毅机器学习——神经网络设计技巧&quot; class=&quot;headerlink&quot; title=&quot;李宏毅机器学习——神经网络设计技巧&quot;&gt;&lt;/a&gt;李宏毅机器学习——神经网络设计技巧&lt;/h3&gt;&lt;h4 id=&quot;1-鞍点-Saddle-Point&quot;&gt;&lt;a href=&quot;#1-鞍点-Saddle-Point&quot; class=&quot;headerlink&quot; title=&quot;1 鞍点(Saddle Point)&quot;&gt;&lt;/a&gt;1 鞍点(&lt;em&gt;Saddle&lt;/em&gt; &lt;em&gt;Point&lt;/em&gt;)&lt;/h4&gt;&lt;p&gt;神经网络中，Gradient为0(或不存在)的点称为临界点(critical point)，其有两种可能性：局部极小(local minima)和鞍点(saddle point)。&lt;/p&gt;
-&lt;p&gt;长期以来，人们普遍认为，神经网络优化问题困难是因为较大的神经网络中包含很多局部极小值，使得算法容易陷入到其中某些点。2014年的一篇论文中提出高维非凸优化问题之所以困难，是因为存在大量的鞍点而不是局部极值。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;鞍点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一个维度向上倾斜且另一维度向下倾斜的点。这些鞍点通常被相同误差值的平面所包围，这使得算法陷入其中很难脱离出来，因为梯度在所有维度上接近于零&lt;/li&gt;
-&lt;li&gt;梯度等于零，在其附近Hessian矩阵有正的和负的特征值，行列式小于0，即是不定的。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://imgtu.com/i/W24pJU&quot;&gt;&lt;img src=&quot;https://z3.ax1x.com/2021/07/25/W24pJU.png&quot; alt=&quot;W24pJU.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;乘法快速幂相关总结-amp-LeetCode-50-Pow-x-n&quot;&gt;&lt;a href=&quot;#乘法快速幂相关总结-amp-LeetCode-50-Pow-x-n&quot; class=&quot;headerlink&quot; title=&quot;乘法快速幂相关总结  &amp;amp; LeetCode </summary>
+      
     
     
     
-    <category term="Neural Networks" scheme="http://example.com/categories/Neural-Networks/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="Momentum" scheme="http://example.com/tags/Momentum/"/>
-    
-    <category term="Adam" scheme="http://example.com/tags/Adam/"/>
+    <category term="Math" scheme="http://example.com/tags/Math/"/>
     
   </entry>
   
   <entry>
-    <title>李宏毅机器学习——反向传播</title>
-    <link href="http://example.com/2021/07/18/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/"/>
-    <id>http://example.com/2021/07/18/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/</id>
-    <published>2021-07-18T14:52:21.000Z</published>
-    <updated>2021-07-25T12:44:33.861Z</updated>
+    <title>素数回文以及素数相关总结</title>
+    <link href="http://example.com/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</id>
+    <published>2022-04-08T13:30:38.000Z</published>
+    <updated>2024-06-01T02:05:44.066Z</updated>
     
     
-    <summary type="html">&lt;h3 id=&quot;李宏毅机器学习——反向传播&quot;&gt;&lt;a href=&quot;#李宏毅机器学习——反向传播&quot; class=&quot;headerlink&quot; title=&quot;李宏毅机器学习——反向传播&quot;&gt;&lt;/a&gt;李宏毅机器学习——反向传播&lt;/h3&gt;&lt;h4 id=&quot;1-反向传播原理&quot;&gt;&lt;a href=&quot;#1-反向传播原理&quot; class=&quot;headerlink&quot; title=&quot;1 反向传播原理&quot;&gt;&lt;/a&gt;1 反向传播原理&lt;/h4&gt;&lt;p&gt;神经网络中求解权重W的算法，分为信号的前向传播（Forward propagation，FP）和反向传播（Back propagation，BP）。前向传播得到预测值，计算输出误差，然后计算每个神经元节点对误差的贡献；反向传播根据前向传播的误差来求梯度，然后根据贡献调整原来的权重，最终达到最小化损失函数的目的。&lt;br&gt;&lt;a href=&quot;https://imgtu.com/i/W2hxoV&quot;&gt;&lt;img src=&quot;https://z3.ax1x.com/2021/07/25/W2hxoV.png&quot; alt=&quot;W2hxoV.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Neural Networks" scheme="http://example.com/categories/Neural-Networks/"/>
-    
-    
-    <category term="Back Propagation" scheme="http://example.com/tags/Back-Propagation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习——梯度下降</title>
-    <link href="http://example.com/2021/07/16/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
-    <id>http://example.com/2021/07/16/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</id>
-    <published>2021-07-16T14:52:21.000Z</published>
-    <updated>2021-07-25T12:44:02.681Z</updated>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;李宏毅机器学习——梯度下降&quot;&gt;&lt;a href=&quot;#李宏毅机器学习——梯度下降&quot; class=&quot;headerlink&quot; title=&quot;李宏毅机器学习——梯度下降&quot;&gt;&lt;/a&gt;李宏毅机器学习——梯度下降&lt;/h3&gt;&lt;h4 id=&quot;1-偏差与方差&quot;&gt;&lt;a href=&quot;#1-偏差与方差&quot; class=&quot;headerlink&quot; title=&quot;1 偏差与方差&quot;&gt;&lt;/a&gt;1 偏差与方差&lt;/h4&gt;&lt;p&gt;使用样本数据拟合函数，由于样本数据使采样而并非真实值本身，采样本身会带来误差。经过研究发现，其误差的期望值可以分解为三个部分：样本&lt;strong&gt;噪音&lt;/strong&gt;、模型预测值的&lt;strong&gt;方差&lt;/strong&gt;、预测值相对真实值的&lt;strong&gt;偏差&lt;/strong&gt;，公式为：&lt;br&gt;$$&lt;br&gt;E\left((y-\hat{f}(x))^{2}\right)=\sigma^{2}+\operatorname{Var}[\hat{f}(x)]+(\operatorname{Bias}[\hat{f}(x)])^{2}&lt;br&gt;$$&lt;br&gt;其中$Bias[\hat{f}(x)] = E[\hat{f}(x) - f(x)]$，即误差的期望值 = 噪音的方差 + 模型预测值的方差 + 预测值相对真实值的偏差的平方，如下图所示。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://imgtu.com/i/W2h4dP&quot;&gt;&lt;img src=&quot;https://z3.ax1x.com/2021/07/25/W2h4dP.png&quot; alt=&quot;W2h4dP.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;素数回文以及素数相关总结&quot;&gt;&lt;a href=&quot;#素数回文以及素数相关总结&quot; class=&quot;headerlink&quot; title=&quot;素数回文以及素数相关总结&quot;&gt;&lt;/a&gt;素数回文以及素数相关总结&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;普通筛素数法&lt;/li&gt;
+&lt;li&gt;埃式筛法&lt;/li</summary>
+      
     
     
     
-    <category term="Neural Networks" scheme="http://example.com/categories/Neural-Networks/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="Gradient Descent" scheme="http://example.com/tags/Gradient-Descent/"/>
+    <category term="Math" scheme="http://example.com/tags/Math/"/>
     
   </entry>
   
   <entry>
-    <title>李宏毅机器学习——回归</title>
-    <link href="http://example.com/2021/07/14/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%9B%9E%E5%BD%92/"/>
-    <id>http://example.com/2021/07/14/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%9B%9E%E5%BD%92/</id>
-    <published>2021-07-14T14:52:21.000Z</published>
-    <updated>2021-07-25T12:42:33.982Z</updated>
+    <title>最小生成树模板题(Kruskal算法和Prim算法实现)</title>
+    <link href="http://example.com/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/"/>
+    <id>http://example.com/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/</id>
+    <published>2022-03-26T13:30:38.000Z</published>
+    <updated>2024-06-01T02:04:37.678Z</updated>
     
     
-    <summary type="html">&lt;h3 id=&quot;李宏毅机器学习——回归&quot;&gt;&lt;a href=&quot;#李宏毅机器学习——回归&quot; class=&quot;headerlink&quot; title=&quot;李宏毅机器学习——回归&quot;&gt;&lt;/a&gt;李宏毅机器学习——回归&lt;/h3&gt;&lt;p&gt;回归大致可以理解为根据数据集$D$，拟合出近似的曲线，所以回归也常称为拟合（Fit）。按照自变量的数量可以分为一元回归和多元回归，按照自变量与因变量之间的函数表达式可以分为线性回归(Linear Regression)和非线性回归(Non-linear Regression)。&lt;/p&gt;
-&lt;h4 id=&quot;1-模型步骤&quot;&gt;&lt;a href=&quot;#1-模型步骤&quot; class=&quot;headerlink&quot; title=&quot;1 模型步骤&quot;&gt;&lt;/a&gt;1 模型步骤&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;Step1：模型假设，选择模型框架（线性模型）&lt;/li&gt;
-&lt;li&gt;Step2：模型评估，如何判断众多模型的好坏（损失函数）&lt;/li&gt;
-&lt;li&gt;Step3：模型优化，如何筛选最优的模型（梯度下降）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&quot;1-1-模型假设（多元线性模型）&quot;&gt;&lt;a href=&quot;#1-1-模型假设（多元线性模型）&quot; class=&quot;headerlink&quot; title=&quot;1.1 模型假设（多元线性模型）&quot;&gt;&lt;/a&gt;1.1 模型假设（多元线性模型）&lt;/h5&gt;&lt;p&gt;多元线性模型就是特征x的线性组合的函数，可以表示为$y=\sum{w_ix_i}+b$，$x_i$为特征，$w_i$为权重，b为偏移量。&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;最小生成树模板题-Kruskal算法和Prim算法实现&quot;&gt;&lt;a href=&quot;#最小生成树模板题-Kruskal算法和Prim算法实现&quot; class=&quot;headerlink&quot; title=&quot;最小生成树模板题(Kruskal算法和Prim算法实现)&quot;&gt;&lt;/a&gt;最小生成</summary>
+      
     
     
     
-    <category term="Neural Networks" scheme="http://example.com/categories/Neural-Networks/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
-    
-    <category term="Regression" scheme="http://example.com/tags/Regression/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>李宏毅机器学习——机器学习介绍</title>
-    <link href="http://example.com/2021/07/12/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://example.com/2021/07/12/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/</id>
-    <published>2021-07-12T14:52:21.000Z</published>
-    <updated>2021-07-25T12:42:02.981Z</updated>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;李宏毅机器学习——机器学习介绍&quot;&gt;&lt;a href=&quot;#李宏毅机器学习——机器学习介绍&quot; class=&quot;headerlink&quot; title=&quot;李宏毅机器学习——机器学习介绍&quot;&gt;&lt;/a&gt;李宏毅机器学习——机器学习介绍&lt;/h3&gt;&lt;h4 id=&quot;1-机器学习简介&quot;&gt;&lt;a href=&quot;#1-机器学习简介&quot; class=&quot;headerlink&quot; title=&quot;1. 机器学习简介&quot;&gt;&lt;/a&gt;1. 机器学习简介&lt;/h4&gt;&lt;p&gt;机器学习是人工智能的一部分, 研究如何让计算机从数据学习某种规律。机器学习的目的是通过计算机程序根据数据去优化某一个评价指标，自动的从数据发现规律, 使用这些规律做出预测。&lt;br&gt;&lt;a href=&quot;https://imgtu.com/i/W2huKs&quot;&gt;&lt;img src=&quot;https://z3.ax1x.com/2021/07/25/W2huKs.png&quot; alt=&quot;W2huKs.png&quot;&gt;&lt;/a&gt;&lt;br&gt;如图，机器学习可以简化为三个步骤，一、找一个function，二、让machine评价这个function，三、让machine自动地挑出最好的function。&lt;/p&gt;
-&lt;h4 id=&quot;2-机器学习分类&quot;&gt;&lt;a href=&quot;#2-机器学习分类&quot; class=&quot;headerlink&quot; title=&quot;2. 机器学习分类&quot;&gt;&lt;/a&gt;2. 机器学习分类&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://imgtu.com/i/W2hlV0&quot;&gt;&lt;img src=&quot;https://z3.ax1x.com/2021/07/25/W2hlV0.png&quot; alt=&quot;W2hlV0.png&quot;&gt;&lt;/a&gt;&lt;br&gt;机器学习可大致分为监督学习、无监督学习、半监督学习、迁移学习和强化学习。&lt;/p&gt;
-&lt;h5 id=&quot;2-1-监督学习&quot;&gt;&lt;a href=&quot;#2-1-监督学习&quot; class=&quot;headerlink&quot; title=&quot;2.1 监督学习&quot;&gt;&lt;/a&gt;2.1 监督学习&lt;/h5&gt;&lt;p&gt;监督学习是机器学习任务的一种。它从有标签的训练数据中推导出预测函数。有标签的训练数据是指每个训练实例都包括输入和期望的输出。简单来说就是给定数据，预测标签。&lt;br&gt;监督学习包括&lt;code&gt;分类&lt;/code&gt;和&lt;code&gt;回归&lt;/code&gt;。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Neural Networks" scheme="http://example.com/categories/Neural-Networks/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——基本图论与PyG库</title>
-    <link href="http://example.com/2021/07/09/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E9%9B%86%E7%B1%BB%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%9B%BE%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://example.com/2021/07/09/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E9%9B%86%E7%B1%BB%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%9B%BE%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1%E5%AE%9E%E8%B7%B5/</id>
-    <published>2021-07-09T14:52:21.000Z</published>
-    <updated>2021-07-12T02:11:47.951Z</updated>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;图神经网络——超大规模数据集类的创建和图预测任务实践&quot;&gt;&lt;a href=&quot;#图神经网络——超大规模数据集类的创建和图预测任务实践&quot; class=&quot;headerlink&quot; title=&quot;图神经网络——超大规模数据集类的创建和图预测任务实践&quot;&gt;&lt;/a&gt;图神经网络——超大规模数据集类的创建和图预测任务实践&lt;/h3&gt;&lt;p&gt;当数据集规模超级大时，很难有足够大的内存完全存下所有数据。因此需要一个按需加载样本到内存的数据集类。&lt;/p&gt;
-&lt;h4 id=&quot;1-Dataset基类&quot;&gt;&lt;a href=&quot;#1-Dataset基类&quot; class=&quot;headerlink&quot; title=&quot;1 Dataset基类&quot;&gt;&lt;/a&gt;1 &lt;code&gt;Dataset&lt;/code&gt;基类&lt;/h4&gt;&lt;h5 id=&quot;1-1-Dataset基类介绍&quot;&gt;&lt;a href=&quot;#1-1-Dataset基类介绍&quot; class=&quot;headerlink&quot; title=&quot;1.1 Dataset基类介绍&quot;&gt;&lt;/a&gt;1.1 &lt;code&gt;Dataset&lt;/code&gt;基类介绍&lt;/h5&gt;&lt;p&gt;在PyG中，通过继承&lt;code&gt;torch_geometric.data.Dataset&lt;/code&gt;基类来自定义一个按需加载样本到内存的数据集类。&lt;br&gt;继承此基类相比较继承&lt;code&gt;torch_geometric.data.InMemoryDataset&lt;/code&gt;基类要多实现以下方法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;len()&lt;/code&gt;：返回数据集中的样本的数量。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;get()&lt;/code&gt;：实现加载单个图的操作。注意：在内部，getitem()返回通过调用get()来获取Data对象，并根据transform参数对它们进行选择性转换。&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="Dataset" scheme="http://example.com/tags/Dataset/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——基本图论与PyG库</title>
-    <link href="http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2021/07/05/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9B%BE%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/</id>
-    <published>2021-07-05T14:52:21.000Z</published>
-    <updated>2021-07-25T12:26:08.403Z</updated>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;图神经网络——基于图神经网络的图表征学习方法&quot;&gt;&lt;a href=&quot;#图神经网络——基于图神经网络的图表征学习方法&quot; class=&quot;headerlink&quot; title=&quot;图神经网络——基于图神经网络的图表征学习方法&quot;&gt;&lt;/a&gt;图神经网络——基于图神经网络的图表征学习方法&lt;/h3&gt;&lt;p&gt;图表征学习要求在输入节点属性、边和边的属性（如果有的话）得到一个向量作为图的表征，基于图表征进一步的我们可以做图的预测，而图同构网络（Graph Isomorphism Network, GIN）的图表征网络是当前最经典的图表征学习网络。&lt;/p&gt;
-&lt;h4 id=&quot;1-GNN的邻域聚合-消息传递&quot;&gt;&lt;a href=&quot;#1-GNN的邻域聚合-消息传递&quot; class=&quot;headerlink&quot; title=&quot;1.GNN的邻域聚合(消息传递)&quot;&gt;&lt;/a&gt;1.GNN的邻域聚合(消息传递)&lt;/h4&gt;&lt;p&gt;GNN的目标是以图结构数据和节点特征作为输入，以学习到节点（或图）的embedding，用于分类任务。&lt;br&gt;基于邻域聚合的GNN可以拆分为以下三个模块：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Aggregate：聚合一阶邻域特征。&lt;/li&gt;
-&lt;li&gt;Combine：将邻居聚合的特征 与 当前节点特征合并， 以更新当前节点特征。&lt;/li&gt;
-&lt;li&gt;Readout（可选）：如果是对graph分类，需要将graph中所有节点特征转变成graph特征。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;但是Aggregate的三种方式sum、mean、max的表征能力不够强大。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="WL Test" scheme="http://example.com/tags/WL-Test/"/>
-    
-    <category term="GIN" scheme="http://example.com/tags/GIN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——超大图上的节点表征学习</title>
-    <link href="http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2021/07/01/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%B6%85%E5%A4%A7%E5%9B%BE%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-07-01T14:52:21.000Z</published>
-    <updated>2021-07-25T12:38:12.290Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;图卷积网络(GCN)已经成功地应用于许多基于图形的应用，然而大规模的GCN的训练仍然具有挑战性。目前基于SGD的算法要么面临着随GCN层数呈指数增长的高计算成本，要么面临着保存整个图形和每个节点的embedding到内存的巨大空间(显存)需求。于是论文&lt;a href=&quot;https://arxiv.org/abs/1905.07953&quot;&gt;Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Network&lt;/a&gt;提出了Cluster-GCN方法来解决超大图的训练问题。&lt;/p&gt;
-&lt;h4 id=&quot;1-Cluster-GCN方法简单概括&quot;&gt;&lt;a href=&quot;#1-Cluster-GCN方法简单概括&quot; class=&quot;headerlink&quot; title=&quot;1.Cluster-GCN方法简单概括&quot;&gt;&lt;/a&gt;1.Cluster-GCN方法简单概括&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;利用图节点聚类算法将一个图的节点划分为$c$个簇，每一次选择几个簇的节点和这些节点对应的边构成一个子图，然后对子图做训练。&lt;/li&gt;
-&lt;li&gt;由于是利用图节点聚类算法将节点划分为多个簇，所以簇内边的数量要比簇间边的数量多得多，所以可以提高表征利用率，并提高图神经网络的训练效率。&lt;/li&gt;
-&lt;li&gt;每一次随机选择多个簇来组成一个batch，这样不会丢失簇间的边，同时也不会有batch内类别分布偏差过大的问题。&lt;/li&gt;
-&lt;li&gt;基于小图进行训练，不会消耗很多内存空间，于是我们可以训练更深的神经网络，进而可以达到更高的精度。&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——节点分类与边预测</title>
-    <link href="http://example.com/2021/06/27/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E4%B8%8E%E8%BE%B9%E9%A2%84%E6%B5%8B/"/>
-    <id>http://example.com/2021/06/27/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E8%8A%82%E7%82%B9%E5%88%86%E7%B1%BB%E4%B8%8E%E8%BE%B9%E9%A2%84%E6%B5%8B/</id>
-    <published>2021-06-27T13:12:21.000Z</published>
-    <updated>2021-06-28T03:11:20.427Z</updated>
-    
-    
-    <summary type="html">&lt;h4 id=&quot;1-InMemoryDataset基类&quot;&gt;&lt;a href=&quot;#1-InMemoryDataset基类&quot; class=&quot;headerlink&quot; title=&quot;1.InMemoryDataset基类&quot;&gt;&lt;/a&gt;1.InMemoryDataset基类&lt;/h4&gt;&lt;p&gt;在PyG中，可以通过继承InMemoryDataset类来自定义一个数据可全部存储到内存的数据集类。(继承Dataset是分次加载到内存，继承InMemoryDataset是一次性加载所有数据到内存)&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;InMemoryDataset&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;root: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;built_in&quot;&gt;str&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, transform: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, pre_transform: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;, pre_filter: &lt;span class=&quot;type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Callable&lt;/span&gt;] = &lt;span class=&quot;literal&quot;&gt;None&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;参数说明：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;transform：数据转换函数，用于转换Data对象，每一次数据获取过程中都会被执行。&lt;br&gt;pre_transform：数据转换函数，用于转换Data对象，在Data对象被保存到文件前调用。&lt;br&gt;pre_filter：检查数据是否要保留的函数，接收一个Data对象，返回此Data对象是否应该被包含在最终的数据集中，在Data对象被保存到文件前调用。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
-    
-    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
-    
-    <category term="GAT" scheme="http://example.com/tags/GAT/"/>
-    
-    <category term="Sequential" scheme="http://example.com/tags/Sequential/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——基于图神经网络的节点表征学习</title>
-    <link href="http://example.com/2021/06/23/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2021/06/23/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%8A%82%E7%82%B9%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0/</id>
-    <published>2021-06-23T15:12:21.000Z</published>
-    <updated>2021-06-28T03:11:18.546Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Graph的特征表示非常复杂：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;1.复杂的拓扑结构，较难从图像中的感受野提取有效信息；&lt;br&gt;2.无特定的节点顺序；&lt;br&gt;3.通常graph会是动态变化的， 且使用多模态特征。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;高质量的节点表征能够用于衡量节点的相似性，同时高质量的节点表征也是准确分类节点的前提。&lt;/p&gt;
-&lt;p&gt;本文以Cora论文引用网络数据集为例，对MLP、GCN、GAT三种神经网络的分类性能进行对比。首先载入数据集并定义可视化函数：&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#载入数据集&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; torch_geometric.datasets &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Planetoid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; torch_geometric.transforms &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; NormalizeFeatures&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dataset = Planetoid(root=&lt;span class=&quot;string&quot;&gt;&amp;#x27;dataset&amp;#x27;&lt;/span&gt;, name=&lt;span class=&quot;string&quot;&gt;&amp;#x27;Cora&amp;#x27;&lt;/span&gt;, transform=NormalizeFeatures())&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
     
     <category term="Graph" scheme="http://example.com/tags/Graph/"/>
     
-    <category term="MLP" scheme="http://example.com/tags/MLP/"/>
+    <category term="Kruskal" scheme="http://example.com/tags/Kruskal/"/>
     
-    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
-    
-    <category term="GAT" scheme="http://example.com/tags/GAT/"/>
+    <category term="Prim" scheme="http://example.com/tags/Prim/"/>
     
   </entry>
   
   <entry>
-    <title>图神经网络——消息传递网络</title>
-    <link href="http://example.com/2021/06/19/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E7%BD%91%E7%BB%9C/"/>
-    <id>http://example.com/2021/06/19/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E7%BD%91%E7%BB%9C/</id>
-    <published>2021-06-19T15:11:21.000Z</published>
-    <updated>2021-06-28T03:08:30.503Z</updated>
+    <title>最短路dijkstra模板</title>
+    <link href="http://example.com/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/"/>
+    <id>http://example.com/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/</id>
+    <published>2022-03-09T13:30:38.000Z</published>
+    <updated>2024-06-01T02:02:08.772Z</updated>
     
     
-    <summary type="html">&lt;p&gt;消息传递(Message Passing) 指的是目标节点$S1$的邻居$\mathcal{N(S1)}$——B1、B2、B3，这些邻居节点根据一定的规则将信息(特征)，汇总到目标节点上。信息汇总中最简单的规则就是逐个元素相加。&lt;br&gt;在pytorch-geometric的官方文档中，消息传递图神经网络被描述为:&lt;br&gt;$$&lt;br&gt;\mathbf{x}_i^{(k)} = \gamma^{(k)} \left( \mathbf{x}&lt;em&gt;i^{(k-1)}, \square&lt;/em&gt;{j \in \mathcal{N}(i)} , \phi^{(k)}\left(\mathbf{x}&lt;em&gt;i^{(k-1)}, \mathbf{x}&lt;em&gt;j^{(k-1)},\mathbf{e}&lt;/em&gt;{j,i}\right) \right),&lt;br&gt;$$&lt;br&gt;其中，$\mathbf{e}&lt;/em&gt;{j,i} \in \mathbb{R}^D$ 表示从节点$j$到节点$i$的边的属性，$\mathbf{x}^{(k-1)}_i\in\mathbb{R}^F$表示$(k-1)$层中节点$i$的节点表征，$\square$表示聚合策略，$\gamma$和$\phi$表示一些神经网络方法，比如MLPs多层感知器、LSTM等。&lt;br&gt;从公式中可以看出，目标节点$x_i$在k层的特征可以通过$x_i$在上一层(k-1层)的特征与其相邻节点$x_j$在上一层(k-1层)的特征以及相邻节点到目标节点的边的特征，这三个特征在k层通过$\square$的聚合策略(aggregate)，通过一个$\gamma$在k层的分析方法来导出目标节点$x_i$的特征。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
-    
-    
-    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
-    
-    <category term="GCN" scheme="http://example.com/tags/GCN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络——基本图论与PyG库</title>
-    <link href="http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/"/>
-    <id>http://example.com/2021/06/15/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E5%9B%BE%E8%AE%BA%E4%B8%8EPyG%E5%BA%93/</id>
-    <published>2021-06-15T14:52:21.000Z</published>
-    <updated>2021-06-28T03:07:19.207Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;在以往的深度学习中，主要的数据形式包括矩阵、张量、序列(sequence)和时间序列(time series)，然而还有许多数据是图的结构，如社交网络、知识图谱等。图结构数据具有以下特点：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;任意的大小和复杂的拓扑结构；&lt;br&gt;没有固定的节点排序或参考点；&lt;br&gt;通常是动态的，并具有多模态的特征；&lt;br&gt;图的信息包括节点信息、边信息和拓扑结构信息。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;1-图结构数据&quot;&gt;&lt;a href=&quot;#1-图结构数据&quot; class=&quot;headerlink&quot; title=&quot;1. 图结构数据&quot;&gt;&lt;/a&gt;1. 图结构数据&lt;/h4&gt;&lt;h5 id=&quot;1-1-图-Graphs&quot;&gt;&lt;a href=&quot;#1-1-图-Graphs&quot; class=&quot;headerlink&quot; title=&quot;1.1 图(Graphs)&quot;&gt;&lt;/a&gt;1.1 图(Graphs)&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;·&lt;/strong&gt; 一个图记作$\mathcal{G}={\mathcal{V}, \mathcal{E}}$，其中 $\mathcal{V}=\left{v_{1}, \ldots, v_{N}\right}$是数量为$N=|\mathcal{V}|$ 的节点的集合， $\mathcal{E}=\left{e_{1}, \ldots, e_{M}\right}$ 是数量为 $M$ 的边的集合。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 节点表示实体(entities)，边表示实体间的关系(relations)；节点和边的信息可以是类别型或数值型的。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 只有一种类型的节点和一种类型的边的图称为同质图(Homogeneous Graph)。&lt;br&gt;&lt;strong&gt;·&lt;/strong&gt; 存在多种类型的节点和多种类型的边的图称为异质图(Heterogeneous Graph)&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;p&gt;﻿## 最短路dijkstra模板&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dijkstra&lt;/code&gt;算法总结&lt;/li&gt;
+&lt;li&gt;常用模板解决&lt;/li&gt;
+&lt;li&gt;其他写法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; clas</summary>
+      
     
     
     
-    <category term="GNN" scheme="http://example.com/categories/GNN/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
-    
-    <category term="PyG" scheme="http://example.com/tags/PyG/"/>
     
     <category term="Graph" scheme="http://example.com/tags/Graph/"/>
     
-  </entry>
-  
-  <entry>
-    <title>异常检测——集成方法</title>
-    <link href="http://example.com/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2021/05/23/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95/</id>
-    <published>2021-05-23T15:52:53.000Z</published>
-    <updated>2021-06-28T03:05:20.497Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;一般情况下，可以把异常检测看成是数据不平衡下的分类问题，如果数据条件允许，优先使用有监督异常检测如XGBOOST；仅有少量标签时，可以用无监督学习作为一种特征抽取方式，最后喂给有监督的分类模型。&lt;br&gt;之前介绍的统计与概率模型、线性模型、基于相似度的模型，和今天要介绍的集成学习都是无监督模型。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;为什么要使用集成学习？——①适合高维度数据(空间稀疏)，②提高模型鲁棒性。&lt;br&gt;值得注意的时，异常检测没有标签，所以feature bagging、bagging比boosting多。而使用boosting进行异常检测，需要生成伪标签。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
-    
-    
-    <category term="Feature Bagging" scheme="http://example.com/tags/Feature-Bagging/"/>
-    
-    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
+    <category term="dijkstra" scheme="http://example.com/tags/dijkstra/"/>
     
   </entry>
   
   <entry>
-    <title>异常检测——基于相似度的方法</title>
-    <link href="http://example.com/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
-    <published>2021-05-20T15:52:43.000Z</published>
-    <updated>2021-06-28T03:05:27.443Z</updated>
+    <title>Instrction Arrangement以及关键路径详解</title>
+    <link href="http://example.com/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/"/>
+    <id>http://example.com/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/</id>
+    <published>2022-02-25T13:30:38.000Z</published>
+    <updated>2024-06-01T02:00:51.766Z</updated>
     
     
-    <summary type="html">&lt;p&gt;异常值通常具有更高的离群程度分数值，同时也更具有可解释性。在基于相似度的异常检测方法中，主要思想是异常点的表示与正常点不同。&lt;/p&gt;
-&lt;h4 id=&quot;1-基于距离的度量&quot;&gt;&lt;a href=&quot;#1-基于距离的度量&quot; class=&quot;headerlink&quot; title=&quot;1.  基于距离的度量&quot;&gt;&lt;/a&gt;1.  基于距离的度量&lt;/h4&gt;&lt;p&gt;基于距离的异常检测有这样一个前提假设，即异常点的k近邻距离要远大于正常点。常见的方法是嵌套循环，第一层循环遍历每个数据，第二层循环进行异常判断计算当前点与其他点的距离，一旦发现多于k个数据点与当前点的距离在D之内，则将该点标记为非异常值。 此法计算的时间复杂度为O(N&lt;sup&gt;2&lt;/sup&gt;)，当数据量比较大时需要修剪方法以加快距离计算。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
-    
-    
-    <category term="LOF" scheme="http://example.com/tags/LOF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>异常检测——线性相关方法</title>
-    <link href="http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/</id>
-    <published>2021-05-17T15:52:21.000Z</published>
-    <updated>2021-06-28T03:05:04.734Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;真实数据集中不同维度的特征可能具有高度相关性，这是因为不同的特征往往是由相同的基础过程以密切相关的方式产生的。这被称为——回归建模，是一种参数化的相关性分析。&lt;br&gt;一类相关性分析通过其他变量预测单独的属性值，另一类方法用一些潜在变量来代表整个数&lt;br&gt;据。前者的代表是&lt;strong&gt;线性回归&lt;/strong&gt;，后者一个典型的例子是&lt;strong&gt;主成分分析&lt;/strong&gt;。&lt;br&gt;线性相关分析基于的假设是：①近似线性相关假设；②子空间假设。为了确定线性模型是否适合数据集，需要进行探索性和可视化分析。&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Ordering-Tasks-LeetCode-207-Course-Schedule-拓扑排序&quot;&gt;&lt;a href=&quot;#Ordering-Tasks-LeetCode-207-Course-Schedule-拓扑排序&quot; class=&quot;headerlink&quot; tit</summary>
+      
     
     
     
-    <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="OLSE" scheme="http://example.com/tags/OLSE/"/>
+    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
     
-    <category term="Linear Regression" scheme="http://example.com/tags/Linear-Regression/"/>
+    <category term="BFS" scheme="http://example.com/tags/BFS/"/>
     
-    <category term="Gradient descent" scheme="http://example.com/tags/Gradient-descent/"/>
-    
-    <category term="PCA" scheme="http://example.com/tags/PCA/"/>
-    
-    <category term="PyOD" scheme="http://example.com/tags/PyOD/"/>
+    <category term="DFS" scheme="http://example.com/tags/DFS/"/>
     
   </entry>
   
   <entry>
-    <title>异常检测——基于统计学的方法</title>
-    <link href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
-    <published>2021-05-14T15:18:11.000Z</published>
-    <updated>2021-06-28T03:05:35.162Z</updated>
+    <title>Instrction Arrangement以及关键路径详解</title>
+    <link href="http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://example.com/2022/02/17/Instrction%20Arrangement%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E8%AF%A6%E8%A7%A3/</id>
+    <published>2022-02-17T13:30:38.000Z</published>
+    <updated>2024-06-01T02:00:23.846Z</updated>
     
     
-    <summary type="html">&lt;p&gt;异常检测的统计方法包含两种主要类型：参数方法和非参数方法。&lt;br&gt;&lt;strong&gt;参数方法：&lt;/strong&gt;假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)&lt;br&gt;&lt;strong&gt;非参数方法&lt;/strong&gt;：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
-    
-    
-    <category term="Normal distribution" scheme="http://example.com/tags/Normal-distribution/"/>
-    
-    <category term="HBOS" scheme="http://example.com/tags/HBOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>异常检测(Anomaly Detection)简介</title>
-    <link href="http://example.com/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/"/>
-    <id>http://example.com/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/</id>
-    <published>2021-05-12T15:12:13.000Z</published>
-    <updated>2021-06-28T03:05:13.895Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;异常检测顾名思义就是检测出与正常数据不同的数据，检测给定的新数据是否属于这组数据集。&lt;/p&gt;
-&lt;h4 id=&quot;1-异常检测的任务类型&quot;&gt;&lt;a href=&quot;#1-异常检测的任务类型&quot; class=&quot;headerlink&quot; title=&quot;1. 异常检测的任务类型&quot;&gt;&lt;/a&gt;1. 异常检测的任务类型&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;无监督&lt;/strong&gt;：训练集无标签&lt;br&gt;&lt;strong&gt;有监督&lt;/strong&gt;：训练集的正例和反例均有标签&lt;br&gt;&lt;strong&gt;半监督&lt;/strong&gt;：在训练集中只有正例，异常实例不参与训练&lt;/p&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Instrction-Arrangement以及关键路径详解&quot;&gt;&lt;a href=&quot;#Instrction-Arrangement以及关键路径详解&quot; class=&quot;headerlink&quot; title=&quot;Instrction Arrangement以及关键路径详解&quot;&gt;</summary>
+      
     
     
     
-    <category term="Anomaly Detection" scheme="http://example.com/categories/Anomaly-Detection/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="LOF" scheme="http://example.com/tags/LOF/"/>
+    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
     
-    <category term="OLSE" scheme="http://example.com/tags/OLSE/"/>
+    <category term="BFS" scheme="http://example.com/tags/BFS/"/>
     
-    <category term="Isolation Forest" scheme="http://example.com/tags/Isolation-Forest/"/>
-    
-    <category term="PCV" scheme="http://example.com/tags/PCV/"/>
-    
-    <category term="KNN" scheme="http://example.com/tags/KNN/"/>
-    
-    <category term="DBSCAN" scheme="http://example.com/tags/DBSCAN/"/>
+    <category term="DFS" scheme="http://example.com/tags/DFS/"/>
     
   </entry>
   
   <entry>
-    <title>特征工程_1</title>
-    <link href="http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/"/>
-    <id>http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/</id>
-    <published>2021-04-21T15:14:12.000Z</published>
-    <updated>2021-05-26T13:41:45.296Z</updated>
+    <title>图的基本结构以及BFS和DFS(递归和非递归)</title>
+    <link href="http://example.com/2022/01/29/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%BB%A5%E5%8F%8ABFS%E5%92%8CDFS(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92)/"/>
+    <id>http://example.com/2022/01/29/%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E4%BB%A5%E5%8F%8ABFS%E5%92%8CDFS(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92)/</id>
+    <published>2022-01-29T13:30:38.000Z</published>
+    <updated>2024-06-01T01:59:38.990Z</updated>
     
     
-    <summary type="html">&lt;p&gt;特征工程就是将原始数据空间变换到新的特征空间，在新的特征空间中，模型能够更好地学习数据中的规律。特征的选择和构造，就是人为地帮助模型学习到原本很难学好的东西，从而使模型达到更好的效果。&lt;/p&gt;
-&lt;h4 id=&quot;1-根据现实情况构造特征&quot;&gt;&lt;a href=&quot;#1-根据现实情况构造特征&quot; class=&quot;headerlink&quot; title=&quot;1. 根据现实情况构造特征&quot;&gt;&lt;/a&gt;1. 根据现实情况构造特征&lt;/h4&gt;&lt;h5 id=&quot;1-1-各点与特定点的距离&quot;&gt;&lt;a href=&quot;#1-1-各点与特定点的距离&quot; class=&quot;headerlink&quot; title=&quot;1.1 各点与特定点的距离&quot;&gt;&lt;/a&gt;1.1 各点与特定点的距离&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;x_dis&amp;#x27;&lt;/span&gt;] = (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;x&amp;#x27;&lt;/span&gt;] - &lt;span class=&quot;number&quot;&gt;6165599&lt;/span&gt;).&lt;span class=&quot;built_in&quot;&gt;abs&lt;/span&gt;()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;y_dis&amp;#x27;&lt;/span&gt;] = (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;y&amp;#x27;&lt;/span&gt;] - &lt;span class=&quot;number&quot;&gt;5202660&lt;/span&gt;).&lt;span class=&quot;built_in&quot;&gt;abs&lt;/span&gt;()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;base_dis] = (df[&amp;#x27;&lt;/span&gt;y_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;]**2))**0.5 + ((df[&amp;#x27;&lt;/span&gt;x_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;]**2)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;del df[&amp;#x27;&lt;/span&gt;x_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;],df[&amp;#x27;&lt;/span&gt;y_dis&lt;span class=&quot;string&quot;&gt;&amp;#x27;] &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;df[&amp;#x27;&lt;/span&gt;base_dis_dif&lt;span class=&quot;string&quot;&gt;f&amp;#x27;].head()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h5 id=&quot;1-2-将时间划分为白天与黑夜&quot;&gt;&lt;a href=&quot;#1-2-将时间划分为白天与黑夜&quot; class=&quot;headerlink&quot; title=&quot;1.2 将时间划分为白天与黑夜&quot;&gt;&lt;/a&gt;1.2 将时间划分为白天与黑夜&lt;/h5&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df.loc[(df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;hour&amp;#x27;&lt;/span&gt;] &amp;gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;) &amp;amp; (df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;hour&amp;#x27;&lt;/span&gt;] &amp;lt; &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt;),&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;] = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;df[&lt;span class=&quot;string&quot;&gt;&amp;#x27;day_night&amp;#x27;&lt;/span&gt;].head()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+      
+      
+    <summary type="html">&lt;h2 id=&quot;图的基本结构以及BFS和DFS-递归和非递归&quot;&gt;&lt;a href=&quot;#图的基本结构以及BFS和DFS-递归和非递归&quot; class=&quot;headerlink&quot; title=&quot;图的基本结构以及BFS和DFS(递归和非递归)&quot;&gt;&lt;/a&gt;图的基本结构以及BFS和DFS(递归和</summary>
+      
     
     
     
-    <category term="Feature Engineering" scheme="http://example.com/categories/Feature-Engineering/"/>
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
     
     
-    <category term="Pandas" scheme="http://example.com/tags/Pandas/"/>
+    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
     
-    <category term="Embedding" scheme="http://example.com/tags/Embedding/"/>
+    <category term="BFS" scheme="http://example.com/tags/BFS/"/>
     
-    <category term="Word2vec" scheme="http://example.com/tags/Word2vec/"/>
+    <category term="DFS" scheme="http://example.com/tags/DFS/"/>
     
-    <category term="NMF" scheme="http://example.com/tags/NMF/"/>
+  </entry>
+  
+  <entry>
+    <title>最长公共子序列LCS 和 最长公众子串</title>
+    <link href="http://example.com/2022/01/15/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97LCS%20%E5%92%8C%20%E6%9C%80%E9%95%BF%E5%85%AC%E4%BC%97%E5%AD%90%E4%B8%B2/"/>
+    <id>http://example.com/2022/01/15/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97LCS%20%E5%92%8C%20%E6%9C%80%E9%95%BF%E5%85%AC%E4%BC%97%E5%AD%90%E4%B8%B2/</id>
+    <published>2022-01-15T13:30:38.000Z</published>
+    <updated>2024-06-01T01:58:47.424Z</updated>
     
-    <category term="DataFramte" scheme="http://example.com/tags/DataFramte/"/>
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;最长公共子序列LCS-和-最长公众子串&quot;&gt;&lt;a href=&quot;#最长公共子序列LCS-和-最长公众子串&quot; class=&quot;headerlink&quot; title=&quot;最长公共子序列LCS 和 最长公众子串&quot;&gt;&lt;/a&gt;最长公共子序列LCS 和 最长公众子串&lt;/h2&gt;&lt;ul&gt;
+</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
+    
+    
+    <category term="Dynamic Programming" scheme="http://example.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>各种排序算法总结(全面)</title>
+    <link href="http://example.com/2021/12/29/%E5%90%84%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93(%E5%85%A8%E9%9D%A2)/"/>
+    <id>http://example.com/2021/12/29/%E5%90%84%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93(%E5%85%A8%E9%9D%A2)/</id>
+    <published>2021-12-29T13:30:38.000Z</published>
+    <updated>2024-06-01T01:56:44.269Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;各种排序算法总结-全面&quot;&gt;&lt;a href=&quot;#各种排序算法总结-全面&quot; class=&quot;headerlink&quot; title=&quot;各种排序算法总结(全面)&quot;&gt;&lt;/a&gt;各种排序算法总结(全面)&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E6%A6%82%E6%8B%</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
+    
+    
+    <category term="Sort" scheme="http://example.com/tags/Sort/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>二分查找的总结(6种变形)</title>
+    <link href="http://example.com/2021/12/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%80%BB%E7%BB%93(6%E7%A7%8D%E5%8F%98%E5%BD%A2)/"/>
+    <id>http://example.com/2021/12/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E6%80%BB%E7%BB%93(6%E7%A7%8D%E5%8F%98%E5%BD%A2)/</id>
+    <published>2021-12-15T13:30:38.000Z</published>
+    <updated>2024-06-01T01:56:04.264Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;二分查找的总结&quot;&gt;&lt;a href=&quot;#二分查找的总结&quot; class=&quot;headerlink&quot; title=&quot;二分查找的总结&quot;&gt;&lt;/a&gt;二分查找的总结&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;#%E6%99%AE%E9%80%9A%E7%9A%84%E4%</summary>
+      
+    
+    
+    
+    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
+    
+    
+    <category term="BinarySearch" scheme="http://example.com/tags/BinarySearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机网络知识总结一计算机网络和协议(一)</title>
+    <link href="http://example.com/2021/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%80%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%8D%8F%E8%AE%AE(%E4%B8%80)/"/>
+    <id>http://example.com/2021/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E4%B8%80%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%8D%8F%E8%AE%AE(%E4%B8%80)/</id>
+    <published>2021-11-21T13:30:38.000Z</published>
+    <updated>2024-06-01T02:08:21.207Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;计算机网络知识总结一计算机网络和协议-一&quot;&gt;&lt;a href=&quot;#计算机网络知识总结一计算机网络和协议-一&quot; class=&quot;headerlink&quot; title=&quot;计算机网络知识总结一计算机网络和协议(一)&quot;&gt;&lt;/a&gt;计算机网络知识总结一计算机网络和协议(一)&lt;/h2</summary>
+      
+    
+    
+    
+    <category term="Computer Network" scheme="http://example.com/categories/Computer-Network/"/>
+    
+    
+    <category term="HTTP" scheme="http://example.com/tags/HTTP/"/>
+    
+    <category term="TCP/IP" scheme="http://example.com/tags/TCP-IP/"/>
+    
+    <category term="OSI" scheme="http://example.com/tags/OSI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Http协议</title>
+    <link href="http://example.com/2021/11/05/Http%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://example.com/2021/11/05/Http%E5%8D%8F%E8%AE%AE/</id>
+    <published>2021-11-05T13:30:38.000Z</published>
+    <updated>2024-06-01T02:08:27.925Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Http协议&quot;&gt;&lt;a href=&quot;#Http协议&quot; class=&quot;headerlink&quot; title=&quot;Http协议&quot;&gt;&lt;/a&gt;Http协议&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E4%B8%80web%E5%92%8C%E7%BD%91%E7%BB%9</summary>
+      
+    
+    
+    
+    <category term="Computer Network" scheme="http://example.com/categories/Computer-Network/"/>
+    
+    
+    <category term="HTTP" scheme="http://example.com/tags/HTTP/"/>
+    
+    <category term="TCP/IP" scheme="http://example.com/tags/TCP-IP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言基础知识总结(一)</title>
+    <link href="http://example.com/2021/10/26/C++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93(%E4%B8%80)/"/>
+    <id>http://example.com/2021/10/26/C++%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93(%E4%B8%80)/</id>
+    <published>2021-10-26T13:30:38.000Z</published>
+    <updated>2024-06-01T01:37:57.616Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;C-基础知识总结-一&quot;&gt;&lt;a href=&quot;#C-基础知识总结-一&quot; class=&quot;headerlink&quot; title=&quot;C++基础知识总结(一)&quot;&gt;&lt;/a&gt;C++基础知识总结(一)&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#c%E5%AF%B9c%E8%AF%</summary>
+      
+    
+    
+    
+    <category term="C" scheme="http://example.com/categories/C/"/>
+    
+    
+    <category term="C Language" scheme="http://example.com/tags/C-Language/"/>
+    
+    <category term="C++" scheme="http://example.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言基础知识总结(一)</title>
+    <link href="http://example.com/2021/10/01/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93(%E4%B8%80)/"/>
+    <id>http://example.com/2021/10/01/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93(%E4%B8%80)/</id>
+    <published>2021-10-01T13:30:38.000Z</published>
+    <updated>2024-06-01T01:36:37.989Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;C语言基础知识总结-一&quot;&gt;&lt;a href=&quot;#C语言基础知识总结-一&quot; class=&quot;headerlink&quot; title=&quot;C语言基础知识总结(一)&quot;&gt;&lt;/a&gt;C语言基础知识总结(一)&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%BC%96%E8%AF%</summary>
+      
+    
+    
+    
+    <category term="C" scheme="http://example.com/categories/C/"/>
+    
+    
+    <category term="Compilation" scheme="http://example.com/tags/Compilation/"/>
+    
+    <category term="C Language" scheme="http://example.com/tags/C-Language/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM总结(二) - 垃圾收集器与内存分配策略</title>
+    <link href="http://example.com/2021/09/05/JVM%E6%80%BB%E7%BB%93(%E4%BA%8C)%20-%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/"/>
+    <id>http://example.com/2021/09/05/JVM%E6%80%BB%E7%BB%93(%E4%BA%8C)%20-%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</id>
+    <published>2021-09-05T13:30:38.000Z</published>
+    <updated>2024-06-01T01:18:17.425Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;JVM总结-二-垃圾收集器与内存分配策略&quot;&gt;&lt;a href=&quot;#JVM总结-二-垃圾收集器与内存分配策略&quot; class=&quot;headerlink&quot; title=&quot;JVM总结(二) - 垃圾收集器与内存分配策略&quot;&gt;&lt;/a&gt;JVM总结(二) - 垃圾收集器与内存分配策略</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JVM" scheme="http://example.com/categories/Java/JVM/"/>
+    
+    
+    <category term="Garbage Collection Overview" scheme="http://example.com/tags/Garbage-Collection-Overview/"/>
+    
+    <category term="Object Identification" scheme="http://example.com/tags/Object-Identification/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM总结(一) - 内存区域与内存管理</title>
+    <link href="http://example.com/2021/08/26/JVM%E6%80%BB%E7%BB%93(%E4%B8%80)%20-%20%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>http://example.com/2021/08/26/JVM%E6%80%BB%E7%BB%93(%E4%B8%80)%20-%20%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</id>
+    <published>2021-08-26T13:30:38.000Z</published>
+    <updated>2024-06-01T01:29:50.870Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;JVM总结-一-内存区域与内存管理&quot;&gt;&lt;a href=&quot;#JVM总结-一-内存区域与内存管理&quot; class=&quot;headerlink&quot; title=&quot;JVM总结(一) - 内存区域与内存管理&quot;&gt;&lt;/a&gt;JVM总结(一) - 内存区域与内存管理&lt;/h1&gt;&lt;ul&gt;
+&lt;l</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JVM" scheme="http://example.com/categories/Java/JVM/"/>
+    
+    
+    <category term="JVM Architecture" scheme="http://example.com/tags/JVM-Architecture/"/>
+    
+    <category term="Heap Memory" scheme="http://example.com/tags/Heap-Memory/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java虚拟机性能监控工具</title>
+    <link href="http://example.com/2021/08/19/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/"/>
+    <id>http://example.com/2021/08/19/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/</id>
+    <published>2021-08-19T13:30:38.000Z</published>
+    <updated>2024-06-01T01:12:49.861Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Java虚拟机性能监控工具&quot;&gt;&lt;a href=&quot;#Java虚拟机性能监控工具&quot; class=&quot;headerlink&quot; title=&quot;Java虚拟机性能监控工具&quot;&gt;&lt;/a&gt;Java虚拟机性能监控工具&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;一、JDK的命令行工具&lt;/li&gt;
+&lt;li</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JVM" scheme="http://example.com/categories/Java/JVM/"/>
+    
+    
+    <category term="JVM Performance Monitoring" scheme="http://example.com/tags/JVM-Performance-Monitoring/"/>
+    
+    <category term="Heap Analysis" scheme="http://example.com/tags/Heap-Analysis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java8 Stream</title>
+    <link href="http://example.com/2021/08/10/Stream/"/>
+    <id>http://example.com/2021/08/10/Stream/</id>
+    <published>2021-08-10T13:30:38.000Z</published>
+    <updated>2024-06-01T01:10:31.134Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Stream&quot;&gt;&lt;a href=&quot;#Stream&quot; class=&quot;headerlink&quot; title=&quot;Stream&quot;&gt;&lt;/a&gt;Stream&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;一、引入流&lt;/li&gt;
+&lt;li&gt;二、使用流&lt;/li&gt;
+&lt;li&gt;三、Optional取代null&lt;/</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    
+    <category term="Stream API" scheme="http://example.com/tags/Stream-API/"/>
+    
+    <category term="Optional" scheme="http://example.com/tags/Optional/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java8 Lambda表达式总结</title>
+    <link href="http://example.com/2021/08/01/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%80%BB%E7%BB%93/"/>
+    <id>http://example.com/2021/08/01/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%80%BB%E7%BB%93/</id>
+    <published>2021-08-01T13:30:38.000Z</published>
+    <updated>2024-06-01T02:08:37.471Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Lambda表达式总结&quot;&gt;&lt;a href=&quot;#Lambda表达式总结&quot; class=&quot;headerlink&quot; title=&quot;Lambda表达式总结&quot;&gt;&lt;/a&gt;Lambda表达式总结&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E4%B8%80%E4%BD%BF</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    
+    <category term="Lambda Expression" scheme="http://example.com/tags/Lambda-Expression/"/>
+    
+    <category term="Stream API" scheme="http://example.com/tags/Stream-API/"/>
+    
+    <category term="Lazy Initialization" scheme="http://example.com/tags/Lazy-Initialization/"/>
     
   </entry>
   
