@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -323,7 +323,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">异常检测——基于相似度的方法</a></h1>
+                <a class="post-title-link" href="/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/" itemprop="url">二叉树之Morris遍历</a></h1>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-20T23:52:43+08:00">
-                2021-05-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-07-05T21:30:38+08:00">
+                2022-07-05
               </time>
             
 
@@ -358,8 +358,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -376,9 +376,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
+                <a href="/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/05/20/异常检测——基于相似度的方法/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/07/05/二叉树之Morris遍历/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,11 +426,20 @@
 
       
         
-          <p>异常值通常具有更高的离群程度分数值，同时也更具有可解释性。在基于相似度的异常检测方法中，主要思想是异常点的表示与正常点不同。</p>
-<h4 id="1-基于距离的度量"><a href="#1-基于距离的度量" class="headerlink" title="1.  基于距离的度量"></a>1.  基于距离的度量</h4><p>基于距离的异常检测有这样一个前提假设，即异常点的k近邻距离要远大于正常点。常见的方法是嵌套循环，第一层循环遍历每个数据，第二层循环进行异常判断计算当前点与其他点的距离，一旦发现多于k个数据点与当前点的距离在D之内，则将该点标记为非异常值。 此法计算的时间复杂度为O(N<sup>2</sup>)，当数据量比较大时需要修剪方法以加快距离计算。</p>
+          
+          二叉树之Morris遍历
+递归理解以及morris遍历
+由morris遍历改成前序遍历
+由morris遍历改成中序遍历
+由morris遍历改成后续遍历
+完整测试代码
+
+
+递归理解以及morris遍历12345678static void rec(Node head) &#123;     if (h
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/20/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%96%B9%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -481,7 +490,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -500,7 +509,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/" itemprop="url">异常检测——线性相关方法</a></h1>
+                <a class="post-title-link" href="/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/" itemprop="url">二叉树结点间的最大距离问题</a></h1>
         
 
         <div class="post-meta">
@@ -512,8 +521,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-17T23:52:21+08:00">
-                2021-05-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-25T21:30:38+08:00">
+                2022-06-25
               </time>
             
 
@@ -535,8 +544,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -553,9 +562,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
+                <a href="/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/05/17/异常检测——线性相关方法/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/06/25/二叉树结点间的最大距离问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -577,7 +586,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.2k
+                  934
                 </span>
               
 
@@ -603,10 +612,22 @@
 
       
         
-          <p>真实数据集中不同维度的特征可能具有高度相关性，这是因为不同的特征往往是由相同的基础过程以密切相关的方式产生的。这被称为——回归建模，是一种参数化的相关性分析。<br>一类相关性分析通过其他变量预测单独的属性值，另一类方法用一些潜在变量来代表整个数<br>据。前者的代表是<strong>线性回归</strong>，后者一个典型的例子是<strong>主成分分析</strong>。<br>线性相关分析基于的假设是：①近似线性相关假设；②子空间假设。为了确定线性模型是否适合数据集，需要进行探索性和可视化分析。</p>
+          
+          二叉树结点间的最大距离问题
+递归
+改进的写法
+完整测试代码题目
+
+
+递归解析这个也是一个二叉树的问题，分为三步:
+
+列出所有可能性；
+列出结点需要的信息，并整合信息(成一个结构体)；
+改递归 ，先假设左和右都给我信息(黑盒)，然后怎么利用左边和右边的信息组出来我该返回的信息，最后basecase(边
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/17/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -657,7 +678,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -676,7 +697,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">异常检测——基于统计学的方法</a></h1>
+                <a class="post-title-link" href="/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/" itemprop="url">二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等)</a></h1>
         
 
         <div class="post-meta">
@@ -688,8 +709,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-14T23:18:11+08:00">
-                2021-05-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-06T21:30:38+08:00">
+                2022-06-06
               </time>
             
 
@@ -711,8 +732,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -729,9 +750,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
+                <a href="/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/05/14/异常检测——基于统计学的方法/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/06/06/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -753,7 +774,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  3.7k
                 </span>
               
 
@@ -779,10 +800,35 @@
 
       
         
-          <p>异常检测的统计方法包含两种主要类型：参数方法和非参数方法。<br><strong>参数方法：</strong>假定数据服从以θ为参数的参数分布，该参数分布的概率密度函数f(x,θ)给出x属于该分布的概率，该值越小，x越可能是异常点。(仅对数据做的统计假定满足实际约束时可行)<br><strong>非参数方法</strong>：不假定先验统计模型，假定参数的个数较为灵活，并非完全无参。</p>
+          
+          二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等)
+建立二叉树
+1、根据下标关系
+2、前序输入(cin)建立
+
+
+前序遍历
+1、递归前序
+2、非递归前序
+
+
+中序遍历
+1、递归中序
+2、非递归中序
+
+
+后序遍历
+1、递归后序
+2、非递归后序
+
+
+层次遍历
+寻找树中有没有值为x的结点
+统计树中
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/14/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E7%9A%84%E6%96%B9%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -833,7 +879,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -852,7 +898,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/" itemprop="url">异常检测(Anomaly Detection)简介</a></h1>
+                <a class="post-title-link" href="/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/" itemprop="url">子数组累加和为aim(小于等于aim)的三个问题</a></h1>
         
 
         <div class="post-meta">
@@ -864,8 +910,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-12T23:12:13+08:00">
-                2021-05-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-26T21:30:38+08:00">
+                2022-05-26
               </time>
             
 
@@ -887,8 +933,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -905,9 +951,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/#comments" itemprop="discussionUrl">
+                <a href="/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/05/12/异常检测简介/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/05/26/子数组累加和为aim(小于等于aim)的三个问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -929,7 +975,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  676
+                  1.6k
                 </span>
               
 
@@ -955,11 +1001,18 @@
 
       
         
-          <p>异常检测顾名思义就是检测出与正常数据不同的数据，检测给定的新数据是否属于这组数据集。</p>
-<h4 id="1-异常检测的任务类型"><a href="#1-异常检测的任务类型" class="headerlink" title="1. 异常检测的任务类型"></a>1. 异常检测的任务类型</h4><p><strong>无监督</strong>：训练集无标签<br><strong>有监督</strong>：训练集的正例和反例均有标签<br><strong>半监督</strong>：在训练集中只有正例，异常实例不参与训练</p>
+          
+          子数组累加和为aim(小于等于aim)的三个问题
+累加和 = aim的最长子数组的长度(数组可+,-,0)；
+累加和 = aim的最长子数组的长度(数组+)(只有正数)；
+累加和 &lt;= aim的最长子数组的长度(数组可+,-,0)；
+
+
+累加和 = aim的最长子数组的长度(数组可+,-,0)
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/12/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%AE%80%E4%BB%8B/#more" rel="contents">
+            <a class="btn" href="/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1010,7 +1063,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1029,7 +1082,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/" itemprop="url">特征工程_1</a></h1>
+                <a class="post-title-link" href="/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/" itemprop="url">矩阵相关操作和矩阵快速幂</a></h1>
         
 
         <div class="post-meta">
@@ -1041,8 +1094,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-21T23:14:12+08:00">
-                2021-04-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-06T21:30:38+08:00">
+                2022-05-06
               </time>
             
 
@@ -1064,8 +1117,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -1082,187 +1135,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/#comments" itemprop="discussionUrl">
+                <a href="/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/04/21/特征工程_1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>特征工程就是将原始数据空间变换到新的特征空间，在新的特征空间中，模型能够更好地学习数据中的规律。特征的选择和构造，就是人为地帮助模型学习到原本很难学好的东西，从而使模型达到更好的效果。</p>
-<h4 id="1-根据现实情况构造特征"><a href="#1-根据现实情况构造特征" class="headerlink" title="1. 根据现实情况构造特征"></a>1. 根据现实情况构造特征</h4><h5 id="1-1-各点与特定点的距离"><a href="#1-1-各点与特定点的距离" class="headerlink" title="1.1 各点与特定点的距离"></a>1.1 各点与特定点的距离</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;x_dis&#x27;</span>] = (df[<span class="string">&#x27;x&#x27;</span>] - <span class="number">6165599</span>).<span class="built_in">abs</span>()</span><br><span class="line">df[<span class="string">&#x27;y_dis&#x27;</span>] = (df[<span class="string">&#x27;y&#x27;</span>] - <span class="number">5202660</span>).<span class="built_in">abs</span>()</span><br><span class="line">df[<span class="string">&#x27;base_dis] = (df[&#x27;</span>y_dis<span class="string">&#x27;]**2))**0.5 + ((df[&#x27;</span>x_dis<span class="string">&#x27;]**2)</span></span><br><span class="line"><span class="string">del df[&#x27;</span>x_dis<span class="string">&#x27;],df[&#x27;</span>y_dis<span class="string">&#x27;] </span></span><br><span class="line"><span class="string">df[&#x27;</span>base_dis_dif<span class="string">f&#x27;].head()</span></span><br></pre></td></tr></table></figure>
-<h5 id="1-2-将时间划分为白天与黑夜"><a href="#1-2-将时间划分为白天与黑夜" class="headerlink" title="1.2 将时间划分为白天与黑夜"></a>1.2 将时间划分为白天与黑夜</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;day_night&#x27;</span>] = <span class="number">0</span></span><br><span class="line">df.loc[(df[<span class="string">&#x27;hour&#x27;</span>] &gt; <span class="number">5</span>) &amp; (df[<span class="string">&#x27;hour&#x27;</span>] &lt; <span class="number">20</span>),<span class="string">&#x27;day_night&#x27;</span>] = <span class="number">1</span></span><br><span class="line">df[<span class="string">&#x27;day_night&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/04/21/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B_1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XHJ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/" itemprop="url">地理空间数据EDA数据探索性分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-17T20:30:22+08:00">
-                2021-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/04/17/EDA数据探索性分析/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/05/06/矩阵相关操作和矩阵快速幂/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1310,15 +1185,21 @@
 
       
         
-          <p>EDA——数据探索性分析，是通过了解数据集的基本情况、变量间的相互关系以及变量与预测值之间的关系，为后期特征工程和建立模型做铺垫。本文以<em>智慧海洋建设竞赛</em>为例进行演示。</p>
-<h4 id="1-总体了解数据"><a href="#1-总体了解数据" class="headerlink" title="1. 总体了解数据"></a>1. 总体了解数据</h4><h5 id="1-1-查看样本个数和原始特征维度"><a href="#1-1-查看样本个数和原始特征维度" class="headerlink" title="1.1 查看样本个数和原始特征维度"></a>1.1 查看样本个数和原始特征维度</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.shape</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_test.shape</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_train.columns	<span class="comment">#查看列名</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.set_option(<span class="string">&#x27;display.max_info_rows&#x27;</span>,<span class="number">2699639</span>)	<span class="comment">#提高非缺失值检查的行数上线</span></span><br><span class="line"><span class="comment">#pd.options.display.max_info_rows = 2699639</span></span><br><span class="line">data_train.info()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看count 非空值数、std 标准差、（25%、50%、75%）分位数等基本情况</span></span><br><span class="line">data_train.describe([<span class="number">0.01</span>,<span class="number">0.025</span>,<span class="number">0.05</span>,<span class="number">0.5</span>,<span class="number">0.75</span>,<span class="number">0.9</span>,<span class="number">0.99</span>])	</span><br></pre></td></tr></table></figure>
+          
+          矩阵相关操作和矩阵快速幂
+矩阵基本运算以及快速幂模板
+POJ - 3070. Fibonacci
+Hdu - 1757A. Simple Math Problem
+Codeforces - 185A. Plant
+
+
+矩阵基本运算以及快速幂模板先看一下矩阵的乘法规则: 
+
+直接给出一个模板题，直接包
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/04/17/EDA%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/#more" rel="contents">
+            <a class="btn" href="/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1369,7 +1250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&%20LeetCode%20-%2050.%20Pow(x,%20n)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1388,7 +1269,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/" itemprop="url">地理数据分析常用工具</a></h1>
+                <a class="post-title-link" href="/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&%20LeetCode%20-%2050.%20Pow(x,%20n)/" itemprop="url">乘法快速幂相关总结  & LeetCode - 50. Pow(x, n)</a></h1>
         
 
         <div class="post-meta">
@@ -1400,8 +1281,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-15T23:30:38+08:00">
-                2021-04-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-26T21:30:38+08:00">
+                2022-04-26
               </time>
             
 
@@ -1423,8 +1304,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -1441,9 +1322,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/#comments" itemprop="discussionUrl">
+                <a href="/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&%20LeetCode%20-%2050.%20Pow(x,%20n)/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/04/15/地理数据分析常用工具/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/04/26/乘法快速幂相关总结  & LeetCode - 50. Pow(x, n)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1465,7 +1346,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k
+                  1.9k
                 </span>
               
 
@@ -1491,12 +1372,18 @@
 
       
         
-          <p>在地理空间数据分析中，常用一些模块进行地理数据分析、特征提取及可视化，包括shapely、geopandas、folium、kepler.gl、geohash等工具。</p>
-<h4 id="1-shapely"><a href="#1-shapely" class="headerlink" title="1. shapely"></a>1. shapely</h4><p>shapely是基于笛卡尔坐标的几何对象操作和分析Python库，底层基于GEOS和JTS拓扑运算库。</p>
-<h5 id="1-1-Point对象"><a href="#1-1-Point对象" class="headerlink" title="1.1 Point对象"></a>1.1 Point对象</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shapely.geometry <span class="keyword">import</span> Point</span><br><span class="line"></span><br><span class="line">point1 = Point(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">point2 = Point(<span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line">point3 = Point(<span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#点的可视化</span></span><br><span class="line">geo.GeometryCollection([point1,point2,point3])</span><br><span class="line"></span><br><span class="line"><span class="comment">#Point转为numpy数组</span></span><br><span class="line"><span class="built_in">print</span>(np.array(point))</span><br></pre></td></tr></table></figure>
+          
+          乘法快速幂相关总结  &amp; LeetCode - 50. Pow(x, n)
+递归计算 (a n) % mod
+非递归计算  (a n) % mod
+计算 ( a * b ) % mod
+配合 ( a * b ) % mod和乘法快速幂
+XYNUOJ - 1872. 次方求模题解
+LeetCo
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/04/15/%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/#more" rel="contents">
+            <a class="btn" href="/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&%20LeetCode%20-%2050.%20Pow(x,%20n)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1547,7 +1434,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1566,7 +1453,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/" itemprop="url">LightGBM调参_1</a></h1>
+                <a class="post-title-link" href="/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/" itemprop="url">素数回文以及素数相关总结</a></h1>
         
 
         <div class="post-meta">
@@ -1578,8 +1465,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-26T22:30:38+08:00">
-                2021-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-04-08T21:30:38+08:00">
+                2022-04-08
               </time>
             
 
@@ -1601,8 +1488,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -1619,9 +1506,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/#comments" itemprop="discussionUrl">
+                <a href="/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/03/26/lightGBM调参/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/04/08/素数回文以及素数相关总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1643,7 +1530,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k
+                  1.5k
                 </span>
               
 
@@ -1669,17 +1556,23 @@
 
       
         
-          <p>#1简单列举一下日常调参过程中常用的几种方法，具体的原理下次补上。</p>
-<h4 id="1-经验法"><a href="#1-经验法" class="headerlink" title="1. 经验法:"></a>1. 经验法:</h4><blockquote>
-<p>往两个方向调：</p>
-<p>1.提高准确率：max_depth, num_leaves, learning_rate</p>
-<p>2.降低过拟合：max_bin, min_data_in_leaf；L1, L2正则化；数据抽样, 列采样</p>
-</blockquote>
-<p>1.使用较小的num_leaves，max_depth和max_bin，降低复杂度。</p>
-<p>2.使用min_data_in_leaf和min_sum_hessian_in_leaf，该值越大，模型的学习越保守。</p>
+          
+          素数回文以及素数相关总结
+普通筛素数法
+埃式筛法
+优化筛法
+整数分解(唯一分解定理)
+约数枚举
+Hdu - 1431. 素数回文
+
+
+普通筛素数法这个也是普通的素数判定的方法，这个方法判定素数时间复杂度为O (sqrt(n))。
+
+1234567891011121314151617181920sta
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/03/26/lightGBM%E8%B0%83%E5%8F%82/#more" rel="contents">
+            <a class="btn" href="/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1730,7 +1623,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/25/tsfresh/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1749,7 +1642,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/03/25/tsfresh/" itemprop="url">Tsfresh——自动化特征工程工具</a></h1>
+                <a class="post-title-link" href="/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/" itemprop="url">最小生成树模板题(Kruskal算法和Prim算法实现)</a></h1>
         
 
         <div class="post-meta">
@@ -1761,8 +1654,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-25T23:30:38+08:00">
-                2021-03-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-26T21:30:38+08:00">
+                2022-03-26
               </time>
             
 
@@ -1784,8 +1677,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -1802,9 +1695,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/03/25/tsfresh/#comments" itemprop="discussionUrl">
+                <a href="/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/03/25/tsfresh/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/03/26/最小生成树模板题(Kruskal算法和Prim算法实现)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1826,7 +1719,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  675
+                  2.3k
                 </span>
               
 
@@ -1852,16 +1745,22 @@
 
       
         
-          <blockquote>
-<p>改进模型的潜在途径之一是：生成更多的潜在特征，输入更多的样本。</p>
-</blockquote>
-<p>Tsfresh是处理时间序列数据的特征工程工具，能够自动计算大量时间序列特征，如平均值、最大值、峰度等。之后，可以使用这些特征集构建机器学习模型。</p>
-<p>本文以<em>天池-心跳信号分类预测</em>为例，演示tsfresh工具的用法。</p>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><h5 id="1-合并train和test数据"><a href="#1-合并train和test数据" class="headerlink" title="1. 合并train和test数据"></a>1. 合并train和test数据</h5><p>合并数据集，对整体数据做统一的特征工程。(注意需要为test数据添加label列，值为-1，方便后续操作)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_test[<span class="string">&#x27;label&#x27;</span>] = -<span class="number">1</span></span><br><span class="line">all_data = pd.concat((data_train, data_test)).reset_index(drop = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+          
+          最小生成树模板题(Kruskal算法和Prim算法实现)
+Kruskal算法思想及流程
+Prim算法思想及流程: 
+
+题目链接
+http://acm.hdu.edu.cn/showproblem.php?pid=1863
+
+题目
+题意 就是一个求最小生成树的模板题(一般是无向图)。
+
+Kruskal
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/03/25/tsfresh/#more" rel="contents">
+            <a class="btn" href="/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1912,7 +1811,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1931,7 +1830,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/" itemprop="url">特征选择_1</a></h1>
+                <a class="post-title-link" href="/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/" itemprop="url">最短路dijkstra模板</a></h1>
         
 
         <div class="post-meta">
@@ -1943,8 +1842,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-20T23:30:38+08:00">
-                2021-03-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-09T21:30:38+08:00">
+                2022-03-09
               </time>
             
 
@@ -1966,8 +1865,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
 
@@ -1984,9 +1883,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/#comments" itemprop="discussionUrl">
+                <a href="/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/03/20/特征选择_1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2022/03/09/最短路dijkstra模板/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2008,7 +1907,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.1k
+                  2.4k
                 </span>
               
 
@@ -2034,13 +1933,209 @@
 
       
         
-          <p>在数据预处理过程中，特征选择是一个重要的过程，选择出重要的特征可以加快模型训练速度。通常可以从以下两方面来选择特征：</p>
-<blockquote>
-<p>1.特征是否发散（对于样本区分作用的大小）<br>2.特征与标签的相关性</p>
-</blockquote>
+          
+          ﻿## 最短路dijkstra模板
+
+dijkstra算法总结
+常用模板解决
+其他写法
+
+
+题目链接
+http://acm.hdu.edu.cn/showproblem.php?pid=1874
+
+题目
+dijkstra算法总结总结一下dijkstra算法大致的流程: 
+
+一开始有一个dist[]数
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/03/20/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9_1/#more" rel="contents">
+            <a class="btn" href="/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/" itemprop="url">Instrction Arrangement以及关键路径详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-25T21:30:38+08:00">
+                2022-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2022/02/25/Ordering Tasks _ LeetCode - 207. Course Schedule (拓扑排序)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Ordering Tasks | LeetCode - 207. Course Schedule (拓扑排序)
+Uva - 10305. Ordering Tasks
+LeetCode - 207. Course Schedule
+
+
+Uva - 10305. Ordering Tasks题目链接
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/02/25/Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule%20(%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F)/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2082,7 +2177,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2132,7 +2227,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2143,7 +2238,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2154,7 +2249,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2235,7 +2330,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">159.2k</span>
+    <span title="Site words total count">271.2k</span>
   
 </div>
 

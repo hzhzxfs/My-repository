@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-06-01T02:26:47.460Z</updated>
+  <updated>2024-06-01T03:59:54.913Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,478 +17,459 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java多线程基础</title>
-    <link href="http://example.com/2023/01/12/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    <id>http://example.com/2023/01/12/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</id>
-    <published>2023-01-12T13:30:38.000Z</published>
-    <updated>2024-06-01T02:26:47.460Z</updated>
+    <title>Tomcat</title>
+    <link href="http://example.com/2024/03/15/Tomcat/"/>
+    <id>http://example.com/2024/03/15/Tomcat/</id>
+    <published>2024-03-15T13:30:38.000Z</published>
+    <updated>2024-06-01T03:59:54.913Z</updated>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;Java多线程基础&quot;&gt;&lt;a href=&quot;#Java多线程基础&quot; class=&quot;headerlink&quot; title=&quot;Java多线程基础&quot;&gt;&lt;/a&gt;Java多线程基础&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#%E4%B8%80%E7%BA%BF%E7%A8%8</summary>
+    <summary type="html">&lt;h2 id=&quot;Tomcat&quot;&gt;&lt;a href=&quot;#Tomcat&quot; class=&quot;headerlink&quot; title=&quot;Tomcat&quot;&gt;&lt;/a&gt;Tomcat&lt;/h2&gt;&lt;h4 id=&quot;1-Tomcat的缺省端口是多少，怎么修改？&quot;&gt;&lt;a href=&quot;#1-Tomcat的缺省端口是多</summary>
+      
+    
+    
+    
+    <category term="Web Servers" scheme="http://example.com/categories/Web-Servers/"/>
+    
+    
+    <category term="Tomcat" scheme="http://example.com/tags/Tomcat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RabbitMQ</title>
+    <link href="http://example.com/2024/03/04/RabbitMQ/"/>
+    <id>http://example.com/2024/03/04/RabbitMQ/</id>
+    <published>2024-03-04T13:30:38.000Z</published>
+    <updated>2024-06-01T03:59:08.675Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;RabbitMQ&quot;&gt;&lt;a href=&quot;#RabbitMQ&quot; class=&quot;headerlink&quot; title=&quot;RabbitMQ&quot;&gt;&lt;/a&gt;RabbitMQ&lt;/h2&gt;&lt;h4 id=&quot;1、什么是-RabbitMQ？为什么使用-RabbitMQ？&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="Message Queues" scheme="http://example.com/categories/Message-Queues/"/>
+    
+    
+    <category term="RabbitMQ" scheme="http://example.com/tags/RabbitMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx</title>
+    <link href="http://example.com/2024/02/26/Nginx/"/>
+    <id>http://example.com/2024/02/26/Nginx/</id>
+    <published>2024-02-26T13:30:38.000Z</published>
+    <updated>2024-06-01T03:56:31.544Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h2&gt;&lt;h4 id=&quot;1-什么是Nginx&quot;&gt;&lt;a href=&quot;#1-什么是Nginx&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="Web Servers" scheme="http://example.com/categories/Web-Servers/"/>
+    
+    
+    <category term="Nginx" scheme="http://example.com/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Netty</title>
+    <link href="http://example.com/2024/02/16/Netty/"/>
+    <id>http://example.com/2024/02/16/Netty/</id>
+    <published>2024-02-16T13:30:38.000Z</published>
+    <updated>2024-06-01T03:52:33.956Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Netty&quot;&gt;&lt;a href=&quot;#Netty&quot; class=&quot;headerlink&quot; title=&quot;Netty&quot;&gt;&lt;/a&gt;Netty&lt;/h2&gt;&lt;h4 id=&quot;1-Netty的特点？&quot;&gt;&lt;a href=&quot;#1-Netty的特点？&quot; class=&quot;headerlink</summary>
+      
+    
+    
+    
+    <category term="Middleware" scheme="http://example.com/categories/Middleware/"/>
+    
+    
+    <category term="Netty" scheme="http://example.com/tags/Netty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis-下卷</title>
+    <link href="http://example.com/2024/02/07/Redis-%E4%B8%8B%E5%8D%B7/"/>
+    <id>http://example.com/2024/02/07/Redis-%E4%B8%8B%E5%8D%B7/</id>
+    <published>2024-02-07T13:30:38.000Z</published>
+    <updated>2024-06-01T03:51:18.625Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Redis&quot;&gt;&lt;a href=&quot;#Redis&quot; class=&quot;headerlink&quot; title=&quot;Redis&quot;&gt;&lt;/a&gt;Redis&lt;/h2&gt;&lt;h4 id=&quot;1-查看配置语法&quot;&gt;&lt;a href=&quot;#1-查看配置语法&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="http://example.com/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="http://example.com/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis-上卷</title>
+    <link href="http://example.com/2024/01/31/Redis-%E4%B8%8A%E5%8D%B7/"/>
+    <id>http://example.com/2024/01/31/Redis-%E4%B8%8A%E5%8D%B7/</id>
+    <published>2024-01-31T13:30:38.000Z</published>
+    <updated>2024-06-01T03:50:51.383Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Redis&quot;&gt;&lt;a href=&quot;#Redis&quot; class=&quot;headerlink&quot; title=&quot;Redis&quot;&gt;&lt;/a&gt;Redis&lt;/h2&gt;&lt;h4 id=&quot;1-Redis是什么&quot;&gt;&lt;a href=&quot;#1-Redis是什么&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="http://example.com/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="http://example.com/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB必知必会</title>
+    <link href="http://example.com/2024/01/16/MongoDB/"/>
+    <id>http://example.com/2024/01/16/MongoDB/</id>
+    <published>2024-01-16T13:30:38.000Z</published>
+    <updated>2024-06-01T03:56:56.282Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;MongoDB&quot;&gt;&lt;a href=&quot;#MongoDB&quot; class=&quot;headerlink&quot; title=&quot;MongoDB&quot;&gt;&lt;/a&gt;MongoDB&lt;/h2&gt;&lt;h4 id=&quot;1-什么是MongoDB&quot;&gt;&lt;a href=&quot;#1-什么是MongoDB&quot; class=&quot;</summary>
+      
+    
+    
+    
+    <category term="Database" scheme="http://example.com/categories/Database/"/>
+    
+    
+    <category term="MongoDB" scheme="http://example.com/tags/MongoDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka必知必会</title>
+    <link href="http://example.com/2024/01/06/Kafka/"/>
+    <id>http://example.com/2024/01/06/Kafka/</id>
+    <published>2024-01-06T13:30:38.000Z</published>
+    <updated>2024-06-01T03:58:17.964Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Kafka&quot;&gt;&lt;a href=&quot;#Kafka&quot; class=&quot;headerlink&quot; title=&quot;Kafka&quot;&gt;&lt;/a&gt;Kafka&lt;/h2&gt;&lt;h4 id=&quot;1-什么是kafka&quot;&gt;&lt;a href=&quot;#1-什么是kafka&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="Message Queues" scheme="http://example.com/categories/Message-Queues/"/>
+    
+    
+    <category term="Kafka" scheme="http://example.com/tags/Kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo必知必会</title>
+    <link href="http://example.com/2023/12/30/Dubbo/"/>
+    <id>http://example.com/2023/12/30/Dubbo/</id>
+    <published>2023-12-30T13:30:38.000Z</published>
+    <updated>2024-06-01T04:02:35.284Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Dubbo&quot;&gt;&lt;a href=&quot;#Dubbo&quot; class=&quot;headerlink&quot; title=&quot;Dubbo&quot;&gt;&lt;/a&gt;Dubbo&lt;/h2&gt;&lt;h4 id=&quot;1-什么是Dubbo&quot;&gt;&lt;a href=&quot;#1-什么是Dubbo&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="Middleware" scheme="http://example.com/categories/Middleware/"/>
+    
+    
+    <category term="Dubbo" scheme="http://example.com/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elasticsearch必知必会</title>
+    <link href="http://example.com/2023/12/30/Elasticsearch/"/>
+    <id>http://example.com/2023/12/30/Elasticsearch/</id>
+    <published>2023-12-30T13:30:38.000Z</published>
+    <updated>2024-06-01T04:08:59.305Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Elasticsearch&quot;&gt;&lt;a href=&quot;#Elasticsearch&quot; class=&quot;headerlink&quot; title=&quot;Elasticsearch&quot;&gt;&lt;/a&gt;Elasticsearch&lt;/h2&gt;&lt;h4 id=&quot;1-简单介绍下ES？&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="Middleware" scheme="http://example.com/categories/Middleware/"/>
+    
+    
+    <category term="Elasticsearch" scheme="http://example.com/tags/Elasticsearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git必知必会</title>
+    <link href="http://example.com/2023/12/15/Git/"/>
+    <id>http://example.com/2023/12/15/Git/</id>
+    <published>2023-12-15T13:30:38.000Z</published>
+    <updated>2024-06-01T03:41:51.888Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Git&quot;&gt;&lt;a href=&quot;#Git&quot; class=&quot;headerlink&quot; title=&quot;Git&quot;&gt;&lt;/a&gt;Git&lt;/h2&gt;&lt;h4 id=&quot;1-什么是Git？&quot;&gt;&lt;a href=&quot;#1-什么是Git？&quot; class=&quot;headerlink&quot; title=&quot;1.什</summary>
+      
+    
+    
+    
+    <category term="Git" scheme="http://example.com/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="http://example.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker必知必会</title>
+    <link href="http://example.com/2023/12/05/docker%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"/>
+    <id>http://example.com/2023/12/05/docker%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/</id>
+    <published>2023-12-05T13:30:38.000Z</published>
+    <updated>2024-06-01T03:41:09.380Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;docker心得体会&quot;&gt;&lt;a href=&quot;#docker心得体会&quot; class=&quot;headerlink&quot; title=&quot;docker心得体会&quot;&gt;&lt;/a&gt;docker心得体会&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;==并不是笔记，而是针对自己需要记忆的东西，留下痕迹。一定要</summary>
+      
+    
+    
+    
+    <category term="Docker" scheme="http://example.com/categories/Docker/"/>
+    
+    
+    <category term="Docker" scheme="http://example.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机操作系统 - 概述</title>
+    <link href="http://example.com/2023/11/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://example.com/2023/11/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</id>
+    <published>2023-11-26T13:30:38.000Z</published>
+    <updated>2024-06-01T03:40:46.421Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;操作系统&quot;&gt;&lt;a href=&quot;#操作系统&quot; class=&quot;headerlink&quot; title=&quot;操作系统&quot;&gt;&lt;/a&gt;操作系统&lt;/h1&gt;&lt;h1 id=&quot;计算机操作系统-概述&quot;&gt;&lt;a href=&quot;#计算机操作系统-概述&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    <category term="Operating System" scheme="http://example.com/categories/Operating-System/"/>
+    
+    
+    <category term="Thread" scheme="http://example.com/tags/Thread/"/>
+    
+    <category term="Process" scheme="http://example.com/tags/Process/"/>
+    
+    <category term="Semaphore" scheme="http://example.com/tags/Semaphore/"/>
+    
+    <category term="Message Queue" scheme="http://example.com/tags/Message-Queue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot</title>
+    <link href="http://example.com/2023/11/01/SpringBoot/"/>
+    <id>http://example.com/2023/11/01/SpringBoot/</id>
+    <published>2023-11-01T13:30:38.000Z</published>
+    <updated>2024-06-01T03:33:42.580Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;1-微服务阶段&quot;&gt;&lt;a href=&quot;#1-微服务阶段&quot; class=&quot;headerlink&quot; title=&quot;1. 微服务阶段&quot;&gt;&lt;/a&gt;1. 微服务阶段&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/2021010611</summary>
       
     
     
     
     <category term="Java" scheme="http://example.com/categories/Java/"/>
     
-    <category term="JUC" scheme="http://example.com/categories/Java/JUC/"/>
+    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
     
     
-    <category term="Thread" scheme="http://example.com/tags/Thread/"/>
-    
-    <category term="JVM" scheme="http://example.com/tags/JVM/"/>
+    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
     
   </entry>
   
   <entry>
-    <title>MYSQL高级</title>
-    <link href="http://example.com/2022/12/31/MYSQL%E9%AB%98%E7%BA%A7/"/>
-    <id>http://example.com/2022/12/31/MYSQL%E9%AB%98%E7%BA%A7/</id>
-    <published>2022-12-31T13:30:38.000Z</published>
-    <updated>2024-06-01T02:25:13.870Z</updated>
+    <title>SSM整合</title>
+    <link href="http://example.com/2023/10/27/SSM%E6%95%B4%E5%90%88/"/>
+    <id>http://example.com/2023/10/27/SSM%E6%95%B4%E5%90%88/</id>
+    <published>2023-10-27T13:30:38.000Z</published>
+    <updated>2024-06-01T03:33:00.811Z</updated>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;MYSQL高级&quot;&gt;&lt;a href=&quot;#MYSQL高级&quot; class=&quot;headerlink&quot; title=&quot;MYSQL高级&quot;&gt;&lt;/a&gt;MYSQL高级&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;一、Mysql的架构介绍&lt;/li&gt;
-&lt;li&gt;二、索引优化分析&lt;/li&gt;
-&lt;li&gt;三、查询</summary>
+    <summary type="html">&lt;h1 id=&quot;1-ssmbuild&quot;&gt;&lt;a href=&quot;#1-ssmbuild&quot; class=&quot;headerlink&quot; title=&quot;1. ssmbuild&quot;&gt;&lt;/a&gt;1. ssmbuild&lt;/h1&gt;&lt;h1 id=&quot;2-环境要求&quot;&gt;&lt;a href=&quot;#2-环境要求&quot; class</summary>
       
     
     
     
-    <category term="MySQL" scheme="http://example.com/categories/MySQL/"/>
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
     
     
-    <category term="InnoDB" scheme="http://example.com/tags/InnoDB/"/>
-    
-    <category term="MyISAM" scheme="http://example.com/tags/MyISAM/"/>
+    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
     
   </entry>
   
   <entry>
-    <title>MySQL基础</title>
-    <link href="http://example.com/2022/12/15/MySQL%E5%9F%BA%E7%A1%80/"/>
-    <id>http://example.com/2022/12/15/MySQL%E5%9F%BA%E7%A1%80/</id>
-    <published>2022-12-15T13:30:38.000Z</published>
-    <updated>2024-06-01T02:24:48.877Z</updated>
+    <title>SSM框架之Mybatis</title>
+    <link href="http://example.com/2023/10/15/SpringMVC/"/>
+    <id>http://example.com/2023/10/15/SpringMVC/</id>
+    <published>2023-10-15T13:30:38.000Z</published>
+    <updated>2024-06-01T03:32:05.336Z</updated>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;MySQL基础&quot;&gt;&lt;a href=&quot;#MySQL基础&quot; class=&quot;headerlink&quot; title=&quot;MySQL基础&quot;&gt;&lt;/a&gt;MySQL基础&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#%E4%B8%80%E6%95%B0%E6%8D%AE%E5%BA%</summary>
+    <summary type="html">&lt;h1 id=&quot;0-老版本Spring官方文档-https-docs-spring-io-spring-framework-docs-4-3-24-RELEASE-spring-framework-reference-html&quot;&gt;&lt;a href=&quot;#0-老版本Spring官方文档</summary>
       
     
     
     
-    <category term="MySQL" scheme="http://example.com/categories/MySQL/"/>
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
     
     
-    <category term="InnoDB" scheme="http://example.com/tags/InnoDB/"/>
-    
-    <category term="MyISAM" scheme="http://example.com/tags/MyISAM/"/>
+    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
     
   </entry>
   
   <entry>
-    <title>The Suspects以及并查集总结</title>
-    <link href="http://example.com/2022/11/26/The%20Suspects%E4%BB%A5%E5%8F%8A%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2022/11/26/The%20Suspects%E4%BB%A5%E5%8F%8A%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%80%BB%E7%BB%93/</id>
-    <published>2022-11-26T13:30:38.000Z</published>
-    <updated>2024-06-01T02:20:09.379Z</updated>
+    <title>SSM框架之Mybatis</title>
+    <link href="http://example.com/2023/10/08/SSM%E6%A1%86%E6%9E%B6%E4%B9%8BMybatis/"/>
+    <id>http://example.com/2023/10/08/SSM%E6%A1%86%E6%9E%B6%E4%B9%8BMybatis/</id>
+    <published>2023-10-08T13:30:38.000Z</published>
+    <updated>2024-06-01T03:31:41.522Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;The-Suspects以及并查集总结&quot;&gt;&lt;a href=&quot;#The-Suspects以及并查集总结&quot; class=&quot;headerlink&quot; title=&quot;The Suspects以及并查集总结&quot;&gt;&lt;/a&gt;The Suspects以及并查集总结&lt;/h2&gt;&lt;ul&gt;
-</summary>
+    <summary type="html">&lt;h1 id=&quot;0-ssm框架大纲&quot;&gt;&lt;a href=&quot;#0-ssm框架大纲&quot; class=&quot;headerlink&quot; title=&quot;0. ssm框架大纲&quot;&gt;&lt;/a&gt;0. ssm框架大纲&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20</summary>
       
     
     
     
-    <category term="Data Structure" scheme="http://example.com/categories/Data-Structure/"/>
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
     
     
-    <category term="UnionFind" scheme="http://example.com/tags/UnionFind/"/>
+    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
     
   </entry>
   
   <entry>
-    <title>Implement Trie (Prefix Tree)以及实现字典树(前缀树)</title>
-    <link href="http://example.com/2022/11/07/Implement%20Trie%20(Prefix%20Tree)%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AD%97%E5%85%B8%E6%A0%91(%E5%89%8D%E7%BC%80%E6%A0%91)/"/>
-    <id>http://example.com/2022/11/07/Implement%20Trie%20(Prefix%20Tree)%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AD%97%E5%85%B8%E6%A0%91(%E5%89%8D%E7%BC%80%E6%A0%91)/</id>
-    <published>2022-11-07T13:30:38.000Z</published>
-    <updated>2024-06-01T02:19:21.397Z</updated>
+    <title>Linux网络配置</title>
+    <link href="http://example.com/2023/09/27/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    <id>http://example.com/2023/09/27/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</id>
+    <published>2023-09-27T13:30:38.000Z</published>
+    <updated>2024-06-01T03:29:57.874Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;LeetCode-208-Implement-Trie-Prefix-Tree-以及实现字典树-前缀树&quot;&gt;&lt;a href=&quot;#LeetCode-208-Implement-Trie-Prefix-Tree-以及实现字典树-前缀树&quot; class=&quot;headerlin</summary>
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;网络配置&quot;&gt;&lt;a href=&quot;#网络配置&quot; class=&quot;headerlink&quot; title=&quot;网络配置&quot;&gt;&lt;/a&gt;网络配置&lt;/h1&gt;&lt;h2 id=&quot;1-Linux网络配置原理&quot;&gt;&lt;a href=&quot;#1-Linux网络配置原理&quot; clas</summary>
       
     
     
     
-    <category term="Data Structure" scheme="http://example.com/categories/Data-Structure/"/>
+    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
     
     
-    <category term="Trie" scheme="http://example.com/tags/Trie/"/>
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
-    <title>最大值减去最小值小于等于aim的子数组数量(单调队列(最大值和最小值更新结构))</title>
-    <link href="http://example.com/2022/10/05/%E6%9C%80%E5%A4%A7%E5%80%BC%E5%87%8F%E5%8E%BB%E6%9C%80%E5%B0%8F%E5%80%BC%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim%20%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E6%95%B0%E9%87%8F(%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97(%E6%9C%80%E5%A4%A7%E5%80%BC%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BC%E6%9B%B4%E6%96%B0%E7%BB%93%E6%9E%84))/"/>
-    <id>http://example.com/2022/10/05/%E6%9C%80%E5%A4%A7%E5%80%BC%E5%87%8F%E5%8E%BB%E6%9C%80%E5%B0%8F%E5%80%BC%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim%20%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E6%95%B0%E9%87%8F(%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97(%E6%9C%80%E5%A4%A7%E5%80%BC%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BC%E6%9B%B4%E6%96%B0%E7%BB%93%E6%9E%84))/</id>
-    <published>2022-10-05T13:30:38.000Z</published>
-    <updated>2024-06-01T02:18:16.166Z</updated>
+    <title>Linux磁盘分区、挂载度</title>
+    <link href="http://example.com/2023/09/19/Linux%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E3%80%81%E6%8C%82%E8%BD%BD%E5%BA%A6/"/>
+    <id>http://example.com/2023/09/19/Linux%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E3%80%81%E6%8C%82%E8%BD%BD%E5%BA%A6/</id>
+    <published>2023-09-19T13:30:38.000Z</published>
+    <updated>2024-06-01T03:29:21.094Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;最大值减去最小值小于等于aim的子数组数量-单调队列-最大值和最小值更新结构&quot;&gt;&lt;a href=&quot;#最大值减去最小值小于等于aim的子数组数量-单调队列-最大值和最小值更新结构&quot; class=&quot;headerlink&quot; title=&quot;最大值减去最小值小于等于aim的</summary>
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;Linux磁盘分区、挂载度&quot;&gt;&lt;a href=&quot;#Linux磁盘分区、挂载度&quot; class=&quot;headerlink&quot; title=&quot;Linux磁盘分区、挂载度&quot;&gt;&lt;/a&gt;Linux磁盘分区、挂载度&lt;/h1&gt;&lt;h2 id=&quot;1-分区方式&quot;&gt;</summary>
       
     
     
     
-    <category term="Data Structure" scheme="http://example.com/categories/Data-Structure/"/>
+    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
     
     
-    <category term="MonotoneStack" scheme="http://example.com/tags/MonotoneStack/"/>
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
-    <title>单调栈介绍以及构造数组的MaxTree问题</title>
-    <link href="http://example.com/2022/09/29/%E5%8D%95%E8%B0%83%E6%A0%88%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E6%9E%84%E9%80%A0%E6%95%B0%E7%BB%84%E7%9A%84MaxTree%E9%97%AE%E9%A2%98/"/>
-    <id>http://example.com/2022/09/29/%E5%8D%95%E8%B0%83%E6%A0%88%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E6%9E%84%E9%80%A0%E6%95%B0%E7%BB%84%E7%9A%84MaxTree%E9%97%AE%E9%A2%98/</id>
-    <published>2022-09-29T13:30:38.000Z</published>
-    <updated>2024-06-01T02:18:00.579Z</updated>
+    <title>Linux组管理和权限管理</title>
+    <link href="http://example.com/2023/09/05/%E7%BB%84%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/"/>
+    <id>http://example.com/2023/09/05/%E7%BB%84%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</id>
+    <published>2023-09-05T13:30:38.000Z</published>
+    <updated>2024-06-01T03:21:37.418Z</updated>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;单调栈介绍以及构造数组的MaxTree问题&quot;&gt;&lt;a href=&quot;#单调栈介绍以及构造数组的MaxTree问题&quot; class=&quot;headerlink&quot; title=&quot;单调栈介绍以及构造数组的MaxTree问题&quot;&gt;&lt;/a&gt;单调栈介绍以及构造数组的MaxTree问题&lt;/</summary>
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;组管理和权限管理&quot;&gt;&lt;a href=&quot;#组管理和权限管理&quot; class=&quot;headerlink&quot; title=&quot;组管理和权限管理&quot;&gt;&lt;/a&gt;组管理和权限管理&lt;/h1&gt;&lt;h2 id=&quot;1-Linux组基本介绍&quot;&gt;&lt;a href=&quot;#1-Li</summary>
       
     
     
     
-    <category term="Data Structure" scheme="http://example.com/categories/Data-Structure/"/>
+    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
     
     
-    <category term="MonotoneStack" scheme="http://example.com/tags/MonotoneStack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>将单链表按某值划分成左边小，中间相等，右边大的形式</title>
-    <link href="http://example.com/2022/09/16/%E5%B0%86%E5%8D%95%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/"/>
-    <id>http://example.com/2022/09/16/%E5%B0%86%E5%8D%95%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/</id>
-    <published>2022-09-16T13:30:38.000Z</published>
-    <updated>2024-06-01T02:17:42.027Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;将单链表按某值划分成左边小，中间相等，右边大的形式&quot;&gt;&lt;a href=&quot;#将单链表按某值划分成左边小，中间相等，右边大的形式&quot; class=&quot;headerlink&quot; title=&quot;将单链表按某值划分成左边小，中间相等，右边大的形式&quot;&gt;&lt;/a&gt;将单链表按某值划分成左</summary>
-      
-    
-    
-    
-    <category term="Data Structure" scheme="http://example.com/categories/Data-Structure/"/>
-    
-    
-    <category term="List" scheme="http://example.com/tags/List/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>找到二叉树中的最大搜索二叉子树</title>
-    <link href="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/"/>
-    <id>http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/</id>
-    <published>2022-08-19T13:30:38.000Z</published>
-    <updated>2024-06-01T02:15:30.734Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;找到二叉树中的最大搜索二叉子树&quot;&gt;&lt;a href=&quot;#找到二叉树中的最大搜索二叉子树&quot; class=&quot;headerlink&quot; title=&quot;找到二叉树中的最大搜索二叉子树&quot;&gt;&lt;/a&gt;找到二叉树中的最大搜索二叉子树&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;递归&lt;/li&gt;
-&lt;li&gt;</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在一颗二叉树中寻找一个结点的后继结点(前驱结点)</title>
-    <link href="http://example.com/2022/08/02/%E5%9C%A8%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%AF%BB%E6%89%BE%E4%B8%80%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E5%90%8E%E7%BB%A7%E7%BB%93%E7%82%B9(%E5%89%8D%E9%A9%B1%E7%BB%93%E7%82%B9)/"/>
-    <id>http://example.com/2022/08/02/%E5%9C%A8%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%AF%BB%E6%89%BE%E4%B8%80%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E5%90%8E%E7%BB%A7%E7%BB%93%E7%82%B9(%E5%89%8D%E9%A9%B1%E7%BB%93%E7%82%B9)/</id>
-    <published>2022-08-02T13:30:38.000Z</published>
-    <updated>2024-06-01T02:15:11.927Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;在一颗二叉树中寻找一个结点的后继结点-前驱结点&quot;&gt;&lt;a href=&quot;#在一颗二叉树中寻找一个结点的后继结点-前驱结点&quot; class=&quot;headerlink&quot; title=&quot;在一颗二叉树中寻找一个结点的后继结点(前驱结点)&quot;&gt;&lt;/a&gt;在一颗二叉树中寻找一个结点的后继</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何直观的打印一颗二叉树</title>
-    <link href="http://example.com/2022/07/27/%E5%A6%82%E4%BD%95%E7%9B%B4%E8%A7%82%E7%9A%84%E6%89%93%E5%8D%B0%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>http://example.com/2022/07/27/%E5%A6%82%E4%BD%95%E7%9B%B4%E8%A7%82%E7%9A%84%E6%89%93%E5%8D%B0%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%A0%91/</id>
-    <published>2022-07-27T13:30:38.000Z</published>
-    <updated>2024-06-01T02:14:53.559Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;如何直观的打印一颗二叉树&quot;&gt;&lt;a href=&quot;#如何直观的打印一颗二叉树&quot; class=&quot;headerlink&quot; title=&quot;如何直观的打印一颗二叉树&quot;&gt;&lt;/a&gt;如何直观的打印一颗二叉树&lt;/h2&gt;&lt;p&gt; 打印的结果是需要&lt;font color = red&gt;顺时针</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉树之Morris遍历</title>
-    <link href="http://example.com/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/"/>
-    <id>http://example.com/2022/07/05/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86/</id>
-    <published>2022-07-05T13:30:38.000Z</published>
-    <updated>2024-06-01T02:14:34.580Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;二叉树之Morris遍历&quot;&gt;&lt;a href=&quot;#二叉树之Morris遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树之Morris遍历&quot;&gt;&lt;/a&gt;二叉树之Morris遍历&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;递归理解以及&lt;code&gt;morris&lt;/code</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉树结点间的最大距离问题</title>
-    <link href="http://example.com/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/"/>
-    <id>http://example.com/2022/06/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98/</id>
-    <published>2022-06-25T13:30:38.000Z</published>
-    <updated>2024-06-01T02:14:18.540Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;二叉树结点间的最大距离问题&quot;&gt;&lt;a href=&quot;#二叉树结点间的最大距离问题&quot; class=&quot;headerlink&quot; title=&quot;二叉树结点间的最大距离问题&quot;&gt;&lt;/a&gt;二叉树结点间的最大距离问题&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;递归&lt;/li&gt;
-&lt;li&gt;改进的写法&lt;/l</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等)</title>
-    <link href="http://example.com/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/"/>
-    <id>http://example.com/2022/06/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%84%E7%A7%8D%E6%93%8D%E4%BD%9C(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86,%E6%A0%91%E6%B7%B1%E5%BA%A6,%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0%E7%AD%89%E7%AD%89)/</id>
-    <published>2022-06-06T13:30:38.000Z</published>
-    <updated>2024-06-01T02:13:51.083Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;二叉树的各种操作-递归和非递归遍历-树深度-结点个数等等&quot;&gt;&lt;a href=&quot;#二叉树的各种操作-递归和非递归遍历-树深度-结点个数等等&quot; class=&quot;headerlink&quot; title=&quot;二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等)&quot;&gt;&lt;/a&gt;二</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Tree" scheme="http://example.com/tags/Tree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>子数组累加和为aim(小于等于aim)的三个问题</title>
-    <link href="http://example.com/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
-    <id>http://example.com/2022/05/26/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98/</id>
-    <published>2022-05-26T13:30:38.000Z</published>
-    <updated>2024-06-01T02:09:57.877Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;子数组累加和为aim-小于等于aim-的三个问题&quot;&gt;&lt;a href=&quot;#子数组累加和为aim-小于等于aim-的三个问题&quot; class=&quot;headerlink&quot; title=&quot;子数组累加和为aim(小于等于aim)的三个问题&quot;&gt;&lt;/a&gt;子数组累加和为aim(小于等</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="TwoPointer" scheme="http://example.com/tags/TwoPointer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>矩阵相关操作和矩阵快速幂</title>
-    <link href="http://example.com/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
-    <id>http://example.com/2022/05/06/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/</id>
-    <published>2022-05-06T13:30:38.000Z</published>
-    <updated>2024-06-01T02:06:21.844Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;矩阵相关操作和矩阵快速幂&quot;&gt;&lt;a href=&quot;#矩阵相关操作和矩阵快速幂&quot; class=&quot;headerlink&quot; title=&quot;矩阵相关操作和矩阵快速幂&quot;&gt;&lt;/a&gt;矩阵相关操作和矩阵快速幂&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;矩阵基本运算以及快速幂模板&lt;/li&gt;
-&lt;li&gt;P</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Math" scheme="http://example.com/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>乘法快速幂相关总结  &amp; LeetCode - 50. Pow(x, n)</title>
-    <link href="http://example.com/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&amp;%20LeetCode%20-%2050.%20Pow(x,%20n)/"/>
-    <id>http://example.com/2022/04/26/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20&amp;%20LeetCode%20-%2050.%20Pow(x,%20n)/</id>
-    <published>2022-04-26T13:30:38.000Z</published>
-    <updated>2024-06-01T02:05:36.792Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;乘法快速幂相关总结-amp-LeetCode-50-Pow-x-n&quot;&gt;&lt;a href=&quot;#乘法快速幂相关总结-amp-LeetCode-50-Pow-x-n&quot; class=&quot;headerlink&quot; title=&quot;乘法快速幂相关总结  &amp;amp; LeetCode </summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Math" scheme="http://example.com/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>素数回文以及素数相关总结</title>
-    <link href="http://example.com/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/"/>
-    <id>http://example.com/2022/04/08/%E7%B4%A0%E6%95%B0%E5%9B%9E%E6%96%87%E4%BB%A5%E5%8F%8A%E7%B4%A0%E6%95%B0%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</id>
-    <published>2022-04-08T13:30:38.000Z</published>
-    <updated>2024-06-01T02:05:44.066Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;素数回文以及素数相关总结&quot;&gt;&lt;a href=&quot;#素数回文以及素数相关总结&quot; class=&quot;headerlink&quot; title=&quot;素数回文以及素数相关总结&quot;&gt;&lt;/a&gt;素数回文以及素数相关总结&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;普通筛素数法&lt;/li&gt;
-&lt;li&gt;埃式筛法&lt;/li</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Math" scheme="http://example.com/tags/Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最小生成树模板题(Kruskal算法和Prim算法实现)</title>
-    <link href="http://example.com/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/"/>
-    <id>http://example.com/2022/03/26/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%A8%A1%E6%9D%BF%E9%A2%98(Kruskal%E7%AE%97%E6%B3%95%E5%92%8CPrim%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0)/</id>
-    <published>2022-03-26T13:30:38.000Z</published>
-    <updated>2024-06-01T02:04:37.678Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;最小生成树模板题-Kruskal算法和Prim算法实现&quot;&gt;&lt;a href=&quot;#最小生成树模板题-Kruskal算法和Prim算法实现&quot; class=&quot;headerlink&quot; title=&quot;最小生成树模板题(Kruskal算法和Prim算法实现)&quot;&gt;&lt;/a&gt;最小生成</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
-    
-    <category term="Kruskal" scheme="http://example.com/tags/Kruskal/"/>
-    
-    <category term="Prim" scheme="http://example.com/tags/Prim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最短路dijkstra模板</title>
-    <link href="http://example.com/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/"/>
-    <id>http://example.com/2022/03/09/%E6%9C%80%E7%9F%AD%E8%B7%AFdijkstra%E6%A8%A1%E6%9D%BF/</id>
-    <published>2022-03-09T13:30:38.000Z</published>
-    <updated>2024-06-01T02:02:08.772Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;﻿## 最短路dijkstra模板&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;dijkstra&lt;/code&gt;算法总结&lt;/li&gt;
-&lt;li&gt;常用模板解决&lt;/li&gt;
-&lt;li&gt;其他写法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; clas</summary>
-      
-    
-    
-    
-    <category term="Algorithm" scheme="http://example.com/categories/Algorithm/"/>
-    
-    
-    <category term="Graph" scheme="http://example.com/tags/Graph/"/>
-    
-    <category term="dijkstra" scheme="http://example.com/tags/dijkstra/"/>
+    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
