@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Tree," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="XHJ" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="找到二叉树中的最大搜索二叉子树 递归 技巧的写法 完整测试代码  题目 递归解析:这种题目的解题过程分为三步:   列出所有可能性； **列出结点需要的信息，并整合信息(成一个结构体)**； 改递归 ，先假设左和右都给我信息(黑盒)，然后怎么利用左边和右边的信息组出来我该返回的信息，最后basecase(边界)填什么；  具体到这个题目：第一步，列出所有可能性：   第一种可能性，以node为头的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="找到二叉树中的最大搜索二叉子树">
+<meta property="og:url" content="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/index.html">
+<meta property="og:site_name" content="XHJ">
+<meta property="og:description" content="找到二叉树中的最大搜索二叉子树 递归 技巧的写法 完整测试代码  题目 递归解析:这种题目的解题过程分为三步:   列出所有可能性； **列出结点需要的信息，并整合信息(成一个结构体)**； 改递归 ，先假设左和右都给我信息(黑盒)，然后怎么利用左边和右边的信息组出来我该返回的信息，最后basecase(边界)填什么；  具体到这个题目：第一步，列出所有可能性：   第一种可能性，以node为头的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/images/tree3.png">
+<meta property="og:image" content="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/images/tree4.png">
+<meta property="article:published_time" content="2022-08-19T13:30:38.000Z">
+<meta property="article:modified_time" content="2024-06-01T02:15:30.734Z">
+<meta property="article:author" content="xhj">
+<meta property="article:tag" content="Tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/images/tree3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/08/19/找到二叉树中的最大搜索二叉子树/"/>
+
+
+
+
+
+  <title>找到二叉树中的最大搜索二叉子树 | XHJ</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XHJ</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XHJ">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">找到二叉树中的最大搜索二叉子树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-08-19T21:30:38+08:00">
+                2022-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2022/08/19/找到二叉树中的最大搜索二叉子树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.6k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="找到二叉树中的最大搜索二叉子树"><a href="#找到二叉树中的最大搜索二叉子树" class="headerlink" title="找到二叉树中的最大搜索二叉子树"></a>找到二叉树中的最大搜索二叉子树</h2><ul>
+<li>递归</li>
+<li>技巧的写法</li>
+<li>完整测试代码</li>
+</ul>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p><img src="images/tree3.png" alt="在这里插入图片描述"></p>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>解析:<br>这种题目的解题过程分为三步: </p>
+<ul>
+<li><strong>列出所有可能性</strong>；</li>
+<li>**列出结点需要的信息，并整合信息(成一个结构体)**；</li>
+<li><strong>改递归 ，先假设左和右都给我信息(黑盒)，然后怎么利用左边和右边的信息组出来我该返回的信息，最后<code>basecase</code>(边界)填什么</strong>；</li>
+</ul>
+<p>具体到这个题目：<br><font color = red>第一步，列出所有可能性</font>： </p>
+<ul>
+<li>第一种可能性，以<code>node</code>为头的结点的最大二叉搜索子树可能来自它左子树；</li>
+<li>第二种可能性，以<code>node</code>为头的结点的最大二叉搜索子树可能来自它右子树；</li>
+<li>第三种可能性，左树整体是搜索二叉树，右树整体也是搜索二叉树，而且左树的头是<code>node.left</code>，右树的头是<code>node.right</code>，且左树的最大值<code>&lt; node.value</code>，右树的最小值<code> &gt; node.value</code>，  <strong>那么以我为头的整棵树都是搜索二叉树；</strong></li>
+</ul>
+<p><font color = red>第二步，列出结点需要的信息:</font></p>
+<ul>
+<li>信息一: 左树最大搜索二叉树大小；</li>
+<li>信息二: 右树最大搜索二叉树大小；</li>
+<li>信息三: 左树上最大搜索二叉树的头部是什么；</li>
+<li>信息四: 右树上最大搜索二叉树的头部是什么；</li>
+<li>信息五: 左树上的最大值；</li>
+<li>信息六: 右树上的最小值；</li>
+</ul>
+<p>整合成一个<code>Pair</code>结构: 信息一和信息二整合：<code>size</code> ，信息三和信息四整合 : <code>head</code>(结点类型)，以及信息五和信息六 ；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回的类型</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> size; <span class="comment">//左右子树的大小</span></span><br><span class="line">    <span class="keyword">public</span> Node root; <span class="comment">//左右子树的头</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> min;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后第三部就是改成递归，具体如下(是后序遍历的顺序(需要左右的信息来构造头部的信息)): </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">public</span> Node left;</span><br><span class="line">    <span class="keyword">public</span> Node right;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回的类型</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> size; <span class="comment">//左右子树的大小</span></span><br><span class="line">    <span class="keyword">public</span> Node root; <span class="comment">//左右子树的头</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> min;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> max;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(<span class="keyword">int</span> size, Node root, <span class="keyword">int</span> min, <span class="keyword">int</span> max)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.size = size;</span><br><span class="line">        <span class="keyword">this</span>.root = root;</span><br><span class="line">        <span class="keyword">this</span>.min = min;</span><br><span class="line">        <span class="keyword">this</span>.max = max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> Node <span class="title">biggestSubBST</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> rec(head).root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> Pair <span class="title">rec</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair(<span class="number">0</span>, <span class="keyword">null</span>, Integer.MAX_VALUE, Integer.MIN_VALUE);</span><br><span class="line">    Pair L = rec(head.left);</span><br><span class="line">    Pair R = rec(head.right);</span><br><span class="line">    <span class="keyword">int</span> msize =</span><br><span class="line">            (L.root == head.left &amp;&amp; R.root == head.right &amp;&amp; L.max &lt; head.value &amp;&amp; R.min &gt; head.value)</span><br><span class="line">                    ? L.size + R.size + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxSize = Math.max(Math.max(L.size, R.size), msize);</span><br><span class="line">    Node mroot = L.size &gt; R.size ? L.root : R.root;</span><br><span class="line">    <span class="keyword">if</span> (maxSize == msize) mroot = head;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Pair(maxSize, mroot, Math.min(head.value, Math.min(L.min, R.min)),</span><br><span class="line">            Math.max(head.value, Math.max(L.max, R.max)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="改造的写法"><a href="#改造的写法" class="headerlink" title="改造的写法"></a>改造的写法</h3><p>技巧的写法(使用一个数组来记录<code>size,min,max</code>):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> Node <span class="title">biggestSubBST2</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] rec = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];  <span class="comment">//0 记录size 1记录min 2记录max</span></span><br><span class="line">    <span class="keyword">return</span> rec2(head, rec);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> Node <span class="title">rec2</span><span class="params">(Node head, <span class="keyword">int</span>[] rec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">        rec[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        rec[<span class="number">1</span>] = Integer.MAX_VALUE;</span><br><span class="line">        rec[<span class="number">2</span>] = Integer.MIN_VALUE;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Node L = rec2(head.left, rec);</span><br><span class="line">    <span class="keyword">int</span> lsize = rec[<span class="number">0</span>], lmin = rec[<span class="number">1</span>], lmax = rec[<span class="number">2</span>];</span><br><span class="line">    Node R = rec2(head.right, rec);</span><br><span class="line">    <span class="keyword">int</span> rsize = rec[<span class="number">0</span>], rmin = rec[<span class="number">1</span>], rmax = rec[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> msize = (L == head.left &amp;&amp; R == head.right &amp;&amp; lmax &lt; head.value &amp;&amp; rmin &gt; head.value) ? lsize + rsize + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxSize = Math.max(msize, Math.max(lsize, rsize));</span><br><span class="line">    Node root = lsize &gt; rsize ? L : R;</span><br><span class="line">    <span class="keyword">if</span> (msize == maxSize) root = head;</span><br><span class="line">    rec[<span class="number">0</span>] = maxSize;</span><br><span class="line">    rec[<span class="number">1</span>] = Math.min(head.value, Math.min(lmin, rmin));</span><br><span class="line">    rec[<span class="number">2</span>] = Math.max(head.value, Math.max(lmax, rmax));</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整测试代码-测试样例"><a href="#完整测试代码-测试样例" class="headerlink" title="完整测试代码(测试样例)"></a>完整测试代码(测试样例)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 返回一棵树中最大的二叉搜索子树的大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BiggestSubBST</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line">        <span class="keyword">public</span> Node left;</span><br><span class="line">        <span class="keyword">public</span> Node right;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回的类型</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> size; <span class="comment">//左右子树的大小</span></span><br><span class="line">        <span class="keyword">public</span> Node root; <span class="comment">//左右子树的头</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> min;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> max;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(<span class="keyword">int</span> size, Node root, <span class="keyword">int</span> min, <span class="keyword">int</span> max)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.size = size;</span><br><span class="line">            <span class="keyword">this</span>.root = root;</span><br><span class="line">            <span class="keyword">this</span>.min = min;</span><br><span class="line">            <span class="keyword">this</span>.max = max;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Node <span class="title">biggestSubBST</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> rec(head).root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Pair <span class="title">rec</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Pair(<span class="number">0</span>, <span class="keyword">null</span>, Integer.MAX_VALUE, Integer.MIN_VALUE);</span><br><span class="line">        Pair L = rec(head.left);</span><br><span class="line">        Pair R = rec(head.right);</span><br><span class="line">        <span class="keyword">int</span> msize =</span><br><span class="line">                (L.root == head.left &amp;&amp; R.root == head.right &amp;&amp; L.max &lt; head.value &amp;&amp; R.min &gt; head.value)</span><br><span class="line">                        ? L.size + R.size + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxSize = Math.max(Math.max(L.size, R.size), msize);</span><br><span class="line">        Node mroot = L.size &gt; R.size ? L.root : R.root;</span><br><span class="line">        <span class="keyword">if</span> (maxSize == msize) mroot = head;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair(maxSize, mroot, Math.min(head.value, Math.min(L.min, R.min)),</span><br><span class="line">                Math.max(head.value, Math.max(L.max, R.max)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Node <span class="title">biggestSubBST2</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] rec = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];  <span class="comment">//0 记录size 1记录min 2记录max</span></span><br><span class="line">        <span class="keyword">return</span> rec2(head, rec);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Node <span class="title">rec2</span><span class="params">(Node head, <span class="keyword">int</span>[] rec)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            rec[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">            rec[<span class="number">1</span>] = Integer.MAX_VALUE;</span><br><span class="line">            rec[<span class="number">2</span>] = Integer.MIN_VALUE;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node L = rec2(head.left, rec);</span><br><span class="line">        <span class="keyword">int</span> lsize = rec[<span class="number">0</span>], lmin = rec[<span class="number">1</span>], lmax = rec[<span class="number">2</span>];</span><br><span class="line">        Node R = rec2(head.right, rec);</span><br><span class="line">        <span class="keyword">int</span> rsize = rec[<span class="number">0</span>], rmin = rec[<span class="number">1</span>], rmax = rec[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> msize = (L == head.left &amp;&amp; R == head.right &amp;&amp; lmax &lt; head.value &amp;&amp; rmin &gt; head.value) ? lsize + rsize + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxSize = Math.max(msize, Math.max(lsize, rsize));</span><br><span class="line">        Node root = lsize &gt; rsize ? L : R;</span><br><span class="line">        <span class="keyword">if</span> (msize == maxSize) root = head;</span><br><span class="line">        rec[<span class="number">0</span>] = maxSize;</span><br><span class="line">        rec[<span class="number">1</span>] = Math.min(head.value, Math.min(lmin, rmin));</span><br><span class="line">        rec[<span class="number">2</span>] = Math.max(head.value, Math.max(lmax, rmax));</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//建立二叉树</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Node <span class="title">build</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= arr.length || arr[index] == -<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        Node root = <span class="keyword">new</span> Node(arr[index]);</span><br><span class="line">        root.left = build(arr, index * <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">        root.right = build(arr, index * <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> head   传入的节点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> height 　　层数(根节点为0)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> to     表示的特定节点  H表示根节点   ^表示父亲节点在左上方　v表示父亲节点在左下方</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> len    　　　指定每一个节点打印的宽度</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printTree</span><span class="params">(Node head, <span class="keyword">int</span> height, String to, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        printTree(head.right, height + <span class="number">1</span>, <span class="string">&quot;v&quot;</span>, len);</span><br><span class="line"></span><br><span class="line">        String val = to + head.value + to;  <span class="comment">//两边指示的字符</span></span><br><span class="line">        <span class="keyword">int</span> lenV = val.length();</span><br><span class="line">        <span class="keyword">int</span> lenL = (len - lenV) / <span class="number">2</span>;  <span class="comment">//左边的空格(分一半)</span></span><br><span class="line">        <span class="keyword">int</span> lenR = len - lenV - lenL; <span class="comment">// 右边的空格</span></span><br><span class="line">        System.out.println(getSpace(len * height) + getSpace(lenL) + val + getSpace(lenR));</span><br><span class="line"></span><br><span class="line">        printTree(head.left, height + <span class="number">1</span>, <span class="string">&quot;^&quot;</span>, len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取指定的空格</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">getSpace</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        StringBuffer str = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) str.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> str.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">6</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">13</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">4</span>, <span class="number">14</span>, <span class="number">20</span>, <span class="number">16</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">11</span>, <span class="number">15</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">        Node head = build(arr, <span class="number">0</span>);</span><br><span class="line">        printTree(head, <span class="number">0</span>, <span class="string">&quot;H&quot;</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(biggestSubBST(head).value);</span><br><span class="line">        System.out.println(biggestSubBST2(head).value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>二叉树打印见<a target="_blank" rel="noopener" href="https://blog.csdn.net/zxzxzx0119/article/details/81096554">这个博客</a><br>测试效果:<br><img src="images/tree4.png" alt="这里写图片描述"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div class="wechat_OA">
+    <span>欢迎关注我们的公众号</span>
+    <br>
+    <!-- 这里添加你的二维码图片 -->
+    <img src ="https://ae01.alicdn.com/kf/U0c820fb8af0f4a6a84fde221b4177520e.jpg">
+</div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    xhj
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/" title="找到二叉树中的最大搜索二叉子树">http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tree/" rel="tag"># Tree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/08/02/%E5%9C%A8%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%AF%BB%E6%89%BE%E4%B8%80%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E5%90%8E%E7%BB%A7%E7%BB%93%E7%82%B9(%E5%89%8D%E9%A9%B1%E7%BB%93%E7%82%B9)/" rel="next" title="在一颗二叉树中寻找一个结点的后继结点(前驱结点)">
+                <i class="fa fa-chevron-left"></i> 在一颗二叉树中寻找一个结点的后继结点(前驱结点)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/09/16/%E5%B0%86%E5%8D%95%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/" rel="prev" title="将单链表按某值划分成左边小，中间相等，右边大的形式">
+                将单链表按某值划分成左边小，中间相等，右边大的形式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzhzxfs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wcy111.github.io/" title="Yaoguo Wang" target="_blank">Yaoguo Wang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">找到二叉树中的最大搜索二叉子树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.0.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-number">1.0.2.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E9%80%A0%E7%9A%84%E5%86%99%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">改造的写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-%E6%B5%8B%E8%AF%95%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">完整测试代码(测试样例)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">159.2k</span>
+  
+</div>
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2022/08/19/%E6%89%BE%E5%88%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E6%90%9C%E7%B4%A2%E4%BA%8C%E5%8F%89%E5%AD%90%E6%A0%91/';
+          this.page.identifier = '2022/08/19/找到二叉树中的最大搜索二叉子树/';
+          this.page.title = '找到二叉树中的最大搜索二叉子树';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+
+  
+    <script src="/js/cursor/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
