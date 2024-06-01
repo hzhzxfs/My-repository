@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-06-01T03:59:54.913Z</updated>
+  <updated>2024-06-01T07:34:37.564Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,146 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hadoop常见参数</title>
+    <link href="http://example.com/2024/06/01/Hadoop%E5%8F%82%E6%95%B0/"/>
+    <id>http://example.com/2024/06/01/Hadoop%E5%8F%82%E6%95%B0/</id>
+    <published>2024-06-01T07:30:38.000Z</published>
+    <updated>2024-06-01T07:34:37.564Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;Hadoop常见参数&quot;&gt;&lt;a href=&quot;#Hadoop常见参数&quot; class=&quot;headerlink&quot; title=&quot;Hadoop常见参数&quot;&gt;&lt;/a&gt;Hadoop常见参数&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;st</summary>
+      
+    
+    
+    
+    <category term="Big Data" scheme="http://example.com/categories/Big-Data/"/>
+    
+    
+    <category term="Hadoop" scheme="http://example.com/tags/Hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hadoop简介</title>
+    <link href="http://example.com/2024/05/26/Hadoop%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/"/>
+    <id>http://example.com/2024/05/26/Hadoop%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/</id>
+    <published>2024-05-26T13:30:38.000Z</published>
+    <updated>2024-06-01T07:33:52.971Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Hadoop简介&quot;&gt;&lt;a href=&quot;#Hadoop简介&quot; class=&quot;headerlink&quot; title=&quot;Hadoop简介&quot;&gt;&lt;/a&gt;Hadoop简介&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    <category term="Big Data" scheme="http://example.com/categories/Big-Data/"/>
+    
+    
+    <category term="Hadoop" scheme="http://example.com/tags/Hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java设计模式及UML类图</title>
+    <link href="http://example.com/2024/05/05/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8AUML%E7%B1%BB%E5%9B%BE/"/>
+    <id>http://example.com/2024/05/05/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8AUML%E7%B1%BB%E5%9B%BE/</id>
+    <published>2024-05-05T13:30:38.000Z</published>
+    <updated>2024-06-01T07:17:02.160Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;23种设计模式&quot;&gt;&lt;a href=&quot;#23种设计模式&quot; class=&quot;headerlink&quot; title</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    <category term="Design Patterns" scheme="http://example.com/categories/Java/Design-Patterns/"/>
+    
+    
+    <category term="MySQL" scheme="http://example.com/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL基础与高级</title>
+    <link href="http://example.com/2024/04/16/MySQL%E5%9F%BA%E7%A1%80%E4%B8%8E%E9%AB%98%E7%BA%A7/"/>
+    <id>http://example.com/2024/04/16/MySQL%E5%9F%BA%E7%A1%80%E4%B8%8E%E9%AB%98%E7%BA%A7/</id>
+    <published>2024-04-16T13:30:38.000Z</published>
+    <updated>2024-06-01T07:16:04.101Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;Mysql基础&quot;&gt;&lt;a href=&quot;#Mysql基础&quot; class=&quot;headerlink&quot; title</summary>
+      
+    
+    
+    
+    <category term="Database" scheme="http://example.com/categories/Database/"/>
+    
+    
+    <category term="MySQL" scheme="http://example.com/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven</title>
+    <link href="http://example.com/2024/04/04/Maven/"/>
+    <id>http://example.com/2024/04/04/Maven/</id>
+    <published>2024-04-04T13:30:38.000Z</published>
+    <updated>2024-06-01T07:13:45.236Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Maven&quot;&gt;&lt;a href=&quot;#Maven&quot; class=&quot;headerlink&quot; title=&quot;Maven&quot;&gt;&lt;/a&gt;Maven&lt;/h2&gt;&lt;h4 id=&quot;1-Maven-是什么？&quot;&gt;&lt;a href=&quot;#1-Maven-是什么？&quot; class=&quot;headerli</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://example.com/categories/Java/"/>
+    
+    
+    <category term="Maven" scheme="http://example.com/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper</title>
+    <link href="http://example.com/2024/03/27/Zookeeper/"/>
+    <id>http://example.com/2024/03/27/Zookeeper/</id>
+    <published>2024-03-27T13:30:38.000Z</published>
+    <updated>2024-06-01T04:08:42.615Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Zookeeper&quot;&gt;&lt;a href=&quot;#Zookeeper&quot; class=&quot;headerlink&quot; title=&quot;Zookeeper&quot;&gt;&lt;/a&gt;Zookeeper&lt;/h2&gt;&lt;h4 id=&quot;1-ZooKeeper-是什么？&quot;&gt;&lt;a href=&quot;#1-ZooKeep</summary>
+      
+    
+    
+    
+    <category term="Middleware" scheme="http://example.com/categories/Middleware/"/>
+    
+    
+    <category term="Zookeeper" scheme="http://example.com/tags/Zookeeper/"/>
+    
+  </entry>
   
   <entry>
     <title>Tomcat</title>
@@ -329,147 +469,6 @@
     
     
     <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSM整合</title>
-    <link href="http://example.com/2023/10/27/SSM%E6%95%B4%E5%90%88/"/>
-    <id>http://example.com/2023/10/27/SSM%E6%95%B4%E5%90%88/</id>
-    <published>2023-10-27T13:30:38.000Z</published>
-    <updated>2024-06-01T03:33:00.811Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;1-ssmbuild&quot;&gt;&lt;a href=&quot;#1-ssmbuild&quot; class=&quot;headerlink&quot; title=&quot;1. ssmbuild&quot;&gt;&lt;/a&gt;1. ssmbuild&lt;/h1&gt;&lt;h1 id=&quot;2-环境要求&quot;&gt;&lt;a href=&quot;#2-环境要求&quot; class</summary>
-      
-    
-    
-    
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
-    
-    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
-    
-    
-    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSM框架之Mybatis</title>
-    <link href="http://example.com/2023/10/15/SpringMVC/"/>
-    <id>http://example.com/2023/10/15/SpringMVC/</id>
-    <published>2023-10-15T13:30:38.000Z</published>
-    <updated>2024-06-01T03:32:05.336Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;0-老版本Spring官方文档-https-docs-spring-io-spring-framework-docs-4-3-24-RELEASE-spring-framework-reference-html&quot;&gt;&lt;a href=&quot;#0-老版本Spring官方文档</summary>
-      
-    
-    
-    
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
-    
-    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
-    
-    
-    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSM框架之Mybatis</title>
-    <link href="http://example.com/2023/10/08/SSM%E6%A1%86%E6%9E%B6%E4%B9%8BMybatis/"/>
-    <id>http://example.com/2023/10/08/SSM%E6%A1%86%E6%9E%B6%E4%B9%8BMybatis/</id>
-    <published>2023-10-08T13:30:38.000Z</published>
-    <updated>2024-06-01T03:31:41.522Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;0-ssm框架大纲&quot;&gt;&lt;a href=&quot;#0-ssm框架大纲&quot; class=&quot;headerlink&quot; title=&quot;0. ssm框架大纲&quot;&gt;&lt;/a&gt;0. ssm框架大纲&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20</summary>
-      
-    
-    
-    
-    <category term="Java" scheme="http://example.com/categories/Java/"/>
-    
-    <category term="JavaWeb" scheme="http://example.com/categories/Java/JavaWeb/"/>
-    
-    
-    <category term="JavaWeb" scheme="http://example.com/tags/JavaWeb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux网络配置</title>
-    <link href="http://example.com/2023/09/27/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
-    <id>http://example.com/2023/09/27/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</id>
-    <published>2023-09-27T13:30:38.000Z</published>
-    <updated>2024-06-01T03:29:57.874Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;网络配置&quot;&gt;&lt;a href=&quot;#网络配置&quot; class=&quot;headerlink&quot; title=&quot;网络配置&quot;&gt;&lt;/a&gt;网络配置&lt;/h1&gt;&lt;h2 id=&quot;1-Linux网络配置原理&quot;&gt;&lt;a href=&quot;#1-Linux网络配置原理&quot; clas</summary>
-      
-    
-    
-    
-    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux磁盘分区、挂载度</title>
-    <link href="http://example.com/2023/09/19/Linux%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E3%80%81%E6%8C%82%E8%BD%BD%E5%BA%A6/"/>
-    <id>http://example.com/2023/09/19/Linux%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E3%80%81%E6%8C%82%E8%BD%BD%E5%BA%A6/</id>
-    <published>2023-09-19T13:30:38.000Z</published>
-    <updated>2024-06-01T03:29:21.094Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;Linux磁盘分区、挂载度&quot;&gt;&lt;a href=&quot;#Linux磁盘分区、挂载度&quot; class=&quot;headerlink&quot; title=&quot;Linux磁盘分区、挂载度&quot;&gt;&lt;/a&gt;Linux磁盘分区、挂载度&lt;/h1&gt;&lt;h2 id=&quot;1-分区方式&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux组管理和权限管理</title>
-    <link href="http://example.com/2023/09/05/%E7%BB%84%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/"/>
-    <id>http://example.com/2023/09/05/%E7%BB%84%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</id>
-    <published>2023-09-05T13:30:38.000Z</published>
-    <updated>2024-06-01T03:21:37.418Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;组管理和权限管理&quot;&gt;&lt;a href=&quot;#组管理和权限管理&quot; class=&quot;headerlink&quot; title=&quot;组管理和权限管理&quot;&gt;&lt;/a&gt;组管理和权限管理&lt;/h1&gt;&lt;h2 id=&quot;1-Linux组基本介绍&quot;&gt;&lt;a href=&quot;#1-Li</summary>
-      
-    
-    
-    
-    <category term="Linux" scheme="http://example.com/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
   </entry>
   
